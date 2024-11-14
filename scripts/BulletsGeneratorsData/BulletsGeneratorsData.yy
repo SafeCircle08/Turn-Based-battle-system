@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BulletsGeneratorsData",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BulletsGeneratorsData",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
