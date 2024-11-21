@@ -12,13 +12,14 @@ global.bulletsGenerators =
 	oSpikeDownBulletGen,
 	oKnifeBulletGen,
 	oDocumentBulletGen,
-	oCrossSwordsBulletGen,
+	oCrossSwordsBulletGen, //5
 	oAnswersBulletGen,
 	oAnswersBulletGen,
 	oAnswersBulletGen,
 	oAllDirectionSteamGen,
-	oToolBoxGenerator,
+	oToolBoxGenerator,  //10
 	oPlatformGenerator,
 	oChemistryGenerator,
-	oExplosionsBulletGen
+	oExplosionsBulletGen,
+	oSawsBulletGen,
 ];

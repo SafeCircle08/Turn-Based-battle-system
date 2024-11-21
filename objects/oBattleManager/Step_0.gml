@@ -26,8 +26,7 @@ if (battle == true)
 			if (selected_option == 0) {selected_option = 1; audio_play_sound(sndNavigating, 50, false); };
 			if (selected_option == 2) {selected_option = 3; audio_play_sound(sndNavigating, 50, false); };
 		}
-	
-		
+
 		if keyboard_check_pressed(ord("A"))
 		{
 			if (selected_option == 1) {selected_option = 0; audio_play_sound(sndNavigating, 50, false); };

@@ -24,15 +24,12 @@ if (timerToGetCoord == 0)
 	}
 }
 
-if (canCreateTimer > 0) {canCreateTimer--};
+if (canCreateTimer > 0) { canCreateTimer--};
 
-if (instance_exists(oDocumentBulletGen))
+if (canCreateTimer == 0) && (canCreate == true)
 {
-	if (canCreateTimer == 0) && (canCreate == true)
-	{
-		var _xx = irandom_range(-200, 200);
-		var _yy = irandom_range(-75, 75);
-		instance_create_layer(oSoul.x + _xx, oSoul.y + _yy, "Bullets", oDocumentBullet);
-		canCreate = false;
-	}
+	var _xx = irandom_range(-200, 200);
+	var _yy = irandom_range(-75, 75);
+	instance_create_layer(oSoul.x + _xx, oSoul.y + _yy, "Bullets", oDocumentBullet);
+	canCreate = false;
 }

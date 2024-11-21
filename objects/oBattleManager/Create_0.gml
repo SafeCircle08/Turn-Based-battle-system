@@ -13,7 +13,7 @@ global.borderHeight = 100;
 
 //PLAYER VARIABLES
 battle = true;
-turnNumber = 0;
+turnNumber = 14;
 global.playerName = "Misery";
 global.playerMAX_HP = 200;
 global.playerHP = 200;

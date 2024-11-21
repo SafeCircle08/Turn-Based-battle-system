@@ -28,7 +28,5 @@ if (oBattleBox.visible == true)
 		var _possY = clamp(oSoul.y, global.border_u + 10, global.border_d - 9);
 		oSoul.x = _possX;
 		oSoul.y = _possY;
-		if (oSoul.x + hsp < global.border_l + 5) || (oSoul.x + hsp > global.border_r - 4) { image_speed = 0; image_index = 0; }
-		if (oSoul.y + vsp < global.border_u + 10) || (oSoul.y + vsp > global.border_d - 9) { image_speed = 0; image_index = 0; }
 	}
 }

@@ -23,7 +23,7 @@ canCollide = true;
 coordTimer = 1;
 canShow = true;
 grounded = 0;
-jump = -15;
+jump = -13;
 jump_mod = 3;
 grv = 0.2;
 vsp_max = 15;
@@ -82,7 +82,9 @@ stateMirrored = function()
 //L'AURA E' QUELLA BLU (GRAVITA, DIVENTA COME UN PLATFORMER)
 stateGravity = function()
 {
-
+	
+	image_angle = 0
+	
 	//startSprite = sPlayerJumpFront;
 	hsp = (key_right - key_left) * global.SoulSpeed;
 	if (key_left) { sprite_index = sPlayerLeftJump; image_speed = 1; }
@@ -95,14 +97,11 @@ stateGravity = function()
 	if ((key_jumpPressed == 1) && (vsp == 0)) { vsp += jump; }
 	
 	if (vsp < 0) { vsp = max(vsp, jump / jump_mod) }
-
-	vsp += grv;
-	
 	vsp = clamp(vsp, -vsp_max, vsp_max);
 	
 	//SE COLLIDI A DESTRA O SINISTRA CON I MURI
-	if (place_meeting(x + hsp, y, oPlatformParent)) { hsp = 0; }
-
+	if (vsp < 0) { if (place_meeting(x + hsp, y, oPlatformParent)) { hsp = 0; } }
+	
 	//SE SEI SOPRA AD UNA PIATTAFORMA
 	if (place_meeting(x, y + vsp, oPlatformParent))
 	{
@@ -111,18 +110,63 @@ stateGravity = function()
 	}
 	
 	//SE STO TOCCANDO IL SOFFITTO DEL BOX
-	if (y < global.boxOriginY - (global.borderHeight / 2) + sprite_get_height(sprite_index) - 31) { vsp -= jump + 13 }
+	if (y < global.boxOriginY - (global.borderHeight / 2) + sprite_get_height(sprite_index) - 31) { vsp -= jump + 12 }
 	
-	if (y + vsp > global.boxOriginY + global.borderHeight / 2 - 10)
+	if (y + vsp >= global.boxOriginY + global.borderHeight / 2 - 10)
 	{
 		grounded = 1;	
 		grv = 0;
 		vsp = 0;
 	} else { grv = 0.2; }
 	
+	vsp += grv;
+	
 	//SE COLLIDO CON IL "LIQUIDO" IN FONDO
 	if (place_meeting(x, y, oWaveTrigger)) { vsp += jump * 2; }
 	
+	x += hsp;
+	y += vsp;
+}
+//L'AURA E' SEMPRE QUELLA BLU, MA LA GRAVITA' E' INVERTITA
+stateGravityUp = function()
+{
+	image_angle = 180;
+	
+	//startSprite = sPlayerJumpFront;
+	hsp = (key_right - key_left) * global.SoulSpeed;
+	if (key_left) { sprite_index = sPlayerRightJump; image_speed = 1; }
+	if (key_right) { sprite_index = sPlayerLeftJump; image_speed = 1; }
+	boxColor = c_white;
+
+	if (hsp == 0) and (vsp == 0) { image_speed = 0; image_index = 0; }
+	
+	if (vsp < 0) { vsp = max(vsp, jump / jump_mod) }
+	vsp = clamp(vsp, -vsp_max, vsp_max);
+	
+	
+	//SE COLLIDI A DESTRA O SINISTRA CON I MURI
+	if (vsp < 0) { if (place_meeting(x + hsp, y, oPlatformParent)) { hsp = 0; } }
+	
+	//SE SEI SOPRA AD UNA PIATTAFORMA
+	if (place_meeting(x, y + vsp, oPlatformParent))
+	{
+		if (vsp < 0) { grounded = 0; y -= 2; }
+		else { grounded = 1; vsp = 0; }
+	}
+	
+	//SE STO TOCCANDO IL SOFFITTO DEL BOX
+	//if (y < global.boxOriginY - (global.borderHeight / 2) + sprite_get_height(sprite_index) - 31) { vsp -= jump + 12 }
+	
+	if (y <= global.boxOriginY - (global.borderHeight / 2) + 10)
+	{
+		grounded = 1;	
+		grv = 0;
+		vsp = 0;
+		if (key_jumpPressed == 1) { vsp -= jump + 9; }
+	} else { grv = 0.2; }
+	
+	vsp -= grv;
+
 	x += hsp;
 	y += vsp;
 }
