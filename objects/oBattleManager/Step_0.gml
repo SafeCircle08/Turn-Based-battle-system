@@ -101,8 +101,9 @@ if (battle == true)
 	if (showBattleText)
 	{
 		//FA TORNARE "INVISIBILI I BACKGROUNDS"
-		if (oBlack.image_alpha > 0) { oBlack.image_alpha -= 0.05 } 
-		if (oAttackBG.image_alpha > 0) { oAttackBG.image_alpha -= 0.05 }
+		if (oBlack.image_alpha > 0) { oBlack.image_alpha -= 0.05; } 
+		if (oAttackBG.image_alpha > 0) { oAttackBG.image_alpha -= 0.05; }
+		if (oPinkDetails.image_alpha > 0) { oPinkDetails.image_alpha -= 0.05; }
 		
 		if (instance_exists(oAttackBar)) { instance_destroy(oAttackBar) } 
 		

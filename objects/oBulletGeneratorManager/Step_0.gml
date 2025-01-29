@@ -22,3 +22,18 @@ if (global.enemyTimer == global.enemyAttackTime - 60)
 	if (instance_exists(oBulletGeneratorParent)) { instance_destroy(oBulletGeneratorParent); }
 	if (instance_exists(oExtrasParent)) { instance_destroy(oExtrasParent); }
 }
+
+//ONLY FOR DEBUGGING---------(skippa il turno)------------
+if keyboard_check(ord("R"))
+{
+	#region ANIMAZIONE "BEAM DEL PLAYER"
+	global.playerMoveTimer = 60;
+	global.enemyAttackTime = 61;
+	indexMax = 0;
+	oSoul.canShow = false;
+	#endregion
+	//DISTRUGGE GLI OGGETTI (I BULLETS E I GENERATORS ED EXTRAS) ALLA FINE DEL TURNO
+	if (instance_exists(oBulletParent)) { instance_destroy(oBulletParent); }
+	if (instance_exists(oBulletGeneratorParent)) { instance_destroy(oBulletGeneratorParent); }
+	if (instance_exists(oExtrasParent)) { instance_destroy(oExtrasParent); }		
+}

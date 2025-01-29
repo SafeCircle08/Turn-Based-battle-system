@@ -10,8 +10,8 @@
   "name":"oPlatformGenerator",
   "overriddenProperties":[],
   "parent":{
-    "name":"BulletsGenerators",
-    "path":"folders/Objects/BulletsGenerators.yy",
+    "name":"Turns: 11-15",
+    "path":"folders/Objects/BulletsGenerators/Turns: 11-15.yy",
   },
   "parentObjectId":{
     "name":"oBulletGeneratorParent",

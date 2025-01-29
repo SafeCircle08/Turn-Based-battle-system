@@ -1,0 +1,1 @@
+draw_sprite(sDirection, 0, room_width / 2, 	room_height / 2 - 83);

@@ -1,6 +1,6 @@
 event_inherited();
 
-steamUpBullet =
+var _steamUpBullet =
 [
 		oBulletSteam,
 		[115, 130, 145, 160, 175], //x Coord;
@@ -17,7 +17,7 @@ if (global.created == false)
 		for (var i = 0; i < 5; i++)
 		{
 			var _actualBullet = global.bulletsCreated;
-			instance_create_layer(steamUpBullet[1][i], steamUpBullet[2], "Bullets", oBulletSteam);
+			instance_create_layer(_steamUpBullet[1][i], _steamUpBullet[2], "Bullets", oBulletSteam);
 			global.bulletsCreated++;
 		}	
 	}

@@ -1,6 +1,6 @@
 event_inherited();
 
-global.crossSwordPattern = 
+var crossSword = 
 [
 	[
 		[oBulletSteam, oBulletSteamDown, oBulletSteamLeft, oBulletSteamRight],
@@ -30,13 +30,17 @@ if (global.created == false)
 			var _actualBullet = global.bulletsCreated;
 			instance_create_layer
 			(
-				global.crossSwordPattern[1][_actualBullet][i], 
-				global.crossSwordPattern[2][_actualBullet][i],
+				crossSword[1][_actualBullet][i], 
+				crossSword[2][_actualBullet][i],
 				"Bullets",
-				global.crossSwordPattern[0][_actualBullet][i]	
+				crossSword[0][_actualBullet][i]	
 			);	
 			if (i == 3) { global.bulletsCreated++; global.createTimer = 80; } 
 	}
-	if (global.bulletsCreated == 2) { global.bulletsCreated = 0; instance_create_layer(oSoul.x + choose( -70, 70), oSoul.y + choose(-90, 90), "Bullets", oDocumentBullet); }
+		if (global.bulletsCreated == 3) 
+		{ 
+			global.bulletsCreated = 0;
+			instance_create_layer(oSoul.x + choose( -70, 70), oSoul.y + choose(-90, 90), "Bullets", oDocumentBullet); 
+		}
 	}	
 }

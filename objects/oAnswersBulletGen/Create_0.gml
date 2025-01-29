@@ -5,10 +5,6 @@ global.created = false;
 global.bulletsCreated = 0;
 global.enemyAttackTime = 999;
 
-//ORIGINI DEL BOX
-global.boxOriginY = (room_height / 2) - 20;
-global.boxOriginX = 160;
-
 //DIMENSIONI DEL BOX
 global.borderWidth = 175;
 global.borderHeight = 60;

@@ -4,6 +4,8 @@ global.bulletsCreated = 0;
 global.enemyAttackTime = 300;
 global.actualQuestion = -1;
 global.pov = "Up";
+global.generatorPhase = -1;
+global.fxColor = -1;
 
 global.bulletsGenerators = 
 [
@@ -17,9 +19,12 @@ global.bulletsGenerators =
 	oAnswersBulletGen,
 	oAnswersBulletGen,
 	oAllDirectionSteamGen,
-	oToolBoxGenerator,  //10
+	oRobotsToolGen,  //10
 	oPlatformGenerator,
 	oChemistryGenerator,
-	oExplosionsBulletGen,
 	oSawsBulletGen,
+	oSawsBulletGen,
+	oTeleportBulletGen, // 15
+	oPressureElectronGen,
+	oBlasterFreeGen,
 ];

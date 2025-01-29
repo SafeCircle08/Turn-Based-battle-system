@@ -9,8 +9,8 @@
   "name":"oSchizzo",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Miscellaneous",
+    "path":"folders/Objects/Extras(Object that doesn't deal Damage)/Miscellaneous.yy",
   },
   "parentObjectId":null,
   "persistent":false,

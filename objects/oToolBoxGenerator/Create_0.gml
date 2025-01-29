@@ -1,23 +1,22 @@
-spd = -2;
-finalSpd = 1;
+//FARE RIFERIMENTO AL oRobotsToolgen;
+//PER ROBOT LEFT: C'E' UN ARRAY CHE DICE
+//SE IL ROBOT STA ANDANDO A SINISTRA APPENA CREATO (0 o 1)
+//PER ROBOTS SPEEDS: ANCHE QUI C'E' UN ARRAY CHE CONTIENE
+//LE VARIABILI DELLA VELOCITA' (NON SONO GIUSTE A LIVELLO SCRITTO)
+//MA FUNZIONANO PER VIA DI COME E' SCRITTO IL CODICE DEL ROBOTTINO CHE SI MUOVE
+goingLeft = oRobotsToolGen.robotLeft;
+spds = oRobotsToolGen.robotSpeeds;
 timerToTurn = 1;
-goingLeft = true;
-amplitude = 5;
+amplitude = 1;
 getAmplitudeTimer = 50;
 
-global.enemyAttackTime = 950;
+xBuffer = sprite_get_width(sprite_index) / 4
 
-//BATTLE BOX CHANGING DIMENSIONS
-global.borderWidth = 270;
-global.borderHeight = 35;
-global.boxOriginY = (room_height / 2) + 30;
-
-//SETTING THE XSTART AND YSTART
-x = global.boxOriginX + global.borderWidth / 2;
-y = (room_height / 2) - 90;
+image_xscale = 0.5;
+image_yscale = 0.5;
 
 distance = 98;
 distanceTravelled = 0;
 timerToTurn = 1;
-goingLeft = true;
 dropTimer = 30;
+maxDropTimer = 30

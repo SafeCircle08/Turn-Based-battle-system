@@ -57,9 +57,9 @@ if (global.enemyTimer > 997) && (answered == false)
 	if (instance_exists(oAnswerParent)) { instance_destroy(oAnswerParent) };
 }
 
+//PARTE DOVE VA A CREARE GLI STEAM
 if (steamTimer > 0) { steamTimer-- }
 
-//PARTE DOVE VA A CREARE GLI STEAM
 if (steamTimer == 0)
 {
 	for (var i = 0; i < 2; i++)

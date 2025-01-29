@@ -2,10 +2,8 @@ event_inherited();
 
 if (global.created == false)
 {
-	for (var i = 0; i < 2; i++)
-	{
-		instance_create_layer(global.bulletKind[5][1][i], global.bulletKind[5][2][i], "Bullets", oDocumentBullet);	
-		global.created = true;
-	}
+	var _xx = global.bulletKind[5][1][global.bulletsCreated];
+	var _yy = global.bulletKind[5][2][global.bulletsCreated];
+	createBullets(_xx, _yy, "Bullets", oDocumentBullet, 0, 2, true)
 }
 

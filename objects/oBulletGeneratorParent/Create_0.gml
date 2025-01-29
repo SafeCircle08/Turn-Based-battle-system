@@ -4,3 +4,7 @@
 
 
 global.playerMoveTimer = 65;
+
+//ORIGINI DEL BOX
+global.boxOriginX = 160;
+global.boxOriginY = 100;

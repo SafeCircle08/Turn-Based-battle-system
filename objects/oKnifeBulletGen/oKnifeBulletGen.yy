@@ -10,8 +10,8 @@
   "name":"oKnifeBulletGen",
   "overriddenProperties":[],
   "parent":{
-    "name":"BulletsGenerators",
-    "path":"folders/Objects/BulletsGenerators.yy",
+    "name":"Turns: 1-5",
+    "path":"folders/Objects/BulletsGenerators/Turns: 1-5.yy",
   },
   "parentObjectId":{
     "name":"oBulletGeneratorParent",

@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sBlack",
-    "path":"sprites/sBlack/sBlack.yy",
+    "name":"sBattleBG",
+    "path":"sprites/sBattleBG/sBattleBG.yy",
   },
   "spriteMaskId":null,
   "visible":true,

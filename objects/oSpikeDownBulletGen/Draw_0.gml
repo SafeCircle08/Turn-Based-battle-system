@@ -1,4 +1,4 @@
-if (drawTimer > 0) { drawTimer-- }
+drawTimer = setTimer(drawTimer);
 
 if (drawTimer == 0)
 {

@@ -1,76 +1,64 @@
 //CHECKS THE DISTANCE AND SETS THE GRADIENT OF THE SPEED
-
 event_inherited();
+randomize();
 
-global.boxOriginY -= 0.1;
-
-//CHECKS THE DISTANCE AND SETS THE GRADIENT OF THE SPEED
-
-if (distanceTravelled < (distance / 2) - 10) { spd = -2; }
-else { spd = -(distanceTravelled / 20); }
-
-if (getAmplitudeTimer > 0) { getAmplitudeTimer-- }
-
-if (getAmplitudeTimer == 0)
-{
-	amplitude = irandom_range(7, 10);
-	getAmplitudeTimer = 50;
-}
+global.boxOriginY -= 0.05;
 
 y = ystart - sin(x / 15) * amplitude;
+#endregion
 
-if (dropTimer > 0) { dropTimer-- }
+if (dropTimer > -100) { dropTimer-- }
 
+//QUANDO E' ZERO PARTE L'ANIMAZIONE
 if (dropTimer == 0)
 {
-	instance_create_layer(self.x, self.y, "Bullets", oToolBullet);
-	dropTimer = irandom_range(10, 40);
+	sprite_index = sRobotLaunching
 }
 
-//QUANDO VA A SINISTRA
-if (goingLeft == true)
+//LANCIA L'OGGETTO
+if (dropTimer == -45)
 {
-	image_angle += 0.7
-	if (distanceTravelled < distance)
-	{
-		x += spd;
-		distanceTravelled++;
-	}
-	
-	if (distanceTravelled == distance)
-	{
-		if (timerToTurn > 0) { timerToTurn--; }	
-	}
-	
-	if (timerToTurn == 0)
-	{
-		goingLeft = false;	
-		timerToTurn = 1;
-		distanceTravelled = 0;
-	}
-	exit;
+	instance_create_layer(self.x, self.y, "Bullets", oToolBullet);	
+}
+
+//INTERROMPE L'ANIMAZIONE
+if (dropTimer = - 60) 
+{
+	dropTimer = irandom_range(5, 20);
+	sprite_index = sRobotStill;		
 }
 
 //QUANDO VA A DESTRA
 if (goingLeft == false)
 {
-	image_angle -= 1
-	if (distanceTravelled < distance)
-	{
-		x -= spd;
-		distanceTravelled++;
-	}
+	//FARE RIFERIMENTO ALL'ARRAY
+	//DI oRobotsBulletgen
+	x += spds[1];
 	
-	if (distanceTravelled == distance)
-	{
-		if (timerToTurn > 0) { timerToTurn--; }	
-	}
+	//Controlla prima che tutto lo sprite vada fuori dallo schermo
+	if (x + xBuffer > room_width) { if (timerToTurn > 0) timerToTurn--; }
 	
 	if (timerToTurn == 0)
 	{
 		goingLeft = true;	
-		timerToTurn = 1;
-		distanceTravelled = 0;
+		timerToTurn = 1;	
 	}
+	exit;
 }
 
+//QUANDO VA A SINISTRA
+if (goingLeft == true)
+{
+	//FARE RIFERIMENTO ALL'ARRAY
+	//DI oRobotsBulletgen
+	x += spds[0];
+	
+	//Controlla prima che tutto lo sprite vada fuori dallo schermo
+	if (x - xBuffer - 5 < 0) { if (timerToTurn > 0) timerToTurn--; }	
+	
+	if (timerToTurn == 0)
+	{
+		goingLeft = false;	
+		timerToTurn = 1;
+	}
+}

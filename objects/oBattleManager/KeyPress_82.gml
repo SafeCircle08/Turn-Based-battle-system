@@ -1,1 +1,1 @@
-global.enemyAttackTime = 10;
+global.enemyAttackTime = global.enemyAttackTime - 60;

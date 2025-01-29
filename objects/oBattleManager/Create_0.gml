@@ -13,10 +13,10 @@ global.borderHeight = 100;
 
 //PLAYER VARIABLES
 battle = true;
-turnNumber = 14;
+turnNumber = 0;
 global.playerName = "Misery";
-global.playerMAX_HP = 200;
-global.playerHP = 200;
+global.playerMAX_HP = 512;
+global.playerHP = 512;
 global.playerShield = 50;
 global.playerMaxShield = 50;
 global.CSvalue = 100;	//CAGE STATE

@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"blaster_shooting",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":5.590167,
+  "name":"blaster_shooting",
+  "parent":{
+    "name":"BlastersSND",
+    "path":"folders/Sounds/BlastersSND.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"blaster_shooting.mp3",
+  "type":0,
+  "volume":1.0,
+}

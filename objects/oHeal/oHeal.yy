@@ -9,8 +9,8 @@
   "name":"oHeal",
   "overriddenProperties":[],
   "parent":{
-    "name":"Extras(Object that doesn't deal Damage)",
-    "path":"folders/Objects/Extras(Object that doesn't deal Damage).yy",
+    "name":"Miscellaneous",
+    "path":"folders/Objects/Extras(Object that doesn't deal Damage)/Miscellaneous.yy",
   },
   "parentObjectId":null,
   "persistent":false,

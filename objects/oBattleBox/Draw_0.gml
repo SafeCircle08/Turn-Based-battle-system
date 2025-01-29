@@ -1,6 +1,6 @@
 draw_self();
 
-var _col = oSoul.boxColor;
+var _col = make_color_rgb(240, 0, 100)
 
 global.border_l = (global.boxOriginX - (currentWidth / 2));
 global.border_r = (global.boxOriginX + (currentWidth / 2)) 

@@ -1,13 +1,9 @@
 event_inherited();
 
-global.bulletsCreated = 0;
-global.created = false;
-global.createTimer = 120;
-global.enemyAttackTime = 800;
+genTimeVars(120, false, 900, 0)
 
-//ORIGINI DEL BOX
-global.boxOriginX = 160;
-global.boxOriginY = 80;
+
+
 global.pov = "Front"; //il player può saltare
 
 global.yOffset = -30;
@@ -16,6 +12,7 @@ chemistryBulletsYs = []
 chemistryBulletsYindex = 0;
 magnetsX = 0;
 bossIndex = 0;
+magnetsCreated = false;
 //DIMENSIONI DEL BOX
 global.borderWidth = 200;
 global.borderHeight = (sprite_get_height(sMagnet)*numberOfMagnets);

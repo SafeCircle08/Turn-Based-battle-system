@@ -9,8 +9,8 @@
   "name":"oCrossSwordsBulletGen",
   "overriddenProperties":[],
   "parent":{
-    "name":"BulletsGenerators",
-    "path":"folders/Objects/BulletsGenerators.yy",
+    "name":"Turns: 6-10",
+    "path":"folders/Objects/BulletsGenerators/Turns: 6-10.yy",
   },
   "parentObjectId":{
     "name":"oBulletGeneratorParent",

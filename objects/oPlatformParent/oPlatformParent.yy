@@ -6,8 +6,8 @@
   "name":"oPlatformParent",
   "overriddenProperties":[],
   "parent":{
-    "name":"Extras(Object that doesn't deal Damage)",
-    "path":"folders/Objects/Extras(Object that doesn't deal Damage).yy",
+    "name":"Platforms",
+    "path":"folders/Objects/Extras(Object that doesn't deal Damage)/Platforms.yy",
   },
   "parentObjectId":{
     "name":"oExtrasParent",

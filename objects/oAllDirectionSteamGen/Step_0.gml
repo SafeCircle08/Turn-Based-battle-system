@@ -54,9 +54,9 @@ if (global.created == false)
 				allDirectionSteam[2][_actualBullet][i],
 				"Bullets",
 				allDirectionSteam[0][_actualBullet][i]	
-			);	
+			);
 			if (i == 1) { global.bulletsCreated++; global.createTimer = 40; } 
-	}
-	if (global.bulletsCreated == 4) { global.bulletsCreated = 0; }
+		}
+		if (global.bulletsCreated == 4) { global.bulletsCreated = 0; }
 	}	
 }

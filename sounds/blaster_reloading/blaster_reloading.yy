@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"blaster_reloading",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":0,
+  "bitRate":16,
+  "compression":0,
+  "conversionMode":0,
+  "duration":2.611451,
+  "name":"blaster_reloading",
+  "parent":{
+    "name":"BlastersSND",
+    "path":"folders/Sounds/BlastersSND.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":5512,
+  "soundFile":"blaster_reloading.ogg",
+  "type":0,
+  "volume":1.0,
+}

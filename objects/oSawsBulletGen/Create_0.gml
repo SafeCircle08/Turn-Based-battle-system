@@ -1,28 +1,52 @@
 event_inherited();
 
-global.bulletsCreated = 0;
-global.created = false;
-global.createTimer = 100;
-global.enemyAttackTime = 9999;
-
-//ORIGINI DEL BOX
-global.boxOriginX = 160;
-global.boxOriginY = 80;
+timers = [70, 55];
+global.generatorPhase++;
+genTimeVars(timers[global.generatorPhase], false,9999, 0)
+frame = 0
 
 //DIMENSIONI BOX 
 global.borderWidth = 100;
 global.borderHeight = 100;
 
-oSoul.state = oSoul.stateGravity;
+oSoul.state = oSoul.stateFree;
+global.pov = "Front";
+
+//Mette il cuore al centro
+global.yOffset = 0;
+
+gravUp = oSoul.stateGravityUp;
+gravDown = oSoul.stateGravity;
+gravLeft = oSoul.stateGravityLeft;
+gravRight = oSoul.stateGravityRight;
+
+oSoul.state = oSoul.stateGravityUp;
 
 sawSpeed = undefined;
+sawSpeedX = undefined;
+sawSpeedY = undefined;
+changeStateTimer = 40;
+states = [gravDown, gravUp, gravLeft, gravRight]
+index = undefined;
+stateFlow = true;
+
+if (global.generatorPhase == 1)
+{
+	gloveDir = -1;
+	sinMark = 1;
+	instance_create_layer(global.boxOriginX - 100, y, "Bullets", oFunkyGlove);
+	gloveDir = 1;
+	sinMark = -1;
+	instance_create_layer(global.boxOriginX + 100, y, "Bullets", oFunkyGlove);
+}
+#region SAWS ARRAYS (ALL THE KINDS: LEFT, UP...)
 
 sawsDown =
 [
 	//Objects
 	[oSaw, oSaw],
 	//X positions
-	[global.boxOriginX - (global.borderWidth / 2) - 50, global.boxOriginX + (global.borderWidth / 2) + 50],
+	[global.boxOriginX - (global.borderWidth / 2) - 100, global.boxOriginX + (global.borderWidth / 2) + 100],
 	//Y positions
 	[global.boxOriginY + (global.borderHeight / 2), global.boxOriginY + (global.borderHeight / 2)],
 	//X speeds
@@ -36,7 +60,7 @@ sawsUp =
 	//Objects
 	[oSaw, oSaw],
 	//X positions
-	[global.boxOriginX - (global.borderWidth / 2) - 50, global.boxOriginX + (global.borderWidth / 2) + 50],
+	[global.boxOriginX - (global.borderWidth / 2) - 100, global.boxOriginX + (global.borderWidth / 2) + 100],
 	//Y positions
 	[global.boxOriginY - (global.borderHeight / 2), global.boxOriginY - (global.borderHeight / 2)],
 	//X speeds
@@ -59,7 +83,6 @@ sawsLeft =
 	[+3, -3]
 ];
 
-
 sawsRight =
 [
 	//Objects
@@ -74,5 +97,4 @@ sawsRight =
 	[+3, -3]
 ];
 
-
-sawsArr = [sawsDown, sawsUp, sawsLeft, sawsRight];
+#endregion

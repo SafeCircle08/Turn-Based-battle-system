@@ -2,7 +2,7 @@ steamEnemyText =
 [
 	"I'm sorry but i've warned you...",
 	[
-		"After all, with all your energy...",
+		"After all, with all your energy...",   
 		"I'll gain a lot of POWER!",
 	],
 	[
@@ -51,7 +51,10 @@ steamEnemyText =
 		"In which i've worked very hard!",
 		"And i'am sure this is going to finally Defeat YOU!"
 	],
-	
+	"text",
+	"text",
+	"text",
+	"text",
 ];
 
 global.textList = steamEnemyText;

@@ -8,7 +8,7 @@ if (enemyCanShowText) && (enemyTextShowed == false)
 	
 	draw_sprite(sTextBG, 0, _x, _y);
 	draw_set_font(fText);
-	draw_set_color(c_black);
+	draw_set_color(c_white);
 	
 	//CONTROLLA SE LA PAGINA IN QUESTIONE E' UN ARRAY O MENO
 	if !is_array(global.textList[turnNumber - 1])
@@ -30,7 +30,7 @@ if (enemyCanShowText) && (enemyTextShowed == false)
 	else
 	{
 		//IL TESTO VIENE MOSTRATO SUBITO E SI PUO' SKIPPARE SUBITO
-		if keyboard_check_pressed(ord("X")) { charCount = string_length(global.textList[turnNumber - 1][page]); textSkipTimer = 0;}
+		if keyboard_check_pressed(ord("X")) { charCount = string_length(global.textList[turnNumber - 1][page]); textSkipTimer = 0; }
 		
 		//FA PROGREDIRE IL TESTO LETTERA PER LETTERA
 		if (charCount < string_length(global.textList[turnNumber - 1][page])) { charCount += speechSpeed; }
@@ -53,5 +53,10 @@ if (enemyCanShowText) && (enemyTextShowed == false)
 		}	
 	}
 }
+
+draw_set_color(c_white);
+//draw_text_transformed(5, 30, "FPS REAL: " + string(fps_real), 0.5, 0.5, image_angle)
+//draw_text_transformed(5, 60, "Current FPS " + string(fps), 0.5, 0.5, image_angle)
+
 
 if (enemyTextShowed == true) { draw_set_color(c_white); }

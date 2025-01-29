@@ -1,12 +1,6 @@
 event_inherited();
-global.bulletsCreated = 0;
-global.created = false;
-global.createTimer = 0;
-global.enemyAttackTime = 800;
 
-//ORIGINI DEL BOX
-global.boxOriginX = 160;
-global.boxOriginY = 80;
+genTimeVars(0, false, 800, 0)
 
 //DIMENSIONI BOX 
 global.borderWidth = 230;

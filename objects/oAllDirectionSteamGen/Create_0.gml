@@ -1,12 +1,9 @@
 event_inherited();
+
 global.bulletsCreated = 0;
 global.created = false;
 global.createTimer = 50;
 global.enemyAttackTime = 800;
-
-//ORIGINI DEL BOX
-global.boxOriginX = 160;
-global.boxOriginY = 80;
 
 //NUMERO DI TUBI CHE SI VUOLE NEL TURNO
 numberOfTubesWidth = 12;

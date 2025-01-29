@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sBullet",
-    "path":"sprites/sBullet/sBullet.yy",
+    "name":"sFire",
+    "path":"sprites/sFire/sFire.yy",
   },
   "spriteMaskId":null,
   "visible":true,
