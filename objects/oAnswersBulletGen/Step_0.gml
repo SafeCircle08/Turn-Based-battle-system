@@ -1,7 +1,5 @@
 event_inherited();
 
-//if (timer == 400) { oSoul.state = oSoul.stateGravity; }
-
 //COORDINATE DEI QUADRATI ANSWERS
 var _leftAnswerX = global.boxOriginX - (global.borderWidth) / 4;
 var _rightAnswerX = global.boxOriginX + (global.borderWidth) / 4;
@@ -58,7 +56,7 @@ if (global.enemyTimer > 997) && (answered == false)
 }
 
 //PARTE DOVE VA A CREARE GLI STEAM
-if (steamTimer > 0) { steamTimer-- }
+steamTimer = setTimer(steamTimer);
 
 if (steamTimer == 0)
 {

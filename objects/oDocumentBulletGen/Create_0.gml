@@ -1,6 +1,6 @@
 event_inherited();
 
-genTimeVars(0, false, 800, 0)
+genTimeVars(0, false, 11800, 0)
 
 //DIMENSIONI BOX 
 global.borderWidth = 230;

@@ -3,15 +3,8 @@ event_inherited();
 
 randomize();
 
-var _targetsX =
-[
-	oSoul.x - 400, oSoul.x + 400
-]
-
-var _targetsY = 
-[
-	oSoul.y - 400, oSoul.y + 400
-]
+var _targetsX = [oSoul.x - 400, oSoul.x + 400]
+var _targetsY = [oSoul.y - 400, oSoul.y + 400]
 
 if (global.created == false)
 {

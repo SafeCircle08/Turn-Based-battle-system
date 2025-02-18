@@ -28,14 +28,3 @@ draw_set_color(c_black);
 draw_rectangle(global.border_l, global.border_u, global.border_r, global.border_d, false);
 draw_sprite_ext(sCenter, 0, global.boxOriginX + global.xOffset, global.boxOriginY + global.yOffset, 1, 1, image_angle, _col, 1);
 draw_sprite(sRedCross, 0, global.boxOriginX + global.xOffset, global.boxOriginY + global.yOffset + 1.5);
-
-/*oSoul.x = clamp(oSoul.x, global.border_l + 8, global.border_r - 7);
-oSoul.y = clamp(oSoul.y, global.border_u + 8, global.border_d - 9);
-/*
-
-oSoul.x = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
-oSoul.y = clamp(oSoul.y, global.border_u + 10, global.border_d - 9);
-
-//HITBOX DEL PLAYER IN FORMA FISICA	
-oSoul.x = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
-oSoul.y = clamp(oSoul.y, global.border_u + 10, global.border_d - 9);

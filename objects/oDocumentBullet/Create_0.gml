@@ -1,8 +1,9 @@
-timerToGetCoord = 50;
+timerToGetCoord = 30;
 takingX = 0;
 takingY = 0;
-canCreateTimer = 50;
+canCreateTimer = 30;
 canCreate = true;
 
-image_xscale = 0.5;
+image_xscale = 0;
 image_yscale = 0.5;
+disapperTimer = 10;

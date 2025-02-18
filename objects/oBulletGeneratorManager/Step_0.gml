@@ -9,13 +9,14 @@ if (oBattleManager.playerTurn == false)
 	}
 }
 
-//ANIMAZIONE PLAYER E "RESET" DEGLIATTACCHI
+//ANIMAZIONE PLAYER E "RESET" DEGLI ATTACCHI
 if (global.enemyTimer == global.enemyAttackTime - 60)
 {
 	#region ANIMAZIONE "BEAM DEL PLAYER"
 	global.playerMoveTimer = 60;
 	indexMax = 0;
 	oSoul.canShow = false;
+	oBattleBox.returnAnimation = true;
 	#endregion
 	//DISTRUGGE GLI OGGETTI (I BULLETS E I GENERATORS ED EXTRAS) ALLA FINE DEL TURNO
 	if (instance_exists(oBulletParent)) { instance_destroy(oBulletParent); }

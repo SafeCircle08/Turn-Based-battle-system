@@ -7,7 +7,7 @@
   },
   "bitDepth":1,
   "bitRate":320,
-  "compression":1,
+  "compression":0,
   "conversionMode":0,
   "duration":64.026085,
   "name":"sBGMusic",

@@ -2,7 +2,7 @@ event_inherited();
 
 timers = [70, 55];
 global.generatorPhase++;
-genTimeVars(timers[global.generatorPhase], false,9999, 0)
+genTimeVars(timers[global.generatorPhase], false, 1200, 0)
 frame = 0
 
 //DIMENSIONI BOX 

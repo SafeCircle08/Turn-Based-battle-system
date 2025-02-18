@@ -1,6 +1,5 @@
 randomize();
 
-
 var _height = (sprite_get_height(sCannon) / 2);
 
 var _xStart = -200;

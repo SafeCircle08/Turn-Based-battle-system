@@ -1,7 +1,7 @@
 startScaleX = 1;
 startScaleY = 1;
-maxScaleX = 5;
-maxScaleY = 5;
+maxScaleX = 20;
+maxScaleY = 20;
 frame = 0;
 
 sprite = [sNoEffects, sInvertedEffect, sEffectGravity, sWeigthDangerFX]

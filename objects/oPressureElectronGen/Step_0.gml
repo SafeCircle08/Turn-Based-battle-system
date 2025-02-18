@@ -13,8 +13,7 @@ if (!instance_exists(oWeightTrigger))
 	oWeightTrigger.image_yscale = _height + 2;
 }
 
-if (timer > 0) { timer--; }
-
+timer = setTimer(timer);
 if (timer == 0)
 {	
 	global.boxOriginX += 0.1;

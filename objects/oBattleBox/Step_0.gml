@@ -4,10 +4,9 @@ if (self.visible = false)
 	currentWidth = 50;
 	currentHeight = 50;
 } 
-
-if (self.visible == true)
-{	
-	if (animateBoxTimer > 0 ) { animateBoxTimer-- }
+else 
+{ 
+	if (animateBoxTimer > 0 ) { animateBoxTimer-- } 
 }
 
 if (animateBoxTimer == 0)
