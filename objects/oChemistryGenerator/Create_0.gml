@@ -1,8 +1,6 @@
 event_inherited();
 
-genTimeVars(120, false, 900, 0)
-
-
+genTimeVars(120, false, 11900, 0)
 
 global.pov = "Front"; //il player può saltare
 
@@ -17,7 +15,7 @@ magnetsCreated = false;
 global.borderWidth = 200;
 global.borderHeight = (sprite_get_height(sMagnet)*numberOfMagnets);
 
-oSoul.state = oSoul.stateGravity;
+playerChangeState(oSoul.stateGravity, 3)
 
 instance_create_layer(global.boxOriginX - (global.borderWidth) / 4, global.boxOriginY + (global.borderHeight) / 4, "ExtrasObjects", oPlatform)
 instance_create_layer(global.boxOriginX + (global.borderWidth) / 4, global.boxOriginY + (global.borderHeight) / 4, "ExtrasObjects", oPlatform)

@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sCannon",
-    "path":"sprites/sCannon/sCannon.yy",
+    "name":"sCannonHat",
+    "path":"sprites/sCannonHat/sCannonHat.yy",
   },
   "spriteMaskId":null,
   "visible":true,

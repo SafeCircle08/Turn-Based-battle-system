@@ -1,50 +1,75 @@
-image_angle = clamp(image_angle, firstImageAngle, finalDegree + firstImageAngle)
+//image_angle = clamp(image_angle, firstImageAngle, finalDegree + firstImageAngle)
+
+if (timer > 0)
+{	
+	if face == "vertical"
+	{
+		if (y > room_width / 2) 
+		{ 
+			image_angle = 90;
+			firstImageAngle = image_angle;
+		}
+		else
+		{
+			image_angle = 270;
+			firstImageAngle = image_angle;
+		}
+	}
+	else
+	{
+		if (x > room_width / 2)
+		{
+			image_angle = 180;
+			firstImageAngle = image_angle;
+		}
+		else
+		{
+			image_angle = 0;
+			firstImageAngle = image_angle;
+		}
+	}	
+	timer = -1;
+}
 
 if (reached == false)
 {
 	if (image_angle < finalDegree + firstImageAngle)
 	{	
-		image_angle += 60
+		image_angle += 30;
 	}
-	if (x < targetX) { x+=5 }
-	if (x > targetX) { x-=5 }
-	//if (y < targetY) { y+=5 }
-	//if (y > targetY) { y-=5 }
+	if (x < targetX) { x+=5; }
+	else { x-=5; }
+	if (y < targetY) { y+=5 }
+	else { y-= 5 }
 }
 
-
-if (x == targetX) //and (y = targetY)
+if (x == targetX) && (y = targetY)
 {
 	reached = true;
-	if (timer > 0) { timer-- }
+	actualTimer = setTimer(actualTimer);
+	image_angle = firstImageAngle;
 	
-	if (timer % 5 == 0) { image_index++ }
-	
-	if (timer == 0)
+	if (actualTimer == 0)
 	{
 		oShake.shake = true;
 		with instance_create_layer(x, y, "Bullets", oBlasterBeam)
 		{
 			image_angle = other.firstImageAngle
 		}
-		timer = -1;
+		actualTimer = -1;
 	}
 }
-
-if (timer = -1)
+if (actualTimer = -1)
 {
-	if (goBackTimer > 0) { goBackTimer-- }
-	if (goBackTimer == 0)
+	actualGoBackTimer = setTimer(actualGoBackTimer);
+	if (actualGoBackTimer == 0)
 	{
-		{
-			if (x < xstart) { x+=5 }
-			if (x > xstart) { x-=5 }
-			//if (y < ystart) { y+=5 }
-			//if (y > ystart) { y-=5 }
-			image_angle-=10
-			
-			if (x == xstart) { instance_destroy(self); show_debug_message("Distrutto"); }
-			
-		}
+		if (x < xstart) { x+=5; }
+		else { x-=5; }
+		if (y < ystart) { y+=5 }
+		else { y-=5; }
+		firstImageAngle -= 10;
+		image_angle = firstImageAngle;
+		if (x == xstart) && (y == ystart) { instance_destroy(self); }
 	}
 }

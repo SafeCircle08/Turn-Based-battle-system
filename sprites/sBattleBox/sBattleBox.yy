@@ -12,14 +12,14 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"ee37d666-cf78-4e7f-b0e6-a27219c30bf7","name":"ee37d666-cf78-4e7f-b0e6-a27219c30bf7","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"293a2318-fb28-404b-9248-05e4946525a3","name":"293a2318-fb28-404b-9248-05e4946525a3","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":100,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"50d9b62c-597d-46eb-9667-a9309e3188c7","blendMode":0,"displayName":"default","isLocked":false,"name":"50d9b62c-597d-46eb-9667-a9309e3188c7","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"a9a12707-67db-4c4b-a8a0-59ba0571783b","blendMode":0,"displayName":"default","isLocked":false,"name":"a9a12707-67db-4c4b-a8a0-59ba0571783b","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"sBattleBox",
   "nineSlice":{
@@ -44,8 +44,8 @@
   },
   "origin":4,
   "parent":{
-    "name":"Sprites",
-    "path":"folders/Sprites.yy",
+    "name":"BattleGUI-BattleBox",
+    "path":"folders/Sprites/GUI/BattleGUI-BattleBox.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
@@ -88,8 +88,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"ee37d666-cf78-4e7f-b0e6-a27219c30bf7","path":"sprites/sBattleBox/sBattleBox.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"65b9dfb1-4c10-4f85-be50-602e80409b9b","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"293a2318-fb28-404b-9248-05e4946525a3","path":"sprites/sBattleBox/sBattleBox.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"56f92813-98d2-4df6-8920-225f7bf92c1c","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

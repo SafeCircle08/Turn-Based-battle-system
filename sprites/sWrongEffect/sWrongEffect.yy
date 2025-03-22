@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"GUI",
-    "path":"folders/Sprites/GUI.yy",
+    "name":"RandomEffects",
+    "path":"folders/Sprites/GUI/BattleGUI-BattleBox/RandomEffects.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -48,6 +48,5 @@ if (canCreateTimer == 0) && (canCreate == true)
 	var _xx = oSoul.x + 120 * sign(_sign);
 	var _yy = oSoul.y + 70 * sign(_sign)
 	instance_create_layer(_xx, _yy, "Bullets", oDocumentBullet);
-	//Lo stesso bullet non creerà più altri documents
 	canCreateTimer = -1;
 }

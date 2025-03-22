@@ -13,10 +13,10 @@ global.borderHeight = 100;
 
 //PLAYER VARIABLES
 battle = true;
-turnNumber = 11;
+turnNumber = 17;
 global.playerName = "Misery";
 global.playerMAX_HP = 512;
-global.playerHP = 100;
+global.playerHP = 500;
 global.playerShield = 50;
 global.playerMaxShield = 50;
 global.CSvalue = 100;	//CAGE STATE
@@ -29,6 +29,9 @@ playerTurn = true;
 moreStepsAct = false; //if an action requires more steps
 acting = false;
 selected_option = 0;
+
+shieldBarW = 121;
+hpbarW = 121;
 
 //ATTACK FUNCTION VARIABLES
 attacking = false;
@@ -43,10 +46,12 @@ roll = 0;
 
 //BOX VARIABLES and TEXTS
 boxWidth = sprite_get_width(sTextBG) + 10;
-stringHeight = string_height(global.textList[turnNumber]);
+strHeight = string_height(global.textList[turnNumber]);
 charCount = 0;
+charCountSupport = 0;
+enter = keyboard_check_pressed(vk_enter)
 page = 0;
-speechSpeed = 0.5;
+speechSpeed = 0.2;
 ds_messages = ds_list_create();
 messageCounter = 0;
 showBattleText = false;
@@ -56,6 +61,8 @@ enemyTextShowed = false;
 enemyCanShowText = 0;
 textSkipTimer = 100;
 color = c_white;
+dialogueDelay = 10;
+lastSpace = 0;
 
 //INVENTORY VARIABLES
 frame = -1;
@@ -74,15 +81,6 @@ global.monsterHP = 500;
 global.maxMonsterHp = 500;
 global.monsterDamage = 1;
 global.enemyTimer = 0;
-
-//SCREEN SHAKE
-screenShake = false;
-maxShakeX = 3;
-maxShakeY = -3;
-shakeX = 0;
-shakeY = 0;
-shakeTimer = 0;
-timerTillShakeEnds = 30;
 
 //FUNCTIONS:
 attackFunction = function()
@@ -175,13 +173,19 @@ openingInv = function()
 	var _guiY = surface_get_height(application_surface);
 	var _spriteWidth = sprite_get_width(sInventory);
 	var _spriteHeight = sprite_get_height(sInventory);
+	var _itemWidth = sprite_get_width(sItemSprite);
+	var _itemHeigth = sprite_get_height(sItemSprite);
+	var _actualItemSprite = global.itemSpriteDraw;
 	
 	draw_sprite_stretched(sInventory, 0, _guiX + 70, _guiY - 280, 240, 250);
+	draw_sprite_stretched(_actualItemSprite, 0, _guiX + 200, _guiY - 260, _itemWidth * 3, _itemHeigth * 3 )
 	
 	if (!instance_exists(itemOutput))
 	{	
+		var _xx = (surface_get_width(application_surface) / 2) + 85;
+		var _yy = (surface_get_height(application_surface) - 250) + 100;
 		var _info = itemInfo(invPos);
-		draw_text_ext(_guiX + 200, _guiY - 250, _info, 20, _spriteWidth * 2);
+		draw_text_ext(_xx, _yy, _info, 20, _spriteWidth * 4);
 	}
 	
 	takenOptionDelay = setTimer(takenOptionDelay);

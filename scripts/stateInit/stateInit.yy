@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"stateInit",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"stateInit",
+  "parent":{
+    "name":"sPlayerStateScripts",
+    "path":"folders/Scripts/sPlayerStateScripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -31,7 +31,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"sBattleBox",
+    "path":"sprites/sBattleBox/sBattleBox.yy",
+  },
   "spriteMaskId":null,
   "visible":false,
 }

@@ -1,18 +1,13 @@
 event_inherited();
 
-instance_create_layer(0,0, "Bullets", oDocumentBullet);
-oDocumentBullet.canCreateTimer = 70;
+//instance_create_layer(0,0, "Bullets", oDocumentBullet);
+//oDocumentBullet.canCreateTimer = 90;
+genTimeVars(100, false, 9999, 0)
+numberOfWaves = 4;
 
-genTimeVars(100, false, 900, 0)
-
-
+boxDimensions((sprite_get_width(sWave)*numberOfWaves) - 1, 200);
 
 global.pov = "Front"; //il player può saltare
-//DIMENSIONI DEL BOX
-numberOfWaves = 4;
-global.borderHeight = 130;
-global.borderWidth = (sprite_get_width(sWave)*numberOfWaves) - 1;
-
 waveIndex = 0;
 waveAlpha = 0;
 lavaDropperAlpha = 0;

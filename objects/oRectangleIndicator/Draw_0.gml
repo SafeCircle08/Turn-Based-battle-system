@@ -13,3 +13,4 @@ draw_set_color(c_red);
 draw_text_ext_transformed(_xx, _yy + 8, _weightLimit, 10, 200, 0.4, 0.45, image_angle);
 
 draw_set_color(c_white);
+draw_set_font(fGenericText);

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"createBullets",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"bulletScripts",
+    "path":"folders/Scripts/bulletScripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

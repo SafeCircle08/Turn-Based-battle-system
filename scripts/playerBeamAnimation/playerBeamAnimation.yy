@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"playerBeamAnimation",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"playerBeamAnimation",
+  "parent":{
+    "name":"generalUse",
+    "path":"folders/Scripts/generalUse.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

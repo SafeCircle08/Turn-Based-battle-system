@@ -36,5 +36,5 @@ if (global.bulletsCreated == 2) { global.bulletsCreated = 0; }
 //Generates the blasters
 if (oRectangleIndicator.weight == 100)
 {
-	oBlasterGenerator.createBlaster = true;
+	oBlasterLineGenerator.createBlaster = true;
 }

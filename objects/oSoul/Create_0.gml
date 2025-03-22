@@ -16,6 +16,11 @@ global.yOffset = 0;
 global.playerMoveTimer = 65;
 global.beamAnimation = false;
 
+xAngle = 0;
+yAngle = 0;
+xAngleIncr = 0;
+yAngleincr = 0;
+
 //----------------------------VARIABILI STRANE----------------------------
 boxColor = c_white;
 godMode = 0;
@@ -29,7 +34,9 @@ grv = 0.2;
 vsp_max = 4;
 hsp_max = 4;
 left = 0;
-fxIndex = undefined; //variabile che assegnerà gli sprite all'Effetto
+t = 0;
+umbrelling = false;
+umbrellaJump = false;
 
 //DIMENSIONI DEL PLAYER IN FORMA
 image_xscale = 0.5;
@@ -40,14 +47,7 @@ vsp = 0;
 //L'AURA E' QUELLA BASE (NESSUN EFFETTO APPLICATO)
 stateFree = function()
 {
-	fxIndex = 0;
-	boxColor = c_white; //arancione scuro
-	if (global.playerMoveTimer == -1) 
-	{ 
-		sprite_index = sPlayerFront;
-		instance_create_layer(x, y, "ExtrasObjects", oPlayerEffect);
-		global.playerMoveTimer = -2; 
-	}
+	stateInit(sPlayerFront, stateFree, sNoEffects);
 	
 	hsp = (key_right - key_left) * global.SoulSpeed;
 	vsp = (key_down - key_up) * global.SoulSpeed;
@@ -66,17 +66,10 @@ stateFree = function()
 //L'AURA E' QUELLA ARANCIONE (TUTTI I COMANDI SONO INVERTITI)
 stateMirrored = function()
 {
-	fxIndex = 1;
-	//boxColor = make_color_rgb(240, 80, 0) //arancione scuro
-	if (global.playerMoveTimer == -1) 
-	{ 
-		sprite_index = sPlayerFrontMirrored;
-		instance_create_layer(x, y, "ExtrasObjects", oPlayerEffect);
-		global.playerMoveTimer = -2; 
-	}
+	stateInit(sPlayerFrontMirrored, stateMirrored, sInvertedEffect);
+	
 	hsp = (key_left - key_right) * global.SoulSpeed;
 	vsp = (key_up - key_down) * global.SoulSpeed;
-	startSprite = sPlayerFrontMirrored;
 	
 	if (hsp == 0) and (vsp == 0) { image_speed = 0; image_index = 0; }
 	
@@ -93,88 +86,82 @@ stateMirrored = function()
 stateGravity = function()
 {
 	image_angle = 0;
-	
-	key_jumpPressed = keyboard_check_pressed(vk_space);
-	fxIndex = 2;
-	//boxColor = make_color_rgb(0, 20, 255);
-	if (global.playerMoveTimer == -1) 
-	{ 
-		sprite_index = sPlayerRightJump; 
-		global.auraColor = c_blue;
-		instance_create_layer(x, y, "ExtrasObjects", oPlayerEffect);
-		global.playerMoveTimer = -2; 
-	}
+	key_jumpPressed = keyboard_check(vk_space);
+	stateInit(sPlayerRightJump, stateGravity, sEffectGravity);
 	
 	//Setting the horizontal speed
 	hsp = (key_right - key_left) * global.SoulSpeed;
 	if (key_left) { image_speed = 1; left = true; }
 	if (key_right) { image_speed = 1; left = false; }
+	
 	if (grounded != 1)
-	{ 
-		if (left = true) { sprite_index = sPlayerLeftJumping; image_speed = 1; }
-		else
-		{ sprite_index = sPlayerRightJumping; image_speed = 1; }
+	{
+		if (keyboard_check_pressed(vk_space)) { umbrelling = true; }
+		if (umbrelling == true) { usingUmbrella(); }
+		
+		if (umbrelling == false)
+		{
+			if (left == true) { sprite_index = sPlayerLeftJumping; image_speed = 1; }
+			else { sprite_index = sPlayerRightJumping; image_speed = 1; }
+			if (place_meeting(x + hsp, y, oPlatformParent)) { hsp = 0; } 
+		}
 	}
 	
 	//If the player is standing still
-	if (hsp == 0) and (vsp == 0) { image_speed = 0; image_index = 0; }
+	if (hsp == 0) && (vsp == 0) { image_speed = 0; image_index = 0; }
 	
 	//SE PREMI SPAZIO-------------------------------------------------------------------
-	if ((key_jumpPressed == 1) && (vsp == 0)) { vsp += jump; grounded = 0;}
-	
-	//DARE UN'OCCHIATA ANCHE QUI
+	if ((key_jumpPressed == 1) && (vsp == 0) && (grounded == 1)) { vsp += jump; grounded = 0; }
 	if (vsp < 0) { vsp = max(vsp, jump / jump_mod); }
-	
-	//NEL CASO SI RISCONTRASSERO PROBLEMI NELLE PROVE
-	//FUTURE, UTILIZZARE QUESTI DATI:
-	//vsp = clamp(vsp, -vsp_max, vsp_max);
-	//vsp_max = 15 (proprio all'inizio)
-	//vsp_max = 4 (secondo valore)
-	
-	//Queste sembrano dare un valore stabile;
-	//Fare altri test
-	
-	//------------------------------------	
 	vsp = clamp(vsp, -4, 4);
-	//------------------------------------	
 	
-	//SE COLLIDI A DESTRA O SINISTRA CON I MURI
-	if (vsp < 0) { if (place_meeting(x + hsp, y, oPlatformParent)) { hsp = 0; } }
+	if (y - sprite_get_width(sprite_index) / 2 <= global.border_u) { vsp += 1 }
 	
-	//SE STO TOCCANDO IL SOFFITTO DEL BOX
-	//if (y < global.boxOriginY - (global.borderHeight / 2) + sprite_get_height(sprite_index) - 31) { vsp -= jump + 13 }
-
 	//SE SEI SUL BORDO-------------------------------------------------------------------
-	if (y + vsp >= global.boxOriginY + global.borderHeight / 2 - 10)
+	if (y + sprite_get_height(sprite_index) / 4 >= global.border_d)
 	{
 		if (left == true) { sprite_index = sPlayerLeftJump; } else sprite_index = sPlayerRightJump;
 		grounded = 1;	
 		grv = 0;
 		vsp = 0;
-		if ((key_jumpPressed == 1) && (vsp == 0)) { vsp += jump; grounded = 0}
+		if (umbrelling == true)
+		{
+			umbrelling = false;
+			umbrellaJump = false;
+			instance_create_layer(x, y, "ExtrasObjects", oMiniUmbrella);
+		}
+		if ((key_jumpPressed == 1) && (vsp == 0)) { vsp += jump; grounded = 0; }
 	} 
 	else 
-	{ 
-		//SE STAI COLLIDENDO CON UNA PIATTAFORMA----------------------------
-		if (place_meeting(x, y + vsp, oPlatformParent))
-		{
-			//QUANDO STAI SALTANDO-----------------------------
-			if (vsp < 0) { grounded = 0; y -= 2; }
-			else 
-			{ 
-				//QUANDO STAI ATTERRANDO---------------------------
-				grounded = 1; vsp = 0; grv = 0; 
-				if (left = true) { sprite_index = sPlayerLeftJump; } else sprite_index = sPlayerRightJump;
+	{
+		if (umbrelling == false) { grv = 0.2; }
+		else { grv = 0.05; }
+		grounded = 0; 	
+	} 
+	
+	//SE STAI COLLIDENDO CON UNA PIATTAFORMA----------------------------
+	if (place_meeting(x, y + vsp, oPlatformParent))
+	{
+		if (vsp < 0) { grounded = 0; y -= 2; }
+		else 
+		{ 
+			if (umbrelling == true)
+			{
+				instance_create_layer(x, y, "ExtrasObjects", oMiniUmbrella);
+				umbrelling = false;
+				umbrellaJump = false;
 			}
-		} else { grv = 0.2; }	
-	}
-	
-	
-	//GRAVITA'-----------------------------------------
+			grounded = 1; 
+			vsp = 0; 
+			grv = 0; 
+			if (left == true) { sprite_index = sPlayerLeftJump; } else { sprite_index = sPlayerRightJump; }
+		}
+	} 
+
 	vsp += grv;
 	
 	//SE COLLIDO CON IL "LIQUIDO" IN FONDO
-	if (place_meeting(x, y, oWaveTrigger)) { vsp += jump*3; grounded = 0;}
+	if (place_meeting(x, y, oWaveTrigger)) { vsp += jump*3; grounded = 0; umbrelling = false; }
 	
 	x += hsp;
 	y += vsp;
@@ -183,17 +170,9 @@ stateGravity = function()
 //L'AURA E' SEMPRE QUELLA BLU, MA LA GRAVITA' E' INVERTITA
 stateGravityUp = function()
 {
-	key_jumpPressed = keyboard_check_pressed(ord("S"));
+	key_jumpPressed = keyboard_check(ord("S"));
 	image_angle = 180;
-	fxIndex = 2;
-	//boxColor = make_color_rgb(0, 20, 255);
-	if (global.playerMoveTimer == -1) 
-	{ 
-		sprite_index = sPlayerRightJump; 
-		global.auraColor = c_blue;
-		instance_create_layer(x, y, "ExtrasObjects", oPlayerEffect);
-		global.playerMoveTimer = -2; 
-	}
+	stateInit(sPlayerRightJump, stateGravityUp, sEffectGravity);
 	
 	//Setting the horizontal speed
 	hsp = (key_right - key_left) * global.SoulSpeed;
@@ -207,21 +186,13 @@ stateGravityUp = function()
 		{ sprite_index = sPlayerLeftJumping; image_speed = 1; }
 	}
 	
-	boxColor = c_white;
-	
-	if ((key_jumpPressed == 1) && (vsp == 0)) { vsp -= jump + 9; grounded = 0; }
+	if ((key_jumpPressed == 1) && (vsp == 0) && (grounded == 1)) { vsp -= jump + 9; grounded = 0; }
 	
 	//If the player is standing still
 	if (hsp == 0) and (vsp == 0) { image_speed = 0; image_index = 0; }
 	
 	//DARE UN'OCCHIATA ANCHE QUI
 	if (vsp < 0) { vsp = max(vsp, jump / jump_mod) }
-	
-	//NEL CASO SI RISCONTRASSERO PROBLEMI NELLE PROVE
-	//FUTURE, UTILIZZARE QUESTI DATI:
-	//vsp = clamp(vsp, -vsp_max, vsp_max);
-	//vsp_max = 15 (proprio all'inizio)
-	//vsp_max = 4 (secondo valore)
 	
 	//------------------------------------
 	vsp = clamp(vsp, -vsp_max*2, 7);
@@ -249,7 +220,9 @@ stateGravityUp = function()
 		if (vsp > 0) { grounded = 0; y += 2; }
 		else 
 		{
-			grounded = 1; vsp = 0; grv = 0;
+			grounded = 1; 
+			vsp = 0;
+			grv = 0;
 			if (left = true) { sprite_index = sPlayerLeftJump; } 
 			else sprite_index = sPlayerRightJump;
 		}
@@ -264,17 +237,10 @@ stateGravityUp = function()
 //L'AURA E' SEMPRE QUELLA BLU, MA LA GRAVITA' E' E' ATTRATTA DAL BORDO DI SINISTRA
 stateGravityLeft = function() 
 {
-	key_jumpPressed = keyboard_check_pressed(ord("D"));
+	key_jumpPressed = keyboard_check(ord("D"));
 	image_angle = 270;
-	fxIndex = 2;
-	//boxColor = make_color_rgb(0, 20, 255);
-	if (global.playerMoveTimer == -1) 
-	{ 
-		sprite_index = sPlayerRightJump; 
-		global.auraColor = c_blue;
-		instance_create_layer(x, y, "ExtrasObjects", oPlayerEffect);
-		global.playerMoveTimer = -2; 
-	}
+	
+	stateInit(sPlayerRightJump, stateGravityLeft, sEffectGravity);
 	
 	//Setting the vertical speed
 	vsp = (key_down - key_up) * global.SoulSpeed;
@@ -286,19 +252,12 @@ stateGravityLeft = function()
 		else
 		{ sprite_index = sPlayerRightJumping; image_speed = 1; }
 	}
-	boxColor = c_white;
 	
 	//If the player is standing still
 	if (hsp == 0) and (vsp == 0) { image_speed = 0; image_index = 0; }
 	
 	//DARE UN'OCCHIATA ANCHE QUI
 	if (hsp < 0) { hsp = max(hsp, jump / jump_mod) }
-
-	//NEL CASO SI RISCONTRASSERO PROBLEMI NELLE PROVE
-	//FUTURE, UTILIZZARE QUESTI DATI:
-	//hsp = clamp(hsp, -hsp_max, hsp_max);
-	//hsp_max = 15 (proprio all'inizio)
-	//hsp_max = 4 (secondo valore)
 	
 	//------------------------------------
 	hsp = clamp(hsp, -hsp_max*2, 7);
@@ -333,7 +292,7 @@ stateGravityLeft = function()
 		grv = 0;
 		hsp = 0;
 		//If you press space
-		if ((key_jumpPressed == 1) && (hsp == 0)) { hsp -= jump + 9; grounded = 0; }
+		if ((key_jumpPressed == 1) && (hsp == 0) && (grounded == 1)) { hsp -= jump + 9; grounded = 0; }
 	} else { grv = 0.2; }
 	
 	hsp -= grv;
@@ -348,17 +307,10 @@ stateGravityLeft = function()
 //L'AURA E' SEMPRE QUELLA BLU, MA LA GRAVITA' E' E' ATTRATTA DAL BORDO DI DESTRA
 stateGravityRight = function() 
 {
-	key_jumpPressed = keyboard_check_pressed(ord("A"));
+	key_jumpPressed = keyboard_check(ord("A"));
 	image_angle = 90;
-	fxIndex = 2;
-	//boxColor = make_color_rgb(0, 20, 255);
-	if (global.playerMoveTimer == -1) 
-	{ 
-		sprite_index = sPlayerRightJump; 
-		global.auraColor = c_blue;
-		instance_create_layer(x, y, "ExtrasObjects", oPlayerEffect);
-		global.playerMoveTimer = -2; 
-	}
+	
+	stateInit(sPlayerRightJump, stateGravityRight, sEffectGravity);
 	
 	//Setting the vertical speed
 	vsp = (key_down - key_up) * global.SoulSpeed;
@@ -370,20 +322,13 @@ stateGravityRight = function()
 		else
 		{ sprite_index = sPlayerLeftJumping; image_speed = 1; }
 	}
-	boxColor = c_white;
 	
 	//If the player is standing still
 	if (hsp == 0) and (vsp == 0) { image_speed = 0; image_index = 0; }
 	
 	//DARE UN'OCCHIATA ANCHE QUI
 	if (hsp < 0) { hsp = max(hsp, jump / jump_mod) }
-	
-	//NEL CASO SI RISCONTRASSERO PROBLEMI NELLE PROVE
-	//FUTURE, UTILIZZARE QUESTI DATI:
-	//hsp = clamp(hsp, -hsp_max, hsp_max);
-	//hsp_max = 15 (proprio all'inizio)
-	//hsp_max = 4 (secondo valore)
-	
+
 	//------------------------------------
 	hsp = clamp(hsp, -hsp_max*2, 3);
 	//------------------------------------
@@ -414,7 +359,7 @@ stateGravityRight = function()
 		grv = 0;
 		hsp = 0;
 		//If you press space
-		if ((key_jumpPressed == 1) && (hsp == 0)) { hsp += jump + 9; grounded = 0; }
+		if ((key_jumpPressed == 1) && (hsp == 0) && (grounded == 1)) { hsp += jump + 9; grounded = 0; }
 	} else { grv = 0.2; }
 	
 	hsp += grv;
@@ -426,5 +371,32 @@ stateGravityRight = function()
 	y += vsp;
 }
 
-state = stateFree;
+//QUANDO SPAWNI DIRETTAMENTE CON L'OMBRELLO
+stateUmbrella = function()
+{
+	t += 0.05;
+	yFloating = sin(t) * 2;	
+	stateInit(sPlayerUmbrella, stateUmbrella, sUmbrellaEffect);
 
+	//Setting the horizontal speed
+	hsp = (key_right - key_left) * global.SoulSpeed;
+	vsp = (key_down - key_up) * global.SoulSpeed;
+	
+	x += hsp;
+	y += vsp + (yFloating / 10);
+}
+
+//VIENE CHIAMATA QUANDO C'E' GRAVITA'
+usingUmbrella = function()
+{
+	if (umbrellaJump == false)
+	{
+		vsp -= 4;
+		umbrellaJump = true;
+		effect = instance_create_layer(oSoul.x, oSoul.y, "ExtrasObjects", oPlayerEffect);
+		effect.sprite_index = sUmbrellaEffect;
+	}
+	sprite_index = sPlayerUmbrella;
+}	
+
+state = stateFree;

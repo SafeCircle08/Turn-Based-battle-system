@@ -1,7 +1,9 @@
 visible = false;
 currentWidth = 0;
 currentHeight = 0;
-animateBoxTimer = 30;
+animateBoxTimer = 50;
+image_alpha = 1;
+drawAlpha = 0;
 
 //ORIGINI DEL BATTLE BOX
 global.boxOriginX = 160;

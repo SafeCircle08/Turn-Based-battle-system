@@ -6,6 +6,7 @@ randomize();
 //FASE INIZIALE PARTITA, QUANDO PUOI SCEGLIERE I PULSANTI
 if (playerTurn == true) && (showBattleText == false) && (acting == false)
 {
+	
 	if keyboard_check_pressed(ord("S"))
 	{
 		if (selected_option == 0) { selected_option = 2; audio_play_sound(sndNavigating, 50, false); }
@@ -35,24 +36,21 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 		//A NEW TURN STARTS; CHANGE ALL VARIABLES
 		//Battle Manager variables
 		turnNumber += 1;
-		textCounter = 0;
 		defended = 0;
 		enemyTextShowed = false;
 		barCreated = false;
 		attackPressed = false;
-		charCount = 0;
-		page = 0;
 		acting = true;
 				
 		//Generator variables
 		oBulletGeneratorManager.generatorCreated = false;
-				
+		
 		//Player variables
 		global.playerShield = global.playerMaxShield;
 		oSoul.sprite_index = sPlayerFront;
 		oSoul.canShow = true;
 		oSoul.coordTimer = 1;
-			
+		
 		if (!ds_exists(ds_messages, ds_type_list)) { ds_messages = ds_list_create() } 
 			
 		//---------------------------SELECTING ACTIONS-------------------------
@@ -155,24 +153,7 @@ if (showBattleText)
 		}
 	}	
 }
-	
-//SHAKE
-if (screenShake == true)
-{
-	shakeTimer++;
-	
-	shakeX = irandom_range(-maxShakeX, maxShakeX);
-	shakeY = irandom_range(-maxShakeY, maxShakeY);
-	
-	if (shakeTimer > timerTillShakeEnds)
-	{
-		screenShake = false;
-		shakeTimer = 0;
-		shakeX = 0;
-		shakeY = 0;
-	}
-}
-	
+
 ////----------------ATTACK SEQUENCE----------------------
 if (acting == true)
 {
@@ -182,6 +163,7 @@ if (acting == true)
 //-------------------QUANDO VEDI TUTTI I BULLETS NEL BOX------------------------
 if (!playerTurn) && (!showBattleText)
 {
+	global.playerHP = clamp(global.playerHP, -666, global.playerMAX_HP);
 	enemyCanShowText = false;
 	global.enemyTimer++; //Parte da 0 e arriva fino a global.enemyAttackTime
 	oBattleBox.visible = true;
@@ -192,8 +174,7 @@ if (!playerTurn) && (!showBattleText)
 		if (!ds_exists(ds_messages, ds_type_list))
 		{
 			ds_messages = ds_list_create();	
-		}
-			
+		}		
 		ds_messages[| 0] = "The monster has finished his attack."
 		battleOption = 0;
 		oBattleBox.visible = false;

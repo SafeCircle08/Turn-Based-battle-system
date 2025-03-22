@@ -78,6 +78,7 @@ if (stateFlow == true)
 //Cambia l'aura del player (destra, sinistra ecc...)
 if (changeStateTimer == 0)
 {
+	/*
 	for (var i = 0; i < 4; i++)
 	{
 		var _xL = global.boxOriginX - (global.borderWidth / 2);
@@ -88,6 +89,8 @@ if (changeStateTimer == 0)
 		var _yPos =[_yU + 10, _yU + 10, _yD - 10, _yD - 10];
 		instance_create_layer(_xPos[i], _yPos[i], "Bullets", oExclamationMark)
 	}
+	*/
+	createExclamationMarks();
 	//SECOND PHASE OF THE GENERATOR------------------------------
 	if (global.generatorPhase == 1) { index = irandom_range(2, 3); }
 	else { index = irandom_range(0, 3) }

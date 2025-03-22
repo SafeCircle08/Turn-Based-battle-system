@@ -1,8 +1,8 @@
 steamEnemyText =  
 [
-	"I'm sorry but i've warned you...",
+	["So right now you are telling me this is not working???"],
 	[
-		"After all, with all your energy...",   
+		"This is very annoying... for real ngl",   
 		"I'll gain a lot of POWER!",
 	],
 	[
@@ -14,20 +14,20 @@ steamEnemyText =
 		"And, please...",
 		"Don't think that I like doing this to you.",
 	],
-	"My will is against what i HAVE to do.",
+	["My will is against what i HAVE to do."],
 	[
 		"It's not even your fault because you are here.",
 		"You are just..."
 	],
-	"Victim of your own fate.",
-	"Damn this is starting to get dramatic, isn't it?",
+	["Victim of your own fate."],
+	["Damn this is starting to get dramatic, isn't it?"],
 	[
 		"Now let me think of a way in wich i could cheer you up...",
 		"...",
 		"...",
 		"Oh yeah!",
 	],
-	"I've finally understood PHOTOSINTESIS.",
+	["I've finally understood PHOTOSINTESIS."],
 	[
 		"Uh?",
 		"You really don't know what it is about?",
@@ -51,10 +51,18 @@ steamEnemyText =
 		"In which i've worked very hard!",
 		"And i'am sure this is going to finally Defeat YOU!"
 	],
-	"text",
-	"text",
-	"text",
-	"text",
+	["text"],
+	["text"],
+	["text"],
+	["text"],
+	["text"],
+	["text"],
+	["text"],
+	["text"],
+	["text"],
+	["text"],
+	["text"],
+	["text"],
 ];
 
 global.textList = steamEnemyText;

@@ -4,9 +4,13 @@ maxScaleX = 20;
 maxScaleY = 20;
 frame = 0;
 
-sprite = [sNoEffects, sInvertedEffect, sEffectGravity, sWeigthDangerFX]
-
-sprite_index = sprite[oSoul.fxIndex];
+sprites = 
+{
+	noEffect: sNoEffects,
+	mirrored: sInvertedEffect,
+	gravity_effect: sUmbrellaEffect,
+	umbrella: sUmbrellaEffect,
+}
 
 image_xscale = startScaleX;
 image_yscale = startScaleY;

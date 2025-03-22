@@ -44,8 +44,8 @@
   },
   "origin":9,
   "parent":{
-    "name":"Sprites",
-    "path":"folders/Sprites.yy",
+    "name":"BattleGUI-BattleBox",
+    "path":"folders/Sprites/GUI/BattleGUI-BattleBox.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

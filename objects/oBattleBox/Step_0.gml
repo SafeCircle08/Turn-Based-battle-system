@@ -1,8 +1,10 @@
 if (self.visible = false) 
 {
-	animateBoxTimer = 30; 
+	image_angle = 1;
+	animateBoxTimer = 50;
 	currentWidth = 50;
 	currentHeight = 50;
+	drawAlpha = 0;
 } 
 else 
 { 

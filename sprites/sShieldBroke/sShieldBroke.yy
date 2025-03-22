@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"sDecorations",
-    "path":"folders/Sprites/sDecorations.yy",
+    "name":"PlayerMiscellaneous",
+    "path":"folders/Sprites/PLAYER_SPRITES/sPlayerEffects/PlayerMiscellaneous.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

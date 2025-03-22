@@ -27,4 +27,7 @@ global.bulletsGenerators =
 	oTeleportBulletGen, // 15
 	oPressureElectronGen,
 	oBlasterFreeGen,
+	oStereoGen,
+	oBgScrolling,
+	oEmpyTurn, //20
 ];

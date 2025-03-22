@@ -6,7 +6,7 @@ var _yy = 50
 if (global.actualQuestion != -1)
 {
 	timer--;
-	draw_sprite_stretched(sLittleRectangle, 0, oBattleBox.x - sprite_get_width(sBattleBox), 5, sprite_get_width(sBattleBox) * 2, 40)
+	draw_sprite_stretched(sLittleRectangle, 1, oBattleBox.x - sprite_get_width(sBattleBox), 5, sprite_get_width(sBattleBox) * 2, 40)
 	draw_set_font(fText);
 	draw_set_color(c_white);
 	draw_set_halign(fa_center);

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"setLineBlasterPos",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"setLineBlasterPos",
+  "parent":{
+    "name":"bulletScripts",
+    "path":"folders/Scripts/bulletScripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
