@@ -70,7 +70,7 @@ if (oBattleBox.visible == false)
 	draw_set_font(fGenericText);
 	draw_set_color(c_white);
 	#endregion
-	#region DRAWS THE OPTION THE PLAYER CAN TAKE AND THE ARROW
+	#region DRAWS THE OPTION THE PLAYER CAN TAKE AND THE ARROW and SELF BOX
 	if(!showBattleText)
 	{
 		for (var i = 0; i < array_length(a_text); i++)
@@ -123,8 +123,8 @@ if (oBattleBox.visible == false)
 	var _selfBoxHeight = sprite_get_height(sSelfBox);
 	
 	//DRAWS THE STATE BARS BACKGROUNDS
-	draw_sprite(sHealthBarBG, 0, _barX - (_textBoxW) + BUFFER * 7 + 2, _barY - BUFFER * 10 - 1);
-	draw_sprite(sShieldBarBG, 0, _barX - (_textBoxW) + BUFFER * 7 + 2, _barY - BUFFER * 5 - 3);
+	draw_sprite(sHealthBarBG, 0, _barX - (_textBoxW) + BUFFER * 7 + 2, _barY - BUFFER * 10);
+	draw_sprite(sShieldBarBG, 0, _barX - (_textBoxW) + BUFFER * 7 + 2, _barY - BUFFER * 5 - 2);
 
 	//DRAWS THE ACTUAL BARS
 	var _finalHpWidth = (global.playerHP/global.playerMAX_HP) * _hpBarW;
@@ -132,15 +132,15 @@ if (oBattleBox.visible == false)
 	var _finalShieldWidth = (global.playerShield/global.playerMaxShield) * _shieldBarW;
 	_finalShieldWidth = clamp(_finalShieldWidth, 0, _shieldBarW);
 	
-	draw_sprite_stretched(sHealthBar, 0, _barX - (_textBoxW) + BUFFER * 7 + 2, _barY - BUFFER * 10 - 1, _finalHpWidth, _hpBarH);
-	draw_sprite_stretched(sShieldBar, 0, _barX - (_textBoxW) + BUFFER * 7 + 2, _barY - BUFFER * 5 - 3, _finalShieldWidth, _shieldBarH);
+	draw_sprite_stretched(sHealthBar, 0, _barX - (_textBoxW) + BUFFER * 7 + 2, _barY - BUFFER * 10, _finalHpWidth, _hpBarH);
+	draw_sprite_stretched(sShieldBar, 0, _barX - (_textBoxW) + BUFFER * 7 + 2, _barY - BUFFER * 5 - 2, _finalShieldWidth, _shieldBarH);
 	
 	//STATE CAGE BAR
 	//Si trova in playerVariables/stateCageBar
 	
 	//BAR DECORATION
-	draw_sprite(sBarCorner, 0, _barX - (_textBoxW) + BUFFER * 7 + 2, _barY - BUFFER * 10 - 1);
-	draw_sprite(sBarCorner, 0, _barX - (_textBoxW) + BUFFER * 7 + 2, _barY - BUFFER * 5 - 3);
+	draw_sprite(sBarCorner, 0, _barX - (_textBoxW) + BUFFER * 7 + 2, _barY - BUFFER * 10);
+	draw_sprite(sBarCorner, 0, _barX - (_textBoxW) + BUFFER * 7 + 2, _barY - BUFFER * 5 - 2);
 	#endregion
 }
 else

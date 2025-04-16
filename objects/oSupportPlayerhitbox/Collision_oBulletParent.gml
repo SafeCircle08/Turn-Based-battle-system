@@ -9,15 +9,16 @@ if (canCollide == true)
 	oBattleManager.screenShake = true;
 	
 	if (global.playerShield < 1) { audio_play_sound(sndHurt, 50, false); }
-	//CREATING THE DAMAGE "POP" EFFECT
-	instance_create_layer(x, y, "Effect", oFloatingText);
 	
 	if (global.playerShield > 1) { shield_shards(); }
 	
 	//SE E' DIFESO SUBIRA MENO DANNI
 	if oBattleManager.defended == true
 	{
-		global.defenceValue = irandom_range(10, 15); //Defence value casuale		
+		global.defenceValue = irandom_range(10, 15); //Defence value casuale
+		//DAMAGE POP EFFECT
+		flText = instance_create_layer(x, y, "Effect", oFloatingText);
+		flText.value = global.attackRandom - global.defenceValue;
 		if (global.playerShield > 0) 
 		{ 
 			global.playerShield -= global.attackRandom; oFloatingText.damageIndex = 1;
@@ -27,6 +28,9 @@ if (canCollide == true)
 	else
 	{
 		global.defenceValue = 0;
+		//DAMAGE POP EFFECT
+		flText = instance_create_layer(x, y, "Effect", oFloatingText);
+		flText.value = global.attackRandom - global.defenceValue;
 		if (godMode = 0) 
 		{	
 			if (global.playerShield > 0) { global.playerShield -= global.attackRandom; oFloatingText.damageIndex = 1;}

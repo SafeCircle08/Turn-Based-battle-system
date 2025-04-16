@@ -19,5 +19,3 @@ if (global.enemyTimer == 600)
 }
 
 if (instance_exists(oDocumentBullet)) { oDocumentBullet.canCreate = false; }
-
-if (keyboard_check_pressed(vk_space)) { playerChangeState(oSoul.stateFree, sNoEffects); }

@@ -1,6 +1,7 @@
 event_inherited();
 
 genTimeVars(60, false, 250, 0)
+playerChangeState(oSoul.stateFree);
 
 //DIMENSIONI BOX 
 global.borderWidth = 100;
@@ -13,5 +14,3 @@ tubePositions =
 	[117, 132, 147, 162, 177, 192, 207],
 	global.border_d - 5,
 ];
-
-oSoul.state = oSoul.stateFree;

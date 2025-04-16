@@ -9,8 +9,8 @@
   "name":"oBgScrolling",
   "overriddenProperties":[],
   "parent":{
-    "name":"Turns: 16-20",
-    "path":"folders/Objects/BulletsGenerators/Turns: 16-20.yy",
+    "name":"BGscrollingAttributes",
+    "path":"folders/Objects/BulletsGenerators/Turns: 16-20/BGscrollingAttributes.yy",
   },
   "parentObjectId":{
     "name":"oBulletGeneratorParent",

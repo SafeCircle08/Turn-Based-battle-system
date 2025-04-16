@@ -1,10 +1,12 @@
+x = global.boxOriginX;
+y = global.boxOriginY;
+
 if (self.visible = false) 
 {
 	image_angle = 1;
 	animateBoxTimer = 50;
 	currentWidth = 50;
 	currentHeight = 50;
-	drawAlpha = 0;
 } 
 else 
 { 

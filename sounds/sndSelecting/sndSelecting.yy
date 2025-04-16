@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":0.672,
+  "duration":2.389433,
   "name":"sndSelecting",
   "parent":{
     "name":"Sounds",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sndSelecting.mp3",
+  "soundFile":"sndSelecting.ogg",
   "type":0,
   "volume":1.0,
 }

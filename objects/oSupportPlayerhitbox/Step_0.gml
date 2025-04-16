@@ -1,7 +1,8 @@
 if (oBattleBox.visible == false) { exit; }
 
-x = oSoul.x
-y = oSoul.y
+x = oSoul.x + oSoul.hbX;
+y = oSoul.y + oSoul.hbY;
+image_angle = oSoul.image_angle;
 
 //SUBITO DOPO CHE SEI COLPITO LA GODMODE E' MAGGIORE DI 0
 if (godMode > 0) 

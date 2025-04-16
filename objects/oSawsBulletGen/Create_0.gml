@@ -3,24 +3,19 @@ event_inherited();
 timers = [70, 55];
 global.generatorPhase++;
 genTimeVars(timers[global.generatorPhase], false, 1200, 0)
-frame = 0
-
-//DIMENSIONI BOX 
-global.borderWidth = 100;
-global.borderHeight = 100;
-
-oSoul.state = oSoul.stateFree;
+playerChangeState(oSoul.stateGravityUp);
+boxDimensions(100, 100);
 global.pov = "Front";
 
 //Mette il cuore al centro
 global.yOffset = 0;
 
+frame = 0
 gravUp = oSoul.stateGravityUp;
 gravDown = oSoul.stateGravity;
 gravLeft = oSoul.stateGravityLeft;
 gravRight = oSoul.stateGravityRight;
 
-oSoul.state = oSoul.stateGravityUp;
 
 sawSpeed = undefined;
 sawSpeedX = undefined;

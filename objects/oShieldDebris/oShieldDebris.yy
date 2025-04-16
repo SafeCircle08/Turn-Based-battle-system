@@ -9,8 +9,8 @@
   "name":"oShieldDebris",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"PlayerMiscellaneous",
+    "path":"folders/Objects/Soul/PlayerMiscellaneous.yy",
   },
   "parentObjectId":{
     "name":"oExtrasParent",

@@ -9,8 +9,8 @@
   "name":"oBulletGeneratorParent",
   "overriddenProperties":[],
   "parent":{
-    "name":"BulletsGenerators",
-    "path":"folders/Objects/BulletsGenerators.yy",
+    "name":"Managers",
+    "path":"folders/Objects/Managers.yy",
   },
   "parentObjectId":null,
   "persistent":false,

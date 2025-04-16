@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"stateInit",
   "parent":{
-    "name":"sPlayerStateScripts",
-    "path":"folders/Scripts/sPlayerStateScripts.yy",
+    "name":"PlayerScripts",
+    "path":"folders/Scripts/PlayerScripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -1,19 +1,10 @@
 event_inherited();
 
 //INIT VARIABLES
-
 genTimeVars(60, false, 850, 0)
-
-//BATTLE BOX CHANGING DIMENSIONS
-global.borderWidth = 270;
-global.borderHeight = 35;
-
-//ORIGINI DEL BOX
-global.boxOriginX = 160;
-global.boxOriginY = (room_height / 2) + 40;
-
-//AURA DEL GIOCATORE
-oSoul.state = oSoul.stateFree;
+playerChangeState(oSoul.stateFree);
+setBoxOrigin(160, (room_width / 2) + 40);
+boxDimensions(270, 35);
 
 // VADO A DESTRA
 robotRight = 

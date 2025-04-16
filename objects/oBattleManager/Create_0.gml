@@ -2,6 +2,8 @@
 // You can write your code in this editor
 // feather disable all
 
+global.enemySeq = layer_sequence_create("Enemy", 101, 41, Sequence1);
+
 a_text[0] = "ATK";
 a_text[1] = "DEF";
 a_text[2] = "FREE";
@@ -13,10 +15,10 @@ global.borderHeight = 100;
 
 //PLAYER VARIABLES
 battle = true;
-turnNumber = 17;
+turnNumber = 11;
 global.playerName = "Misery";
 global.playerMAX_HP = 512;
-global.playerHP = 500;
+global.playerHP = 511;
 global.playerShield = 50;
 global.playerMaxShield = 50;
 global.CSvalue = 100;	//CAGE STATE
@@ -167,6 +169,7 @@ openingInv = function()
 		itemCordTaken = false;
 		itemOptionNav = [];
 		turnNumber -= 1;
+		audio_play_sound(sndSelecting, 50, false);
 	}
 
 	var _guiX = surface_get_width(application_surface) / 2;
@@ -191,8 +194,9 @@ openingInv = function()
 	takenOptionDelay = setTimer(takenOptionDelay);
 	if (takenOptionDelay == 0)
 	{
-		if (keyboard_check_pressed(ord("S"))) { invPos += 1; }
-		if (keyboard_check_pressed(ord("W"))) { invPos -= 1; }	
+		if (keyboard_check_pressed(ord("S"))) { invPos += 1; audio_play_sound(sndNavigating, 50, false); }
+		if (keyboard_check_pressed(ord("W"))) { invPos -= 1; 
+			audio_play_sound(sndNavigating, 50, false); }	
 		
 		//Creating the possible nav pos while using items
 		if (itemCordTaken == false)
@@ -209,6 +213,7 @@ openingInv = function()
 		
 		if (keyboard_check_pressed(vk_enter)) 
 		{ 
+			audio_play_sound(sndSelecting, 50, false);
 			if (instance_exists(itemOutput)) 
 			{ 
 				instance_destroy(itemOutput);

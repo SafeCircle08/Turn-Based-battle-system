@@ -33,7 +33,7 @@ global.pizza =
 global.kfc =
 {
 	sprite: sKfc,
-	hp: 200,
+	hp: 33,
 	info: "you have seen too many memes to take that seriusly...",
 	outPutMessage: "You became a black ninja! How awesome isnt it?"
 }
@@ -76,7 +76,7 @@ function usingItem(_index)
 		_message = [">You ate one candy... It was too sweat... \n>You gained " + string(global.candy.hp) + " HP!"];
 		if (global.playerHP + 200) >= global.playerMAX_HP
 		{
-			_message = [">You ate a slice of pizza... It wasn't even good... \n>You gained " + string(global.pizza.hp) + " HP!\nHP maxed out!"];
+			_message = [">That candy gave you POWERS! " + string(global.pizza.hp) + " HP!\nHP maxed out!"];
 		}
 		instance_create_depth(290, 90, -9999, oHealingEffect);
 	}

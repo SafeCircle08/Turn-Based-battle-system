@@ -2,7 +2,7 @@ event_inherited();
 
 genTimeVars(10, false, 1320, 0);
 boxDimensions(240, 140);
-playerChangeState(oSoul.stateFree, sNoEffects);
+playerChangeState(oSoul.stateFree);
 setBoxOrigin(room_width / 2, 100);
 global.pov = "Up";
 
@@ -22,6 +22,7 @@ var _w = global.borderWidth / 2;
 var _h = global.borderHeight / 2;
 
 cannonVertical = instance_create_layer(x, y, "Bullets", oBlasterLineGenerator);
+cannonVertical.blasterTimer = 60;
 setLineBlasterPos
 (
 	cannonVertical,
@@ -33,6 +34,7 @@ setLineBlasterPos
 	3
 );
 cannonHorizontal = instance_create_layer(x, y, "Bullets", oBlasterLineGenerator);
+cannonHorizontal.blasterTimer = 60;
 setLineBlasterPos
 (
 	cannonHorizontal,

@@ -23,7 +23,7 @@ if (timer <= 800)
 		boxDimensions(200, 125);
 		createExclamationMarks();
 		createPlatforms(4, 3);
-		playerChangeState(oSoul.stateGravity, sUmbrellaEffect);
+		playerChangeState(oSoul.stateGravity);
 		global.pov = "Front";
 		if (instance_exists(oCannonFree)) 
 		{ 

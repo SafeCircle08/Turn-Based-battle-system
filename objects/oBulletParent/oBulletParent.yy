@@ -6,8 +6,8 @@
   "name":"oBulletParent",
   "overriddenProperties":[],
   "parent":{
-    "name":"BulletsObjects",
-    "path":"folders/Objects/BulletsObjects.yy",
+    "name":"Managers",
+    "path":"folders/Objects/Managers.yy",
   },
   "parentObjectId":null,
   "persistent":false,

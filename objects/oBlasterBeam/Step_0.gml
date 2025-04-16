@@ -5,7 +5,15 @@ if (energyTimer > 0)
 	{
 		image_xscale += ((70 - image_xscale) / 15)	
 	}
-}
+	//-----TO DO-----
+	//Per dare l'effetto di blocco se
+	//se si usa uno scudo
+	//if (place_meeting(x, y, oDefenceThing))
+	//{
+		//energyTimer = 0;	
+	//}
+	//----------------
+}  
 
 if (energyTimer == 0) 
 { 

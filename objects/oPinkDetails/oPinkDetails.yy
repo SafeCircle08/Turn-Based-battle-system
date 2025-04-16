@@ -9,8 +9,8 @@
   "name":"oPinkDetails",
   "overriddenProperties":[],
   "parent":{
-    "name":"Actions Effects",
-    "path":"folders/Objects/Actions Effects.yy",
+    "name":"GUIobjects",
+    "path":"folders/Objects/GUIobjects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -9,8 +9,8 @@
   "name":"oElectronBullet",
   "overriddenProperties":[],
   "parent":{
-    "name":"BulletsObjects",
-    "path":"folders/Objects/BulletsObjects.yy",
+    "name":"FunkyBullets",
+    "path":"folders/Objects/BulletsObjects/FunkyBullets.yy",
   },
   "parentObjectId":{
     "name":"oBulletParent",

@@ -143,7 +143,6 @@ if (showBattleText)
 					playerTurn = !playerTurn; 
 					showBattleText = false;
 					messageCounter = 0;
-					//oBattleBox.visible = false;
 					if (ds_exists(ds_messages, ds_type_list)) ds_list_destroy(ds_messages);
 				}
 			}

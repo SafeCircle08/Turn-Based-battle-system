@@ -1,7 +1,7 @@
 if (energyTimer > 0)
 {
 	energyTimer--;
-	if (image_xscale < maxScaleX + 200)
+	if (image_xscale < maxScaleX)
 	{
 		image_xscale += ((70 - image_xscale) / 15)	
 	}

@@ -17,6 +17,7 @@ if (createBlaster == true)
 			lineCannon.targetX = targetX[index_x];
 			lineCannon.targetY = targetY[index_y];
 			lineCannon.face = faceDirection;
+			lineCannon.actualTimer = blasterTimer;
 		}
 	}
 	else
@@ -27,6 +28,7 @@ if (createBlaster == true)
 			lineCannon.targetX = targetX[indexX];
 			lineCannon.targetY = targetY[indexY];
 			lineCannon.face = faceDirection;
+			lineCannon.actualTimer = blasterTimer;
 			indexX += 1;
 			indexY += 1;
 			if (indexX == array_length(targetX) - 1) { instance_destroy(self); }

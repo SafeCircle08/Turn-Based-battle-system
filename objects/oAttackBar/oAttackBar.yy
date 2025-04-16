@@ -9,8 +9,8 @@
   "name":"oAttackBar",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"GUIobjects",
+    "path":"folders/Objects/GUIobjects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

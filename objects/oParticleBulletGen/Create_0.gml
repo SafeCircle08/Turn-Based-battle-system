@@ -1,7 +1,7 @@
 event_inherited();
 
 genTimeVars(120, false, 400, 0);
-playerChangeState(oSoul.stateMirrored, 1)
+playerChangeState(oSoul.stateMirrored);
 
 //DIMENSIONI DEL BOX
 global.borderHeight = 100;

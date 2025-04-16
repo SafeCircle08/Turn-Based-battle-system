@@ -9,8 +9,8 @@
   "name":"oShieldShard",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"PlayerMiscellaneous",
+    "path":"folders/Objects/Soul/PlayerMiscellaneous.yy",
   },
   "parentObjectId":null,
   "persistent":false,

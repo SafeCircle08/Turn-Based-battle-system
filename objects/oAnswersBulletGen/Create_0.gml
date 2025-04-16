@@ -1,12 +1,9 @@
 event_inherited();
 
 genTimeVars(0, false, 999, 0);
-
-//DIMENSIONI DEL BOX
 boxDimensions(175, 60);
-
-global.boxOriginX = room_width / 2;
-global.boxOriginY = room_height / 2;
+playerChangeState(oSoul.stateFree);
+setBoxOrigin(room_width / 2, room_width / 2);
 
 answered = false;
 timer = 999;
