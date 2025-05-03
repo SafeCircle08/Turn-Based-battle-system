@@ -15,7 +15,7 @@ global.borderHeight = 100;
 
 //PLAYER VARIABLES
 battle = true;
-turnNumber = 11;
+turnNumber = 20;
 global.playerName = "Misery";
 global.playerMAX_HP = 512;
 global.playerHP = 511;
@@ -117,6 +117,7 @@ attackFunction = function()
 			
 		instance_destroy(oAttackBar);
 		attacking = false;
+		acting = false;
 		ds_messages[| 0] = "The player has TRIED to attacked!"
 		oAttackRoll.visible = false;
 		showBattleText = true;
@@ -169,7 +170,7 @@ openingInv = function()
 		itemCordTaken = false;
 		itemOptionNav = [];
 		turnNumber -= 1;
-		audio_play_sound(sndSelecting, 50, false);
+		audio_play_sound(sndSelecting, 50, false, global.soundGain);
 	}
 
 	var _guiX = surface_get_width(application_surface) / 2;
@@ -194,9 +195,9 @@ openingInv = function()
 	takenOptionDelay = setTimer(takenOptionDelay);
 	if (takenOptionDelay == 0)
 	{
-		if (keyboard_check_pressed(ord("S"))) { invPos += 1; audio_play_sound(sndNavigating, 50, false); }
+		if (keyboard_check_pressed(ord("S"))) { invPos += 1; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
 		if (keyboard_check_pressed(ord("W"))) { invPos -= 1; 
-			audio_play_sound(sndNavigating, 50, false); }	
+			audio_play_sound(sndNavigating, 50, false, global.soundGain); }	
 		
 		//Creating the possible nav pos while using items
 		if (itemCordTaken == false)
@@ -213,7 +214,7 @@ openingInv = function()
 		
 		if (keyboard_check_pressed(vk_enter)) 
 		{ 
-			audio_play_sound(sndSelecting, 50, false);
+			audio_play_sound(sndSelecting, 50, false, global.soundGain);
 			if (instance_exists(itemOutput)) 
 			{ 
 				instance_destroy(itemOutput);

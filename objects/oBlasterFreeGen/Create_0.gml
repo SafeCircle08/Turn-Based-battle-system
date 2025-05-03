@@ -4,7 +4,6 @@ genTimeVars(10, false, 1320, 0);
 boxDimensions(240, 140);
 playerChangeState(oSoul.stateFree);
 setBoxOrigin(room_width / 2, 100);
-global.pov = "Up";
 
 timer = 1300;
 platformCreated = false;

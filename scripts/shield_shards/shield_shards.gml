@@ -1,7 +1,7 @@
 function shield_shards()
 {
 	instance_create_layer(oSoul.x, oSoul.y, "ExtrasObjects", oShieldDebris);
-	audio_play_sound(sndShieldBroke, 50, false);
+	audio_play_sound(sndShieldBroke, 50, false, global.soundGain);
 	for (var i = 0; i < 5; i++)
 	{
 		shard = instance_create_layer(oSoul.x, oSoul.y, "Bullets", oShieldShard);

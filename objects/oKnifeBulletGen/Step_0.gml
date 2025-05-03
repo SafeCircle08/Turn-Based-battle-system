@@ -26,7 +26,7 @@ if (global.created == false)
 		global.bulletsCreated = 0;
 		instance_create_layer(160, 53, "Bullets", oBulletSteamDown);
 		instance_create_layer(160, 53, "Bullets", oExclamationMark);
-		audio_play_sound(sndExclamation, 50, false);
+		audio_play_sound(sndExclamation, 50, false, global.soundGain);
 	};
 }
 

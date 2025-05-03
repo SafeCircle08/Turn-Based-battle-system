@@ -21,12 +21,12 @@ canCollide = true;
 coordTimer = 1;
 canShow = true;
 grounded = 0;
-grav = 0.275;
 jumpSpd = -10;
 left = 0;
 t = 0;
 umbrelling = false;
 umbrellaJump = false;
+grav = 0.275;
 
 //DIMENSIONI DEL PLAYER IN FORMA
 image_xscale = 0.5;
@@ -34,13 +34,23 @@ image_yscale = 0.5;
 hsp = 0;  
 vsp = 0;
 canMove = true;
-hbX = 0; //X offset per la sua HITBOX (sprite non simmetrici)
-hbY = 0; //Y offset per la sua HITBOX (sprite non simmetrici)
+hbX = 0;
+hbY = 0;
+
+//Spider State variables
+spiderState = 0;
+trailLength = 0;
+
+//Shader variables
+flashColor = make_color_rgb(50, 250, 100); //Aqua green
+flashAlpha = 0;
 
 //L'AURA E' QUELLA BASE (NESSUN EFFETTO APPLICATO)
 stateFree = function()
 {
-	stateInit(sPlayerFront, sNoEffects);
+	stateInit(sPlayerFront, sNoEffects, "Up");
+	hbX = 0;
+	hbY = 2.5;
 	if (canMove)
 	{
 		hsp = (key_right - key_left) * global.SoulSpeed;
@@ -64,8 +74,9 @@ stateFree = function()
 //L'AURA E' QUELLA ARANCIONE (TUTTI I COMANDI SONO INVERTITI)
 stateMirrored = function()
 {
-	stateInit(sPlayerFrontMirrored, sInvertedEffect);
-	
+	stateInit(sPlayerFrontMirrored, sInvertedEffect, "Up");
+	hbX = 0;
+	hbY = 2.5;
 	hsp = (key_left - key_right) * global.SoulSpeed;
 	vsp = (key_up - key_down) * global.SoulSpeed;
 	
@@ -87,8 +98,8 @@ stateMirrored = function()
 //QUANDO SPAWNI DIRETTAMENTE CON L'OMBRELLO
 stateUmbrella = function()
 {
-	stateInit(sPlayerUmbrella, sUmbrellaEffect);
-	hbY = 5;
+	stateInit(sPlayerUmbrella, sUmbrellaEffect, "Front");
+	hbY = -11;
 	hbX = -2;
 	t += 0.05;
 	yFloating = sin(t) * 2;	
@@ -104,6 +115,8 @@ stateUmbrella = function()
 //VIENE CHIAMATA QUANDO C'E' GRAVITA'
 usingUmbrella = function()
 {
+	hbX = -1;
+	hbY	= -11;
 	if (umbrellaJump == false)
 	{
 		vsp = -10;
@@ -116,18 +129,15 @@ usingUmbrella = function()
 	sprite_index = sPlayerUmbrella;
 }	
 
-grav = 0.275;
-termVel = 4;
-jumpSpd = -10;
-fellTimer = 30;
-
 //State Jump Base (RIVISITATO)
 stateGravity = function()
 {
 	//Set up generale
 	image_angle = 0;
 	key_jumpPressed = keyboard_check(vk_space);
-	stateInit(sPlayerRightJump, sEffectGravity);		
+	stateInit(sPlayerRightJump, sEffectGravity, "Up");		
+	hbX = 0;
+	hbY = -10;
 	
 	//Crea la barra delle collisioni
 	//Side box (down)
@@ -224,16 +234,20 @@ stateGravity = function()
 	x += hsp;
 	y += vsp;
 	var _possX = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
+	var _possY = clamp(oSoul.y, global.border_u, global.border_d + 1);
 	oSoul.x = _possX;
+	oSoul.y = _possY;
 }
 
-//State Jump y Invertita (RIVISITATO)
+//State Jump y Invertita 
 stateGravityUp = function()
 {
 	//Set up generale
 	image_angle = 180;
 	key_jumpPressed = keyboard_check(ord("S"));
-	stateInit(sPlayerRightJump, sEffectGravity);		
+	stateInit(sPlayerRightJump, sEffectGravity, "Up");		
+	hbX = 0;
+	hbY = 10;
 	
 	//Crea la barra delle collisioni
 	//Side box (down)
@@ -313,7 +327,9 @@ stateGravityRight = function()
 	//Set up generale
 	image_angle = 90;
 	key_jumpPressed = keyboard_check(ord("A"));
-	stateInit(sPlayerRightJump, sEffectGravity);		
+	stateInit(sPlayerRightJump, sEffectGravity, "Up");		
+	hbX = -10;
+	hbY = 0;
 	
 	//Crea la barra delle collisioni
 	//Side box (down)
@@ -386,13 +402,15 @@ stateGravityRight = function()
 	oSoul.y = _possY;
 }
 
-//State Jump y Invertita (RIVISITATO)
+//State Jump y Invertita 
 stateGravityLeft = function()
 {
 	//Set up generale
 	image_angle = 270;
 	key_jumpPressed = keyboard_check(ord("D"));
-	stateInit(sPlayerRightJump, sEffectGravity);		
+	stateInit(sPlayerRightJump, sEffectGravity, "Up");		
+	hbX = 10;
+	hbY = 0;
 	
 	//Crea la barra delle collisioni
 	//Side box (down)
@@ -464,6 +482,132 @@ stateGravityLeft = function()
 	y += vsp;
 	var _possY = clamp(oSoul.y, global.border_u + 5, global.border_d - 4);
 	oSoul.y = _possY;
+}
+
+//Spider State
+stateSpider = function()
+{
+	#region STATE INIT + BASIC MOVEMENT
+	stateInit(sPlayerSpiderRight, sSpiderEffect, "SpiderPov");
+	if (!instance_exists(oSpiderPointer)) { pointer = instance_create_layer(x, y, "ExtrasObjects", oSpiderPointer); }
+	hsp = (key_right - key_left) * global.SoulSpeed;
+	if (hsp == 0) { image_speed = 0; image_index = 0; }
+	#endregion
+	#region SPIDER MOVEMENT (KEYS AND COLLISIONS)
+	
+	//Quando sono con lo spider a terra
+	if (spiderState == 0)
+	{
+		//La piattaforma di base
+		if (!instance_exists(oBoxSidePlaftorm_D)) 
+		{ 
+			instance_destroy(oBoxSidePlatformParent);
+			instance_create_layer(x,-500, "ExtrasObjects", oBoxSidePlaftorm_D); 
+		}
+		
+		//Basic Movement
+		if (key_left) { sprite_index = sPlayerSpiderLeft; image_speed = 1; }
+		if (key_right) { sprite_index = sPlayerSpiderRight; image_speed = 1; }
+		//y = global.border_d + 1;
+		pointer.y = global.border_u;
+		pointer.image_angle = 0;
+		hbX = 0;
+		hbY = -10;
+		
+		//Se sono su una piattaforma ma 
+		//"Scivolo" o ci cado:
+		if (!place_meeting(x, y + 1, oPlatformParent)) 
+		{ 
+			image_index = 0;
+			image_speed = 0;
+			y = global.border_d + 1; 
+			//Creo la spider trail
+			instance_create_layer(self.x, self.y, "ExtrasObjects", oSpiderTrail, 
+			{ image_xscale: 0.5, image_yscale: global.borderHeight / sprite_get_height(sSpiderTrail), image_angle: 0 });
+		}
+		
+		//Se premo per andare in su
+		if (key_up)
+		{
+			//Aggiunge uno fino a quando raggiono il bottomo del box
+			while (y > global.border_u)
+			{
+				//Se collido esco
+				if (place_meeting(x, y - 1, oPlatformParent))
+				{
+					//Creo la spider trail
+					instance_create_layer(self.x, self.y, "ExtrasObjects", oSpiderTrail, 
+					{ image_xscale: 0.5, image_yscale: global.borderHeight / sprite_get_height(sSpiderTrail), image_angle: 180 });
+					break; 
+				}
+				y--;
+			}
+			
+			//Setto le condizioni giusto della rotazione del player
+			image_angle = 180;
+			spiderState = 1;
+			flashAlpha = 1;
+		}
+	}
+	else
+	{
+		//La piattaforma di base
+		if (!instance_exists(oBoxSidePlaftorm_U))
+		{ 
+			instance_destroy(oBoxSidePlatformParent);
+			instance_create_layer(x,-500, "ExtrasObjects", oBoxSidePlaftorm_U); 
+		}
+		
+		//Basic Movement
+		if (key_left) { sprite_index = sPlayerSpiderRight; image_speed = 1; }
+		if (key_right) { sprite_index = sPlayerSpiderLeft; image_speed = 1; }
+		pointer. y = global.border_d + 1;
+		pointer.image_angle = 180;
+		hbX = 0;
+		hbY = 10;
+
+		//Se sono su una piattaforma ma 
+		//"Scivolo" o ci cado:
+		if (!place_meeting(x, y - 2, oPlatformParent)) 
+		{ 
+			image_index = 0;
+			image_speed = 0;
+			y = global.border_u; 
+			//Creo la spider trail
+			instance_create_layer(self.x, self.y, "ExtrasObjects", oSpiderTrail, 
+			{ image_xscale: 0.5, image_yscale: global.borderHeight / sprite_get_height(sSpiderTrail), image_angle: 180 });
+		}
+		
+		//Se premo per andare in basso:
+		if (key_down)
+		{
+			//Aggiungo sempre di uno
+			while (y < global.border_d + 1)
+			{
+				//Se collido esco
+				if (place_meeting(x, y, oPlatformParent))
+				{
+					//Creo la spider trail
+					instance_create_layer(self.x, self.y, "ExtrasObjects", oSpiderTrail, 
+					{ image_xscale: 0.5, image_yscale: global.borderHeight / sprite_get_height(sSpiderTrail), image_angle: 0 });
+					break; 
+				}
+				y++;	
+			}
+			
+			//Setto le nuove condizioni di rotazione
+			image_angle = 0;
+			spiderState = 0;
+			flashAlpha = 1;
+		}
+	}	
+	#endregion
+	
+	if (flashAlpha > 0) { flashAlpha -= 0.05; } 
+
+	x += hsp;
+	var _possX = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
+	oSoul.x = _possX;
 }
 
 state = stateFree;

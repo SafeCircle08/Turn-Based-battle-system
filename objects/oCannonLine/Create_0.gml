@@ -13,4 +13,4 @@ timer = 20;
 actualTimer = 20;
 goBackTimer = 20;
 actualGoBackTimer = 20;
-audio_play_sound(blaster_reloading, 50, false);
+audio_play_sound(blaster_reloading, 50, false, global.soundGain);

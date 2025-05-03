@@ -36,4 +36,11 @@ if (draw == true)
 	draw_set_color(c_black);
 	draw_rectangle(global.border_l, global.border_u, global.border_r, global.border_d, false);
 	draw_sprite_ext(sCenter, 0, _originX + global.xOffset, _originY + global.yOffset, 1, 1, 0, _col, 1);
+	
+	if (animateBoxTimer == 0) && global.pov == "SpiderPov"
+	{
+		draw_set_color(_col);
+		draw_line_width(global.border_l + 20, global.border_u - 2, global.border_l + 20, global.border_d, 6);
+		draw_line_width(global.border_r - 20, global.border_u - 2, global.border_r - 20, global.border_d, 3);
+	}
 }

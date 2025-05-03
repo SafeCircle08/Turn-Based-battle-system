@@ -78,26 +78,16 @@ if (stateFlow == true)
 //Cambia l'aura del player (destra, sinistra ecc...)
 if (changeStateTimer == 0)
 {
-	/*
-	for (var i = 0; i < 4; i++)
-	{
-		var _xL = global.boxOriginX - (global.borderWidth / 2);
-		var _xR = global.boxOriginX + (global.borderWidth / 2);
-		var _yU = global.boxOriginY - (global.borderHeight / 2);
-		var _yD = global.boxOriginY + (global.borderHeight / 2);
-		var _xPos = [_xL + 10, _xR - 10, _xL + 10, _xR - 10];
-		var _yPos =[_yU + 10, _yU + 10, _yD - 10, _yD - 10];
-		instance_create_layer(_xPos[i], _yPos[i], "Bullets", oExclamationMark)
-	}
-	*/
 	createExclamationMarks();
 	//SECOND PHASE OF THE GENERATOR------------------------------
 	if (global.generatorPhase == 1) { index = irandom_range(2, 3); }
 	else { index = irandom_range(0, 3) }
 	
 	oSoul.state = states[index];
+	oSoul.umbrelling = false;
+	oSoul.umbrellaJump = false;
 	changeStateTimer = 40;
-	audio_play_sound(sndExclamation, 50, false);
+	audio_play_sound(sndExclamation, 50, false, global.soundGain);
 	stateFlow = false;
 }
 

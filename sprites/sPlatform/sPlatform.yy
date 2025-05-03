@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":1,
   "parent":{
-    "name":"Bullets",
-    "path":"folders/Sprites/Bullets.yy",
+    "name":"steamPunkFight",
+    "path":"folders/Sprites/Bullets/steamPunkFight.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

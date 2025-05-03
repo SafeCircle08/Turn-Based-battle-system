@@ -38,7 +38,7 @@ function boxDimensions(_width, _height, _resize = false, _instant = true, _wAdde
 function resizeDeco()
 {
 	instance_create_layer(global.boxOriginX, global.boxOriginY, "ExtrasObjects", oResizeDeco);
-	audio_play_sound(sndResizing, 99, false);
+	audio_play_sound(sndResizing, 99, false, global.soundGain);
 }
 
 //Set all the time variables of the turn

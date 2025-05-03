@@ -5,7 +5,6 @@ randomize();
 global.boxOriginY -= 0.05;
 
 y = ystart - sin(x / 15) * amplitude;
-#endregion
 
 if (dropTimer > -100) { dropTimer-- }
 
@@ -18,11 +17,12 @@ if (dropTimer == 0)
 //LANCIA L'OGGETTO
 if (dropTimer == -45)
 {
+	instance_create_layer(self.x, self.y, "ExtrasObjects", oExclamationMark);
 	instance_create_layer(self.x, self.y, "Bullets", oToolBullet);	
 }
 
 //INTERROMPE L'ANIMAZIONE
-if (dropTimer = - 60) 
+if (dropTimer == -60) 
 {
 	dropTimer = irandom_range(5, 20);
 	sprite_index = sRobotStill;		

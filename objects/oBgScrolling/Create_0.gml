@@ -11,7 +11,7 @@ finalTimer = timer_1 + timer_2 + timer_3;
 boxDimensions(80, room_height);
 setBoxOrigin(room_width / 2, room_height / 2);
 genTimeVars(0, false, 5000, 0);
-playerChangeState(oSoul.stateUmbrella);
+playerChangeState(oSoul.stateUmbrella, sUmbrellaEffect, "Front");
 instance_create_layer(x, y, "Bullets", oDocumentWave);
 oBackGround.canScroll = true;
 var _orX = global.boxOriginX;

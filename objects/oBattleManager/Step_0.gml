@@ -9,26 +9,26 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 	
 	if keyboard_check_pressed(ord("S"))
 	{
-		if (selected_option == 0) { selected_option = 2; audio_play_sound(sndNavigating, 50, false); }
-		if (selected_option == 1) { selected_option = 3; audio_play_sound(sndNavigating, 50, false); }
+		if (selected_option == 0) { selected_option = 2; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
+		if (selected_option == 1) { selected_option = 3;  audio_play_sound(sndNavigating, 50, false, global.soundGain); }
 	}
 
 	if keyboard_check_pressed(ord("W"))
 	{
-		if (selected_option == 2) { selected_option = 0; audio_play_sound(sndNavigating, 50, false); }
-		if (selected_option == 3) { selected_option = 1; audio_play_sound(sndNavigating, 50, false); }
+		if (selected_option == 2) { selected_option = 0;  audio_play_sound(sndNavigating, 50, false, global.soundGain); }
+		if (selected_option == 3) { selected_option = 1; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
 	}
 	
 	if keyboard_check_pressed(ord("D"))
 	{
-		if (selected_option == 0) { selected_option = 1; audio_play_sound(sndNavigating, 50, false); }
-		if (selected_option == 2) { selected_option = 3; audio_play_sound(sndNavigating, 50, false); }
+		if (selected_option == 0) { selected_option = 1; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
+		if (selected_option == 2) { selected_option = 3; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
 	}
 
 	if keyboard_check_pressed(ord("A"))
 	{
-		if (selected_option == 1) { selected_option = 0; audio_play_sound(sndNavigating, 50, false); }
-		if (selected_option == 3) { selected_option = 2; audio_play_sound(sndNavigating, 50, false); }
+		if (selected_option == 1) { selected_option = 0; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
+		if (selected_option == 3) { selected_option = 2; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
 	}
 		
 	if keyboard_check_pressed(vk_enter)
@@ -70,7 +70,7 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 				ds_messages[| 0] = "Player DEFENDS!";
 				ds_messages[| 1] = "Damage DECREASED!";
 				defended = 1;
-				audio_play_sound(sndSelecting, 50, false);				
+				audio_play_sound(sndSelecting, 50, false, global.soundGain);				
 			break;
 			//-----------------UNBIND CASE----------------------
 			case 2:
@@ -79,7 +79,7 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 				ds_messages[| 0] = "Player UNBINDS the CAGE!";
 				ds_messages[| 1] = "CS - 10%";
 				global.CSvalue -= 10;
-				audio_play_sound(sndSelecting, 50, false);				
+				audio_play_sound(sndSelecting, 50, false, global.soundGain);				
 			break;
 			//-----------------ITEM CASE----------------------
 			case 3:
@@ -90,13 +90,13 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 					ds_messages[| 0] = "Player Used an Item!";
 					invGUI.visible = true;
 					frame += 1;
-					audio_play_sound(sndSelecting, 50, false);
+					audio_play_sound(sndSelecting, 50, false, global.soundGain);
 				}
 				else
 				{
 					moreStepsAct = false;
 					ds_messages[| 0] = "You don't have any item...";
-					audio_play_sound(sndSelecting, 50, false);
+					audio_play_sound(sndSelecting, 50, false, global.soundGain);
 				}
 			break;
 		}

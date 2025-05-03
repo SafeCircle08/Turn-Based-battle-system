@@ -9,7 +9,7 @@
   "bitRate":320,
   "compression":1,
   "conversionMode":0,
-  "duration":64.026085,
+  "duration":90.51428,
   "name":"sBGMusic",
   "parent":{
     "name":"Sounds",

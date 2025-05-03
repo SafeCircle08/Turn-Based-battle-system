@@ -3,7 +3,7 @@ event_inherited();
 genTimeVars(0, false, 999, 0);
 boxDimensions(175, 60);
 playerChangeState(oSoul.stateFree);
-setBoxOrigin(room_width / 2, room_width / 2);
+setBoxOrigin(room_width / 2, room_height / 2);
 
 answered = false;
 timer = 999;

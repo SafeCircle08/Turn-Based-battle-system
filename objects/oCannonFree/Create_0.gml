@@ -17,4 +17,4 @@ actualTimer = 70;
 goBackTimer = 20;
 actualGoBackTimer = 0;
 beamPoint = undefined;
-audio_play_sound(blaster_reloading, 50, false);
+audio_play_sound(blaster_reloading, 50, false, global.soundGain);

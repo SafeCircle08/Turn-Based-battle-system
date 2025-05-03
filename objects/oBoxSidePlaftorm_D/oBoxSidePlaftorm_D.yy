@@ -38,5 +38,5 @@
     "path":"sprites/sBoxSidesPlatform/sBoxSidesPlatform.yy",
   },
   "spriteMaskId":null,
-  "visible":false,
+  "visible":true,
 }

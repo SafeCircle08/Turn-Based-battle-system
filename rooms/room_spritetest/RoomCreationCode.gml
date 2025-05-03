@@ -1,1 +1,0 @@
-audio_play_sound(sBGMusic,  100, true);

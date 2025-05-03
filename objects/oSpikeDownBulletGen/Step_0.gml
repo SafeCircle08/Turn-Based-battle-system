@@ -14,7 +14,7 @@ if (global.created == false)
 		var _index = irandom_range(0, 1);
 		instance_create_layer(_slowSteam[_index], global.border_d + 10, "Bullets", oBulletSteam);
 		instance_create_layer(_slowSteam[_index], global.border_d - 10, "Bullets", oExclamationMark);
-		audio_play_sound(sndExclamation, 50, false);
+		audio_play_sound(sndExclamation, 50, false, global.soundGain);
 		slowSteamTimer = 50;
 	}
 	

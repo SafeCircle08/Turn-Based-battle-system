@@ -8,7 +8,7 @@ if (canCollide == true)
 	canCollide = false;
 	oBattleManager.screenShake = true;
 	
-	if (global.playerShield < 1) { audio_play_sound(sndHurt, 50, false); }
+	if (global.playerShield < 1) { audio_play_sound(sndHurt, 50, false, global.soundGain); }
 	
 	if (global.playerShield > 1) { shield_shards(); }
 	

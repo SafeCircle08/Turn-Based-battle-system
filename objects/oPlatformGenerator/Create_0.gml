@@ -2,12 +2,11 @@ event_inherited();
 
 instance_create_layer(0,0, "Bullets", oDocumentBullet);
 oDocumentBullet.canCreateTimer = 75;
-genTimeVars(100, false, 99800, 0)
-playerChangeState(oSoul.stateGravity);
+genTimeVars(100, false, 800, 0)
+playerChangeState(oSoul.stateGravity, sEffectGravity, "Front");
 setBoxOrigin(room_width / 2, room_height / 2 - 20);
 numberOfWaves = 4;
 boxDimensions((sprite_get_width(sWave)*numberOfWaves) - 1, 130);
-global.pov = "Front";
 
 instance_create_layer(0,0, "Bullets", oDocumentBullet);
 oDocumentBullet.canCreateTimer = 75;

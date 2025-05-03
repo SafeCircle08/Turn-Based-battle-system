@@ -32,20 +32,39 @@ moveElectron = function()
 
 	if (xspd > 0)
 	{
-		if (x + _w >= global.border_r) { xspd *= -1; oShake.shake = true; audio_play_sound(sndBallBounce, 50, false); }
+		if (x + _w >= global.border_r) 
+		{ 
+			xspd *= -1; 
+			oShake.shake = true; 
+			audio_play_sound(sndBallBounce, 50, false, global.soundGain); 
+		}
 	} 
 	else
 	{
-		if (x - _w <= global.border_l) { xspd *= -1;  oShake.shake = true; audio_play_sound(sndBallBounce, 50, false); }
+		if (x - _w <= global.border_l) 
+		{ 
+			xspd *= -1;  
+			oShake.shake = true; 
+			audio_play_sound(sndBallBounce, 50, false, global.soundGain); 
+		}
 	}
-
 	if (yspd > 0)
 	{
-		if (y + _h >= global.border_d) { yspd *= -1; oShake.shake = true; audio_play_sound(sndBallBounce, 50, false); }
+		if (y + _h >= global.border_d)
+		{ 
+			yspd *= -1; 
+			oShake.shake = true; 
+			audio_play_sound(sndBallBounce, 50, false, global.soundGain);
+		}
 	}
 	else
 	{
-		if (y - _h <= global.border_u) { yspd *= -1; oShake.shake = true; audio_play_sound(sndBallBounce, 50, false); }
+		if (y - _h <= global.border_u) 
+		{
+			yspd *= -1;
+			oShake.shake = true; 
+			audio_play_sound(sndBallBounce, 50, false, global.soundGain);
+		}
 	}		
 }
 moveProton = function()
@@ -73,22 +92,42 @@ moveProton = function()
 	
 	if (xspd * xSign > 0)
 	{
-		if (x + _w >= global.border_r) { xSign *= -1; x -= 10; oShake.shake = true; audio_play_sound(sndBallBounce, 50, false); }
+		if (x + _w >= global.border_r) 
+		{ 
+			xSign *= -1; x -= 10; 
+			oShake.shake = true; 
+			audio_play_sound(sndBallBounce, 50, false, global.soundGain); 
+		}
 	}
 	if (xspd * xSign < 0)
 	{
-		if (x - _w <= global.border_l) { xSign *= -1; x += 10;  oShake.shake = true; audio_play_sound(sndBallBounce, 50, false); }
+		if (x - _w <= global.border_l) 
+		{
+			xSign *= -1; x += 10;  
+			oShake.shake = true; 
+			audio_play_sound(sndBallBounce, 50, false, global.soundGain); 
+		}
 	}
-
 	if (yspd * ySign > 0)
 	{
-		if (y + _h >= global.border_d) { ySign *= -1; y -= 10; oShake.shake = true; audio_play_sound(sndBallBounce, 50, false); }
+		if (y + _h >= global.border_d) 
+		{ 
+			ySign *= -1; y -= 10; 
+			oShake.shake = true;
+			audio_play_sound(sndBallBounce, 50, false, global.soundGain); 
+		}
 	}
 	if (yspd * ySign < 0)
 	{
-		if (y - _h <= global.border_u) { ySign *= -1; y += 10; oShake.shake = true; audio_play_sound(sndBallBounce, 50, false); }
+		if (y - _h <= global.border_u) 
+		{ 
+			ySign *= -1; y += 10;
+			oShake.shake = true; 
+			audio_play_sound(sndBallBounce, 50, false, global.soundGain); 
+		}
 	}	
 }
+
 moveState = moveElectron;
 
 //Functions for creating the different "balls"

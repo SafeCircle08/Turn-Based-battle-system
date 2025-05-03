@@ -36,5 +36,5 @@
     "path":"sprites/sSupportPlayerHitbox/sSupportPlayerHitbox.yy",
   },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }

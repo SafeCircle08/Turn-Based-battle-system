@@ -9,8 +9,8 @@
   "name":"oToolBullet",
   "overriddenProperties":[],
   "parent":{
-    "name":"BulletsObjects",
-    "path":"folders/Objects/BulletsObjects.yy",
+    "name":"ToolBullets",
+    "path":"folders/Objects/BulletsObjects/ToolBullets.yy",
   },
   "parentObjectId":{
     "name":"oBulletParent",

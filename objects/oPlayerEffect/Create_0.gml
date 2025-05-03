@@ -10,6 +10,7 @@ sprites =
 	mirrored: sInvertedEffect,
 	gravity_effect: sUmbrellaEffect,
 	umbrella: sUmbrellaEffect,
+	spider: sSpiderEffect,
 }
 
 image_xscale = startScaleX;

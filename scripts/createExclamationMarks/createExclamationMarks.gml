@@ -1,6 +1,6 @@
 function createExclamationMarks(_xLoffSet = 0, _xRoffSet = 0, yUoffSet = 0, _yDoffSet = 0)
 {
-	audio_play_sound(sndExclamation, 50, false);
+	audio_play_sound(sndExclamation, 50, false, global.soundGain);
 	for (var i = 0; i < 4; i++)
 	{
 		var _xL = global.boxOriginX - (global.borderWidth / 2) + _xLoffSet;

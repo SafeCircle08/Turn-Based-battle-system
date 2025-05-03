@@ -13,7 +13,7 @@ if (toDestroyTimer == 0)
 	oBoxDestroying.image_index++;
 	toDestroyTimer = 100;
 	hits++;
-	audio_play_sound(sndBallBounce, 50, false);
+	audio_play_sound(sndBallBounce, 50, false, global.soundGain);
 	oShake.shake = true;
 	
 	//Quando lo distrugge
