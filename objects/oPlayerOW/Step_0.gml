@@ -8,8 +8,8 @@ key_leftPr = keyboard_check_pressed(ord("A"));
 key_upPr = keyboard_check_pressed(ord("W"));
 key_downPr = keyboard_check_pressed(ord("S"));
 
-hsp = (key_right - key_left) * global.SoulSpeed;
-vsp = (key_down - key_up) * global.SoulSpeed;
+hsp = round((key_right - key_left) * global.SoulSpeed);
+vsp = round((key_down - key_up) * global.SoulSpeed);
 	
 if (hsp == 0) and (vsp == 0) { image_speed = 0; image_index = 0; }
 	

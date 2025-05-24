@@ -6,7 +6,6 @@ randomize();
 //FASE INIZIALE PARTITA, QUANDO PUOI SCEGLIERE I PULSANTI
 if (playerTurn == true) && (showBattleText == false) && (acting == false)
 {
-	
 	if keyboard_check_pressed(ord("S"))
 	{
 		if (selected_option == 0) { selected_option = 2; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
@@ -65,7 +64,7 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 			break;
 			//-----------------DEFENSE CASE----------------------
 			case 1:
-				moreStepsAct = false;;
+				moreStepsAct = true;
 				instance_create_layer(x, y, "Effect", oShieldEffect);
 				ds_messages[| 0] = "Player DEFENDS!";
 				ds_messages[| 1] = "Damage DECREASED!";
@@ -159,6 +158,7 @@ if (acting == true)
 	if (attacking == true) { attackFunction(); }
 	//if using item: DRAW GUI EVENT
 }
+
 //-------------------QUANDO VEDI TUTTI I BULLETS NEL BOX------------------------
 if (!playerTurn) && (!showBattleText)
 {

@@ -9,7 +9,7 @@ playerChangeState(oSoul.stateFree);
 
 //NUMERO DI TUBI CHE SI VUOLE NEL TURNO
 numberOfTubesWidth = 12;
-numberOfTubesHeight = 3;
+numberOfTubesHeight = 5;
 
 //DIMENSIONI DEL BOX
 global.borderWidth = (sprite_get_width(sTubeSteam) * numberOfTubesWidth);

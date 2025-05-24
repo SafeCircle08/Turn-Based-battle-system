@@ -15,7 +15,7 @@ global.borderHeight = 100;
 
 //PLAYER VARIABLES
 battle = true;
-turnNumber = 20;
+turnNumber = 9;
 global.playerName = "Misery";
 global.playerMAX_HP = 512;
 global.playerHP = 511;
@@ -100,7 +100,7 @@ attackFunction = function()
 	var _hitX = room_width / 2;
 	var _hitY = room_height / 2;
 
-	if (barCreated == false) 
+	if (barCreated == false)
 	{
 		instance_create_layer(_barX, _barY + 12, "Effect", oAttackBar);
 		instance_create_layer(_hitX, _hitY, "Effect", oHitPlace);

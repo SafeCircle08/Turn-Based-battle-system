@@ -40,9 +40,10 @@ hbY = 0;
 //Spider State variables
 spiderState = 0;
 trailLength = 0;
+flickTimer = 50;
 
 //Shader variables
-flashColor = make_color_rgb(50, 250, 100); //Aqua green
+flashColor = make_color_rgb(255, 255, 255); //Aqua green
 flashAlpha = 0;
 
 //L'AURA E' QUELLA BASE (NESSUN EFFETTO APPLICATO)
@@ -135,7 +136,7 @@ stateGravity = function()
 	//Set up generale
 	image_angle = 0;
 	key_jumpPressed = keyboard_check(vk_space);
-	stateInit(sPlayerRightJump, sEffectGravity, "Up");		
+	stateInit(sPlayerRightJump, sEffectGravity, "Front");		
 	hbX = 0;
 	hbY = -10;
 	
@@ -234,7 +235,7 @@ stateGravity = function()
 	x += hsp;
 	y += vsp;
 	var _possX = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
-	var _possY = clamp(oSoul.y, global.border_u, global.border_d + 1);
+	var _possY = clamp(oSoul.y, -100, global.border_d + 2);
 	oSoul.x = _possX;
 	oSoul.y = _possY;
 }
@@ -494,7 +495,6 @@ stateSpider = function()
 	if (hsp == 0) { image_speed = 0; image_index = 0; }
 	#endregion
 	#region SPIDER MOVEMENT (KEYS AND COLLISIONS)
-	
 	//Quando sono con lo spider a terra
 	if (spiderState == 0)
 	{
@@ -518,12 +518,8 @@ stateSpider = function()
 		//"Scivolo" o ci cado:
 		if (!place_meeting(x, y + 1, oPlatformParent)) 
 		{ 
-			image_index = 0;
-			image_speed = 0;
 			y = global.border_d + 1; 
-			//Creo la spider trail
-			instance_create_layer(self.x, self.y, "ExtrasObjects", oSpiderTrail, 
-			{ image_xscale: 0.5, image_yscale: global.borderHeight / sprite_get_height(sSpiderTrail), image_angle: 0 });
+			createSpiderTrail(0);
 		}
 		
 		//Se premo per andare in su
@@ -535,9 +531,7 @@ stateSpider = function()
 				//Se collido esco
 				if (place_meeting(x, y - 1, oPlatformParent))
 				{
-					//Creo la spider trail
-					instance_create_layer(self.x, self.y, "ExtrasObjects", oSpiderTrail, 
-					{ image_xscale: 0.5, image_yscale: global.borderHeight / sprite_get_height(sSpiderTrail), image_angle: 180 });
+					createSpiderTrail(180);
 					break; 
 				}
 				y--;
@@ -570,12 +564,8 @@ stateSpider = function()
 		//"Scivolo" o ci cado:
 		if (!place_meeting(x, y - 2, oPlatformParent)) 
 		{ 
-			image_index = 0;
-			image_speed = 0;
 			y = global.border_u; 
-			//Creo la spider trail
-			instance_create_layer(self.x, self.y, "ExtrasObjects", oSpiderTrail, 
-			{ image_xscale: 0.5, image_yscale: global.borderHeight / sprite_get_height(sSpiderTrail), image_angle: 180 });
+			createSpiderTrail(180);
 		}
 		
 		//Se premo per andare in basso:
@@ -587,9 +577,7 @@ stateSpider = function()
 				//Se collido esco
 				if (place_meeting(x, y, oPlatformParent))
 				{
-					//Creo la spider trail
-					instance_create_layer(self.x, self.y, "ExtrasObjects", oSpiderTrail, 
-					{ image_xscale: 0.5, image_yscale: global.borderHeight / sprite_get_height(sSpiderTrail), image_angle: 0 });
+					createSpiderTrail(0);
 					break; 
 				}
 				y++;	
@@ -603,11 +591,13 @@ stateSpider = function()
 	}	
 	#endregion
 	
-	if (flashAlpha > 0) { flashAlpha -= 0.05; } 
-
+	if (flashAlpha > 0) 
+	{ 
+		flashAlpha -= 0.05; 
+	}
+	
 	x += hsp;
 	var _possX = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
 	oSoul.x = _possX;
 }
-
 state = stateFree;
