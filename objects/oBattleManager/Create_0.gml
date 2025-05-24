@@ -37,14 +37,8 @@ hpbarW = 121;
 
 //ATTACK FUNCTION VARIABLES
 attacking = false;
-global.playerAttackTimer = 300;
+global.playerAttackTimer = 300; //5 seconds
 global.playerAttackTime = 0;
-global.barHit = undefined;
-barCreated = false;
-attackPressed = false;
-attackBGalpha = 0;
-canDrawAttackGui = false;
-roll = 0;
 
 //BOX VARIABLES and TEXTS
 boxWidth = sprite_get_width(sTextBG) + 10;
@@ -89,63 +83,58 @@ attackFunction = function()
 {
 	//TIMER DEL PLAYER (PER QUANTI FRAME PUO' ATTACCARE)
 	global.playerAttackTime++;
-	oAttackRoll.visible = true;
 		
 	//LO SFONDO DIVENTA VISIBILE 
 	oAttackBG.image_alpha += 0.05;
 		
 	//CREATING THE ATTACK BAR
-	var _barX = room_width / 2 - 115;
-	var _barY = room_width / 2 - 37;
-	var _hitX = room_width / 2;
-	var _hitY = room_height / 2;
-
-	if (barCreated == false)
+	var _padX = room_width / 2;
+	var _padY = room_width / 2 - 75;
+	
+	//CREO GLI OGGETTI 
+	if (global.playerAttackTime == 1)
 	{
-		instance_create_layer(_barX, _barY + 12, "Effect", oAttackBar);
-		instance_create_layer(_hitX, _hitY, "Effect", oHitPlace);
-		barCreated = true;
+		instance_create_layer(_padX, _padY, "Instances", oDrumPadBase);
+		instance_create_layer(_padX, _padY, "Bullets", oDrumPad);
+		instance_create_layer(_padX, _padY, "Scope", oDrumPadScope);
 	}			
 		
-	//SE IL PLAYER NON CLICCA IN TEMPO 
+	//SE IL PLAYER NON SPARA IN TEMPO
 	if (global.playerAttackTime >= global.playerAttackTimer)
 	{
-		if (!ds_exists(ds_messages, ds_type_list))
-		{
-			ds_messages = ds_list_create();	
-		}
-			
-		instance_destroy(oAttackBar);
+		if (!ds_exists(ds_messages, ds_type_list)) { ds_messages = ds_list_create(); }
+		oDrumPadObjectsParent.reduceDimensionsAlpha = true;
 		attacking = false;
 		acting = false;
-		ds_messages[| 0] = "The player has TRIED to attacked!"
-		oAttackRoll.visible = false;
+		ds_messages[| 0] = "> The player has TRIED to attacked!"
 		showBattleText = true;
 		global.playerAttackTime = 0;
 	}
-		
-	with (oAttackBar)
+	else
 	{
-		//SE CLICCHI LA BARRA
-		if (keyboard_check_pressed(vk_space)) && (oBattleManager.attackPressed == false)
+		//QUANDO TUTTI I PROIETTILI BUONI FINISCONO
+		if (instance_number(oShell) == 0)
 		{
-			//SE SI TROVA NEL POSTO GIUSTO
-			if (place_meeting(x, y, oHitPlace))
-			{
-				global.monsterHP -= 30 + irandom(15);
-				hit = true;
-				global.playerAttackTime = global.playerAttackTimer - 60;
-				oBattleManager.attackPressed = true;
-			}
-			else
-			{
-				hit = true;	
-				global.playerAttackTime = global.playerAttackTimer - 60
-				oBattleManager.attackPressed = true;
-			}
+			//TODO:
+			/*	
+				Da fare che alla fine dei colpi,
+				Vengono mostrate degli "attacchi" addosso all'enemy,
+				e quando concludono quelle,
+				//Il turno del player effettivamente finisce e viene
+				mostrato il danno nel player
+			*/
+			////////
+			attacking = false;
+			acting = false;
+			ds_messages[| 0] = "> The player has finished his attack!\n> Damage dealt: " + string(oDrumPad.damage) + "!";
+			showBattleText = true;
+			global.playerAttackTime = 0;
+			//Fa chiamare la funzione da tutti gli oggetti: (reduceDimAlpha())
+			oDrumPadObjectsParent.reduceDimensionsAlpha = true;
 		}
 	}
 }
+
 openingInv = function()
 {	
 	instance_activate_object(oThinking);
@@ -196,13 +185,12 @@ openingInv = function()
 	if (takenOptionDelay == 0)
 	{
 		if (keyboard_check_pressed(ord("S"))) { invPos += 1; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
-		if (keyboard_check_pressed(ord("W"))) { invPos -= 1; 
-			audio_play_sound(sndNavigating, 50, false, global.soundGain); }	
+		if (keyboard_check_pressed(ord("W"))) { invPos -= 1; audio_play_sound(sndNavigating, 50, false, global.soundGain); }	
 		
 		//Creating the possible nav pos while using items
 		if (itemCordTaken == false)
 		{
-			var _itemY = surface_get_height(application_surface) - 238
+			var _itemY = surface_get_height(application_surface) - 238;
 			for (var i = 0; i < array_length(global.items); i++)
 			{
 				array_push(itemOptionNav, _itemY + 20 * i)

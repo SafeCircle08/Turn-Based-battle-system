@@ -1,3 +1,4 @@
+event_inherited();
 canShoot = false;
 image_index = 0;
 

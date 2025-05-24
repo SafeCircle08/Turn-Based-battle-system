@@ -12,7 +12,10 @@
     "name":"DrumPadObjs",
     "path":"folders/Objects/DrumPadObjs.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"oDrumPadObjectsParent",
+    "path":"objects/oDrumPadObjectsParent/oDrumPadObjectsParent.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

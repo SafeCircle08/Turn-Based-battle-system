@@ -4,5 +4,4 @@ speed = 1.5;
 
 damageIndex = undefined;
 
-
-value = 0;
+textReference = 0

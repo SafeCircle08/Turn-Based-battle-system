@@ -59,15 +59,15 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 			case 0:
 				moreStepsAct = true;
 				attacking = true; 
-				ds_messages[| 0] = "Player ATTACKS!";
+				ds_messages[| 0] = "> Player ATTACKS!";
 				audio_play_sound(sndSelecting, 50, false);
 			break;
 			//-----------------DEFENSE CASE----------------------
 			case 1:
 				moreStepsAct = true;
 				instance_create_layer(x, y, "Effect", oShieldEffect);
-				ds_messages[| 0] = "Player DEFENDS!";
-				ds_messages[| 1] = "Damage DECREASED!";
+				ds_messages[| 0] = "> Player DEFENDS!";
+				ds_messages[| 1] = "> Damage DECREASED!";
 				defended = 1;
 				audio_play_sound(sndSelecting, 50, false, global.soundGain);				
 			break;
@@ -75,8 +75,8 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 			case 2:
 				moreStepsAct = false;
 				instance_create_layer(x, y, "Effect", oFlashEffect);
-				ds_messages[| 0] = "Player UNBINDS the CAGE!";
-				ds_messages[| 1] = "CS - 10%";
+				ds_messages[| 0] = "> Player UNBINDS the CAGE!";
+				ds_messages[| 1] = "> CS - 10%";
 				global.CSvalue -= 10;
 				audio_play_sound(sndSelecting, 50, false, global.soundGain);				
 			break;
@@ -86,7 +86,7 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 				{
 					moreStepsAct = true;
 					itemOption = true;
-					ds_messages[| 0] = "Player Used an Item!";
+					ds_messages[| 0] = "> Player Used an Item!";
 					invGUI.visible = true;
 					frame += 1;
 					audio_play_sound(sndSelecting, 50, false, global.soundGain);
@@ -94,7 +94,7 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 				else
 				{
 					moreStepsAct = false;
-					ds_messages[| 0] = "You don't have any item...";
+					ds_messages[| 0] = "> You don't have any item...";
 					audio_play_sound(sndSelecting, 50, false, global.soundGain);
 				}
 			break;

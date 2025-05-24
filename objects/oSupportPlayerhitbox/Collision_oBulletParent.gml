@@ -18,7 +18,7 @@ if (canCollide == true)
 		global.defenceValue = irandom_range(10, 15); //Defence value casuale
 		//DAMAGE POP EFFECT
 		flText = instance_create_layer(x, y, "Effect", oFloatingText);
-		flText.value = global.attackRandom - global.defenceValue;
+		flText.textReference = global.attackRandom - global.defenceValue;
 		if (global.playerShield > 0) 
 		{ 
 			global.playerShield -= global.attackRandom; oFloatingText.damageIndex = 1;
@@ -30,7 +30,7 @@ if (canCollide == true)
 		global.defenceValue = 0;
 		//DAMAGE POP EFFECT
 		flText = instance_create_layer(x, y, "Effect", oFloatingText);
-		flText.value = global.attackRandom - global.defenceValue;
+		flText.textReference = global.attackRandom - global.defenceValue;
 		if (godMode = 0) 
 		{	
 			if (global.playerShield > 0) { global.playerShield -= global.attackRandom; oFloatingText.damageIndex = 1;}

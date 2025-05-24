@@ -9,7 +9,7 @@ if (oBattleBox.visible == false)
 	visible = false;
 	exit; 
 }
-
+  
 coordTimer = setTimer(coordTimer);
 	
 if (coordTimer == 0) 

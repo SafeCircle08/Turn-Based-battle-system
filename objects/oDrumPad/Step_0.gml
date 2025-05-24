@@ -1,23 +1,24 @@
 //SE NON CI SONO PIU' PROIETTILI,
 //RALLENTO IL TAMBURO E MI FERMO
-
+event_inherited();
 if (keyboard_check_pressed(ord("R"))) { game_restart(); }
 
-if (instance_number(oShell) == 0)
+if (animating == true) { image_speed = 1; } 
+else { image_speed = 0; image_index = 0; }
+
+//Quando il turno è finito
+if (instance_number(oShell) == 0) || (reduceDimensionsAlpha == true)
 {
 	if (angleAdder > 0) { angleAdder = angleAdder - 0.02; }
-	image_angle += angleAdder;
-	animating = false;
-	image_speed = 0;
-	image_index = 0;
+	image_angle += angleAdder + 10;
 	exit;
 }
 
 //VADO AD AUMENTARE DI UNO IL NUMERO DI GIRI DEL TAMBURO-------
 if (image_angle % 90 == 0) && (rotDelay == 0)
 { 
-	onPressEnter(14);
-	if (delay == 9)
+	onPressEnter(irandom_range(10, 25));
+	if (delay == 4)
 	{
 		audio_play_sound(sndDrumPadSet, 50, false);
 		if (angleRound + 1 < 4)
@@ -26,26 +27,23 @@ if (image_angle % 90 == 0) && (rotDelay == 0)
 		} else { angleRound = 0; }
 	}
 	if (delay > 0) { delay--; }
-	if (delay = 0) { rotDelay = 90 / angleSpeed[angleRound]; }
+	if (delay == 0) { rotDelay = 90 / angleSpeed[angleRound]; }
 }
 
 //DELAY TRA UNA ROTAZIONE E L'ALTRA----------
 if (rotDelay > 0)
 {
-	delay = 9;
+	delay = 4;
 	image_angle += angleSpeed[angleRound];
 	rotDelay--;
 }
 
-//QUANDO IL TAMBURO STA RUOTANDO-------------
+//QUANDO IL TAMBURO E' ANIMATO-------------
 if (animating == true)
 {
-	image_speed = 1;
 	animationTimer--;
 	if (animationTimer < 0)
 	{
-		image_index = 0;
-		image_speed = 0;
 		animating = false;
 		animationTimer = 50;
 	}
@@ -61,7 +59,7 @@ if (attackTime > 0)
 
 //SE IL MIRINO E' VICINO ALLA CAMERA CON I PROIETTILI----------
 if (keyboard_check_pressed(vk_enter) && !oDrumPadScope.canShoot)
-{ audio_play_sound(sndEmpyChamber, 50, false); exit; }
+{ audio_play_sound(sndEmptyChamber, 50, false); exit; }
 
 if (!oDrumPadScope.canShoot) { exit; }
 onPressEnter();
