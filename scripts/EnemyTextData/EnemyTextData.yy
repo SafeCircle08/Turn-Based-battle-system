@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"EnemyTextData",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"textScripts",
+    "path":"folders/Scripts/textScripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

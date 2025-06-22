@@ -1,6 +1,6 @@
 event_inherited();
 
-genTimeVars(120, false, 1500, 0);
+genTimeVars(120, false, 800, 0);
 numberOfMagnets = 7;
 boxDimensions(240, sprite_get_height(sMagnet)*numberOfMagnets);
 oSoul.umbrelling = false; //Per far si che non si bugghi

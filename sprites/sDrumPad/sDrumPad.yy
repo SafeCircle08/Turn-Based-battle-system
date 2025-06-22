@@ -29,8 +29,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"sDrumPadSprites",
-    "path":"folders/Sprites/sDrumPadSprites.yy",
+    "name":"baseDrumPad",
+    "path":"folders/Sprites/sDrumPadSprites/baseDrumPad.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

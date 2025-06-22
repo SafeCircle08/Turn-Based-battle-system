@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"dpSetVariables",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"dpSetVariables",
+  "parent":{
+    "name":"DrumPadScripts",
+    "path":"folders/Scripts/DrumPadScripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

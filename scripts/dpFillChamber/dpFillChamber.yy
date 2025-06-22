@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"dpFillChamber",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"dpFillChamber",
+  "parent":{
+    "name":"DrumPadScripts",
+    "path":"folders/Scripts/DrumPadScripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

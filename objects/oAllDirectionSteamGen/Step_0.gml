@@ -39,6 +39,12 @@ if (timerGetCoord == 0)
 	];
 }
 
+if (global.enemyTimer % 160 == 0)
+{
+	createExclamationMarks();
+	createRandomKnife();
+}
+
 if (global.created == false)
 {
 	if (global.createTimer > 0) { global.createTimer-- };
@@ -48,13 +54,14 @@ if (global.created == false)
 		for (var i = 0; i < 3; i++)
 		{	
 			var _actualBullet = irandom_range(0, 3);
-			instance_create_layer
+			var _steamy = instance_create_layer
 			(
 				allDirectionSteam[1][_actualBullet][i],
 				allDirectionSteam[2][_actualBullet][i],
 				"Bullets",
 				allDirectionSteam[0][_actualBullet][i]	
 			);
+			_steamy.acceleration = false;
 			if (i == 1) { global.bulletsCreated++; global.createTimer = 40; } 
 		}
 		if (global.bulletsCreated == 4) { global.bulletsCreated = 0; }

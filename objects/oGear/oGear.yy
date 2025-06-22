@@ -9,8 +9,8 @@
   "name":"oGear",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"SteamPunkOffice",
+    "path":"folders/Objects/OverWorld/SteamPunkOffice.yy",
   },
   "parentObjectId":null,
   "persistent":false,

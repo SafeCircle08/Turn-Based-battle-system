@@ -3,6 +3,7 @@
 //feather disable all
 randomize();
 
+
 //FASE INIZIALE PARTITA, QUANDO PUOI SCEGLIERE I PULSANTI
 if (playerTurn == true) && (showBattleText == false) && (acting == false)
 {
@@ -37,9 +38,8 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 		turnNumber += 1;
 		defended = 0;
 		enemyTextShowed = false;
-		barCreated = false;
-		attackPressed = false;
 		acting = true;
+
 				
 		//Generator variables
 		oBulletGeneratorManager.generatorCreated = false;
@@ -51,39 +51,32 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 		oSoul.coordTimer = 1;
 		
 		if (!ds_exists(ds_messages, ds_type_list)) { ds_messages = ds_list_create() } 
-			
+		
 		//---------------------------SELECTING ACTIONS-------------------------
 		switch (selected_option)
 		{
-			//-----------------ATTACK CASE----------------------
 			case 0:
 				moreStepsAct = true;
-				attacking = true; 
-				ds_messages[| 0] = "> Player ATTACKS!";
-				audio_play_sound(sndSelecting, 50, false);
+				choosingBattle = true;
+				audio_play_sound(sndSelecting, 50, false);	
 			break;
-			//-----------------DEFENSE CASE----------------------
 			case 1:
 				moreStepsAct = true;
 				instance_create_layer(x, y, "Effect", oShieldEffect);
 				ds_messages[| 0] = "> Player DEFENDS!";
 				ds_messages[| 1] = "> Damage DECREASED!";
 				defended = 1;
-				audio_play_sound(sndSelecting, 50, false, global.soundGain);				
+				audio_play_sound(sndSelecting, 50, false, global.soundGain);
 			break;
-			//-----------------UNBIND CASE----------------------
 			case 2:
 				moreStepsAct = false;
-				instance_create_layer(x, y, "Effect", oFlashEffect);
-				ds_messages[| 0] = "> Player UNBINDS the CAGE!";
-				ds_messages[| 1] = "> CS - 10%";
-				global.CSvalue -= 10;
-				audio_play_sound(sndSelecting, 50, false, global.soundGain);				
+				ds_messages[| 0] = "> Crying won't solve anything;";
+				ds_messages[| 1] = "> Should probably remember this...";
+				audio_play_sound(sndSelecting, 50, false, global.soundGain);			
 			break;
-			//-----------------ITEM CASE----------------------
 			case 3:
-				if (array_length(global.items) > 0)
-				{
+				if (array_length(global.items) > 0) 
+				{ 
 					moreStepsAct = true;
 					itemOption = true;
 					ds_messages[| 0] = "> Player Used an Item!";
@@ -115,8 +108,6 @@ if (showBattleText)
 	if (oPinkDetails.image_alpha > 0) { oPinkDetails.image_alpha -= 0.05; }
 	instance_deactivate_object(oThinking);
 	instance_deactivate_object(oThinkingAttributes);
-	
-	if (instance_exists(oAttackBar)) { instance_destroy(oAttackBar) } 
 		
 	messageTimer++;
 		
@@ -142,7 +133,7 @@ if (showBattleText)
 					playerTurn = !playerTurn; 
 					showBattleText = false;
 					messageCounter = 0;
-					if (ds_exists(ds_messages, ds_type_list)) ds_list_destroy(ds_messages);
+					if (ds_exists(ds_messages, ds_type_list)) { ds_list_destroy(ds_messages); }
 				}
 			}
 			messageTimer = 0;
@@ -155,7 +146,7 @@ if (showBattleText)
 ////----------------ATTACK SEQUENCE----------------------
 if (acting == true)
 {
-	if (attacking == true) { attackFunction(); }
+	if (attacking == true) { attackFunction(global.eqDrumPad, global.eqScope); }
 	//if using item: DRAW GUI EVENT
 }
 

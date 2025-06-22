@@ -4,17 +4,6 @@ key_up = keyboard_check(ord("W"))
 key_down = keyboard_check(ord("S")) 
 key_jump = keyboard_check_pressed(vk_space);
 
-//----------------------------VARIABILI GLOBALI---------------------------------------------------
-global.SoulSpeed = 2;
-global.defenceValue = undefined;
-global.attackRandom = undefined; //VALORE AGGIUNTIVO A GLOBAL.BULLETATK (RENDERE I DANNI VARIABILI)
-//Variabili per spostare il player 
-//(non farlo spawnare sempre al centro del box)
-global.xOffset = 0;
-global.yOffset = 0;
-global.playerMoveTimer = 65;
-global.beamAnimation = false;
-
 //----------------------------VARIABILI STRANE----------------------------
 godMode = 0;
 canCollide = true;
@@ -27,6 +16,7 @@ t = 0;
 umbrelling = false;
 umbrellaJump = false;
 grav = 0.275;
+jumpTimer = 0;
 
 //DIMENSIONI DEL PLAYER IN FORMA
 image_xscale = 0.5;
@@ -113,6 +103,8 @@ stateUmbrella = function()
 	y += vsp + (yFloating / 10);
 }
 
+#region GRAVITY FUNCTIONS
+
 //VIENE CHIAMATA QUANDO C'E' GRAVITA'
 usingUmbrella = function()
 {
@@ -133,105 +125,28 @@ usingUmbrella = function()
 //State Jump Base (RIVISITATO)
 stateGravity = function()
 {
-	//Set up generale
+	//Set up
 	image_angle = 0;
 	key_jumpPressed = keyboard_check(vk_space);
 	stateInit(sPlayerRightJump, sEffectGravity, "Front");		
 	hbX = 0;
 	hbY = -10;
 	
-	//Crea la barra delle collisioni
-	//Side box (down)
-	if (!instance_exists(oBoxSidePlaftorm_D)) 
-	{ 
-		instance_destroy(oBoxSidePlatformParent);
-		instance_create_layer(x,-500, "ExtrasObjects", oBoxSidePlaftorm_D); 
-	}
-	
-	if (grounded == false)
-	{
-		if (keyboard_check_pressed(vk_space)) { umbrelling = true; }
-		if (umbrelling == true) { usingUmbrella(); }
-		
-		if (umbrelling == false)
-		{
-			if (left == true) { sprite_index = sPlayerLeftJumping; image_speed = 1; }
-			else { sprite_index = sPlayerRightJumping; image_speed = 1; }
-		}
-	}	
-	
-	//Movimenti
-	hsp = (key_right - key_left) * global.SoulSpeed;
-	if (key_left) { image_speed = 1; left = true; }
-	if (key_right) { image_speed = 1; left = false; }
-	
-	//Gravità
+	//Movements
+	gravCreateRightGravityBorder(oBoxSidePlaftorm_D);
+	gravSetMovements(1, 1, 1, sPlayerLeftJumping_1, sPlayerRightJumping_1, true);
+	hsp = calculateMovement(key_right, key_left, 1)
 	vsp += grav;
 	
-	//Quando premo spazio
-	if (key_jumpPressed) && (grounded == true) { vsp = jumpSpd; }
-	vsp = clamp(vsp, -5, 4);
+	//Instances collisions
+	if (vsp > 0) { gravCheckingBase(1, 0, vsp, true); }
+	else { gravCheckingBaseBorder(-1, 0, vsp); }
 	
-	//Se collido con una base solida
-	//quando sto cadendo
-	if (vsp > 0)
-	{
-		var _subPixel = 0.5;
-		if (place_meeting( x, y + vsp, oPlatformParent ))
-		{
-			var _pixelCheck = _subPixel * sign(vsp);
-			while !place_meeting( x, y + _pixelCheck, oPlatformParent )
-			{
-				y += _pixelCheck;	
-			}
-
-			//Se collido e avevo l'ombrello:
-			if (umbrelling == true)
-			{
-				instance_create_layer(x, y, "ExtrasObjects", oMiniUmbrella);
-				umbrelling = false;
-				umbrellaJump = false;
-			}
-			vsp = 0;
-			grounded = true;
-		} else 
-		{ 
-			vsp = max(vsp, jumpSpd / 10);
-			grounded = false; 
-		}
-	}
-	else 
-	{ 
-		if (place_meeting(x, y + vsp, oPlatformParent))
-		{
-			y -= lerp(0, 5, 0.4) * 2
-		}
-		grounded = false; 
-	}
+	//Checking the player grounded variable
+	if (grounded == true) { gravPlayerIsGrounded(sPlayerLeftJump, sPlayerRightJump); }
+	else { gravPlayerNotGrounded(sPlayerLeftJumping_1, sPlayerRightJumping_1, true); }
 	
-	//Se sono per terra
-	if (grounded == true)
-	{
-		if (left == true) { sprite_index = sPlayerLeftJump; }
-		if (left == false) { sprite_index = sPlayerRightJump; }		
-		//Se il player è fermo
-		if (hsp == 0) && (vsp == 0) { image_speed = 0; image_index = 0; }
-	}
-	else
-	{	
-		image_speed = 0.5;
-		if (umbrelling == false)
-		{
-			if (left == true) { sprite_index = sPlayerLeftJumping; }
-			if (left == false) { sprite_index = sPlayerRightJumping; }
-		}
-		else
-		{
-			sprite_index = sPlayerUmbrella;
-		}
-	}	
-	
-	//Aggiorna posizione player
+	//Updates the player coords
 	x += hsp;
 	y += vsp;
 	var _possX = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
@@ -243,79 +158,28 @@ stateGravity = function()
 //State Jump y Invertita 
 stateGravityUp = function()
 {
-	//Set up generale
+	//Set up
 	image_angle = 180;
 	key_jumpPressed = keyboard_check(ord("S"));
 	stateInit(sPlayerRightJump, sEffectGravity, "Up");		
 	hbX = 0;
 	hbY = 10;
 	
-	//Crea la barra delle collisioni
-	//Side box (down)
-	if (!instance_exists(oBoxSidePlaftorm_U))
-	{ 
-		instance_destroy(oBoxSidePlatformParent);
-		instance_create_layer(x,-500, "ExtrasObjects", oBoxSidePlaftorm_U); 
-	}
-	
-	//Movimenti
-	hsp = (key_right - key_left) * global.SoulSpeed;
-	if (key_left) { image_speed = 1; left = true; }
-	if (key_right) { image_speed = 1; left = false; }
-	
-	//Gravità
+	//Movements
+	gravCreateRightGravityBorder(oBoxSidePlaftorm_U);
+	gravSetMovements(-1, 1, -1, sPlayerRightJumping_1, sPlayerRightJumping_1);
+	hsp = calculateMovement(key_right, key_left);
 	vsp -= grav;
 	
-	//Quando premo spazio
-	if (key_jumpPressed) && (grounded == true) { vsp = -jumpSpd; }
-	vsp = clamp(vsp, -4, 5);
+	//Instance collisions
+	if (vsp < 0) { gravCheckingBase(-1, 0, vsp); }
+	else { gravCheckingBaseBorder(1, 0, vsp); }
+	
+	//Checking grounded player variable
+	if (grounded == true) { gravPlayerIsGrounded(sPlayerRightJump, sPlayerLeftJump); }
+	else { gravPlayerNotGrounded(sPlayerRightJumping_1, sPlayerRightJumping_1); }
 
-	//Se collido con una base solida
-	//quando sto cadendo
-	if (vsp < 0)
-	{
-		var _subPixel = 0.5;
-		if (place_meeting( x, y + vsp, oPlatformParent ))
-		{
-			var _pixelCheck = _subPixel;
-			while !place_meeting( x, y - _pixelCheck, oPlatformParent )
-			{
-				y -= _pixelCheck;	
-			}
-			vsp = 0;
-			grounded = true;
-		} 
-		else 
-		{ 
-			grounded = false; 
-			vsp = -max(-vsp, jumpSpd / 10);
-		}
-	}
-	else
-	{ 
-		if (place_meeting(x, y + vsp, oPlatformParent))
-		{
-			y += lerp(0, 5, 0.4) * 2;
-		}
-		grounded = false; 
-	}
-	
-	//Se sono per terra
-	if (grounded == true)
-	{
-		if (left == true) { sprite_index = sPlayerRightJump; }
-		if (left == false) { sprite_index = sPlayerLeftJump; }		
-		//Se il player è fermo
-		if (hsp == 0) && (vsp == 0) { image_speed = 0; image_index = 0; }
-	}
-	else
-	{	
-		image_speed = 1;
-		if (left == true) { sprite_index = sPlayerRightJumping; }
-		if (left == false) { sprite_index = sPlayerLeftJumping; }
-	}	
-	
-	//Aggiorna posizione player
+	//Updating player coords
 	x += hsp;
 	y += vsp;		
 	var _possX = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
@@ -325,80 +189,25 @@ stateGravityUp = function()
 //State Jump Right
 stateGravityRight = function()
 {
-	//Set up generale
 	image_angle = 90;
 	key_jumpPressed = keyboard_check(ord("A"));
 	stateInit(sPlayerRightJump, sEffectGravity, "Up");		
 	hbX = -10;
 	hbY = 0;
 	
-	//Crea la barra delle collisioni
-	//Side box (down)
-	if (!instance_exists(oBoxSidePlaftorm_R)) 
-	{ 
-		instance_destroy(oBoxSidePlatformParent);
-		instance_create_layer(x,-500, "ExtrasObjects", oBoxSidePlaftorm_R); 
-	}
-	
-	//Movimenti
-	vsp = (key_down - key_up) * global.SoulSpeed;
-	if (key_down) { image_speed = 1; left = true; }
-	if (key_up) { image_speed = 1; left = false; }
-	
-	//Gravità
-	hsp += grav;
-	
-	//Quando premo spazio
-	if (key_jumpPressed) && (grounded == true) { hsp = jumpSpd; }
-	hsp = clamp(hsp, -5, 4);
+	gravCreateRightGravityBorder(oBoxSidePlaftorm_R);
+	gravSetMovements(1, 1, 1, sPlayerRightJump, sPlayerRightJump, false, false);
+	hsp = calculateMovement(key_down, key_up);
+	vsp += grav;
 
-	//Se collido con una base solida
-	//quando sto cadendo
-	if (hsp > 0)
-	{
-		var _subPixel = 0.5;
-		if (place_meeting( x + hsp, y, oPlatformParent ))
-		{
-			var _pixelCheck = _subPixel * sign(hsp);
-			while !place_meeting( x + _pixelCheck, y, oPlatformParent )
-			{
-				x += _pixelCheck;	
-			}
-			hsp = 0;
-			grounded = true;
-		} else 
-		{ 
-			grounded = false; 
-			hsp = max(hsp, jumpSpd / 10);
-		}
-	}
-	else 
-	{ 
-		if (place_meeting(x + hsp, y, oPlatformParent))
-		{
-			x -= lerp(0, 5, 0.4) * 2;
-		}
-		grounded = false; 
-	}
+	if (vsp > 0) { gravCheckingBase(1, vsp, 0, false, false); }
+	else { gravCheckingBaseBorder(-1, vsp, 0, false); }
 	
-	//Se sono per terra
-	if (grounded == true)
-	{
-		if (left == true) { sprite_index = sPlayerLeftJump; }
-		if (left == false) { sprite_index = sPlayerRightJump; }		
-		//Se il player è fermo
-		if (hsp == 0) && (vsp == 0) { image_speed = 0; image_index = 0; }
-	}
-	else
-	{	
-		image_speed = 1;
-		if (left == true) { sprite_index = sPlayerLeftJumping; }
-		if (left == false) { sprite_index = sPlayerRightJumping; }
-	}	
+	if (grounded == true) { gravPlayerIsGrounded(sPlayerLeftJump, sPlayerRightJump); }
+	else { gravPlayerNotGrounded(sPlayerLeftJumping_1, sPlayerRightJumping_1); }
 	
-	//Aggiorna posizione player
-	x += hsp;
-	y += vsp;
+	x += vsp;
+	y += hsp;
 	var _possY = clamp(oSoul.y, global.border_u + 5, global.border_d - 4);
 	oSoul.y = _possY;
 }
@@ -413,77 +222,24 @@ stateGravityLeft = function()
 	hbX = 10;
 	hbY = 0;
 	
-	//Crea la barra delle collisioni
-	//Side box (down)
-	if (!instance_exists(oBoxSidePlaftorm_L))
-	{ 
-		instance_destroy(oBoxSidePlatformParent);
-		instance_create_layer(x,-500, "ExtrasObjects", oBoxSidePlaftorm_L); 
-	}
+	gravCreateRightGravityBorder(oBoxSidePlaftorm_L);
+	gravSetMovements(1, 1, -1, sPlayerRightJump, sPlayerRightJump, false, false);
+	hsp = calculateMovement(key_down, key_up, 1);
+	vsp -= grav;
 	
-	//Movimenti
-	vsp = (key_down - key_up) * global.SoulSpeed;
-	if (key_down) { image_speed = 1; left = true; }
-	if (key_up) { image_speed = 1; left = false; }
+	if (vsp < 0) { gravCheckingBase(-1, vsp, 0, false, false); }
+	else { gravCheckingBaseBorder(-1, vsp, 0); }
 	
-	//Gravità
-	hsp -= grav;
+	if (grounded == true) { gravPlayerIsGrounded(sPlayerRightJump, sPlayerLeftJump); }
+	else { gravPlayerNotGrounded(sPlayerRightJumping_1, sPlayerLeftJumping_1); }
 	
-	//Quando premo spazio
-	if (key_jumpPressed) && (grounded == true) { hsp = -jumpSpd; }
-	hsp = clamp(hsp, -4, 5);
-	
-	//Se collido con una base solida
-	//quando sto cadendo
-	if (hsp < 0)
-	{
-		var _subPixel = 0.5;
-		if (place_meeting( x + hsp, y, oPlatformParent ))
-		{
-			var _pixelCheck = _subPixel;
-			while !place_meeting( x - _pixelCheck, y, oPlatformParent )
-			{
-				x -= _pixelCheck;	
-			}
-			hsp = 0;
-			grounded = true;
-		} 
-		else 
-		{ 
-			grounded = false; 
-			hsp = -max(-hsp, jumpSpd / 10);
-		}
-	}
-	else
-	{ 
-		if (place_meeting(x + hsp, y, oPlatformParent))
-		{
-			x += lerp(0, 5, 0.4) * 2;
-		}
-		grounded = false; 
-	}
-	
-	//Se sono per terra
-	if (grounded == true)
-	{
-		if (left == true) { sprite_index = sPlayerRightJump; }
-		if (left == false) { sprite_index = sPlayerLeftJump; }		
-		//Se il player è fermo
-		if (hsp == 0) && (vsp == 0) { image_speed = 0; image_index = 0; }
-	}
-	else
-	{	
-		image_speed = 1;
-		if (left == true) { sprite_index = sPlayerRightJumping; }
-		if (left == false) { sprite_index = sPlayerLeftJumping; }
-	}	
-	
-	//Aggiorna posizione player
-	x += hsp;
-	y += vsp;
+	x += vsp;
+	y += hsp;
 	var _possY = clamp(oSoul.y, global.border_u + 5, global.border_d - 4);
 	oSoul.y = _possY;
 }
+
+#endregion
 
 //Spider State
 stateSpider = function()
@@ -499,11 +255,7 @@ stateSpider = function()
 	if (spiderState == 0)
 	{
 		//La piattaforma di base
-		if (!instance_exists(oBoxSidePlaftorm_D)) 
-		{ 
-			instance_destroy(oBoxSidePlatformParent);
-			instance_create_layer(x,-500, "ExtrasObjects", oBoxSidePlaftorm_D); 
-		}
+		gravCreateRightGravityBorder(oBoxSidePlaftorm_D);
 		
 		//Basic Movement
 		if (key_left) { sprite_index = sPlayerSpiderLeft; image_speed = 1; }
@@ -546,11 +298,7 @@ stateSpider = function()
 	else
 	{
 		//La piattaforma di base
-		if (!instance_exists(oBoxSidePlaftorm_U))
-		{ 
-			instance_destroy(oBoxSidePlatformParent);
-			instance_create_layer(x,-500, "ExtrasObjects", oBoxSidePlaftorm_U); 
-		}
+		gravCreateRightGravityBorder(oBoxSidePlaftorm_U);
 		
 		//Basic Movement
 		if (key_left) { sprite_index = sPlayerSpiderRight; image_speed = 1; }
@@ -600,4 +348,24 @@ stateSpider = function()
 	var _possX = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
 	oSoul.x = _possX;
 }
+
+stateSliding = function()
+{
+	var _createSparks = function() 
+	{ 
+		if (!instance_exists(oSlidingSparks))
+		{
+			instance_create_layer(x, y, "ExtrasObjects", oSlidingSparks);
+		}
+	}
+	stateInit(sPlayerSliding, sPlayerPickaxe, "Front", true, _createSparks());
+	sprite_index = oRailsAttack.spriteInput;
+	if (instance_exists(oRailsAttack)) 
+	{ 		
+		var _maxX = oRailsAttack.maxPlayerX; 
+		hsp = (key_right - key_left) * global.SoulSpeed;
+		x = clamp(x, global.border_l + 12, _maxX - 10);
+	}
+}
+
 state = stateFree;

@@ -1,7 +1,5 @@
-x = global.boxOriginX;
-y = global.boxOriginY;
-xspd = 5;
-yspd = 5;
+xspd = 3;
+yspd = 3;
 sprite_index = sElectron;
 image_speed = xspd / 2;
 image_xscale = 0.5;
@@ -10,11 +8,13 @@ timer = 100;
 xSign = undefined;
 ySign = undefined;
 instance_create_layer(x, y, "Bullets", oShake);
+timer = 0;
+collided = false;
 
 //Methods that determine the actual 
 //movement the "balls" have to follow
 moveElectron = function()
-{
+{	
 	x += xspd;
 	y += yspd;
 	
@@ -129,36 +129,3 @@ moveProton = function()
 }
 
 moveState = moveElectron;
-
-//Functions for creating the different "balls"
-createProton = function(_x, _y, _xspd, _yspd, _xSign, _ySign, _timer)
-{
-	var _obj = instance_create_layer(_x, _y, "Bullets", oBallBullet);
-	with (_obj)
-	{
-		xspd = _xspd;
-		yspd = _yspd;
-		xSign = _xSign;
-		ySign = _ySign;
-		timer = _timer;
-		image_xscale = 1;
-		image_yscale = 1;
-		sprite_index = sProton;
-		moveState = moveProton;
-	}	
-}
-createElectron = function(_x, _y, _xspd, _yspd, _xSign, _ySign)
-{
-	var _obj = instance_create_layer(_x, _y, "Bullets", oBallBullet);
-	with (_obj)
-	{
-		xspd = _xspd;
-		yspd = _yspd;
-		xSign = _xSign;
-		ySign = _ySign;
-		image_xscale = 0.5;
-		image_yscale = 0.5;
-		sprite_index = sElectron;
-		moveState = moveElectron;
-	}	
-}

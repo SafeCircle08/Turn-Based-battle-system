@@ -60,8 +60,8 @@
   },
   "origin":4,
   "parent":{
-    "name":"sDecorations",
-    "path":"folders/Sprites/sDecorations.yy",
+    "name":"inBattle",
+    "path":"folders/Sprites/sDecorations/inBattle.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

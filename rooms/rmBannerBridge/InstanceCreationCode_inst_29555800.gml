@@ -1,0 +1,4 @@
+textList = 
+[
+	"<> Just some petals..."
+];

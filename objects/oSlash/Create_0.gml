@@ -1,0 +1,1 @@
+audio_play_sound(sndSwing, 50, false, global.soundGain + 1);

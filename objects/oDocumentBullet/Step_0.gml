@@ -16,9 +16,10 @@ if (timerToGetCoord == 0)
 {
 	var _finalX = takingX;
 	var _finalY = takingY;
+	frame += 0.005;
 	
 	image_angle = point_direction(self.x, self.y, _finalX, _finalY);
-	move_towards_point(_finalX, _finalY, 1);
+	move_towards_point(_finalX, _finalY, moveSpd * frame);
 	
 	if (point_distance(self.x, self.y, _finalX, _finalY) < 2) && (disapperTimer > 0)
 	{

@@ -9,7 +9,9 @@ global.fxColor = -1;
 
 global.bulletsGenerators = 
 [
-	oParticleBulletGen,
+	oElectronCircle,
+	oRailsLampAttack,
+	oBallAttack,
 	oSpikeUpBulletGen,
 	oSpikeDownBulletGen,
 	oKnifeBulletGen,
@@ -18,16 +20,17 @@ global.bulletsGenerators =
 	oAnswersBulletGen,
 	oAnswersBulletGen,
 	oAnswersBulletGen,
+	oKnifeGenerator,
+	oKnifeGenerator_FAST,
 	oAllDirectionSteamGen,
 	oRobotsToolGen,  //10
 	oPlatformGenerator,
 	oChemistryGenerator,
 	oSawsBulletGen,
 	oSawsBulletGen,
-	oTeleportBulletGen, // 15
-	oPressureElectronGen,
+	oPressureElectronGen, //15
 	oBlasterFreeGen,
 	oStereoGen,
 	oBgScrolling,
-	oEmpyTurn, //20
+	oEmpyTurn,
 ];

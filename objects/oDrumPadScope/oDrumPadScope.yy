@@ -9,8 +9,8 @@
   "name":"oDrumPadScope",
   "overriddenProperties":[],
   "parent":{
-    "name":"DrumPadObjs",
-    "path":"folders/Objects/DrumPadObjs.yy",
+    "name":"actualObjects",
+    "path":"folders/Objects/DrumPadObjs/actualObjects.yy",
   },
   "parentObjectId":{
     "name":"oDrumPadObjectsParent",

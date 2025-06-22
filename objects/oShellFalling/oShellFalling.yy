@@ -9,8 +9,8 @@
   "name":"oShellFalling",
   "overriddenProperties":[],
   "parent":{
-    "name":"DrumPadObjs",
-    "path":"folders/Objects/DrumPadObjs.yy",
+    "name":"drumPadEffects",
+    "path":"folders/Objects/DrumPadObjs/drumPadEffects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

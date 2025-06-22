@@ -10,12 +10,12 @@
   "name":"oDrumPad",
   "overriddenProperties":[],
   "parent":{
-    "name":"DrumPadObjs",
-    "path":"folders/Objects/DrumPadObjs.yy",
+    "name":"actualObjects",
+    "path":"folders/Objects/DrumPadObjs/actualObjects.yy",
   },
   "parentObjectId":{
-    "name":"oDrumPadObjectsParent",
-    "path":"objects/oDrumPadObjectsParent/oDrumPadObjectsParent.yy",
+    "name":"oActualDrumPadParent",
+    "path":"objects/oActualDrumPadParent/oActualDrumPadParent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

@@ -1,4 +1,4 @@
-steamEnemyText =  
+steamEnemyText =
 [
 	["So right now you are telling me this is not working???"],
 	[

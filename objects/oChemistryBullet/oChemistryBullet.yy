@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"chemistryTest",
-    "path":"sprites/chemistryTest/chemistryTest.yy",
+    "name":"sIron",
+    "path":"sprites/sIron/sIron.yy",
   },
   "spriteMaskId":null,
   "visible":true,

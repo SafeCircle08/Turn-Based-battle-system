@@ -9,13 +9,10 @@
   "name":"oSparks",
   "overriddenProperties":[],
   "parent":{
-    "name":"DrumPadObjs",
-    "path":"folders/Objects/DrumPadObjs.yy",
+    "name":"drumPadEffects",
+    "path":"folders/Objects/DrumPadObjs/drumPadEffects.yy",
   },
-  "parentObjectId":{
-    "name":"oDrumPadObjectsParent",
-    "path":"objects/oDrumPadObjectsParent/oDrumPadObjectsParent.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

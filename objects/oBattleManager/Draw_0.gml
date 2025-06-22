@@ -1,5 +1,6 @@
 if (enemyCanShowText) && (enemyTextShowed == false)
 {
+	var _border = 7;
 	var _xSep = 17;
 	var _ySep = 5;	
 	var _lSep = 20;
@@ -27,14 +28,11 @@ if (enemyCanShowText) && (enemyTextShowed == false)
 			dialogueDelay = 7;
 		}
 	}
-	
-	//TODO	
-	//Fare il controllo del tildur anche
-	//in questo method
 
 	//FA PROGREDIRE IL TESTO LETTERA PER LETTERA	
+	var _bgH = sprite_get_height(sTextBG) / 2;
 	var _textPart = string_copy(_page[page], 1, charCount);
-	draw_text_ext_transformed(_x + _xSep, _y - 20 - _ySep, _textPart, _lSep, boxWidth + 50, 0.5, 0.5, 0);	
+	draw_text_ext_transformed(_x + _border , _y - _bgH + _border, _textPart, _lSep, boxWidth + 70, 0.5, 0.5, 0);	
 
 	//SE PUOI EFFETTIVAMENTE SKIPPARE
 	if keyboard_check_pressed(vk_enter) && (charCount >= string_length(_page[page]))

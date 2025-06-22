@@ -1,9 +1,10 @@
 //feather disable all
+
 if (oBattleBox.visible == false)
 {
 	#region BOX VARIABLES SETUP
-	guiX = surface_get_width(application_surface) / 2;
-	guiY = surface_get_height(application_surface);
+	var guiX = surface_get_width(application_surface) / 2;
+	var guiY = surface_get_height(application_surface);
 	draw_sprite(sTextBox, 0, guiX, guiY);
 	fontSize = font_get_size(fGenericText);
 	var _textBoxW = sprite_get_width(sTextBox);
@@ -110,6 +111,7 @@ if (oBattleBox.visible == false)
 	if (acting == true)
 	{
 		if (itemOption == true) { openingInv(); }	
+		if (choosingBattle == true) { choosingBattleOptions(); }
 	}
 	
 	#endregion

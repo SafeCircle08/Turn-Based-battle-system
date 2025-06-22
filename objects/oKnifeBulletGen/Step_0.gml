@@ -1,5 +1,11 @@
 event_inherited();
 
+if (global.enemyTimer % 120 == 0) 
+{ 
+	createExclamationMarks();
+	createRandomKnife(); 
+}
+
 var _tubesCoord = 
 [
 	//X pos

@@ -44,8 +44,8 @@
   },
   "origin":0,
   "parent":{
-    "name":"GUI",
-    "path":"folders/Sprites/GUI.yy",
+    "name":"TextBoxes",
+    "path":"folders/Sprites/GUI/TextBoxes.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -4,20 +4,20 @@
 //Per superare il problema, semplicemente crea
 //un bullet generator esterno, indipendente dalle palle;
 
-if (keyboard_check_pressed(vk_enter))
-{
-	var _x = global.boxOriginX;
-	var _y = global.boxOriginY;
-	createProton(_x, _y, 2, 2, -1, -1, 100);
+var _xL = global.border_l;
+var _xR = global.border_r;
+var _yU = global.border_u;
+var _yD = global.border_d;
+var _h = sprite_get_height(sprite_index) / 4;
+
+if (y + _h >= _yD) && (collided == false)
+{  
+	collided = true;
+	hspeed = 0;
+	vspeed = 0;
+	gravity = 0;
 }
 
-if (keyboard_check_pressed(vk_space))
-{
-	var _x = global.boxOriginX;
-	var _y = global.boxOriginY;
-	createElectron(_x, _y, 2, 2, -1, -1);
-}
+if (collided == false) { exit; }
 
 moveState();
-
-show_debug_message(instance_number(oBallBullet));

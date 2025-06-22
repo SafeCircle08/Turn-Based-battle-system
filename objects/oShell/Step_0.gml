@@ -1,2 +1,2 @@
 event_inherited();
-image_angle = oDrumPad.image_angle + adder;
+image_angle = global.eqDrumPad.image_angle + adder;

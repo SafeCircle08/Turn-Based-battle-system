@@ -1,4 +1,4 @@
-global.bulletATK = 20;
+global.bulletATK = 70;
 global.generatorPhase = -1;
 
 global.bulletKind = 

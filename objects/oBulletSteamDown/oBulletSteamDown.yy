@@ -13,8 +13,8 @@
     "path":"folders/Objects/BulletsObjects/Steam Bullets.yy",
   },
   "parentObjectId":{
-    "name":"oBulletParent",
-    "path":"objects/oBulletParent/oBulletParent.yy",
+    "name":"oSteamBulletParent",
+    "path":"objects/oSteamBulletParent/oSteamBulletParent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

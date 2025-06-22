@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"dpShoot",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"dpShoot",
+  "parent":{
+    "name":"DrumPadScripts",
+    "path":"folders/Scripts/DrumPadScripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

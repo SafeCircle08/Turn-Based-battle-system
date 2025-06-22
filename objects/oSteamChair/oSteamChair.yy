@@ -6,8 +6,8 @@
   "name":"oSteamChair",
   "overriddenProperties":[],
   "parent":{
-    "name":"OverWorld",
-    "path":"folders/Objects/OverWorld.yy",
+    "name":"SteamPunkOffice",
+    "path":"folders/Objects/OverWorld/SteamPunkOffice.yy",
   },
   "parentObjectId":null,
   "persistent":false,

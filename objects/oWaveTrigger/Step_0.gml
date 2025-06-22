@@ -1,1 +1,1 @@
-y = oPlatformGenerator.yStart + 5;
+y = oPlatformGenerator.yStart;

@@ -6,40 +6,40 @@ if keyboard_check(ord("C")) oSoul.state = oSoul.stateGravityRight;
 if keyboard_check(ord("V")) oSoul.state = oSoul.stateGravityLeft;
 
 #region SAWS ARRAYS (ALL THE KINDS: LEFT, UP...)
-sawsDown =
+var sawsDown =
 [
 	//Objects
 	[oSaw, oSaw],
 	//X positions
 	[global.boxOriginX - (global.borderWidth / 2) - 100, global.boxOriginX + (global.borderWidth / 2) + 100],
 	//Y positions
-	[global.boxOriginY + (global.borderHeight / 2), global.boxOriginY + (global.borderHeight / 2)],
+	[global.boxOriginY + (global.borderHeight / 2) + offSet, global.boxOriginY + (global.borderHeight / 2) + offSet],
 	//X speeds
 	[+3, -3],
 	//Y speeds
 	[0, 0]
 ];
 
-sawsUp =
+var sawsUp =
 [
 	//Objects
 	[oSaw, oSaw],
 	//X positions
 	[global.boxOriginX - (global.borderWidth / 2) - 100, global.boxOriginX + (global.borderWidth / 2) + 100],
 	//Y positions
-	[global.boxOriginY - (global.borderHeight / 2), global.boxOriginY - (global.borderHeight / 2)],
+	[global.boxOriginY - (global.borderHeight / 2) - offSet, global.boxOriginY - (global.borderHeight / 2) - offSet],
 	//X speeds
 	[+3, -3],
 	//Y speeds
 	[0, 0]
 ];
 
-sawsLeft =
+var sawsLeft =
 [
 	//Objects
 	[oSaw, oSaw],
 	//X positions
-	[global.boxOriginX - (global.borderWidth / 2), global.boxOriginX - (global.borderWidth / 2)],
+	[global.boxOriginX - (global.borderWidth / 2) - offSet, global.boxOriginX - (global.borderWidth / 2) - offSet],
 	//Y positions
 	[global.boxOriginY - (global.borderHeight / 2) - 50, global.boxOriginY + (global.borderHeight / 2) + 50],
 	//X speeds
@@ -48,12 +48,12 @@ sawsLeft =
 	[+3, -3]
 ];
 
-sawsRight =
+var sawsRight =
 [
 	//Objects
 	[oSaw, oSaw],
 	//X positions
-	[global.boxOriginX + (global.borderWidth / 2), global.boxOriginX + (global.borderWidth / 2)],
+	[global.boxOriginX + (global.borderWidth / 2) + offSet, global.boxOriginX + (global.borderWidth / 2) + offSet],
 	//Y positions
 	[global.boxOriginY - (global.borderHeight / 2) - 50, global.boxOriginY + (global.borderHeight / 2) + 50],
 	//X speeds
@@ -68,7 +68,6 @@ if (global.generatorPhase == 1)
 	frame += 0.01
 	global.boxOriginY = (sin(frame) * 40) + 110;
 }
-
 
 if (stateFlow == true)
 {
@@ -98,7 +97,7 @@ if (global.created == false)
 {
 	if (global.createTimer == 0)
 	{  
-		var _sawsArr = [sawsDown, sawsUp, sawsLeft, sawsRight];  
+		var _sawsArr = [sawsDown, sawsUp, sawsLeft, sawsRight];
 		for (var i = 0; i < 2; i++)
 		{
 			sawSpeedX = _sawsArr[index][3][i];

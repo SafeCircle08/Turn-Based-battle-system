@@ -2,11 +2,12 @@
 // You can write your code in this editor
 // feather disable all
 
-global.enemySeq = layer_sequence_create("Enemy", 101, 41, Sequence1);
+mySeq = layer_sequence_create("Enemy", 101, 41, Sequence1);
+changedSeq = false;
 
-a_text[0] = "ATK";
+a_text[0] = "BATTLE";
 a_text[1] = "DEF";
-a_text[2] = "FREE";
+a_text[2] = "CRY";
 a_text[3] = "ITEM";
 
 //BATTLE BOX VARIABLES
@@ -15,14 +16,7 @@ global.borderHeight = 100;
 
 //PLAYER VARIABLES
 battle = true;
-turnNumber = 9;
-global.playerName = "Misery";
-global.playerMAX_HP = 512;
-global.playerHP = 511;
-global.playerShield = 50;
-global.playerMaxShield = 50;
-global.CSvalue = 100;	//CAGE STATE
-global.CSvalueMax = 100;
+turnNumber = 15;
 defended = false;
 playerDeath = false;
 playerTurn = true;
@@ -37,17 +31,14 @@ hpbarW = 121;
 
 //ATTACK FUNCTION VARIABLES
 attacking = false;
-global.playerAttackTimer = 300; //5 seconds
-global.playerAttackTime = 0;
 
 //BOX VARIABLES and TEXTS
 boxWidth = sprite_get_width(sTextBG) + 10;
 strHeight = string_height(global.textList[turnNumber]);
 charCount = 0;
-charCountSupport = 0;
-enter = keyboard_check_pressed(vk_enter)
+enter = keyboard_check_pressed(vk_enter);
 page = 0;
-speechSpeed = 0.2;
+speechSpeed = 0.5;
 ds_messages = ds_list_create();
 messageCounter = 0;
 showBattleText = false;
@@ -72,14 +63,23 @@ drawNav = true;
 itemOption = false; //if you decided to use the item act
 invPos = 0; //the pos your cursor is in the inventory
 
-//ENEMY VARIABLES
-global.monsterHP = 500;
-global.maxMonsterHp = 500;
-global.monsterDamage = 1;
-global.enemyTimer = 0;
+//BATTLE OPTIONS VARIABLES
+battlePos = 0;
+battleOpNav = [];
+choosingBattle = false;
+battleDelay = 3;
+
+resetNavigation = function(_lastOption = 0)
+{
+	selected_option = _lastOption;
+	acting = false;
+	moreStepsAct = false;
+	audio_play_sound(sndSelecting, 50, false, global.soundGain);		
+}
 
 //FUNCTIONS:
-attackFunction = function()
+
+attackFunction = function(eqDrumP, eqSc)
 {
 	//TIMER DEL PLAYER (PER QUANTI FRAME PUO' ATTACCARE)
 	global.playerAttackTime++;
@@ -95,8 +95,8 @@ attackFunction = function()
 	if (global.playerAttackTime == 1)
 	{
 		instance_create_layer(_padX, _padY, "Instances", oDrumPadBase);
-		instance_create_layer(_padX, _padY, "Bullets", oDrumPad);
-		instance_create_layer(_padX, _padY, "Scope", oDrumPadScope);
+		instance_create_layer(_padX, _padY, "Bullets", eqDrumP);
+		instance_create_layer(_padX, _padY, "Scope", eqSc);
 	}			
 		
 	//SE IL PLAYER NON SPARA IN TEMPO
@@ -126,7 +126,7 @@ attackFunction = function()
 			////////
 			attacking = false;
 			acting = false;
-			ds_messages[| 0] = "> The player has finished his attack!\n> Damage dealt: " + string(oDrumPad.damage) + "!";
+			ds_messages[| 0] = "> The player has finished his attack!\n> Damage dealt: " + string(global.eqDrumPad.damage) + "!";
 			showBattleText = true;
 			global.playerAttackTime = 0;
 			//Fa chiamare la funzione da tutti gli oggetti: (reduceDimAlpha())
@@ -135,8 +135,73 @@ attackFunction = function()
 	}
 }
 
+choosingBattleOptions = function()
+{
+	if (keyboard_check_pressed(ord("X")))
+	{
+		resetNavigation(0);
+		battleDelay = 3;
+		turnNumber -= 1;
+		choosingBattle = false;
+	}
+	var _guiX = surface_get_width(application_surface) / 2;
+	var _guiY = surface_get_height(application_surface);
+	var _options = ["ATK", "FREE"];
+	
+	//Draws the secondary options	
+	for (var i = 0; i < 2; i++)
+	{
+		if (i == battlePos) { draw_sprite(sLittleRectangle, 1, _guiX - 144, _guiY - 130 + (40 * i)); }
+		else { draw_sprite(sLittleRectangle, 0, _guiX - 144, _guiY - 130 + (40 * i)); }
+		draw_text(_guiX - 99, _guiY - 123 + (40 * i), _options[i]);
+		
+		if (array_length(battleOpNav) <= 1)
+		{
+			array_push(battleOpNav, _guiY - 123 + (40 * i));
+		}	
+	}
+	
+	//To prevent to immediatly selecting when the player press enter
+	battleDelay = setTimer(battleDelay);
+	if (battleDelay == 0)
+	{
+		if (keyboard_check_pressed(ord("S"))) { battlePos += 1; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
+		if (keyboard_check_pressed(ord("W"))) { battlePos -= 1; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
+		
+		battlePos = clamp(battlePos, 0, 1);
+		draw_sprite(sArrow, 0, _guiX - 125, battleOpNav[battlePos] + 2);
+		
+		
+		if (keyboard_check_pressed(vk_enter))
+		{
+			switch (battlePos)
+			{
+				case 0:
+					attacking = true;
+					battleDelay = 3;
+					choosingBattle = false;
+				break;
+			
+				case 1:
+					choosingBattle = false;
+					acting = false;
+					showBattleText = true;
+					battleDelay = 3;
+					if (!ds_exists(ds_messages, ds_type_list)) { ds_messages = ds_list_create(); }
+					moreStepsAct = false;
+					instance_create_layer(x, y, "Effect", oFlashEffect);
+					ds_messages[| 0] = "> Player UNBINDS the CAGE!";
+					ds_messages[| 1] = "> CS - 10%";
+					global.CSvalue -= 10;
+					audio_play_sound(sndSelecting, 50, false, global.soundGain);	
+				break;
+			}
+		}
+	}
+}
+
 openingInv = function()
-{	
+{
 	instance_activate_object(oThinking);
 	instance_activate_object(oThinkingAttributes);
 	//LO SFONDO DIVENTA VISIBILE 
@@ -146,20 +211,20 @@ openingInv = function()
 	//When you decide not to use the inventory
 	if (keyboard_check_pressed(ord("X")) && (!instance_exists(itemOutput)))
 	{
+		selected_option = 3;
+		acting = false;
+		moreStepsAct = false;
+		audio_play_sound(sndSelecting, 50, false, global.soundGain);
 		instance_deactivate_object(oThinking);
 		instance_deactivate_object(oThinkingAttributes);
 		oAttackBG.image_alpha = 0;
-		selected_option = 3;
 		invPos = 0;
-		acting = false;
-		moreStepsAct = false;
 		itemOption = false;
 		invGUI.visible = false;
 		takenOptionDelay = 3;
 		itemCordTaken = false;
 		itemOptionNav = [];
 		turnNumber -= 1;
-		audio_play_sound(sndSelecting, 50, false, global.soundGain);
 	}
 
 	var _guiX = surface_get_width(application_surface) / 2;
@@ -198,7 +263,7 @@ openingInv = function()
 			}
 		}
 		invPos = clamp(invPos, 0, array_length(global.items) - 1);
-		if (drawNav) { draw_sprite(sNav, 0, _guiX + 85, itemOptionNav[invPos]); }
+		if (drawNav) { draw_sprite(sNav, 0, _guiX + 86, itemOptionNav[invPos] - 2); }
 		
 		if (keyboard_check_pressed(vk_enter)) 
 		{ 

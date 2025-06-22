@@ -7,5 +7,4 @@ maxScaleX = 1000;
 energyTimer = 10;
 image_xscale = startScaleX;
 image_yscale = startScaleY;
-
 audio_play_sound(blaster_shooting, 50, false, global.soundGain);

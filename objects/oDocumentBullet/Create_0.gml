@@ -7,3 +7,5 @@ canCreate = true;
 image_xscale = 0;
 image_yscale = 0.5;
 disapperTimer = 10;
+frame = 0;
+moveSpd = 2;

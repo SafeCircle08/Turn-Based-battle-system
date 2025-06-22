@@ -9,7 +9,7 @@ for (var i = 0; i < array_length(actualArray); i++)
 	
 	if (!instance_exists(oBattleManager.itemOutput))
 	{
-		if (oBattleManager.invPos == i) { _col = make_color_rgb(240, 0, 100) }
+		if (oBattleManager.invPos == i) { _col = make_color_rgb(216, 180, 70); }
 		draw_set_color(_col);
 	}
 	draw_text_ext(_guiX + 97, _guiY + 20 * i, (actualArray[i]), 20, _spriteWidth * _actualSep);

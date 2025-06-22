@@ -4,6 +4,7 @@
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":{"name":"oSoul","path":"objects/oSoul/oSoul.yy",},"eventNum":0,"eventType":4,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"oWaveTrigger",
@@ -13,8 +14,8 @@
     "path":"folders/Objects/BulletsObjects.yy",
   },
   "parentObjectId":{
-    "name":"oBulletParent",
-    "path":"objects/oBulletParent/oBulletParent.yy",
+    "name":"oExtrasParent",
+    "path":"objects/oExtrasParent/oExtrasParent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
