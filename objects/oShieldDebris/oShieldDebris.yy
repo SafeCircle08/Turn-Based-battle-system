@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"PlayerMiscellaneous",
-    "path":"folders/Objects/Soul/PlayerMiscellaneous.yy",
+    "path":"folders/Objects/Battle/Soul/PlayerMiscellaneous.yy",
   },
   "parentObjectId":{
     "name":"oExtrasParent",

@@ -10,11 +10,11 @@ if (instance_number(oElectronCircular) < maxElectrons)
 	delayTimer = setTimer(delayTimer);
 	if (delayTimer == 0)
 	{
-		var _electron = instance_create_layer(_xx, _yy, "Bullets", oElectronCircular);
+		var _electron = instance_create_layer(_xx, _yy, LAYER_BULLETS, oElectronCircular);
 		_electron.image_angle = electronN * 30;
 		if (electronN == 0) 
 		{ 
-			var trigger = instance_create_layer(x, y, "ExtrasObjects", oGeneralTrigger);
+			var trigger = instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oGeneralTrigger);
 			trigger.image_xscale = 74;
 			trigger.image_yscale = 74;
 			trigger.xOffset = -37;
@@ -31,7 +31,7 @@ if (instance_number(oElectronCircular) < maxElectrons)
 				if (timer % 70 == 0)
 				{
 					var _index = irandom_range(0, 1);
-					instance_create_layer(_posX[_index],  _posY[_index], "Bullets", oKnife);		
+					instance_create_layer(_posX[_index],  _posY[_index], LAYER_BULLETS, oKnife);		
 				}
 			}
 		}
@@ -46,6 +46,6 @@ if (delayTimer_2 == 0)
 {
 	var _xx = irandom_range(global.border_l, global.border_r);
 	var _yy = irandom_range(global.border_u, global.border_d);
-	instance_create_layer(_xx, _yy, "ExtrasObjects", oBoxPointer);	
+	instance_create_layer(_xx, _yy, LAYER_EXTRAS_OBJECTS, oBoxPointer);	
 	delayTimer_2 = 70;
 }

@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Extras(Object that doesn't deal Damage)",
-    "path":"folders/Objects/Extras(Object that doesn't deal Damage).yy",
+    "path":"folders/Objects/Battle/Extras(Object that doesn't deal Damage).yy",
   },
   "parentObjectId":{
     "name":"oExtrasParent",

@@ -1,6 +1,6 @@
 event_inherited();
 
-instance_create_layer(0,0, "Bullets", oDocumentBullet);
+instance_create_layer(0,0, LAYER_BULLETS, oDocumentBullet);
 oDocumentBullet.canCreateTimer = 85;
 genTimeVars(100, false, 9999, 0)
 playerChangeState(oSoul.stateGravity, sEffectGravity, "Front");

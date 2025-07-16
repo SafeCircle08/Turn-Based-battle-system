@@ -13,8 +13,8 @@ magnetsX = 0;
 bossIndex = 0;
 magnetsCreated = false;
 
-instance_create_layer(global.boxOriginX - (global.borderWidth) / 4, global.boxOriginY + (global.borderHeight) / 4, "ExtrasObjects", oPlatform)
-instance_create_layer(global.boxOriginX + (global.borderWidth) / 4, global.boxOriginY + (global.borderHeight) / 4, "ExtrasObjects", oPlatform)
-instance_create_layer(global.boxOriginX, global.boxOriginY, "ExtrasObjects", oPlatform)
-instance_create_layer(global.boxOriginX - (global.borderWidth) / 4, global.boxOriginY - (global.borderHeight) / 4, "ExtrasObjects", oPlatform)
-instance_create_layer(global.boxOriginX + (global.borderWidth) / 4, global.boxOriginY - (global.borderHeight) / 4, "ExtrasObjects", oPlatform)
+instance_create_layer(global.boxOriginX - (global.borderWidth) / 4, global.boxOriginY + (global.borderHeight) / 4, LAYER_EXTRAS_OBJECTS, oPlatform)
+instance_create_layer(global.boxOriginX + (global.borderWidth) / 4, global.boxOriginY + (global.borderHeight) / 4, LAYER_EXTRAS_OBJECTS, oPlatform)
+instance_create_layer(global.boxOriginX, global.boxOriginY, LAYER_EXTRAS_OBJECTS, oPlatform)
+instance_create_layer(global.boxOriginX - (global.borderWidth) / 4, global.boxOriginY - (global.borderHeight) / 4, LAYER_EXTRAS_OBJECTS, oPlatform)
+instance_create_layer(global.boxOriginX + (global.borderWidth) / 4, global.boxOriginY - (global.borderHeight) / 4, LAYER_EXTRAS_OBJECTS, oPlatform)

@@ -8,3 +8,5 @@ if (flashAlpha > 0)
 					flashColor, flashAlpha);
 	shader_reset();
 }
+
+if (yellowPopping) { playerYellowPop(); }

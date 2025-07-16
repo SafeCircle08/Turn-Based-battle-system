@@ -1,10 +1,5 @@
-cam = view_camera[0];
-follow = oPlayerOW;
-view_w_half = camera_get_view_width(cam) * 0.5;
-view_h_half = camera_get_view_height(cam) * 0.5;
-xTo = xstart;
-yTo = ystart;
-
-finalCamX = 0;
-finalCamY = 0;
-camTrailSpd = 0.25;
+var _w = camera_get_view_width(view_camera[view_current]);
+var _h = camera_get_view_height(view_camera[view_current]);
+finalCamX = oPlayerOW.x - (_w / 2);
+finalCamY = oPlayerOW.y - (_h / 2);
+camTrailSpd = 0.1;

@@ -14,7 +14,7 @@ if (global.enemyTimer == 600)
 	boxDimensions(170, 150);
 	for (var i = 0; i < 3; i++)
 	{
-		instance_create_layer(_docX[i], _docY, "Bullets", oDocumentBullet);	
+		instance_create_layer(_docX[i], _docY, LAYER_BULLETS, oDocumentBullet);	
 	}
 }
 

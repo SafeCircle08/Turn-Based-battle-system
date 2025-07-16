@@ -4,7 +4,7 @@ function playerChangeState(_newState, _effectSpr = sNoEffects, _newPov = "Up")
 	global.pov = _newPov;
 	if (global.beamAnimation == false)
 	{
-		instance_create_layer(oSoul.x, oSoul.y, "ExtrasObjects", oPlayerEffect, 
+		instance_create_layer(oSoul.x, oSoul.y, LAYER_EXTRAS_OBJECTS, oPlayerEffect, 
 		{ sprite_index: _effectSpr });
 		return;
 	}

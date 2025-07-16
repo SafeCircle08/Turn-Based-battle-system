@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Miscellaneous",
-    "path":"folders/Objects/Extras(Object that doesn't deal Damage)/Miscellaneous.yy",
+    "path":"folders/Objects/Battle/Extras(Object that doesn't deal Damage)/Miscellaneous.yy",
   },
   "parentObjectId":null,
   "persistent":false,

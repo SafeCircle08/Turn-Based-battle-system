@@ -3,6 +3,8 @@ vsp = 0;
 canMove = true;
 owSpd = 1.7;
 
+shading = false;
+
 checkingText = function(_trigger, _textInstance, _objRef = false)
 {
 	if (_trigger.playerShouldFace == "All")

@@ -3,7 +3,7 @@ if (oBattleManager.playerTurn == false)
 {
 	if (generatorCreated == false)
 	{
-		var _actualGenerator = global.bulletsGenerators[oBattleManager.turnNumber - 1];
+		var _actualGenerator = global.inUseGenerator[oBattleManager.turnNumber - 1];
 		instance_create_layer(x, y, "BattleBoxBgs", _actualGenerator);
 		generatorCreated = true;
 	}

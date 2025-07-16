@@ -21,7 +21,7 @@ if (finalSection = true)
 		instance_destroy(electroRUp);
 		instance_destroy(electroRDown);
 		layer_sequence_destroy(global.enemySeq);
-		instance_create_layer(x, y, "ExtrasObjects", oBoxDestroyer);
+		instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oBoxDestroyer);
 		instance_destroy(blaster_down);
 		timer_3 = -2;
 	}
@@ -45,20 +45,20 @@ if (timer_1 == timerSpecial[timerIndex])
 
 if (timer_1 == 900)
 {
-	electroLUp = instance_create_layer(x, y, "Bullets", oElectricity);
+	electroLUp = instance_create_layer(x, y, LAYER_BULLETS, oElectricity);
 	electroLUp.distanceX = -(global.borderWidth / 2) + 10;
 	electroLUp.distanceY = -72;
 
-	electroLDown = instance_create_layer(x, y, "Bullets", oElectricity);
+	electroLDown = instance_create_layer(x, y, LAYER_BULLETS, oElectricity);
 	electroLDown.distanceX = -(global.borderWidth / 2) + 10;
 	electroLDown.distanceY = +72;
 
-	electroRUp = instance_create_layer(x, y, "Bullets", oElectricity);
+	electroRUp = instance_create_layer(x, y, LAYER_BULLETS, oElectricity);
 	electroRUp.distanceX = (global.borderWidth / 2) - 10;
 	electroRUp.distanceY = -72;
 	electroRUp.image_xscale = -1;
 
-	electroRDown = instance_create_layer(x, y, "Bullets", oElectricity);
+	electroRDown = instance_create_layer(x, y, LAYER_BULLETS, oElectricity);
 	electroRDown.distanceX = (global.borderWidth / 2) - 10;
 	electroRDown.distanceY = +72;
 	electroRDown.image_xscale = -1;		
@@ -79,7 +79,7 @@ if (timer_1 == 0)
 	timer_2 = setTimer(timer_2);
 	if (timer_2 % 100) == 0
 	{
-		stereoL = instance_create_layer(50, room_height + 100, "Bullets", oStereo);
+		stereoL = instance_create_layer(50, room_height + 100, LAYER_BULLETS, oStereo);
 		stereoL.image_xscale = 1;
 		stereoL.angles = [0, 30, 0, -30];
 		stereoL.frameSign = -1;
@@ -97,7 +97,7 @@ if (timer_1 == 0)
 	}
 	if (timer_2 % 175) == 0
 	{
-		stereoR = instance_create_layer(room_width - 50, room_height + 100, "Bullets", oStereo);
+		stereoR = instance_create_layer(room_width - 50, room_height + 100, LAYER_BULLETS, oStereo);
 		stereoR.image_xscale = -1;
 		stereoR.angles = [180, 210, 180, 150];
 		stereoR.frameSign = -1;
@@ -123,12 +123,12 @@ if (timer_2 == -1)
 	timer_3 = setTimer(timer_3);
 	if (timer_3 % 90) == 0
 	{
-		instance_create_layer(x, y, "Bullets", oBombBullet);
+		instance_create_layer(x, y, LAYER_BULLETS, oBombBullet);
 	}
 	if (timer_3 % 150 == 0) 
 	{
 		if (instance_exists(blaster_down)) { instance_destroy(blaster_down); }
-		blaster_down = instance_create_layer(x, y, "Bullets", oBlasterLineGenerator);
+		blaster_down = instance_create_layer(x, y, LAYER_BULLETS, oBlasterLineGenerator);
 		blaster_down.specific = false;
 		setLineBlasterPos
 		(

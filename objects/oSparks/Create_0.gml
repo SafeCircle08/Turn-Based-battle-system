@@ -1,6 +1,7 @@
 randomize();
 
 angleAdder = 10;
+hasGravity = false;
 
 if (instance_exists(global.eqDrumPad))
 {

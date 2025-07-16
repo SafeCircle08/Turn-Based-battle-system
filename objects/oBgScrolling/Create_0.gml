@@ -12,14 +12,14 @@ boxDimensions(80, room_height);
 setBoxOrigin(room_width / 2, room_height / 2);
 genTimeVars(0, false, 5000, 0);
 playerChangeState(oSoul.stateUmbrella, sUmbrellaEffect, "Front");
-instance_create_layer(x, y, "Bullets", oDocumentWave);
+instance_create_layer(x, y, LAYER_BULLETS, oDocumentWave);
 oBackGround.canScroll = true;
 var _orX = global.boxOriginX;
 var _orY = global.boxOriginY;
 
 
 #region CANNON HORIZONTAL
-cannonHorizontal = instance_create_layer(x, y, "Bullets", oBlasterLineGenerator);
+cannonHorizontal = instance_create_layer(x, y, LAYER_BULLETS, oBlasterLineGenerator);
 cannonHorizontal.specific = true;
 setLineBlasterPos
 (

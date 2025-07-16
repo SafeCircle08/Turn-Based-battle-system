@@ -1,9 +1,9 @@
-function drawFreeText(_font, _textList, _inBox = false, _boxX = camera_get_view_x(view_camera[view_current]) + 160, _boxY = camera_get_view_height(view_camera[view_current]))
+function drawFreeText(_textList, _refObj = noone, _font = fFontino, _inBox = true, _boxX = camera_get_view_x(view_camera[view_current]) + 160, _boxY = camera_get_view_height(view_camera[view_current]))
 {
 	//Basic properties
 	var _lSep = 15;
-	var _border = 23;
-	draw_set_font(_font);
+	var _border = 25;
+	draw_set_font(fFontino);
 	draw_set_halign(fa_center);
 	
 	//Box properties
@@ -23,7 +23,7 @@ function drawFreeText(_font, _textList, _inBox = false, _boxX = camera_get_view_
 		//The player is "on the textBox"
 		if (oPlayerOW.y > _cameraH + _tollerance)
 		{
-			_boxY = camera_get_view_y(view_camera[view_current]) + _height - 5;
+			_boxY = camera_get_view_y(view_camera[view_current]) + _height - 10;
 			_yPos = _boxY - _height + _border;
 		}
 		
@@ -49,7 +49,20 @@ function drawFreeText(_font, _textList, _inBox = false, _boxX = camera_get_view_
 			dialogueDelay = 5;
 		}
 	}
-
+	
+	if (instance_exists(_refObj))
+	{
+		if (charCount < string_length(_textList[page]))	
+		{
+			_refObj.image_speed = 1; 
+		}	
+		else
+		{
+			_refObj.image_speed = 0; 
+			_refObj.image_index	= 0;				
+		}
+	}
+	
 	//Actually draws the text letter by letter...
 	draw_set_color(c_gray);
 	var _textPart = string_copy(_textList[page], 1, charCount);
@@ -68,6 +81,7 @@ function drawFreeText(_font, _textList, _inBox = false, _boxX = camera_get_view_
 		}
 		else 
 		{
+			oPlayerOW.canMove = true;
 			charCount = 0;
 			page = 0;
 			speechSpeed = 0.5;

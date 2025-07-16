@@ -9,8 +9,8 @@
   "name":"oSlidingSparks",
   "overriddenProperties":[],
   "parent":{
-    "name":"Soul",
-    "path":"folders/Objects/Soul.yy",
+    "name":"PlayerMiscellaneous",
+    "path":"folders/Objects/Battle/Soul/PlayerMiscellaneous.yy",
   },
   "parentObjectId":{
     "name":"oExtrasParent",

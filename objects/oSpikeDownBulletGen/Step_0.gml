@@ -12,9 +12,9 @@ if (global.created == false)
 	if (slowSteamTimer == 0)
 	{
 		var _index = irandom_range(0, 1);
-		var _slowy = instance_create_layer(_slowSteam[_index], global.border_d + 10, "Bullets", oBulletSteam);
+		var _slowy = instance_create_layer(_slowSteam[_index], global.border_d + 10, LAYER_BULLETS, oBulletSteam);
 		_slowy.accValue = 10;
-		instance_create_layer(_slowSteam[_index], global.border_d - 10, "Bullets", oExclamationMark);
+		instance_create_layer(_slowSteam[_index], global.border_d - 10, LAYER_BULLETS, oExclamationMark);
 		audio_play_sound(sndExclamation, 50, false, global.soundGain);
 		slowSteamTimer = 50;
 	}
@@ -26,7 +26,7 @@ if (global.created == false)
 		for (var i = 0; i < 5; i++)
 		{
 			var _actualBullet = global.bulletsCreated;
-			var _groupSteam = instance_create_layer(_steamPattern[i], global.border_u - 12, "Bullets", oBulletSteamDown);
+			var _groupSteam = instance_create_layer(_steamPattern[i], global.border_u - 12, LAYER_BULLETS, oBulletSteamDown);
 			_groupSteam.acceleration = false;
 		}
 		global.createTimer = 30;

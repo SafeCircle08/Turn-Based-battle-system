@@ -9,7 +9,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"SteamExplosion",
-    "path":"folders/Objects/BulletsObjects/Steam Bullets/SteamExplosion.yy",
+    "path":"folders/Objects/Battle/BulletsObjects/Steam Bullets/SteamExplosion.yy",
   },
   "parentObjectId":{
     "name":"oBulletParent",

@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"BulletsGenerators",
-    "path":"folders/Objects/BulletsGenerators.yy",
+    "path":"folders/Objects/Battle/BulletsGenerators.yy",
   },
   "parentObjectId":{
     "name":"oBulletGeneratorParent",

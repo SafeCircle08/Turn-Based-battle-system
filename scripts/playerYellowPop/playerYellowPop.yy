@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"playerYellowPop",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"playerYellowPop",
+  "parent":{
+    "name":"PlayerScripts",
+    "path":"folders/Scripts/PlayerScripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

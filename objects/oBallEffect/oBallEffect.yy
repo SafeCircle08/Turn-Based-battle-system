@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"bouncingBall",
-    "path":"folders/Objects/BulletsObjects/FunkyBullets/bouncingBall.yy",
+    "path":"folders/Objects/Battle/BulletsObjects/FunkyBullets/bouncingBall.yy",
   },
   "parentObjectId":null,
   "persistent":false,

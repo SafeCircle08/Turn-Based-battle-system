@@ -6,7 +6,7 @@ image_angle += 1;
 
 if (alphaTimer % 10 == 0)
 {
-	var _spark = instance_create_layer(x, y, "Explosion", oSparks)
+	var _spark = instance_create_layer(x, y, LAYER_EXPLOSION, oSparks)
 	_spark.image_blend = c_red;
 	if (adderDamage != 0) { _spark.image_blend = c_yellow; }
 	_spark.x = x;

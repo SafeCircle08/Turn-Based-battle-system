@@ -8,7 +8,7 @@ frame = 0;
 
 createProton = function(_x, _y, _xspd, _yspd, _xSign, _ySign, _timer, _vsp, _hsp, _grv)
 {
-	var _obj = instance_create_layer(_x, _y, "Bullets", oBallBullet);
+	var _obj = instance_create_layer(_x, _y, LAYER_BULLETS, oBallBullet);
 	with (_obj)
 	{
 		xspd = _xspd;
@@ -27,7 +27,7 @@ createProton = function(_x, _y, _xspd, _yspd, _xSign, _ySign, _timer, _vsp, _hsp
 }
 createElectron = function(_x, _y, _xspd, _yspd, _xSign, _ySign, _vsp, _hsp, _grv)
 {
-	var _obj = instance_create_layer(_x, _y, "Bullets", oBallBullet);
+	var _obj = instance_create_layer(_x, _y, LAYER_BULLETS, oBallBullet);
 	with (_obj)
 	{
 		xspd = _xspd;

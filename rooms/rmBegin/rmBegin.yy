@@ -39,8 +39,8 @@
   ],
   "name":"rmBegin",
   "parent":{
-    "name":"Rooms",
-    "path":"folders/Rooms.yy",
+    "name":"OverWorld",
+    "path":"folders/Rooms/InUseRooms/OverWorld.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

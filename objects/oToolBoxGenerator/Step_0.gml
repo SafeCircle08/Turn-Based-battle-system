@@ -17,8 +17,8 @@ if (dropTimer == 0)
 //LANCIA L'OGGETTO
 if (dropTimer == -45)
 {
-	instance_create_layer(self.x, self.y, "ExtrasObjects", oExclamationMark);
-	instance_create_layer(self.x, self.y, "Bullets", oToolBullet);	
+	instance_create_layer(self.x, self.y, LAYER_EXTRAS_OBJECTS, oExclamationMark);
+	instance_create_layer(self.x, self.y, LAYER_BULLETS, oToolBullet);	
 }
 
 //INTERROMPE L'ANIMAZIONE

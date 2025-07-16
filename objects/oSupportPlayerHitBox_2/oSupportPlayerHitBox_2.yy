@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Gui-Triggers",
-    "path":"folders/Objects/Extras(Object that doesn't deal Damage)/Gui-Triggers.yy",
+    "path":"folders/Objects/Battle/Extras(Object that doesn't deal Damage)/Gui-Triggers.yy",
   },
   "parentObjectId":{
     "name":"oExtrasParent",

@@ -27,9 +27,9 @@ if (global.generatorPhase == 1)
 {
 	gloveDir = -1;
 	sinMark = 1;
-	instance_create_layer(global.boxOriginX - 100, y, "Bullets", oFunkyGlove);
+	instance_create_layer(global.boxOriginX - 100, y, LAYER_BULLETS, oFunkyGlove);
 	gloveDir = 1;
 	sinMark = -1;
-	instance_create_layer(global.boxOriginX + 100, y, "Bullets", oFunkyGlove);
+	instance_create_layer(global.boxOriginX + 100, y, LAYER_BULLETS, oFunkyGlove);
 }
 offSet = 10;

@@ -20,12 +20,12 @@ function dpFillChamber(_shellN, _maxBadShellN, _badShellN, _angles, _probability
 		{
 			if (_badShellN < _maxBadShellN) && (irandom_range(_minR, _maxR) == 2)
 			{
-				var actualShell = instance_create_layer(x, y, "Shells", oBadShell);	
+				var actualShell = instance_create_layer(x, y, LAYER_SHELLS, oBadShell);	
 				actualShell.adder = _angles[i];
 				_badShellN += 1;
 				continue;
 			}
-			var actualShell = instance_create_layer(x, y, "Shells", oShell);
+			var actualShell = instance_create_layer(x, y, LAYER_SHELLS, oShell);
 			actualShell.adder = _angles[i];
 		}
 		return;
@@ -36,12 +36,12 @@ function dpFillChamber(_shellN, _maxBadShellN, _badShellN, _angles, _probability
 	{
 		if (_badShellN < _maxBadShellN)
 		{
-			var actualShell = instance_create_layer(x, y, "Shells", oBadShell);	
+			var actualShell = instance_create_layer(x, y, LAYER_SHELLS, oBadShell);	
 			actualShell.adder = _angles[i];
 			_badShellN += 1;
 			continue;
 		}
-		var actualShell = instance_create_layer(x, y, "Shells", oShell);
+		var actualShell = instance_create_layer(x, y, LAYER_SHELLS, oShell);
 		actualShell.adder = _angles[i];
 	}		
 	return;

@@ -4,13 +4,13 @@ if (global.created == false)
 {
 	for (var i = 0; i < 4; i++)
 	{
-		instance_create_layer((90 * i), room_height/2 - 20, "ExtrasObjects", oPlatform)
-		instance_create_layer((60 * i), room_height/2 -60, "ExtrasObjects", oPlatform)	
+		instance_create_layer((90 * i), room_height/2 - 20, LAYER_EXTRAS_OBJECTS, oPlatform)
+		instance_create_layer((60 * i), room_height/2 -60, LAYER_EXTRAS_OBJECTS, oPlatform)	
 		if (i == 3) 
 		{ 
 			var _xx = global.boxOriginX - (global.borderWidth / 2);
 			var _yy = global.boxOriginY + (global.borderHeight / 2);
-			instance_create_layer(_xx, _yy, "ExtrasObjects", oWaveTrigger); 
+			instance_create_layer(_xx, _yy, LAYER_EXTRAS_OBJECTS, oWaveTrigger); 
 			global.created = true; 
 		}
 	}

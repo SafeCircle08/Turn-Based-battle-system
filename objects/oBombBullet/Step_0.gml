@@ -7,10 +7,10 @@ if (explosionTimer == 0)
 {
 	for (var i = 0; i < 13; i++)
 	{
-		iNote = instance_create_layer(x, y, "Bullets", oNoteBullet);
+		iNote = instance_create_layer(x, y, LAYER_BULLETS, oNoteBullet);
 		iNote.image_angle = i * 30;
 		iNote.len = 1;
 	}
-	instance_create_layer(x, y, "ExtrasObjects", oBombExplosion);
+	instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oBombExplosion);
 	instance_destroy(self);
 }

@@ -14,7 +14,7 @@ createNotes = function()
 	}	
 }
 
-stereoLeft = instance_create_layer(global.boxOriginX - 70, global.boxOriginY - 20, "Bullets", oStereo);
+stereoLeft = instance_create_layer(global.boxOriginX - 70, global.boxOriginY - 20, LAYER_BULLETS, oStereo);
 stereoLeft.image_xscale = 1;
 stereoLeft.angles = [0, 30, 0, -30];
 stereoLeft.frameSign = -1;
@@ -39,7 +39,7 @@ with(stereoLeft)
 		}
 	}		
 }
-cannonHorizontal = instance_create_layer(x, y, "Bullets", oBlasterLineGenerator);
+cannonHorizontal = instance_create_layer(x, y, LAYER_BULLETS, oBlasterLineGenerator);
 setLineBlasterPos
 (
 	cannonHorizontal,

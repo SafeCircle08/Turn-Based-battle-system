@@ -1,4 +1,4 @@
-if (!instance_exists(oPlayerOW)) { exit; }
+//if (!instance_exists(oPlayerOW)) { instance_destroy(view_camera[0]) }
 
 if (keyboard_check_pressed(vk_f12))
 {
@@ -9,7 +9,7 @@ var _camW = camera_get_view_width(view_camera[view_current]);
 var _camH = camera_get_view_height(view_camera[view_current]);
 var _camX = oPlayerOW.x - _camW / 2;
 var _camY = oPlayerOW.y - _camH / 2;	
-var _camera = view_camera[0];
+var _camera = view_camera[view_current];
 
 _camX = clamp(_camX, 0, room_width - _camW);
 _camY = clamp(_camY, 0, room_height - _camH);
@@ -22,6 +22,7 @@ finalCamY = lerp(finalCamY, _camY, 0.1);
 
 camera_set_view_pos(_camera, finalCamX, finalCamY);
 
+/*
 if (room == rmBannerBridge)
 {
 	layer_x("SkyBG", finalCamX / 4);	

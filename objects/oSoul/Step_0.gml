@@ -4,6 +4,7 @@ key_up = keyboard_check(ord("W"));
 key_down = keyboard_check(ord("S"));
 
 global.playerHP = clamp(global.playerHP, -666, global.playerMAX_HP);
+
 if (oBattleBox.visible == false) 
 { 
 	visible = false;

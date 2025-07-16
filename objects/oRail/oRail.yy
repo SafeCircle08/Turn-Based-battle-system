@@ -8,8 +8,8 @@
   "name":"oRail",
   "overriddenProperties":[],
   "parent":{
-    "name":"Managers",
-    "path":"folders/Objects/Managers.yy",
+    "name":"Extras(Object that doesn't deal Damage)",
+    "path":"folders/Objects/Battle/Extras(Object that doesn't deal Damage).yy",
   },
   "parentObjectId":{
     "name":"oExtrasParent",

@@ -24,7 +24,7 @@ if (changeTimer == 50)
 	if (index + 1) > _length { index = 0 }
 	else { index = index + 1 }  
 
-	instance_create_layer(_positions[0][index], _positions[1][index], "Bullets", oBoxPointer);
+	instance_create_layer(_positions[0][index], _positions[1][index], LAYER_BULLETS, oBoxPointer);
 }
 
 if (changeTimer == 0)
@@ -43,5 +43,5 @@ if (global.created == false)
 {
 	var _xx = irandom_range(10, 300);
 	var _yy = irandom_range(10, 250);
-	createBullets(_xx, _yy, "Bullets", oDocumentBullet, 45, 4, false)
+	createBullets(_xx, _yy, LAYER_BULLETS, oDocumentBullet, 45, 4, false)
 }

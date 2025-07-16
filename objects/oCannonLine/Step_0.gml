@@ -52,7 +52,7 @@ if (x == targetX) && (y = targetY)
 	if (actualTimer == 0)
 	{
 		oShake.shake = true;
-		with instance_create_layer(x, y, "Bullets", oBlasterBeam)
+		with instance_create_layer(x, y, LAYER_BULLETS, oBlasterBeam)
 		{
 			image_angle = other.firstImageAngle
 		}

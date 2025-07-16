@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"sndNoteC",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":4.649796,
+  "name":"sndNoteC",
+  "parent":{
+    "name":"BellsNotes",
+    "path":"folders/Sounds/BellsNotes.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndNoteC.mp3",
+  "type":0,
+  "volume":1.0,
+}

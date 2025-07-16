@@ -26,14 +26,14 @@ if (toDestroyTimer == 0)
 		var _pieces = [sBoxPiece1, sBoxPiece2, sBoxPiece3, sBoxPiece4, sBoxPiece5];
 		for (var i = 0; i < 5; i++)
 		{
-			piece = instance_create_layer(_xx, _yy, "ExtrasObjects", oBoxPiece);
+			piece = instance_create_layer(_xx, _yy, LAYER_EXTRAS_OBJECTS, oBoxPiece);
 			piece.sprite_index = _pieces[i];
 			piece.hspeed = _hspd[i];
 			piece.vspeed = _vspd[i];
 			piece.angleAdd = irandom_range(10, 25);
 		}
 		instance_destroy(oBoxDestroying);
-		instance_create_layer(_xx, _yy, "ExtrasObjects", oAngryHand);
+		instance_create_layer(_xx, _yy, LAYER_EXTRAS_OBJECTS, oAngryHand);
 		oBattleBox.draw = 0;
 		instance_destroy(self);
 	}

@@ -3,7 +3,7 @@ event_inherited();
 
 instance_destroy(oCannonLine);
 toDestroyTimer = 100;
-instance_create_layer(global.boxOriginX, global.boxOriginY, "ExtrasObjects", oBoxDestroying);
+instance_create_layer(global.boxOriginX, global.boxOriginY, LAYER_EXTRAS_OBJECTS, oBoxDestroying);
 oSoul.sprite_index = sPlayerFront;
 oSoul.image_speed = 0;
 oSoul.image_index = 0;

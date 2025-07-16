@@ -20,7 +20,7 @@ if (x == targetX) && (y == targetY)
 	
 	if (actualTimer == timer - 1)
 	{ 
-		gettingPower = instance_create_layer(x, y, "Effect", oCannonAcquiring);
+		gettingPower = instance_create_layer(x, y, LAYER_EFFECT, oCannonAcquiring);
 		gettingPower.image_angle = firstImageAngle;
 		gettingPower.image_speed = 0.7;
 	}
@@ -29,7 +29,7 @@ if (x == targetX) && (y == targetY)
 	{
 		instance_destroy(gettingPower);
 		oShake.shake = true;
-		with instance_create_layer(x, y, "Bullets", oBlasterBeamSmall)
+		with instance_create_layer(x, y, LAYER_BULLETS, oBlasterBeamSmall)
 		{
 			image_angle = other.firstImageAngle
 		}

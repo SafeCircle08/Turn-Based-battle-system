@@ -7,7 +7,7 @@ playerChangeState(oSoul.stateFree);
 
 timer = 100;
 
-cannonHorizotal = instance_create_layer(x, y, "Bullets", oBlasterLineGenerator);
+cannonHorizotal = instance_create_layer(x, y, LAYER_BULLETS, oBlasterLineGenerator);
 setLineBlasterPos
 (
 	cannonHorizotal,
@@ -18,5 +18,5 @@ setLineBlasterPos
 	"horizontal",
 	1
 );
-instance_create_layer(10, 187, "Bullets", oRectangleIndicator);
-instance_create_layer(10, 125, "Bullets", oSupportPlayerHitBox_2);
+instance_create_layer(10, 187, LAYER_BULLETS, oRectangleIndicator);
+instance_create_layer(10, 125, LAYER_BULLETS, oSupportPlayerHitBox_2);

@@ -14,7 +14,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Managers",
-    "path":"folders/Objects/Managers.yy",
+    "path":"folders/Objects/Battle/Managers.yy",
   },
   "parentObjectId":null,
   "persistent":false,

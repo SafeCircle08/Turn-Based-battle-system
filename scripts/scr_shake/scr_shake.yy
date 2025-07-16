@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_shake",
   "parent":{
-    "name":"generalUse",
-    "path":"folders/Scripts/generalUse.yy",
+    "name":"In_battle",
+    "path":"folders/Scripts/generalUse/In_battle.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

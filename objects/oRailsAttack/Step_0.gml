@@ -32,7 +32,7 @@ if (getCoordTimer == 0)
 		{
 			for (var j = 0; j < rails_columns; j++)
 			{
-				instance_create_layer(_cameraW + (j * width), _yy + i * height, "ExtrasObjects", oRail);
+				instance_create_layer(_cameraW + (j * width), _yy + i * height, LAYER_EXTRAS_OBJECTS, oRail);
 			}
 		}
 	}
@@ -57,7 +57,7 @@ else
 {
 	//Basic execution of the inputs without the buffer
 	if (playerUpKey) && (pressDelay == 0) { pressingUp(); }
-	if (playerDownKey) && (pressDelay == 0) { pressingDown(); }	
+	if (playerDownKey) && (pressDelay == 0) { pressingDown(); }
 }
 
 //performing the actual slide "animation"
@@ -78,10 +78,8 @@ if (sliding == true)
 create++;
 if (create > 100)
 {
-	if (create % 25 == 0) 
+	if (create % 10 == 0) 
 	{
-		var index = irandom_range(0, array_length(possiblePlayerYpos) - 1);
-		instance_create_layer(room_width + 40, possiblePlayerYpos[index], "Bullets", oCartObstacle);
+		createObstacleWall(3);
 	}
-	if (create % 100 == 0) { createRandomKnife(); }
 }

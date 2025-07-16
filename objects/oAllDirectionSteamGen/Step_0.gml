@@ -58,7 +58,7 @@ if (global.created == false)
 			(
 				allDirectionSteam[1][_actualBullet][i],
 				allDirectionSteam[2][_actualBullet][i],
-				"Bullets",
+				LAYER_BULLETS,
 				allDirectionSteam[0][_actualBullet][i]	
 			);
 			_steamy.acceleration = false;

@@ -17,11 +17,11 @@ if (image_alpha == 1)
 	timer++;
 	if (timer == 1)
 	{
-		instance_create_layer(x, y, "ExtrasObjects", oStarShine);
+		instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oStarShine);
 	}
 	if (launched == true)
 	{
-		var _slash = instance_create_layer(x, y, "Bullets", oSlash);
+		var _slash = instance_create_layer(x, y, LAYER_BULLETS, oSlash);
 		_slash.image_angle = goalDir;
 		_slash.image_xscale = 4;
 		_slash.image_yscale = 0.5;

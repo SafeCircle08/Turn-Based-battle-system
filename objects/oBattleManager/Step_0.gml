@@ -3,44 +3,33 @@
 //feather disable all
 randomize();
 
-
 //FASE INIZIALE PARTITA, QUANDO PUOI SCEGLIERE I PULSANTI
 if (playerTurn == true) && (showBattleText == false) && (acting == false)
 {
+	//Menaging the navigation trough the buttons
 	if keyboard_check_pressed(ord("S"))
 	{
-		if (selected_option == 0) { selected_option = 2; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
-		if (selected_option == 1) { selected_option = 3;  audio_play_sound(sndNavigating, 50, false, global.soundGain); }
+		selected_option++;
+		audio_play_sound(sndNavigating, 50, false, global.soundGain); 
 	}
 
 	if keyboard_check_pressed(ord("W"))
 	{
-		if (selected_option == 2) { selected_option = 0;  audio_play_sound(sndNavigating, 50, false, global.soundGain); }
-		if (selected_option == 3) { selected_option = 1; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
+		selected_option--;
+		audio_play_sound(sndNavigating, 50, false, global.soundGain); 
 	}
-	
-	if keyboard_check_pressed(ord("D"))
-	{
-		if (selected_option == 0) { selected_option = 1; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
-		if (selected_option == 2) { selected_option = 3; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
-	}
+	selected_option = clamp(selected_option, 0, 3);
 
-	if keyboard_check_pressed(ord("A"))
-	{
-		if (selected_option == 1) { selected_option = 0; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
-		if (selected_option == 3) { selected_option = 2; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
-	}
-		
 	if keyboard_check_pressed(vk_enter)
 	{
 		//A NEW TURN STARTS; CHANGE ALL VARIABLES
 		//Battle Manager variables
 		turnNumber += 1;
+		actualDrawAlpha = 0;
 		defended = 0;
 		enemyTextShowed = false;
 		acting = true;
-
-				
+		
 		//Generator variables
 		oBulletGeneratorManager.generatorCreated = false;
 		
@@ -55,78 +44,83 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 		//---------------------------SELECTING ACTIONS-------------------------
 		switch (selected_option)
 		{
+			//BATTLE
 			case 0:
 				moreStepsAct = true;
 				choosingBattle = true;
 				audio_play_sound(sndSelecting, 50, false);	
 			break;
+			
+			//DEF (OLD) -> FUTURE CRAFT
 			case 1:
-				moreStepsAct = true;
-				instance_create_layer(x, y, "Effect", oShieldEffect);
-				ds_messages[| 0] = "> Player DEFENDS!";
-				ds_messages[| 1] = "> Damage DECREASED!";
-				defended = 1;
+				moreStepsAct = false;
+				ds_messages[| 0] = "> This defence button is bad...";
+				ds_messages[| 1] = "> Use another...";
 				audio_play_sound(sndSelecting, 50, false, global.soundGain);
 			break;
+			
+			//CRY
 			case 2:
 				moreStepsAct = false;
 				ds_messages[| 0] = "> Crying won't solve anything;";
 				ds_messages[| 1] = "> Should probably remember this...";
 				audio_play_sound(sndSelecting, 50, false, global.soundGain);			
 			break;
+			
+			//ITEM
 			case 3:
-				if (array_length(global.items) > 0) 
+				if (array_length(global.items) > 0)
 				{ 
 					moreStepsAct = true;
 					itemOption = true;
-					ds_messages[| 0] = "> Player Used an Item!";
 					invGUI.visible = true;
 					frame += 1;
 					audio_play_sound(sndSelecting, 50, false, global.soundGain);
 				}
 				else
 				{
-					moreStepsAct = false;
-					ds_messages[| 0] = "> You don't have any item...";
-					audio_play_sound(sndSelecting, 50, false, global.soundGain);
+					resetNavigation(
+						3,
+						method(self, function() {
+							moreStepsAct = true;
+							//'Canon open sound'
+							audio_play_sound(sndSelecting, 50, false, global.soundGain);
+						})
+					);
 				}
 			break;
 		}
 		//If an action requires more step, like attacking or 
 		//using an item, it won't show the BattleText
 		//when you touch enter the first time
-		if (moreStepsAct == false) { showBattleText = true; }
+		if (moreStepsAct == false) 
+		{ 
+			terminateAction([acting], []);
+		}
 	}
 }
 	
-//QUANDO IL TURNO FINISCE E VEDI I MESSAGGI NEL "RIQUADRO" BATTAGLIA
+//WHEN THE TURN ENDS, AND YOU SEE THE DS TEXTS
 if (showBattleText)
 {
-	//FA TORNARE "INVISIBILI I BACKGROUNDS"
+	easeOutBg();
 	if (oBlack.image_alpha > 0) { oBlack.image_alpha -= 0.05; } 
-	if (oAttackBG.image_alpha > 0) { oAttackBG.image_alpha -= 0.05; }
 	if (oPinkDetails.image_alpha > 0) { oPinkDetails.image_alpha -= 0.05; }
 	instance_deactivate_object(oThinking);
 	instance_deactivate_object(oThinkingAttributes);
-		
+	
 	messageTimer++;
 		
 	if (messageTimer >= timeBeforePressed)
 	{
 		if (keyboard_check_pressed(vk_enter))
 		{
-			//APPENA CLICCA IL TESTO SI RESETTA
-			//LO STATO DEL PLAYER
-			//COSI' PUO' AGIRE NEL PROSSIMO TURNO 
-			acting = false;
 			if (messageCounter + 1) <= ds_list_size(ds_messages) - 1 { messageCounter++ }
 			else
 			{
-				//FA VISUALIZZARE IL TESTO DELL'ENEMY
 				if (enemyTextShowed == false) { enemyCanShowText = true; }
 					
-				//QUANDO IL TESTO DEL NEMICO E' STATO VISUALIZZATO
-				//Code location: oBattleManager.Draw
+				//Goes to PLAYER TURN
 				if (enemyTextShowed == true)
 				{
 					enemyCanShowText = false;
@@ -146,7 +140,7 @@ if (showBattleText)
 ////----------------ATTACK SEQUENCE----------------------
 if (acting == true)
 {
-	if (attacking == true) { attackFunction(global.eqDrumPad, global.eqScope); }
+	if (attacking == true) { attackFunction(global.eqDrumPad, global.eqScope); } 
 	//if using item: DRAW GUI EVENT
 }
 
@@ -170,6 +164,6 @@ if (!playerTurn) && (!showBattleText)
 		oBattleBox.visible = false;
 		showBattleText = true;
 		global.enemyTimer = 0;
-		if (instance_exists(oBulletGeneratorParent)) { instance_destroy(oBulletGeneratorParent) }
+		if (instance_exists(oBulletGeneratorParent)) { instance_destroy(oBulletGeneratorParent); }
 	}
 }

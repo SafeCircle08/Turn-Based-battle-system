@@ -7,8 +7,8 @@ if (!instance_exists(oWeightTrigger))
 	var _XX = global.boxOriginX - (global.borderWidth / 2) + 1
 	var _yyHigh = global.boxOriginY - (global.borderHeight / 2) + 1
 	var _yyDown = global.boxOriginY + (global.borderHeight / 2) - 1
-	instance_create_layer(_XX, _yyHigh, "Bullets", oWeightTrigger);
-	instance_create_layer(_XX, _yyDown - _height, "Bullets", oWeightTrigger);
+	instance_create_layer(_XX, _yyHigh, LAYER_BULLETS, oWeightTrigger);
+	instance_create_layer(_XX, _yyDown - _height, LAYER_BULLETS, oWeightTrigger);
 	oWeightTrigger.image_xscale = _width;
 	oWeightTrigger.image_yscale = _height + 2;
 }
@@ -29,7 +29,7 @@ var _pos =
 var _xx = _pos[0][global.bulletsCreated];
 var _yy = _pos[1][global.bulletsCreated];
 
-createBullets(_xx, _yy, "Bullets", oElectronBullet, 20, 1, false);
+createBullets(_xx, _yy, LAYER_BULLETS, oElectronBullet, 20, 1, false);
 
 if (global.bulletsCreated == 2) { global.bulletsCreated = 0; }
 

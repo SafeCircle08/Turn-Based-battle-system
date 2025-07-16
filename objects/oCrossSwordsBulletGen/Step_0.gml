@@ -32,7 +32,7 @@ if (global.created == false)
 			(
 				crossSword[1][_actualBullet][i], 
 				crossSword[2][_actualBullet][i],
-				"Bullets",
+				LAYER_BULLETS,
 				crossSword[0][_actualBullet][i]	
 			);	
 			if (i == 3) { global.bulletsCreated++; global.createTimer = 80; } 
@@ -40,7 +40,7 @@ if (global.created == false)
 		if (global.bulletsCreated == 3) 
 		{ 
 			global.bulletsCreated = 0;
-			instance_create_layer(oSoul.x + choose( -70, 70), oSoul.y + choose(-90, 90), "Bullets", oDocumentBullet); 
+			instance_create_layer(oSoul.x + choose( -70, 70), oSoul.y + choose(-90, 90), LAYER_BULLETS, oDocumentBullet); 
 		}
 	}	
 }

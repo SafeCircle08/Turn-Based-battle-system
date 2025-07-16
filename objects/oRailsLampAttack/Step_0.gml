@@ -1,15 +1,11 @@
 event_inherited();
-/*
-var playerUpKey = keyboard_check_pressed(ord("W"));
-var playerDownKey = keyboard_check_pressed(ord("S"));
-
 //Creates the crossair (the scpe)
 if (global.enemyTimer == lampTimer[lampNumber] - 20) 
 {
 	var _lamp = lamps[lampNumber];
 	if (!instance_exists(oCrossAir))
 	{
-		var _cross = instance_create_layer(_lamp.x, _lamp.y, "Effect", oCrossAir);
+		var _cross = instance_create_layer(_lamp.x, _lamp.y, LAYER_EFFECT, oCrossAir);
 		with (_cross)
 		{
 			xGoal = _lamp.id.x;
@@ -23,12 +19,14 @@ if (global.enemyTimer == lampTimer[lampNumber] - 20)
 if (global.enemyTimer == lampTimer[lampNumber] - 10) 
 {
 	var _lamp = lamps[lampNumber];
-	instance_create_layer(_lamp.x - 20, _lamp.y + 16, "Effect", oCircleEffect);		
+	instance_create_layer(_lamp.x - 20, _lamp.y + 16, LAYER_EFFECT, oCircleEffect);		
 }
 
 //Section where it aims the actual lamps:
 if (global.enemyTimer == lampTimer[lampNumber])
 {
+	var _shadowW = sprite_get_width(sShadow_1);
+	instance_create_layer(room_width - ((_shadowW - 30) * lampNumber), 0, LAYER_EXTRAS_OBJECTS, oShadow_1);
 	var _lamp = lamps[lampNumber];
 	_lamp.falling = true;
 	oCrossAir.fading = true;

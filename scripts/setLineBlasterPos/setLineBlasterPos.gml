@@ -1,4 +1,3 @@
-
 function setLineBlasterPos(_obj, _possibleXs, _possibleYs, _targetX, _targetY, _faceDirection, _nums)
 {
 	_obj.possibleXPos = _possibleXs;

@@ -11,7 +11,7 @@ if (createBlaster == true)
 			var index_x = irandom_range(0, _maxIndex_X);
 			var index_y = irandom_range(0, _maxIndex_Y);
 		
-			if (oBattleManager.turnNumber == 18) { index_y = oRectangleIndicator.index; }
+			if (oBattleManager.turnNumber == 20) { index_y = oRectangleIndicator.index; }
 			
 			lineCannon = instance_create_layer(possibleXPos[index_x], possibleYPos[index_y], "Instances", oCannonLine);
 			lineCannon.targetX = targetX[index_x];
@@ -24,7 +24,7 @@ if (createBlaster == true)
 	{
 		for (var i = 0; i < blasterNum[numIndex]; i++)
 		{
-			lineCannon = instance_create_layer(possibleXPos[indexX], possibleYPos[indexY], "Bullets", oCannonLine);	
+			lineCannon = instance_create_layer(possibleXPos[indexX], possibleYPos[indexY], LAYER_BULLETS, oCannonLine);	
 			lineCannon.targetX = targetX[indexX];
 			lineCannon.targetY = targetY[indexY];
 			lineCannon.face = faceDirection;

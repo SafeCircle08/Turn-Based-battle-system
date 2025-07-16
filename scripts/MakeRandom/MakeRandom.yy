@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"MakeRandom",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"MakeRandom",
+  "parent":{
+    "name":"MenagementScripts",
+    "path":"folders/Scripts/MenagementScripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

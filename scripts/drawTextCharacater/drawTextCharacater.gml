@@ -7,12 +7,12 @@
 
 */
 
-function drawFreeCharacter(_font, _textList, _charObj)
+function drawFreeCharacter(_textList,_charObj, _font = fFontino)
 {
 	//Basic properties
 	var _sprTxtBox = sNewBox;
 	var _lSep = 15;
-	var _border = 23;
+	var _border = 27;
 	draw_set_font(_font);
 	draw_set_halign(fa_center);
 	
@@ -34,7 +34,7 @@ function drawFreeCharacter(_font, _textList, _charObj)
 	if (oPlayerOW.y > _cameraH + _tollerance)
 	{
 		_boxY = camera_get_view_y(view_camera[view_current]) + _sprH - 5;
-		_yPos = _boxY - _sprH + _border;
+		_yPos = _boxY - _border;
 	}
 	
 	//Draws the box at the right coordinates
@@ -71,7 +71,7 @@ function drawFreeCharacter(_font, _textList, _charObj)
 	}
 	
 	//Draws the face
-	draw_sprite(spriteFace, 0, _xPos - 10, _yPos);
+	draw_sprite(spriteFace, 0, _xPos - 10, _yPos - 5);
 	
 	//If you click X, the text gets drawn all at once
 	if keyboard_check_pressed(ord("X")) { charCount = string_length(_textList[page]); }
@@ -95,7 +95,7 @@ function drawFreeCharacter(_font, _textList, _charObj)
 	
 	//Actually draws the text	
 	draw_set_color(c_gray);
-	var _xOffset = 50; //Based on the width of the face
+	var _xOffset = 45; //Based on the width of the face
 	var _textPart = string_copy(_textList[page], 1 + charCountBuffer, charCount);
 	draw_text_ext(_xPos + 0.5 + _xOffset, _yPos + 0.5, _textPart, _lSep, _maxW - _xOffset);
 	draw_set_color(c_white);
@@ -115,6 +115,7 @@ function drawFreeCharacter(_font, _textList, _charObj)
 			//If there are no pages
 			//Everything gets reset and the textInstance
 			//Gets destroyed
+			oPlayerOW.canMove = true;
 			charCountBuffer = 0;
 			charCount = 0;
 			page = 0;

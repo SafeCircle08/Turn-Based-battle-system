@@ -1,4 +1,5 @@
 frame += 0.15;
+
 if (timer >= 0)
 {
 	image_alpha += 0.08;
@@ -6,10 +7,23 @@ if (timer >= 0)
 }
 else
 {
-	oBattleManager.showBattleText = true;
+	with (oBattleManager)
+	{
+		terminateAction(
+			[defending], 
+			[">The player DEFENDS!", ">Damage DECREASED!"],
+			method(oBattleManager, function() {
+				defending = false;
+				defended = 1;
+			})
+		);
+	}	
 	image_alpha = clamp(image_alpha, -1, 1);
 	image_alpha -= 0.05;
-	if (image_alpha <= 0) { instance_destroy(self);  }
+	if (image_alpha <= 0) 
+	{ 
+		instance_destroy(self);  
+	}
 }
 
 if (white_alpha < 1 && flashed == false) { white_alpha += 0.1; }

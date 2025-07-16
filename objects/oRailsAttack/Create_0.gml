@@ -21,10 +21,11 @@ movingUp = false;
 movingDown = false;
 sliding = false;
 
-print(actualPlayerPos)
-
 slideTimerRef = 20;
 slideTimer = slideTimerRef;
+
+//Walls positions
+obstaclePerWall = 0;
 
 pressingUp = function()
 {

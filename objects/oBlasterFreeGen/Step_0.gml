@@ -12,7 +12,7 @@ if (timer <= 1300) && (timer > 800)
 		var _targetsY = [oSoul.y - 400, oSoul.y + 400];
 		var _xIndex = irandom_range(0, 1);
 		var _yIndex = irandom_range(0, 1);
-		createBullets(_targetsX[_xIndex], _targetsY[_yIndex], "Bullets", oCannonFree, 50, 1, false);
+		createBullets(_targetsX[_xIndex], _targetsY[_yIndex], LAYER_BULLETS, oCannonFree, 50, 1, false);
 	}
 }
 

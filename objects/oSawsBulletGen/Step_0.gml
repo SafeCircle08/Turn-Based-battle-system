@@ -102,7 +102,7 @@ if (global.created == false)
 		{
 			sawSpeedX = _sawsArr[index][3][i];
 			sawSpeedY = _sawsArr[index][4][i];
-			instance_create_layer(_sawsArr[index][1][i], _sawsArr[index][2][i], "Bullets", _sawsArr[index][0][i]);	
+			instance_create_layer(_sawsArr[index][1][i], _sawsArr[index][2][i], LAYER_BULLETS, _sawsArr[index][0][i]);	
 		}
 		global.createTimer = timers[global.generatorPhase];
 		stateFlow = true;

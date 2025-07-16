@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"make_parallax_bg",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"make_parallax_bg",
+  "parent":{
+    "name":"CameraMenagmentScripts",
+    "path":"folders/Scripts/CameraMenagmentScripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

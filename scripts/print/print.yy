@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"print",
   "parent":{
-    "name":"generalUse",
-    "path":"folders/Scripts/generalUse.yy",
+    "name":"MenagementScripts",
+    "path":"folders/Scripts/MenagementScripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

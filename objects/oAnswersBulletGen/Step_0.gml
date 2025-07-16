@@ -40,7 +40,7 @@ if (global.created == false)
 {	
 	for (var i = 0; i < 4; i++)
 	{
-		instance_create_layer(_answersPos[1][i], _answersPos[2][i], "Bullets", _answersPos[0][i]);
+		instance_create_layer(_answersPos[1][i], _answersPos[2][i], LAYER_BULLETS, _answersPos[0][i]);
 		if (i == 3) { global.bulletsCreated = 1 }
 	}
 	if (global.bulletsCreated == 1) { global.created = true; global.actualQuestion++ };	
@@ -62,7 +62,7 @@ if (steamTimer == 0)
 {
 	for (var i = 0; i < 2; i++)
 	{
-		instance_create_layer(_steamAttacks[1][steamAttackindex][i], _steamAttacks[2][steamAttackindex][i], "Bullets", _steamAttacks[0][steamAttackindex][i]);	
+		instance_create_layer(_steamAttacks[1][steamAttackindex][i], _steamAttacks[2][steamAttackindex][i], LAYER_BULLETS, _steamAttacks[0][steamAttackindex][i]);	
 		steamTimer = 100;
 	}
 	steamAttackindex++;

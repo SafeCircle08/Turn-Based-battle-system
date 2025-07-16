@@ -17,7 +17,7 @@ if (global.created == false)
 		for (var i = 0; i < 5; i++)
 		{
 			var _actualBullet = global.bulletsCreated;
-			instance_create_layer(_steamUpBullet[1][i], _steamUpBullet[2], "Bullets", oBulletSteam);
+			instance_create_layer(_steamUpBullet[1][i], _steamUpBullet[2], LAYER_BULLETS, oBulletSteam);
 			global.bulletsCreated++;
 		}	
 	}

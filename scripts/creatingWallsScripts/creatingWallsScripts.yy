@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"creatingWallsScripts",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"creatingWallsScripts",
+  "parent":{
+    "name":"CartingScripts",
+    "path":"folders/Scripts/CartingScripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

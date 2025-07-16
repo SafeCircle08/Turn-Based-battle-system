@@ -3,4 +3,4 @@ draw_self();
 var _xx = camera_get_view_x(view_camera[view_current]);
 var _yy = camera_get_view_y(view_camera[view_current]);
 
-drawFreeCharacter(fText_2, text, character);
+drawFreeCharacter(text, character);

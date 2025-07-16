@@ -20,7 +20,7 @@ var _yy = global.boxOriginY;
 var _w = global.borderWidth / 2;
 var _h = global.borderHeight / 2;
 
-cannonVertical = instance_create_layer(x, y, "Bullets", oBlasterLineGenerator);
+cannonVertical = instance_create_layer(x, y, LAYER_BULLETS, oBlasterLineGenerator);
 cannonVertical.blasterTimer = 60;
 setLineBlasterPos
 (
@@ -32,7 +32,7 @@ setLineBlasterPos
 	"vertical",
 	3
 );
-cannonHorizontal = instance_create_layer(x, y, "Bullets", oBlasterLineGenerator);
+cannonHorizontal = instance_create_layer(x, y, LAYER_BULLETS, oBlasterLineGenerator);
 cannonHorizontal.blasterTimer = 60;
 setLineBlasterPos
 (

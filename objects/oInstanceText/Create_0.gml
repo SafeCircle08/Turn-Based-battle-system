@@ -12,3 +12,4 @@ spriteFace = 0;
 //Or somewhere else
 inBox = false;
 character = 0;
+refObj = 0;

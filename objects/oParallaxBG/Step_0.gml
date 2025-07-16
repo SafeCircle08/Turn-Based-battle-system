@@ -1,0 +1,1 @@
+make_parallax_bg(coord, parallaxValues, signs, layer1);

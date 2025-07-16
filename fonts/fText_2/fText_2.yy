@@ -130,7 +130,7 @@
   "regenerateBitmap":false,
   "resourceType":"GMFont",
   "resourceVersion":"2.0",
-  "sampleText":"abcdef ABCDEF\n0123456789 .,<>\"'&!?\nthe quick brown fox jumps over the lazy dog\nTHE QUICK BROWN FOX JUMPS OVER THE LAZY DOG\nDefault character: ▯ (9647)",
+  "sampleText":"abcdef ABCDEFNJQRSVSTUWXZP\n0123456789\r\nl\r\n.,<>\"'&!?\neH\"'\"'l' @#$&MN\r\nehKk\r\ni dont understanda\r\ntheA quick brown fox jumps over the lazy dog\nTHE QUICK BROWN FOX JUMPS OVER THE LAZY DOG\nDefault imprsrScCpq\r\nMN\r\n{}\r\ng character: ▯ (9647)",
   "sdfSpread":8,
   "size":9.0,
   "styleName":"Regular",

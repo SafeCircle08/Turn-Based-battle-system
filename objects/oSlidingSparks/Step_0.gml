@@ -37,5 +37,3 @@ if (oSoul.key_right != 0) || (oSoul.key_left != 0)
 		}
 	}
 }
-
-print(instance_number(oSparks))

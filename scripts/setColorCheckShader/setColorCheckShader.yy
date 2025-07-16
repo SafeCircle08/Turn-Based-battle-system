@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"setColorCheckShader",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"setColorCheckShader",
+  "parent":{
+    "name":"ShadersScripts",
+    "path":"folders/Scripts/ShadersScripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

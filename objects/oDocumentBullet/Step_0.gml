@@ -48,6 +48,6 @@ if (canCreateTimer == 0) && (canCreate == true)
 	while _sign == 0 { _sign = irandom_range(-5, 5); } 
 	var _xx = oSoul.x + 120 * sign(_sign);
 	var _yy = oSoul.y + 70 * sign(_sign)
-	instance_create_layer(_xx, _yy, "Bullets", oDocumentBullet);
+	instance_create_layer(_xx, _yy, LAYER_BULLETS, oDocumentBullet);
 	canCreateTimer = -1;
 }

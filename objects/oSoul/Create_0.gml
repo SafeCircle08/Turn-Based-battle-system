@@ -3,6 +3,7 @@ key_left = keyboard_check(ord("A"))
 key_up = keyboard_check(ord("W")) 
 key_down = keyboard_check(ord("S")) 
 key_jump = keyboard_check_pressed(vk_space);
+key_jumpPressed = keyboard_check(vk_space);
 
 //----------------------------VARIABILI STRANE----------------------------
 godMode = 0;
@@ -17,6 +18,8 @@ umbrelling = false;
 umbrellaJump = false;
 grav = 0.275;
 jumpTimer = 0;
+notGroundedDelayRef = 10;
+notGroundedDelay = notGroundedDelayRef;
 
 //DIMENSIONI DEL PLAYER IN FORMA
 image_xscale = 0.5;
@@ -35,6 +38,9 @@ flickTimer = 50;
 //Shader variables
 flashColor = make_color_rgb(255, 255, 255); //Aqua green
 flashAlpha = 0;
+timer = 0;
+duration = 30;
+yellowPopping = false;
 
 //L'AURA E' QUELLA BASE (NESSUN EFFETTO APPLICATO)
 stateFree = function()
@@ -114,7 +120,7 @@ usingUmbrella = function()
 	{
 		vsp = -10;
 		umbrellaJump = true;
-		effect = instance_create_layer(oSoul.x, oSoul.y, "ExtrasObjects", oPlayerEffect);
+		effect = instance_create_layer(oSoul.x, oSoul.y, LAYER_EXTRAS_OBJECTS, oPlayerEffect);
 		effect.sprite_index = sUmbrellaEffect;
 	}
 	grav = 0.300;
@@ -122,121 +128,102 @@ usingUmbrella = function()
 	sprite_index = sPlayerUmbrella;
 }	
 
+inUseGravity = global.playerJumpStateMoveInfo.gravityBasic;
+
 //State Jump Base (RIVISITATO)
 stateGravity = function()
 {
-	//Set up
-	image_angle = 0;
-	key_jumpPressed = keyboard_check(vk_space);
-	stateInit(sPlayerRightJump, sEffectGravity, "Front");		
-	hbX = 0;
-	hbY = -10;
+	//TODO---FARE IN MODO CHE OGNI VOLTA CHE SI CAMBI LO STATE
+	//LE VARIABILI SI INIZIALIZZINO DI NUOVO (SE CAMBI QUELLE DI JUMP,
+	//NON VENGONO CAMBIATI SPRITE, NON VENGONO CREATI BORDER ECC...
+	//PERCHE' SONO INIZIALIZZATI ED ESEGUITI SOLO APPENA IL PLAYER SPAWNA NEL BOX.
+	//POTREBBE ESSERE NECESSARIO MODIFICARE LA FUNZIONE stateInit
 	
-	//Movements
-	gravCreateRightGravityBorder(oBoxSidePlaftorm_D);
-	gravSetMovements(1, 1, 1, sPlayerLeftJumping_1, sPlayerRightJumping_1, true);
-	hsp = calculateMovement(key_right, key_left, 1)
-	vsp += grav;
+	//Itialize all the player new state info
+	var _jmpKey = inUseGravity.jmpKey;
+	key_jumpPressed = keyboard_check(_jmpKey);
+	
+	stateInit(
+		sPlayerRightJump, 
+		sEffectGravity, 
+		"Front", 
+		method(self, function() {
+			image_angle = inUseGravity.angle
+			hbX = inUseGravity.supportHitBoxX;
+			hbY = inUseGravity.supportHitBoxY;
+			var _rightBorder = inUseGravity.boxSidePlatformToCreate;
+			gravCreateRightGravityBorder(_rightBorder);
+		}));
+	
+	gravSetMovements(
+		inUseGravity.gravitySign, 
+		inUseGravity.leftJumpingSprite, 
+		inUseGravity.rightJumpingSprite, 
+		inUseGravity.canUseUmbrella,
+		inUseGravity.horizontal
+	);
+	
+	vsp += grav * inUseGravity._sign;
+	
+	if (inUseGravity.horizontal) {
+		inUseGravity.yComponent = vsp;
+		inUseGravity.xComponent = 0;
+		hsp = calculateMovement(key_right, key_left, 1);
+	}
+	else {
+		inUseGravity.yComponent = 0;
+		inUseGravity.xComponent = vsp;
+		hsp = calculateMovement(key_down, key_up, 1);
+	}
 	
 	//Instances collisions
-	if (vsp > 0) { gravCheckingBase(1, 0, vsp, true); }
-	else { gravCheckingBaseBorder(-1, 0, vsp); }
+	if (inUseGravity.checkCollision()) { 
+		gravCheckingBase(
+			inUseGravity._sign,
+			inUseGravity.xComponent,
+			inUseGravity.yComponent,
+			inUseGravity.canUseUmbrella,
+			inUseGravity.horizontal
+		); 
+	}
+	else { 
+		gravCheckingBaseBorder(
+			inUseGravity._sign * -1,
+			inUseGravity.xComponent,
+			inUseGravity.yComponent,
+			inUseGravity.horizontal
+		); 
+	}
 	
 	//Checking the player grounded variable
-	if (grounded == true) { gravPlayerIsGrounded(sPlayerLeftJump, sPlayerRightJump); }
-	else { gravPlayerNotGrounded(sPlayerLeftJumping_1, sPlayerRightJumping_1, true); }
+	if (grounded == true)  {
+		gravPlayerIsGrounded(
+			inUseGravity.leftSprite, 
+			inUseGravity.rightSprite
+		); 
+	}
+	else {
+		gravPlayerNotGrounded(
+			inUseGravity.rightJumpingSprite, 
+			inUseGravity.leftJumpingSprite, 
+			inUseGravity.canUseUmbrella
+		); 
+	}
 	
 	//Updates the player coords
-	x += hsp;
-	y += vsp;
-	var _possX = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
-	var _possY = clamp(oSoul.y, -100, global.border_d + 2);
-	oSoul.x = _possX;
-	oSoul.y = _possY;
-}
-
-//State Jump y Invertita 
-stateGravityUp = function()
-{
-	//Set up
-	image_angle = 180;
-	key_jumpPressed = keyboard_check(ord("S"));
-	stateInit(sPlayerRightJump, sEffectGravity, "Up");		
-	hbX = 0;
-	hbY = 10;
 	
-	//Movements
-	gravCreateRightGravityBorder(oBoxSidePlaftorm_U);
-	gravSetMovements(-1, 1, -1, sPlayerRightJumping_1, sPlayerRightJumping_1);
-	hsp = calculateMovement(key_right, key_left);
-	vsp -= grav;
-	
-	//Instance collisions
-	if (vsp < 0) { gravCheckingBase(-1, 0, vsp); }
-	else { gravCheckingBaseBorder(1, 0, vsp); }
-	
-	//Checking grounded player variable
-	if (grounded == true) { gravPlayerIsGrounded(sPlayerRightJump, sPlayerLeftJump); }
-	else { gravPlayerNotGrounded(sPlayerRightJumping_1, sPlayerRightJumping_1); }
-
-	//Updating player coords
-	x += hsp;
-	y += vsp;		
-	var _possX = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
-	oSoul.x = _possX;
-}
-
-//State Jump Right
-stateGravityRight = function()
-{
-	image_angle = 90;
-	key_jumpPressed = keyboard_check(ord("A"));
-	stateInit(sPlayerRightJump, sEffectGravity, "Up");		
-	hbX = -10;
-	hbY = 0;
-	
-	gravCreateRightGravityBorder(oBoxSidePlaftorm_R);
-	gravSetMovements(1, 1, 1, sPlayerRightJump, sPlayerRightJump, false, false);
-	hsp = calculateMovement(key_down, key_up);
-	vsp += grav;
-
-	if (vsp > 0) { gravCheckingBase(1, vsp, 0, false, false); }
-	else { gravCheckingBaseBorder(-1, vsp, 0, false); }
-	
-	if (grounded == true) { gravPlayerIsGrounded(sPlayerLeftJump, sPlayerRightJump); }
-	else { gravPlayerNotGrounded(sPlayerLeftJumping_1, sPlayerRightJumping_1); }
-	
-	x += vsp;
-	y += hsp;
-	var _possY = clamp(oSoul.y, global.border_u + 5, global.border_d - 4);
-	oSoul.y = _possY;
-}
-
-//State Jump y Invertita 
-stateGravityLeft = function()
-{
-	//Set up generale
-	image_angle = 270;
-	key_jumpPressed = keyboard_check(ord("D"));
-	stateInit(sPlayerRightJump, sEffectGravity, "Up");		
-	hbX = 10;
-	hbY = 0;
-	
-	gravCreateRightGravityBorder(oBoxSidePlaftorm_L);
-	gravSetMovements(1, 1, -1, sPlayerRightJump, sPlayerRightJump, false, false);
-	hsp = calculateMovement(key_down, key_up, 1);
-	vsp -= grav;
-	
-	if (vsp < 0) { gravCheckingBase(-1, vsp, 0, false, false); }
-	else { gravCheckingBaseBorder(-1, vsp, 0); }
-	
-	if (grounded == true) { gravPlayerIsGrounded(sPlayerRightJump, sPlayerLeftJump); }
-	else { gravPlayerNotGrounded(sPlayerRightJumping_1, sPlayerLeftJumping_1); }
-	
-	x += vsp;
-	y += hsp;
-	var _possY = clamp(oSoul.y, global.border_u + 5, global.border_d - 4);
-	oSoul.y = _possY;
+	if (inUseGravity.horizontal) {
+		x += hsp;
+		y += vsp;
+		var _possX = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
+		oSoul.x = _possX;
+	}
+	else {
+		x += vsp;
+		y += hsp;
+		var _possY = clamp(oSoul.y, -100, global.border_d + 2);
+		oSoul.y = _possY;
+	}
 }
 
 #endregion
@@ -246,7 +233,7 @@ stateSpider = function()
 {
 	#region STATE INIT + BASIC MOVEMENT
 	stateInit(sPlayerSpiderRight, sSpiderEffect, "SpiderPov");
-	if (!instance_exists(oSpiderPointer)) { pointer = instance_create_layer(x, y, "ExtrasObjects", oSpiderPointer); }
+	if (!instance_exists(oSpiderPointer)) { pointer = instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oSpiderPointer); }
 	hsp = (key_right - key_left) * global.SoulSpeed;
 	if (hsp == 0) { image_speed = 0; image_index = 0; }
 	#endregion
@@ -355,7 +342,7 @@ stateSliding = function()
 	{ 
 		if (!instance_exists(oSlidingSparks))
 		{
-			instance_create_layer(x, y, "ExtrasObjects", oSlidingSparks);
+			instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oSlidingSparks);
 		}
 	}
 	stateInit(sPlayerSliding, sPlayerPickaxe, "Front", true, _createSparks());
@@ -367,5 +354,4 @@ stateSliding = function()
 		x = clamp(x, global.border_l + 12, _maxX - 10);
 	}
 }
-
 state = stateFree;

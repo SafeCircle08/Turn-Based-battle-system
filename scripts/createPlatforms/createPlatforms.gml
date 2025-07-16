@@ -12,7 +12,7 @@ function createPlatforms(_lanes, _platformNum)
 				_platform = oPlatformLeft;
 				_xx = room_width + (room_width / _platformNum) * j
 			}
-			instance_create_layer(_xx, _startY + (global.borderHeight / _lanes + 1) * i, "ExtrasObjects", _platform);	
+			instance_create_layer(_xx, _startY + (global.borderHeight / _lanes + 1) * i, LAYER_EXTRAS_OBJECTS, _platform);	
 		}
 	}
 }

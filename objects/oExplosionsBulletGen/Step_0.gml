@@ -16,7 +16,7 @@ if (global.created == false)
 	
 	if (global.createTimer == 0)
 	{
-		instance_create_layer(_explosions[0][global.bulletsCreated], _explosions[1][global.bulletsCreated], "Bullets", _explosions[2][global.bulletsCreated]);
+		instance_create_layer(_explosions[0][global.bulletsCreated], _explosions[1][global.bulletsCreated], LAYER_BULLETS, _explosions[2][global.bulletsCreated]);
 		global.createTimer = 60;
 		global.bulletsCreated++;
 	}

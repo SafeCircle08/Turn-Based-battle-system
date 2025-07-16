@@ -9,7 +9,7 @@ if (timer == 0)
 		var _xPos = [_xxL, _xxR];
 		var _xIndex = irandom_range(0, 1);
 		var _yy = room_height + irandom_range(20, 60);
-		document = instance_create_layer(_xPos[_xIndex], _yy, "ExtrasObjects", oDocument);
+		document = instance_create_layer(_xPos[_xIndex], _yy, LAYER_EXTRAS_OBJECTS, oDocument);
 	}
 	timer = 10;
 }	

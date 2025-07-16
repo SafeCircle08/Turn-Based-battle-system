@@ -7,7 +7,7 @@ image_yscale = 0.5;
 timer = 100;
 xSign = undefined;
 ySign = undefined;
-instance_create_layer(x, y, "Bullets", oShake);
+instance_create_layer(x, y, LAYER_BULLETS, oShake);
 timer = 0;
 collided = false;
 
@@ -24,7 +24,7 @@ moveElectron = function()
 
 	if (delta_time % 5 == 0)
 	{
-		ballEffect = instance_create_layer(x, y, "Bullets", oBallEffect);
+		ballEffect = instance_create_layer(x, y, LAYER_BULLETS, oBallEffect);
 		ballEffect.sprite_index = sprite_index;
 		ballEffect.image_xscale = image_xscale;
 		ballEffect.image_yscale = image_yscale;
@@ -84,7 +84,7 @@ moveProton = function()
 
 	if (delta_time % 5 == 0)
 	{
-		ballEffect = instance_create_layer(x, y, "Bullets", oBallEffect);
+		ballEffect = instance_create_layer(x, y, LAYER_BULLETS, oBallEffect);
 		ballEffect.sprite_index = sprite_index;
 		ballEffect.image_xscale = image_xscale;
 		ballEffect.image_yscale = image_yscale;

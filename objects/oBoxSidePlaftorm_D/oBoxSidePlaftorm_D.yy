@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"boxSidesPlatforms",
-    "path":"folders/Objects/Soul/boxSidesPlatforms.yy",
+    "path":"folders/Objects/Battle/Soul/boxSidesPlatforms.yy",
   },
   "parentObjectId":{
     "name":"oBoxSidePlatformParent",
