@@ -1,11 +1,9 @@
 event_inherited();
 
-genTimeVars(60, false, 250, 0)
-playerChangeState(oSoul.stateFree);
-
-//DIMENSIONI BOX 
-global.borderWidth = 100;
-global.borderHeight = 100;
+var _x = room_width / 2;
+var _y = room_height / 2;
+genTimeVars(60, false, 250, 0);
+initializeNewTurn(60, false, 250, 0, 100, 100, _x, _y, oSoul.stateFree);
 
 drawTimer = 50;
 

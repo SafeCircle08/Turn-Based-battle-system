@@ -1,9 +1,9 @@
 bulletNum = 0;
 generatorCreated = false;
-beamHeight = 300;
-indexMax = 0;
+//beamHeight = 300;
+//indexMax = 0;
 
-global.debugKey = keyboard_check_pressed(ord("R"))
+global.debugKey = keyboard_check_pressed(ord("R"));
 
 /* DA TENERE IN MENTE:
 AL POSTO DI FARE UN GENERATOR DI BULLETS SI PUO' FARE UN GENERATOR DI GENERATOR DI BULLET.

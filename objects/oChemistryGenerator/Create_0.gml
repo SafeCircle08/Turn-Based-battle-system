@@ -1,11 +1,9 @@
 event_inherited();
 
-genTimeVars(120, false, 800, 0);
 numberOfMagnets = 7;
-boxDimensions(240, sprite_get_height(sMagnet)*numberOfMagnets);
-oSoul.umbrelling = false; //Per far si che non si bugghi
-playerChangeState(oSoul.stateGravity, sEffectGravity, "Front");
-setBoxOrigin(room_width / 2, 100);
+
+initializeNewTurn(120, false, 800, 0, 240, sprite_get_height(sMagnet)*numberOfMagnets, room_width / 2, 100, oSoul.stateGravity);
+
 global.yOffset = -30;
 chemistryBulletsYs = [];
 chemistryBulletsYindex = 0;

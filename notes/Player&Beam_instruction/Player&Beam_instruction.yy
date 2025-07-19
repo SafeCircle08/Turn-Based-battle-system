@@ -1,0 +1,11 @@
+{
+  "$GMNotes":"",
+  "%Name":"Player&Beam_instruction",
+  "name":"Player&Beam_instruction",
+  "parent":{
+    "name":"Notes",
+    "path":"folders/Notes.yy",
+  },
+  "resourceType":"GMNotes",
+  "resourceVersion":"2.0",
+}

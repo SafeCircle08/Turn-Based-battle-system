@@ -6,7 +6,7 @@ _railBase.actualPlayerPos = round(_railBase.rails_lines / 2);
 
 boxDimensions(_railBase.rails_columns * _railBase.width, _railBase.rails_lines * _railBase.height)
 genTimeVars(0, false, 9999, 0);
-playerChangeState(oSoul.stateSliding);
+playerSetState(oSoul.stateSliding);
 
 darkPosX = [room_width - 20, room_width - 60, room_width - 100];
 darkN = 0;

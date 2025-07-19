@@ -1,9 +1,9 @@
 event_inherited();
 
-setBoxOrigin(room_width / 2, room_width / 2 - 50);
-boxDimensions(170, 100);
-genTimeVars(0, false, 750, 0);
-playerChangeState(oSoul.stateFree, sNoEffects);
+var _x = room_width / 2;
+var _y = room_height / 2;
+initializeNewTurn(0, false, 750, 0, 170, 100, _x, _y, oSoul.stateFree);
+
 frame = 0;
 delayTimer = 10;
 delayTimer_2 = 70;

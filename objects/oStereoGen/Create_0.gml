@@ -2,7 +2,7 @@ event_inherited();
 
 boxDimensions(150, 150);
 genTimeVars(0, false, 850, 0);
-playerChangeState(oSoul.stateFree);
+playerSetState(oSoul.stateFree);
 
 createNotes = function()
 {

@@ -1,9 +1,7 @@
 event_inherited();
 
-setBoxOrigin(room_width / 2, room_width / 2 - 50);
-boxDimensions(170, 100);
-genTimeVars(0, false, 750, 0);
-playerChangeState(oSoul.stateFree, sNoEffects);
+initializeNewTurn(0, false, 750, 0, 170, 100, room_width / 2, room_height / 2, oSoul.stateFree);
+
 frame = 0;
 
 createProton = function(_x, _y, _xspd, _yspd, _xSign, _ySign, _timer, _vsp, _hsp, _grv)

@@ -15,8 +15,8 @@ if (instance_number(oElectronCircular) < maxElectrons)
 		if (electronN == 0) 
 		{ 
 			var trigger = instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oGeneralTrigger);
-			trigger.image_xscale = 74;
-			trigger.image_yscale = 74;
+			trigger.image_xscale = 4.5;
+			trigger.image_yscale = 4.5;
 			trigger.xOffset = -37;
 			trigger.yOffset = -37;
 			trigger.following = oElectronCircular; 

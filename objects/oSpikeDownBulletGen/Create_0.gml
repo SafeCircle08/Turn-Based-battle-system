@@ -1,7 +1,7 @@
 event_inherited(); //global.playerMoveTimer = 65;
 
 genTimeVars(60, false, 600, 0)
-playerChangeState(oSoul.stateFree);
+playerSetState(oSoul.stateFree);
 
 //DIMENSIONI BOX 
 global.borderWidth = 100;

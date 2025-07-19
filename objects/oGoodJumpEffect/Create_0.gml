@@ -11,6 +11,7 @@ image_yscale = 0.3;
 hspeed = 1;
 vspeed = -1
 gravity = 0.09;
+image_alpha = 0;
 reduceAlphaTimer = 50;
 timer = 0;
 duration = 30;

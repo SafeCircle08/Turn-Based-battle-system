@@ -1,3 +1,77 @@
+//Prova a rendere più compatto
+global.playerJumpStateMoveInfo = {
+	spaceSprite: sPlayerSPACE, //constant
+	
+	gravityBasic: {
+		angle: 0,
+		supportHitBoxX: 0,
+		supportHitBoxY: -10,
+		jmpKey: vk_space,
+		
+		gravitySign: 1,
+		_sign: 1,
+		xComponent: 0, 
+		yComponent: noone, //oSoul.vsp
+		horizontal: true,
+		canUseUmbrella: true,
+		checkCollision: function() {
+			return (yComponent > 0)
+		},
+		boxSidePlatformToCreate: oBoxSidePlaftorm_D,
+	},
+	gravityUp: {
+		angle: 180,
+		supportHitBoxX: 0,
+		supportHitBoxY: 10,
+		jmpKey: ord("S"),
+		
+		gravitySign: -1,
+		_sign: -1,
+		xComponent: 0, 
+		yComponent: noone,
+		horizontal: true, 
+		canUseUmbrella: false,
+			checkCollision: function() {
+			return (yComponent < 0)
+		},
+		boxSidePlatformToCreate: oBoxSidePlaftorm_U,
+	},
+	gravityRight: {
+		angle: 90,
+		supportHitBoxX: -10,
+		supportHitBoxY: 0,
+		jmpKey: ord("A"),
+		
+		gravitySign: 1,
+		_sign: 1,
+		xComponent: noone,
+		yComponent: 0,
+		horizontal: false,
+		canUseUmbrella: false,
+		checkCollision: function() {
+			return (xComponent > 0)
+		},	
+		boxSidePlatformToCreate: oBoxSidePlaftorm_R,
+	},
+	gravityLeft: {
+		angle: 270,
+		supportHitBoxX: 10,
+		supportHitBoxY: 0,
+		jmpKey: ord("D"),
+		
+		gravitySign: -1,
+		_sign: -1,
+		xComponent: noone,
+		yComponent: 0,
+		horizontal: false,
+		canUseUmbrella: false,
+		checkCollision: function() {
+			return (xComponent < 0)
+		},
+		boxSidePlatformToCreate: oBoxSidePlaftorm_L,
+	},
+}
+
 function gravCreateRightGravityBorder(_inputgravityBorder)
 {
 	if (!instance_exists(_inputgravityBorder))
@@ -83,24 +157,20 @@ function gravCheckingBase(_sign, xComponent, yComponent, canUseUmbrella = false,
 	}
 }
 
-function gravPlayerIsGrounded(_sprL, _sprR)
+function gravPlayerIsGrounded()
 {
 	jumpTimer = 0;
-	if (left == true) { sprite_index = _sprL; }
-	if (left == false) { sprite_index = _sprR; }		
+	sprite_index = global.playerJumpStateMoveInfo.spaceSprite;	
 	if (hsp == 0) && (vsp == 0) { image_speed = 0; image_index = 0; }
 	return;
 }
 
-function gravPlayerNotGrounded(_sprL, _sprR, canUseUmbrella = false)
+function gravPlayerNotGrounded(canUseUmbrella = false)
 {
 	image_speed = 1;
 	if (umbrelling == false)
 	{
-		//jumpTimer++;
-		//if (jumpTimer % 3 == 0) { instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oPlayerJumpingFX); }
-		if (left == true) { sprite_index = _sprL; }
-		if (left == false) { sprite_index = _sprR; }
+		sprite_index = global.playerJumpStateMoveInfo.spaceSprite;
 		return;
 	}
 	else 
@@ -138,7 +208,7 @@ function goodJumpEffect(_sparkNum)
 }
 
 /* gSign: the direction the gravity is acting to */
-function gravSetMovements(gSign, sL, sR, canUseUmbrella = false, horizontal = true)
+function gravSetMovements(gSign, canUseUmbrella = false, horizontal = true)
 {
 	if (canUseUmbrella)
 	{
@@ -149,8 +219,8 @@ function gravSetMovements(gSign, sL, sR, canUseUmbrella = false, horizontal = tr
 		
 			if (umbrelling == false)
 			{
-				if (left == true) { sprite_index = sL; image_speed = 1; }
-				else { sprite_index = sR; image_speed = 1; }
+				sprite_index = global.playerJumpStateMoveInfo.spaceSprite;
+				image_speed = 1;
 			}
 		}		
 	}
@@ -167,106 +237,47 @@ function gravSetMovements(gSign, sL, sR, canUseUmbrella = false, horizontal = tr
 		key2 = key_up;			
 	}
 	
-	if (key1) { image_speed = 1; left = true; }
-	if (key2) { image_speed = 1; left = false; }
+	if (key1) { image_speed = 1; left = true; rotatingLeft(); }
+	if (key2) { image_speed = 1; left = false; rotatingRight(); }
+	
+	if (!key1 && !key2) { basicRotation(); }
+
 	if (key_jumpPressed) && (grounded == true) 
 	{ 
+		yellowPopping = true;
 		vsp = jumpSpd * gSign; 
 		if ((notGroundedDelay < notGroundedDelayRef) && (notGroundedDelay > 0)) 
 		{ 
 			goodJumpEffect(4);
 		}
 	}
+	
 	if (gSign == 1) { vsp = clamp(vsp, -5, 4); }
 	else { vsp = clamp(vsp, -4, 5); }
 	return;
 }
 
-//Prova a rendere più compatto
-global.playerJumpStateMoveInfo = {
-	gravityBasic: {
-		angle: 0,
-		supportHitBoxX: 0,
-		supportHitBoxY: -10,
-		jmpKey: vk_space,
-		
-		gravitySign: 1,
-		_sign: 1,
-		xComponent: 0, 
-		yComponent: noone, //oSoul.vsp
-		horizontal: true,
-		canUseUmbrella: true,
-		rightSprite: sPlayerRightJump,
-		leftSprite: sPlayerLeftJump,
-		rightJumpingSprite: sPlayerRightJumping_1,
-		leftJumpingSprite: sPlayerLeftJumping_1,
-		checkCollision: function() {
-			return (yComponent > 0)
-		},
-		boxSidePlatformToCreate: oBoxSidePlaftorm_D,
-	},
-	gravityUp: {
-		angle: 180,
-		supportHitBoxX: 0,
-		supportHitBoxY: 10,
-		jmpKey: ord("S"),
-		
-		gravitySign: -1,
-		_sign: -1,
-		xComponent: 0, 
-		yComponent: noone,
-		horizontal: true, 
-		canUseUmbrella: false,
-		rightJumpingSprite: sPlayerRightJumping_1,
-		leftJumpingSprite: sPlayerRightJumping_1,		
-		rightSprite: sPlayerLeftJump,
-		leftSprite: sPlayerRightJump,
-			checkCollision: function() {
-			return (yComponent < 0)
-		},
-		boxSidePlatformToCreate: oBoxSidePlaftorm_U,
-	},
-	gravityRight: {
-		angle: 90,
-		supportHitBoxX: -10,
-		supportHitBoxY: 0,
-		jmpKey: ord("A"),
-		
-		gravitySign: 1,
-		_sign: 1,
-		xComponent: noone,
-		yComponent: 0,
-		horizontal: false,
-		canUseUmbrella: false,
-		rightJumpingSprite: sPlayerRightJumping_1,
-		leftJumpingSprite: sPlayerLeftJumping_1,
-		rightSprite: sPlayerRightJump,
-		leftSprite: sPlayerLeftJump,	
-		checkCollision: function() {
-			return (xComponent > 0)
-		},	
-
-		boxSidePlatformToCreate: oBoxSidePlaftorm_R,
-	},
-	gravityLeft: {
-		angle: 270,
-		supportHitBoxX: 10,
-		supportHitBoxY: 0,
-		jmpKey: ord("D"),
-		
-		gravitySign: -1,
-		_sign: -1,
-		xComponent: noone,
-		yComponent: 0,
-		horizontal: false,
-		canUseUmbrella: false,
-		rightJumpingSprite: sPlayerLeftJumping_1,
-		leftJumpingSprite: sPlayerRightJumping_1,
-		rightSprite: sPlayerLeftJump,
-		leftSprite: sPlayerRightJump,
-		checkCollision: function() {
-			return (xComponent < 0)
-		},
-		boxSidePlatformToCreate: oBoxSidePlaftorm_L,
-	},
+//Left rotation lol
+function rotatingLeft()
+{
+	image_angle += 0.5;
+	image_angle = clamp(image_angle, inUseGravity.angle, inUseGravity.angle + 10);
 }
+
+//Right rotation lol
+function rotatingRight()
+{
+	image_angle -= 0.5;
+	image_angle = clamp(image_angle, inUseGravity.angle - 10, inUseGravity.angle);	
+}
+
+//basic rotation lmao
+function basicRotation()
+{
+	if (image_angle != inUseGravity.angle)
+	{
+		if (image_angle > inUseGravity.angle) { image_angle -= 0.5; }
+		if (image_angle < inUseGravity.angle) { image_angle += 0.5; }
+	}
+}
+

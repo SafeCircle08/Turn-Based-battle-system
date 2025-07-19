@@ -7,35 +7,20 @@ global.playerHP = clamp(global.playerHP, -666, global.playerMAX_HP);
 
 if (oBattleBox.visible == false) 
 { 
-	visible = false;
+	x = global.boxOriginX;
+	y = -10;
 	exit; 
 }
-  
-coordTimer = setTimer(coordTimer);
-	
-if (coordTimer == 0) 
-{ 
-	x = global.boxOriginX + global.xOffset; 
-	y = global.boxOriginY + global.yOffset; 
-	coordTimer = -1;
-}
-	
-//APPENA SPAWNA E L'ANIMAZIONE INIZIA
-if (global.playerMoveTimer >= 0) 
-{ 
-	global.playerMoveTimer--; 
-	global.beamAnimation = true; 
-}
-else { global.beamAnimation = false; }
-	
-//Il valore "-5" è un valore speciale per 
-//Non far muovere il player in certe occasioni sperciali;
-if (global.playerMoveTimer < 30)
+
+//I am animating the beam
+if (global.beamAnimationTimer > 0)
 {
-	//SOLO SE L'ANIMAZIONE DEL BEAM E' FALSA ALLORA IL PLAYER SARà VISIBILE
-	//if (global.beamAnimation == true) { visible = false; } else { visible = true; }
-	if (canShow == true) { visible = true; } else { visible = false; }
-		
-	//STATO ATTUALE CHE DETERMINA IL MOVIMENTO
-	if (global.enemyTimer < global.enemyAttackTime - 30) { state(); }
+	global.beamAnimationTimer--;
+	global.beamAnimation = true; //-> playerBeamAnimation();
 }
+
+//The turn is finishing (playing beam animation) so we dont call the state
+if (global.enemyTimer > global.enemyAttackTime - 60) { exit; }
+
+//When im done animating the beam
+if (global.beamAnimationTimer < BEAM_ANIMATION_TIMER_REF / 2) { state(); }

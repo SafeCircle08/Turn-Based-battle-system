@@ -5,7 +5,7 @@ global.created = false;
 global.createTimer = 50;
 global.enemyAttackTime = 800;
 
-playerChangeState(oSoul.stateFree);
+playerSetState(oSoul.stateFree);
 
 //NUMERO DI TUBI CHE SI VUOLE NEL TURNO
 numberOfTubesWidth = 12;

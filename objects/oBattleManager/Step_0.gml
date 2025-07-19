@@ -22,81 +22,36 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 
 	if keyboard_check_pressed(vk_enter)
 	{
-		//A NEW TURN STARTS; CHANGE ALL VARIABLES
-		//Battle Manager variables
-		turnNumber += 1;
-		actualDrawAlpha = 0;
-		defended = 0;
-		enemyTextShowed = false;
 		acting = true;
-		
-		//Generator variables
-		oBulletGeneratorManager.generatorCreated = false;
-		
-		//Player variables
-		global.playerShield = global.playerMaxShield;
-		oSoul.sprite_index = sPlayerFront;
-		oSoul.canShow = true;
-		oSoul.coordTimer = 1;
+		enemyTextShowed = false;
+		oBulletGeneratorManager.generatorCreated = false; //will create the actual generator
 		
 		if (!ds_exists(ds_messages, ds_type_list)) { ds_messages = ds_list_create() } 
 		
 		//---------------------------SELECTING ACTIONS-------------------------
 		switch (selected_option)
 		{
-			//BATTLE
-			case 0:
-				moreStepsAct = true;
-				choosingBattle = true;
-				audio_play_sound(sndSelecting, 50, false);	
+			case MAIN_MENU_BATTLE:
+				global.settedMainBattleOptions[MAIN_MENU_BATTLE]._selectFunction();	
 			break;
-			
-			//DEF (OLD) -> FUTURE CRAFT
-			case 1:
-				moreStepsAct = false;
-				ds_messages[| 0] = "> This defence button is bad...";
-				ds_messages[| 1] = "> Use another...";
-				audio_play_sound(sndSelecting, 50, false, global.soundGain);
+			case MAIN_MENU_DEFEND_old:
+				global.settedMainBattleOptions[MAIN_MENU_DEFEND_old]._selectFunction();
 			break;
-			
-			//CRY
-			case 2:
-				moreStepsAct = false;
-				ds_messages[| 0] = "> Crying won't solve anything;";
-				ds_messages[| 1] = "> Should probably remember this...";
-				audio_play_sound(sndSelecting, 50, false, global.soundGain);			
+			case MAIN_MENU_SPECIAL:
+				global.settedMainBattleOptions[MAIN_MENU_SPECIAL]._selectFunction();
 			break;
-			
-			//ITEM
-			case 3:
-				if (array_length(global.items) > 0)
-				{ 
-					moreStepsAct = true;
-					itemOption = true;
-					invGUI.visible = true;
-					frame += 1;
-					audio_play_sound(sndSelecting, 50, false, global.soundGain);
-				}
-				else
-				{
-					resetNavigation(
-						3,
-						method(self, function() {
-							moreStepsAct = true;
-							//'Canon open sound'
-							audio_play_sound(sndSelecting, 50, false, global.soundGain);
-						})
-					);
-				}
+			case MAIN_MENU_INVENTORY:
+			if (array_length(global.items) > 0)
+			{ 
+				global.settedMainBattleOptions[MAIN_MENU_INVENTORY]._selectFunction();
+			}
+			else { resetNavigation(3,method(self, function() { moreStepsAct = true; })); }
 			break;
 		}
 		//If an action requires more step, like attacking or 
 		//using an item, it won't show the BattleText
 		//when you touch enter the first time
-		if (moreStepsAct == false) 
-		{ 
-			terminateAction([acting], []);
-		}
+		if (moreStepsAct == false) { terminateAction(); }
 	}
 }
 	
@@ -137,33 +92,30 @@ if (showBattleText)
 	}	
 }
 
-////----------------ATTACK SEQUENCE----------------------
+//Performing the options' functions
 if (acting == true)
 {
-	if (attacking == true) { attackFunction(global.eqDrumPad, global.eqScope); } 
+	if (attacking == true) { global.playerEquippedOptions[SUB_MENU_ATTACK]._function(global.eqDrumPad, global.eqScope); }
+	if (unbinding == true) { global.playerEquippedOptions[SUB_MENU_UNBIND]._function(); }
+	if (using_special_action == true) { global.playerEquippedOptions[SUB_MENU_SPECIAL_OPTION]._function(); }
 	//if using item: DRAW GUI EVENT
 }
 
-//-------------------QUANDO VEDI TUTTI I BULLETS NEL BOX------------------------
+//When the player is inside the bullet box
 if (!playerTurn) && (!showBattleText)
 {
 	global.playerHP = clamp(global.playerHP, -666, global.playerMAX_HP);
 	enemyCanShowText = false;
 	global.enemyTimer++; //Parte da 0 e arriva fino a global.enemyAttackTime
 	oBattleBox.visible = true;
-		
-	//QUANDO L'ENEMY FINISCE IL TEMPO A DISPOSIZIONE PER ATTACCARE
+	
+	//Starts the beam animation 60 frames before the end of the turn
+	if (global.enemyTimer == global.enemyAttackTime - 60) { startBeamAnimation(false); }
+	
+	//At the end of the turn, actually finish it (lmao)
 	if (global.enemyTimer >= global.enemyAttackTime)
 	{
-		if (!ds_exists(ds_messages, ds_type_list))
-		{
-			ds_messages = ds_list_create();	
-		}		
-		ds_messages[| 0] = "The monster has finished his attack."
-		battleOption = 0;
-		oBattleBox.visible = false;
-		showBattleText = true;
-		global.enemyTimer = 0;
-		if (instance_exists(oBulletGeneratorParent)) { instance_destroy(oBulletGeneratorParent); }
-	}
+		finishTurn();
+		global.playerShield = global.playerMaxShield;
+	}	
 }

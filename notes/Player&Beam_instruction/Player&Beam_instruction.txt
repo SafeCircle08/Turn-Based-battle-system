@@ -1,0 +1,13 @@
+When the battle start, the timer of the beam animation is activated
+So the beam animation is going on, when it is finished, the 
+
+Quando beamTimer == 20: inizia a chiamare lo state();
+Quando beamTimer == 0: viene creato l'effetto dello state;
+A questo punto, tutte le informazione vengono resettate.
+global.beamTimer = 0;
+global.beamAnimation = false;
+
+Quando il turno sta per finire,
+viene impostato global.beamTimer = oSoul.beamTimerRef,
+quindi global.beamAnimation = true;
+L'animazione viene eseguita, e alla fine si ripete tutto.

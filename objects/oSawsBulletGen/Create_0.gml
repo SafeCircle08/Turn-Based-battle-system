@@ -3,7 +3,7 @@ event_inherited();
 timers = [70, 55];
 global.generatorPhase++;
 genTimeVars(timers[global.generatorPhase], false, 800, 0)
-playerChangeState(oSoul.stateGravityUp, sEffectGravity);
+playerSetState(oSoul.stateGravityUp, sEffectGravity);
 boxDimensions(100, 100);
 
 //Mette il cuore al centro

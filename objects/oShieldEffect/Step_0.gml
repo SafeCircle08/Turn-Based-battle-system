@@ -10,10 +10,8 @@ else
 	with (oBattleManager)
 	{
 		terminateAction(
-			[defending], 
-			[">The player DEFENDS!", ">Damage DECREASED!"],
+			global.playerOptions.defence_function._flavourText,
 			method(oBattleManager, function() {
-				defending = false;
 				defended = 1;
 			})
 		);

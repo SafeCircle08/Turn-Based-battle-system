@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"initializePlayerBattleFunctions",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"initializePlayerBattleFunctions",
+  "parent":{
+    "name":"createEvent",
+    "path":"folders/Scripts/PlayerScripts/createEvent.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

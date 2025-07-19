@@ -98,15 +98,11 @@ if (oBattleBox.visible == false)
 	//Drawing the sub options the player can take
 	if (acting == true)
 	{
-		if (itemOption == true) { openingInv(); }	
+		if (itemOption == true) { global.mainMenuOptions.choosing_inventory_option._function(); }	
 		if (choosingBattle == true)
 		{ 
-			choosingBattleOptions(
-			[
-				selectedAttackFunction, 
-				selectedUnbindCage, 
-				defendFunction
-			]); 
+			//global.mainMenuOptions.choosing_battle_option._function();
+			choosingBattleOptions(); 
 		}
 	}
 }
@@ -144,7 +140,7 @@ if (enemyCanShowText) && (enemyTextShowed == false)
 	var _lSep = 17;
 	var _x = 200;
 	var _y = 50;
-	var _page = global.textList[turnNumber - 1];
+	var _page = global.textList[turnNumber];
 	
 	draw_sprite(sTextBG, 0, _x, _y);
 	draw_set_font(fFontino);

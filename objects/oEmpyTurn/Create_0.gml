@@ -1,11 +1,8 @@
 event_inherited();
 
 oSoul.inUseGravity = global.playerJumpStateMoveInfo.gravityBasic;
+initializeNewTurn(0, false, 99999, 0, 100, 100, room_width / 2, room_height / 2, oSoul.stateGravity);
 
-setBoxOrigin(room_width / 2, room_width / 2 - 50);
-boxDimensions(250, 200);
-genTimeVars(0, false, 99999, 0);
-playerChangeState(oSoul.stateGravity, sSpiderEffect, "Up");
 
 oSoul.image_alpha = 1;
 oSoul.canMove = true;

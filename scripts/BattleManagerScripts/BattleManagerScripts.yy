@@ -6,7 +6,7 @@
   "name":"BattleManagerScripts",
   "parent":{
     "name":"BattleManagerScripts",
-    "path":"folders/Scripts/BattleManagerScripts.yy",
+    "path":"folders/Scripts/BattleScripts/BattleManagerScripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

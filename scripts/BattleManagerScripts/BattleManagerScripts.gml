@@ -1,9 +1,28 @@
 //When you choose an action in the submenu
-function chooseAction(_method = function() {})
+
+function selectAction(main = true, _moreStepsAct = true, _flavourText = [], _method = function() {})
 {
-	_method();
-	battleDelay = 3;
-	choosingBattle = false;
+	audio_play_sound(sndSelecting, 50, false, global.soundGain);
+	if (main)
+	{
+		_method();
+		moreStepsAct = _moreStepsAct;
+		var _pages = array_length(_flavourText);
+		if ((_pages >= 0) && (_moreStepsAct == false))
+		{
+			for (var i = 0; i < _pages; i++)
+			{
+				ds_messages[| 0] = _flavourText[i];	
+			}
+		}
+	}
+	else
+	{
+		_method();
+		battleDelay = 3;
+		moreStepsAct = false;
+		choosingBattle = false;
+	}	
 }
 
 //Reset the text variables to show all the texts
@@ -51,17 +70,26 @@ function resetNavigation(_lastOption = 0, _resetMethod = function() {})
 	moreStepsAct = false;
 	actualDrawAlpha = 0;
 	battleDelay = 3;
-	turnNumber -= 1;
+	choosingBattle = false;
+	
+	oAttackBG.fadingOut = true;
+	invPos = 0;
+	itemOption = false;
+	invGUI.visible = false;
+	takenOptionDelay = 3;
+	itemCordTaken = false;
+	itemOptionNav = [];
+	
 	_resetMethod();
+	
 	easeOutBg();
 	resetTextVars();
 	hideMirrors();
 }
 
 //When you terminate an action (when the attack section finishes for example)
-function terminateAction(_action, _ds_list = [], _method = function() {})
+function terminateAction(_ds_list = [], _method = function() {})
 {
-	_action[0] = false; //fixare _action[0] = false
 	enemyTextShowed = false;
 	takenOptionDelay = 3;
 	battleDelay = 3;
@@ -69,7 +97,12 @@ function terminateAction(_action, _ds_list = [], _method = function() {})
 	showBattleText = true;
 	choosingBattle = false;
 	oAttackBG.fadingOut = true;
-	
+	attacking = false;
+	unbinding = false;
+	using_special_action = false;
+	itemOption = false;
+	invGUI.visible = false;
+	drawNav = true;
 	_method();
 	
 	hideMirrors();

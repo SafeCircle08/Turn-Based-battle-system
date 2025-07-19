@@ -6,7 +6,7 @@ key_jump = keyboard_check_pressed(vk_space);
 key_jumpPressed = keyboard_check(vk_space);
 
 //----------------------------VARIABILI STRANE----------------------------
-godMode = 0;
+godMode = true;
 canCollide = true;
 coordTimer = 1;
 canShow = true;
@@ -20,6 +20,8 @@ grav = 0.275;
 jumpTimer = 0;
 notGroundedDelayRef = 10;
 notGroundedDelay = notGroundedDelayRef;
+
+
 
 //DIMENSIONI DEL PLAYER IN FORMA
 image_xscale = 0.5;
@@ -41,6 +43,10 @@ flashAlpha = 0;
 timer = 0;
 duration = 30;
 yellowPopping = false;
+
+#macro BEAM_ANIMATION_TIMER_REF 60
+beamTimer = BEAM_ANIMATION_TIMER_REF;
+global.beamAnimationTimer = 0;
 
 //L'AURA E' QUELLA BASE (NESSUN EFFETTO APPLICATO)
 stateFree = function()
@@ -128,6 +134,7 @@ usingUmbrella = function()
 	sprite_index = sPlayerUmbrella;
 }	
 
+//Default value
 inUseGravity = global.playerJumpStateMoveInfo.gravityBasic;
 
 //State Jump Base (RIVISITATO)
@@ -144,7 +151,7 @@ stateGravity = function()
 	key_jumpPressed = keyboard_check(_jmpKey);
 	
 	stateInit(
-		sPlayerRightJump, 
+		global.playerJumpStateMoveInfo.spaceSprite, 
 		sEffectGravity, 
 		"Front", 
 		method(self, function() {
@@ -157,8 +164,6 @@ stateGravity = function()
 	
 	gravSetMovements(
 		inUseGravity.gravitySign, 
-		inUseGravity.leftJumpingSprite, 
-		inUseGravity.rightJumpingSprite, 
 		inUseGravity.canUseUmbrella,
 		inUseGravity.horizontal
 	);
@@ -197,21 +202,17 @@ stateGravity = function()
 	
 	//Checking the player grounded variable
 	if (grounded == true)  {
-		gravPlayerIsGrounded(
-			inUseGravity.leftSprite, 
-			inUseGravity.rightSprite
-		); 
+		gravPlayerIsGrounded(); 
 	}
 	else {
 		gravPlayerNotGrounded(
-			inUseGravity.rightJumpingSprite, 
-			inUseGravity.leftJumpingSprite, 
+			global.playerJumpStateMoveInfo.spaceSprite, 
+			global.playerJumpStateMoveInfo.spaceSprite,
 			inUseGravity.canUseUmbrella
 		); 
 	}
 	
 	//Updates the player coords
-	
 	if (inUseGravity.horizontal) {
 		x += hsp;
 		y += vsp;
@@ -345,7 +346,7 @@ stateSliding = function()
 			instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oSlidingSparks);
 		}
 	}
-	stateInit(sPlayerSliding, sPlayerPickaxe, "Front", true, _createSparks());
+	stateInit(sPlayerSliding, sPlayerPickaxe, "Front", _createSparks());
 	sprite_index = oRailsAttack.spriteInput;
 	if (instance_exists(oRailsAttack)) 
 	{ 		

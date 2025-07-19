@@ -9,7 +9,7 @@ if (finalSection = true)
 		audio_stop_all();
 		setBoxOrigin(room_width / 2, room_height / 2 + 25);
 		boxDimensions(100, 100);
-		playerChangeState(oSoul.stateFree);
+		playerSetState(oSoul.stateFree);
 		oSoul.canMove = false;
 		oSoul.x = global.boxOriginX;
 		oSoul.y = global.boxOriginY;

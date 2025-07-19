@@ -1,7 +1,7 @@
 event_inherited();
 
 genTimeVars(45, false, 1000, 0)
-playerChangeState(oSoul.stateFree);
+playerSetState(oSoul.stateFree);
 boxDimensions(100, 100);
 
 global.generatorPhase = -1;
