@@ -2,11 +2,6 @@ event_inherited();
 randomize();
 
 
-if (global.enemyTimer == 100)
-{
-	playerSetState(oSoul.stateFree, sPlayerFront, sNoEffects, 0, -13);	
-}
-
 if (global.created == false)
 {
 	if (magnetsCreated == false)

@@ -45,7 +45,7 @@ function initializePlayerMainBattleMenuOptions()
 		choosing_battle_option: {
 			name: "BATTLE", //The name of the option
 			_selectFunction: selectedBattleOption, //When you press enter
-			_function: choosingBattleOptions, //The function you actually want to perform
+			_function: navigatingSubMenuFunction, //The function you actually want to perform
 		},
 		choosing_defend_option: {
 			name: "DEFEND",
@@ -59,7 +59,7 @@ function initializePlayerMainBattleMenuOptions()
 		choosing_inventory_option: {
 			name: "ITEM",
 			_selectFunction: selectedInventoryOption,
-			_function: openingInv,
+			_function: navigatingInventoryFunction,
 		},
 		choosing_healing_option: {
 			name: "HEAL",
@@ -67,6 +67,7 @@ function initializePlayerMainBattleMenuOptions()
 		}
 	};
 	
+	//Default options
 	global.settedMainBattleOptions[MAIN_MENU_BATTLE] = global.mainMenuOptions.choosing_battle_option;
 	global.settedMainBattleOptions[MAIN_MENU_DEFEND_old] = global.mainMenuOptions.choosing_cry_option;
 	global.settedMainBattleOptions[MAIN_MENU_SPECIAL] = global.mainMenuOptions.choosing_healing_option;
@@ -74,7 +75,7 @@ function initializePlayerMainBattleMenuOptions()
 	
 	for (var i = 0; i < array_length(global.settedMainBattleOptions); i++)
 	{
-		a_text[i] = global.settedMainBattleOptions[i].name;
+		mainOptionsNames[i] = global.settedMainBattleOptions[i].name;
 	};
 }
 
@@ -103,7 +104,8 @@ function initializePlayerOptionsinfo()
 			_flavourText: ["<>Player decided to DEFEND!", "<>Damage DECREASED!"]
 		},
 	}
-
+	
+	//Defaul Options
 	global.playerEquippedOptions[SUB_MENU_ATTACK] = global.playerOptions.attack_function;
 	global.playerEquippedOptions[SUB_MENU_UNBIND] = global.playerOptions.unbind_function;
 	global.playerEquippedOptions[SUB_MENU_SPECIAL_OPTION] =  global.playerOptions.defence_function;

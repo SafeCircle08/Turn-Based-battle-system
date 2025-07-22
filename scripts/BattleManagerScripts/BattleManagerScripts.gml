@@ -2,7 +2,6 @@
 
 function selectAction(main = true, _moreStepsAct = true, _flavourText = [], _method = function() {})
 {
-	audio_play_sound(sndSelecting, 50, false, global.soundGain);
 	if (main)
 	{
 		_method();
@@ -21,7 +20,7 @@ function selectAction(main = true, _moreStepsAct = true, _flavourText = [], _met
 		_method();
 		battleDelay = 3;
 		moreStepsAct = false;
-		choosingBattle = false;
+		navigatingSubMenu = false;
 	}	
 }
 
@@ -70,15 +69,15 @@ function resetNavigation(_lastOption = 0, _resetMethod = function() {})
 	moreStepsAct = false;
 	actualDrawAlpha = 0;
 	battleDelay = 3;
-	choosingBattle = false;
+	navigatingSubMenu = false;
 	
 	oAttackBG.fadingOut = true;
 	invPos = 0;
-	itemOption = false;
-	invGUI.visible = false;
+	navigatingInventory = false;
+	invItemNamesGUI.visible = false;
 	takenOptionDelay = 3;
 	itemCordTaken = false;
-	itemOptionNav = [];
+	navigatingInventoryNav = [];
 	
 	_resetMethod();
 	
@@ -95,13 +94,13 @@ function terminateAction(_ds_list = [], _method = function() {})
 	battleDelay = 3;
 	acting = false;
 	showBattleText = true;
-	choosingBattle = false;
+	navigatingSubMenu = false;
 	oAttackBG.fadingOut = true;
 	attacking = false;
 	unbinding = false;
 	using_special_action = false;
-	itemOption = false;
-	invGUI.visible = false;
+	navigatingInventory = false;
+	invItemNamesGUI.visible = false;
 	drawNav = true;
 	_method();
 	

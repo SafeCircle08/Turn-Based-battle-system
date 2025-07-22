@@ -58,14 +58,14 @@ function playerBeamAnimation(_activatedDuringTurn = false, _newState = noone)
 				else { beamEndTurn(); }
 			}
 		}
-		if (beamTimer == 0) { finishBeamAnimation(); }
+		if (beamTimer <= 0) { finishBeamAnimation(); }
 	}
 	
 	//Draws the beam
 	with (oPlayerBeam)
 	{
 		beamHeight = clamp(beamHeight, 1, room_height + 1);
-		indexMax += 0.28;
+		indexMax += 0.28 * (delta_time / 1_000_000) * WANTED_FPS;
 		draw_sprite_stretched(sBeam, indexMax, oSoul.x - 16 , 0, sprite_get_width(sBeam), beamHeight);
 	}
 	

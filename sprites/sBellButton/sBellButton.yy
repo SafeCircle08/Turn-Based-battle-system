@@ -26,7 +26,7 @@
   "origin":9,
   "parent":{
     "name":"bellsSprites",
-    "path":"folders/Sprites/OverWorld/Puzzles/nightBellPuzzle/bellsSprites.yy",
+    "path":"folders/Sprites/OverWorld/NightPetal_zone/Puzzles/nightBellPuzzle/bellsSprites.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -22,7 +22,8 @@ function finishTurn()
 	{
 		if (!ds_exists(ds_messages, ds_type_list)) { ds_messages = ds_list_create(); }
 		ds_messages[| 0] = "The monster has finished his attack."	
-		battleOption = 0;			
+		battleOption = 0;		
+		selected_option = 0;
 		oBattleBox.visible = false;
 		showBattleText = true;
 		global.enemyTimer = 0;

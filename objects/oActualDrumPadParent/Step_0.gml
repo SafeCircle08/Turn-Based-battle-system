@@ -10,10 +10,12 @@ else { image_speed = 0; image_index = 0; }
 //Quando il turno è finito
 if (instance_number(oShell) == 0) || (reduceDimensionsAlpha == true)
 {
-	if (angleAdder > 0) { angleAdder = angleAdder - 0.02; }
+	if (angleAdder > 0) { angleAdder -= 0.02; }
 	image_angle += angleAdder + 10;
 	exit;
 }
+
+print(floor(image_angle))
 
 //VADO AD AUMENTARE DI UNO IL NUMERO DI GIRI DEL TAMBURO-------
 if (image_angle % 90 == 0) && (rotDelay == 0)
@@ -27,8 +29,8 @@ if (image_angle % 90 == 0) && (rotDelay == 0)
 			angleRound += 1; 
 		} else { angleRound = 0; }
 	}
-	if (delay > 0) { delay--; }
-	if (delay == 0) { rotDelay = 90 / angleSpeed[angleRound]; }
+	if (delay > 0) { delay -= 1; }
+	if (delay == 0) { rotDelay = (90 / angleSpeed[angleRound]); }
 }
 
 //DELAY TRA UNA ROTAZIONE E L'ALTRA----------
@@ -36,13 +38,13 @@ if (rotDelay > 0)
 {
 	delay = delayRef - 1;
 	image_angle += angleSpeed[angleRound];
-	rotDelay--;
+	rotDelay -= 1;
 }
 
 //QUANDO IL TAMBURO E' ANIMATO-------------
 if (animating == true)
 {
-	animationTimer--;
+	animationTimer -= 1;
 	if (animationTimer < 0)
 	{
 		animating = false;
@@ -53,7 +55,7 @@ if (animating == true)
 //GESTIONE DELLE BARRE DEL TEMPO
 if (attackTime > 0)
 {
-	attackTime--;
+	attackTime -= 1;
 	leftBarW -= lAdder;
 	rightBarW -= rAdder;
 }

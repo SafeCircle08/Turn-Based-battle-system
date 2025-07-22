@@ -69,16 +69,19 @@ if (oBattleBox.visible == false)
 		}
 		startButtonX = clamp(startButtonX, -200, _goalButtonX);
 		
-		for (var i = 0; i < array_length(a_text); i++)
+		for (var i = 0; i < array_length(mainOptionsNames); i++)
 		{
 			//Draws the button
 			var _index = 0;
 			var _xBufferFirst = 160;
-			if (selected_option == i) { _index = 1 };
+			if (acting == false)
+			{
+				if (selected_option == i) { _index = 1 };
+			}
 			draw_sprite_ext(sLittleRectangle, _index, startButtonX, _buttonY + 21 * i, 0.5, 0.5, 0, c_white, 1);
 		
 			//Draw the action on the button			
-			var text = a_text[i];
+			var text = mainOptionsNames[i];
 			draw_text(startButtonX + 10, (_buttonY + 5) + (_buttonH / 2 + 1) * i, text);
 		}
 		//TO CHANGE
@@ -98,12 +101,8 @@ if (oBattleBox.visible == false)
 	//Drawing the sub options the player can take
 	if (acting == true)
 	{
-		if (itemOption == true) { global.mainMenuOptions.choosing_inventory_option._function(); }	
-		if (choosingBattle == true)
-		{ 
-			//global.mainMenuOptions.choosing_battle_option._function();
-			choosingBattleOptions(); 
-		}
+		if (navigatingInventory == true) { global.mainMenuOptions.choosing_inventory_option._function(); }	
+		if (navigatingSubMenu == true) { global.mainMenuOptions.choosing_battle_option._function(); }
 	}
 }
 else

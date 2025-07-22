@@ -1,1 +1,1 @@
-var _myTextTrigger = instance_place(x, y, oText);
+var _myTextTrigger = instance_place(x, y, oInventoryText);

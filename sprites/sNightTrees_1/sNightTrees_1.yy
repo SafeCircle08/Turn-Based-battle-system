@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"NightBGs",
-    "path":"folders/Sprites/OverWorld/NightBGs.yy",
+    "path":"folders/Sprites/OverWorld/NightPetal_zone/NightBGs.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

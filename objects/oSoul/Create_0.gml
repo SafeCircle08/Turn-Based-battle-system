@@ -48,7 +48,7 @@ yellowPopping = false;
 beamTimer = BEAM_ANIMATION_TIMER_REF;
 global.beamAnimationTimer = 0;
 
-//L'AURA E' QUELLA BASE (NESSUN EFFETTO APPLICATO)
+//L'AURA E' QUELLA BASE (NESSUN EFFETTO APPLICATO) //fps fixati
 stateFree = function()
 {
 	stateInit(sPlayerFront, sNoEffects, "Up");
@@ -65,8 +65,8 @@ stateFree = function()
 		if (key_left) { sprite_index = sPlayerLeft; image_speed = 1; }
 		if (key_up) { sprite_index = sPlayerBehind; image_speed = 1; }
 		if (key_right) { sprite_index = sPlayerRight; image_speed = 1; }
-		x += hsp;
-		y += vsp;
+		x += hsp * (delta_time / 1_000_000) * WANTED_FPS;
+		y += vsp * (delta_time / 1_000_000) * WANTED_FPS;
 	}
 	var _possX = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
 	var _possY = clamp(oSoul.y, global.border_u + 8, global.border_d - 11.5);
@@ -74,7 +74,7 @@ stateFree = function()
 	oSoul.y = _possY;
 }
 
-//L'AURA E' QUELLA ARANCIONE (TUTTI I COMANDI SONO INVERTITI)
+//L'AURA E' QUELLA ARANCIONE (TUTTI I COMANDI SONO INVERTITI) //fps fixati
 stateMirrored = function()
 {
 	stateInit(sPlayerFrontMirrored, sInvertedEffect, "Up");
@@ -89,8 +89,8 @@ stateMirrored = function()
 	if (key_left) { sprite_index = sPlayerRightMirrored; image_speed = 1; }
 	if (key_up) { sprite_index = sPlayerFrontMirrored; image_speed = 1; }
 	if (key_right) { sprite_index = sPlayerLeftMirrored; image_speed = 1; }
-	x += hsp;
-	y += vsp;
+	x += hsp * (delta_time / 1_000_000) * WANTED_FPS;
+	y += vsp * (delta_time / 1_000_000) * WANTED_FPS;
 	
 	var _possX = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
 	var _possY = clamp(oSoul.y, global.border_u + 8, global.border_d - 11.5);
@@ -111,8 +111,8 @@ stateUmbrella = function()
 	hsp = (key_right - key_left) * global.SoulSpeed;
 	vsp = (key_down - key_up) * global.SoulSpeed;
 	
-	x += hsp;
-	y += vsp + (yFloating / 10);
+	x += hsp * (delta_time / 1_000_000) * WANTED_FPS;
+	y += vsp + (yFloating / 10) * (delta_time / 1_000_000) * WANTED_FPS;
 }
 
 #region GRAVITY FUNCTIONS
@@ -137,7 +137,7 @@ usingUmbrella = function()
 //Default value
 inUseGravity = global.playerJumpStateMoveInfo.gravityBasic;
 
-//State Jump Base (RIVISITATO)
+//State Jump Base (RIVISITATO) //FPS FIXATO
 stateGravity = function()
 {
 	//TODO---FARE IN MODO CHE OGNI VOLTA CHE SI CAMBI LO STATE
@@ -168,7 +168,7 @@ stateGravity = function()
 		inUseGravity.horizontal
 	);
 	
-	vsp += grav * inUseGravity._sign;
+	vsp += grav * inUseGravity._sign * (delta_time / 1_000_000) * WANTED_FPS;
 	
 	if (inUseGravity.horizontal) {
 		inUseGravity.yComponent = vsp;
@@ -214,14 +214,14 @@ stateGravity = function()
 	
 	//Updates the player coords
 	if (inUseGravity.horizontal) {
-		x += hsp;
-		y += vsp;
+		x += hsp * (delta_time / 1_000_000) * WANTED_FPS;
+		y += vsp * (delta_time / 1_000_000) * WANTED_FPS;
 		var _possX = clamp(oSoul.x, global.border_l + 5, global.border_r - 4);
 		oSoul.x = _possX;
 	}
 	else {
-		x += vsp;
-		y += hsp;
+		x += vsp * (delta_time / 1_000_000) * WANTED_FPS;
+		y += hsp * (delta_time / 1_000_000) * WANTED_FPS;
 		var _possY = clamp(oSoul.y, -100, global.border_d + 2);
 		oSoul.y = _possY;
 	}

@@ -3,7 +3,7 @@
 // feather disable all
 
 global.enemySeq = layer_sequence_create("Enemy", 101, 41, Sequence1);
-a_text = [];
+mainOptionsNames = [];
 
 //BATTLE BOX VARIABLES
 global.borderWidth = 100;
@@ -11,7 +11,7 @@ global.borderHeight = 100;
 
 //PLAYER VARIABLES
 battle = true;
-turnNumber = 0;
+turnNumber = 15;
 defended = false;
 playerDeath = false;
 playerTurn = true;
@@ -55,20 +55,20 @@ btCharCount = 0;
 
 //INVENTORY VARIABLES
 frame = -1;
-invGUI = undefined;
-itemOptionNav = []; //the position to navigate in the inventory
+invItemNamesGUI = undefined;
+navigatingInventoryNav = []; //the position to navigate in the inventory
 takenOptionDelay = 3;
-itemOutput = undefined;
+itemOutputMessage = undefined;
 maxOption = undefined;
 itemCordTaken = false;
 drawNav = true;
-itemOption = false; //if you decided to use the item act
+navigatingInventory = false; //if you decided to use the item act
 invPos = 0; //the pos your cursor is in the inventory
 
 //BATTLE OPTIONS VARIABLES
 battlePos = 0;
 battleOpNav = [];
-choosingBattle = false;
+navigatingSubMenu = false;
 battleDelay = 3;
 actualDrawAlpha = 0;
 defending = false;

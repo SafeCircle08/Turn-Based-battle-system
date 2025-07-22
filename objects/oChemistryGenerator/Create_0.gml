@@ -2,6 +2,7 @@ event_inherited();
 
 numberOfMagnets = 7;
 
+oSoul.inUseGravity = global.playerJumpStateMoveInfo.gravityBasic;
 initializeNewTurn(120, false, 800, 0, 240, sprite_get_height(sMagnet)*numberOfMagnets, room_width / 2, 100, oSoul.stateGravity);
 
 global.yOffset = -30;

@@ -14,8 +14,8 @@ var _camera = view_camera[view_current];
 _camX = clamp(_camX, 0, room_width - _camW);
 _camY = clamp(_camY, 0, room_height - _camH);
 
-finalCamX += (_camX - finalCamX) * camTrailSpd;
-finalCamY += (_camY - finalCamY) * camTrailSpd;
+finalCamX += ((_camX - finalCamX) * camTrailSpd) * oPersistentObject.dt;
+finalCamY += ((_camY - finalCamY) * camTrailSpd) * oPersistentObject.dt;
 
 finalCamX = lerp(finalCamX, _camX, 0.1);
 finalCamY = lerp(finalCamY, _camY, 0.1);

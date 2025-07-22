@@ -9,8 +9,8 @@
 //Default ones
 function initializeNavigatingBattleOptionFunctions()
 {
-	selectedBattleOption = function() { selectAction(true, true, [], method(self, function() { choosingBattle = true; })) }	
-	choosingBattleOptions = function(_drawArrow = false)
+	selectedBattleOption = function() { selectAction(true, true, [], method(self, function() { navigatingSubMenu = true; })) }	
+	navigatingSubMenuFunction = function(_drawArrow = false)
 	{
 		showMirrors();
 		easeInBg();
@@ -46,7 +46,7 @@ function initializeNavigatingBattleOptionFunctions()
 			var _btnX = _bgX + _xBorder;
 			var _btnY = _bgY + (_h * i) + _yBorder + 3;
 			var _index = 0;
-			if (i == battlePos) { _index = 1; } 
+			if (i == selected_option) { _index = 1; } 
 			draw_sprite_ext(sLittleRectangle, _index, _btnX,  _btnY, 0.5, 0.5, 0, c_white, 1);
 			draw_text(_btnX + _w / 4 - 7, _btnY + _yBorder + 2, _options[i]);
 		
@@ -55,26 +55,21 @@ function initializeNavigatingBattleOptionFunctions()
 		}
 	
 		//Enemy indicating sprite arrow
-		if (_optionList[battlePos].name == "ATTACK") { draw_sprite(sIndicatingEnemyArrow, 0, _btnX + 45, _btnY - 75); }
+		if (_optionList[selected_option].name == "ATTACK") { draw_sprite(sIndicatingEnemyArrow, 0, _btnX + 45, _btnY - 75); }
 	
 		//To prevent to immediatly selecting when the player press enter
 		battleDelay = setTimer(battleDelay);
 		if (battleDelay == 0)
 		{
-			if (keyboard_check_pressed(ord("S"))) { battlePos += 1; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
-			if (keyboard_check_pressed(ord("W"))) { battlePos -= 1; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
-			battlePos = clamp(battlePos, 0, _optionNumber - 1);
+			navigatingBattle(0, _optionNumber - 1);
 		
 			//When to draw the arrow
-			if (_drawArrow) { draw_sprite(sArrow, 0, _bgX + _xBorder, battleOpNav[battlePos] + 2); }
+			if (_drawArrow) { draw_sprite(sArrow, 0, _bgX + _xBorder, battleOpNav[selected_option] + 2); }
 		
 			if (keyboard_check_pressed(vk_enter))
 			{
-				//It only make the function start;
-				//It lasts only one frame;
-				//For making function last longer,
-				//Use variables inside the function
-				switch (battlePos)
+				//It calles the selectFunction (a set up for the main function)
+				switch (selected_option)
 				{
 					case SUB_MENU_ATTACK:
 						_optionList[SUB_MENU_ATTACK]._selectFunction();
@@ -109,22 +104,39 @@ function initialiseCryOptionFunction()
 }
 function initializeInventoryOptionFunctions()
 {
+	function setUpInvItemNamesGUIObject()
+	{
+		//Creates inv text object
+		if (frame == -1)
+		{
+			invItemNamesGUI = instance_create_depth(0, 0, 0, oInventoryText);
+			for (var i = 0; i < array_length(global.equippedItems); i++)
+			{
+				invItemNamesGUI.actualArray[i] = global.equippedItems[i].name;	
+			}
+			invItemNamesGUI.visible = false;
+			frame++;
+		}		
+	}
+	setUpInvItemNamesGUIObject();
+	
+	//When you select (press enter)
 	selectedInventoryOption = function()
 	{
-		selectAction(true, true, [], method(self, function() { 
-			itemOption = true;
-			invGUI.visible = true;
-			frame += 1;
+		selectAction(true, true, [], method(self, function() {
+			selected_option = 0;
+			navigatingInventory = true;
+			invItemNamesGUI.visible = true;
 		}));
 	}
-	openingInv = function()
+	navigatingInventoryFunction = function()
 	{
 		instance_activate_object(oThinking);
 		instance_activate_object(oThinkingAttributes);
 		easeInBg();
 	
 		//When you decide not to use the inventory
-		if (keyboard_check_pressed(ord("X")) && (!instance_exists(itemOutput)))
+		if (keyboard_check_pressed(ord("X")) && (!instance_exists(itemOutputMessage)))
 		{
 			resetNavigation(
 				3,
@@ -150,59 +162,46 @@ function initializeInventoryOptionFunctions()
 	
 		//Draws the inventory BackGround
 		draw_sprite_stretched(sInventory, 0, _guiX, _guiY - 80, _bgW * 3, _bgH * 2);
-		draw_sprite_stretched(_actualItemSprite, 0, _guiX + _bgW + 15, _guiY - 75, _itemWidth, _itemHeigth);
+		draw_sprite_stretched(_actualItemSprite, 0, _guiX + _bgW + 15, _guiY - 70, _itemWidth, _itemHeigth);
 	
 		//Draws the item properties
-		if (!instance_exists(itemOutput))
+		if (!instance_exists(itemOutputMessage))
 		{	
 			//Draws the selected item's info
 			var _xx = _guiX + _border * 2;
 			var _yy = _guiY - 30;
-			var _info = itemInfo(invPos);
+			var _info = itemInfo(selected_option);
 			draw_text_ext_transformed(_xx, _yy, _info, 20, _bgW * 5, 0.5, 0.5, 0);
 		}
 	
 		takenOptionDelay = setTimer(takenOptionDelay);
 		if (takenOptionDelay == 0)
 		{
-			if (keyboard_check_pressed(ord("S"))) { invPos += 1; audio_play_sound(sndNavigating, 50, false, global.soundGain); }
-			if (keyboard_check_pressed(ord("W"))) { invPos -= 1; audio_play_sound(sndNavigating, 50, false, global.soundGain); }	
-		
-			//Creating the possible nav pos while using items
-			if (itemCordTaken == false)
-			{
-				var _itemY = surface_get_height(application_surface) - 238;
-				for (var i = 0; i < array_length(global.items); i++)
-				{
-					array_push(itemOptionNav, _itemY + 20 * i)
-					if (i == array_length(global.items) - 1) { itemCordTaken = true; }
-				}
-			}
-			invPos = clamp(invPos, 0, array_length(global.items) - 1);
-			if (drawNav) { draw_sprite(sNav, 0, _guiX + 86, itemOptionNav[invPos] - 2); }
+			var _itemsNumber = array_length(global.equippedItems);
+			navigatingBattle(0, _itemsNumber - 1);
 		
 			if (keyboard_check_pressed(vk_enter)) 
 			{ 
 				audio_play_sound(sndSelecting, 50, false, global.soundGain);
-				if (instance_exists(itemOutput)) 
+				if (instance_exists(itemOutputMessage)) 
 				{ 
 					//Goes to the 'enemy talking section'
-					instance_destroy(itemOutput);
+					instance_destroy(itemOutputMessage);
 					terminateAction(["Player used an Item!\n>(Super idol!)"]);
 				}
 				else
 				{
 					//Creating the text element that will hold the item output message
-					itemOutput = instance_create_depth(_guiX + 85, _guiY, 0, oText);
-					itemOutput.actualArray = usingItem(invPos);
-					itemOutput.yAdder = 43;
-					itemOutput.xAdder = 0;
-					itemOutput.visible = true;
-					itemOutput.textDelay = 30;
-					drawNav = false;
+					itemOutputMessage = instance_create_depth(_guiX + 85, _guiY, 0, oInventoryText);
+					itemOutputMessage.actualArray = usingItem(selected_option);
+					itemOutputMessage.yAdder = 43;
+					itemOutputMessage.xAdder = 0;
+					itemOutputMessage.visible = true;
+					itemOutputMessage.textDelay = 30;
 					//Making the item have an effect and removing  
 					//it from the inventory
-					array_delete(global.items, invPos, 1);
+					array_delete(global.equippedItems, selected_option, 1);
+					array_delete(invItemNamesGUI.actualArray, selected_option, 1);
 				}
 			}
 		}
@@ -244,10 +243,10 @@ function initializeAttackFunctions()
 		if (global.playerAttackTime >= global.playerAttackTimer)
 		{
 			terminateAction(
-			global.playerOptions.attack_function._failedAttackFlavourText,
+				global.playerOptions.attack_function._failedAttackFlavourText,
 				method(self, function() {
-		            oDrumPadObjectsParent.reduceDimensionsAlpha = true;
-		            global.playerAttackTime = 0;	
+		        oDrumPadObjectsParent.reduceDimensionsAlpha = true;
+		        global.playerAttackTime = 0;	
 				})
 			);
 			return;
@@ -270,8 +269,8 @@ function initializeAttackFunctions()
 				terminateAction(
 					global.playerOptions.attack_function._flavourText,
 					method(self, function() {
-						oDrumPadObjectsParent.reduceDimensionsAlpha = true;
-						global.playerAttackTime = 0;
+					oDrumPadObjectsParent.reduceDimensionsAlpha = true;
+					global.playerAttackTime = 0;
 					})
 				);
 			}

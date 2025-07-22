@@ -27,7 +27,7 @@
   "origin":0,
   "parent":{
     "name":"effectsSprites",
-    "path":"folders/Sprites/OverWorld/Puzzles/nightBellPuzzle/effectsSprites.yy",
+    "path":"folders/Sprites/OverWorld/NightPetal_zone/Puzzles/nightBellPuzzle/effectsSprites.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

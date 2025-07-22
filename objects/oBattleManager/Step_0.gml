@@ -7,18 +7,7 @@ randomize();
 if (playerTurn == true) && (showBattleText == false) && (acting == false)
 {
 	//Menaging the navigation trough the buttons
-	if keyboard_check_pressed(ord("S"))
-	{
-		selected_option++;
-		audio_play_sound(sndNavigating, 50, false, global.soundGain); 
-	}
-
-	if keyboard_check_pressed(ord("W"))
-	{
-		selected_option--;
-		audio_play_sound(sndNavigating, 50, false, global.soundGain); 
-	}
-	selected_option = clamp(selected_option, 0, 3);
+	navigatingBattle(0, 3);
 
 	if keyboard_check_pressed(vk_enter)
 	{
@@ -26,9 +15,9 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 		enemyTextShowed = false;
 		oBulletGeneratorManager.generatorCreated = false; //will create the actual generator
 		
-		if (!ds_exists(ds_messages, ds_type_list)) { ds_messages = ds_list_create() } 
+		if (!ds_exists(ds_messages, ds_type_list)) { ds_messages = ds_list_create() }
 		
-		//---------------------------SELECTING ACTIONS-------------------------
+		//---------------------------SELECTING MAIN ACTIONS-------------------------
 		switch (selected_option)
 		{
 			case MAIN_MENU_BATTLE:
@@ -41,7 +30,7 @@ if (playerTurn == true) && (showBattleText == false) && (acting == false)
 				global.settedMainBattleOptions[MAIN_MENU_SPECIAL]._selectFunction();
 			break;
 			case MAIN_MENU_INVENTORY:
-			if (array_length(global.items) > 0)
+			if (array_length(global.equippedItems) > 0)
 			{ 
 				global.settedMainBattleOptions[MAIN_MENU_INVENTORY]._selectFunction();
 			}
@@ -98,7 +87,6 @@ if (acting == true)
 	if (attacking == true) { global.playerEquippedOptions[SUB_MENU_ATTACK]._function(global.eqDrumPad, global.eqScope); }
 	if (unbinding == true) { global.playerEquippedOptions[SUB_MENU_UNBIND]._function(); }
 	if (using_special_action == true) { global.playerEquippedOptions[SUB_MENU_SPECIAL_OPTION]._function(); }
-	//if using item: DRAW GUI EVENT
 }
 
 //When the player is inside the bullet box
