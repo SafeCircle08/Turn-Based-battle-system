@@ -7,7 +7,7 @@ function playerSetState(_newState)
 }
 
 //To actually change the state during the turn
-function playerStateChange(_newState, _effect, _index,_newPov)
+/*function playerStateChange(_newState, _effect, _index,_newPov)
 {
 	oSoul.sprite_index = _index;
 	oSoul.state = oSoul._newState;
@@ -17,6 +17,7 @@ function playerStateChange(_newState, _effect, _index,_newPov)
 	if (instance_exists(oBoxSidePlatformParent)) { instance_destroy(oBoxSidePlatformParent); }
 	return;
 }
+*/
 
 function setPlayerSpritePov(_spr, _newPov)
 {
@@ -28,7 +29,6 @@ function setPlayerStateEffect(_effect, _otherInits = function() {})
 {
 	effect = instance_create_layer(oSoul.x, oSoul.y, LAYER_EXTRAS_OBJECTS, oPlayerEffect);
 	effect.sprite_index = _effect;
-	if (instance_exists(oBoxSidePlatformParent)) { instance_destroy(oBoxSidePlatformParent); }
 	_otherInits();
 	return;		
 }

@@ -1,4 +1,4 @@
-function makeAlphaSinEffect(_yAdder, _xAdder, _layer, _objFX, _amplitude, _nOfFXs, _oneNotMoving = 0)
+function makeAlphaSinEffect(_yAdder, _xAdder, _layer, _FXsprite, _amplitude, _nOfFXs, _oneNotMoving = 0)
 {
 	//Error catch
 	if (!layer_exists(_layer)) 
@@ -11,10 +11,12 @@ function makeAlphaSinEffect(_yAdder, _xAdder, _layer, _objFX, _amplitude, _nOfFX
 	{
 		if (_oneNotMoving) && (i == 0)
 		{
-			var _stillObj = instance_create_layer(x, y + _yAdder + (_yAdder * i), _layer, _objFX);
+			var _stillObj = instance_create_layer(x, y + _yAdder + (_yAdder * i), _layer, oSuperimposedFX);
+			_stillObj.sprite_index = _FXsprite;
 			_stillObj.sining = false;
 		}
-		var _mySinAlphaFXObj = instance_create_layer(x, y + _yAdder + (_yAdder * i), _layer, _objFX);
+		var _mySinAlphaFXObj = instance_create_layer(x, y + _yAdder + (_yAdder * i), _layer, oSuperimposedFX);
+		_mySinAlphaFXObj.sprite_index = _FXsprite;
 		_mySinAlphaFXObj.image_alpha = 0.9 - (0.2 * i); 
 		_mySinAlphaFXObj.amplitude = _amplitude + (_amplitude * i);
 		_mySinAlphaFXObj.frequence = 0.006;

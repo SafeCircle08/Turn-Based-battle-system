@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"fps_script",
+  "%Name":"optimizeHardwareScript",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"fps_script",
+  "name":"optimizeHardwareScript",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",

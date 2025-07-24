@@ -1,5 +1,11 @@
 draw_self();
 
+var _x = room_width / 2; 
+var _y = room_height / 4;
+
+//draw_text(_x - 70, _y, "Frame image angle: " + string(angle_test)); //runs 60 fps
+//draw_text(_x - 70, _y + 20, "Delta image angle: " + string(image_angle)); //runs by time
+
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 

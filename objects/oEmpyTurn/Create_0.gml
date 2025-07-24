@@ -1,7 +1,7 @@
 event_inherited();
 
 oSoul.inUseGravity = global.playerJumpStateMoveInfo.gravityBasic;
-initializeNewTurn(0, false, 99999, 0, 100, 100, room_width / 2, room_height / 2, oSoul.stateFree);
+initializeNewTurn(0, false, 99999, 0, 500, 100, room_width / 2, room_height / 2, oSoul.stateGravity);
 
 
 oSoul.image_alpha = 1;

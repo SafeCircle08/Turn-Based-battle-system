@@ -15,8 +15,6 @@ if (instance_number(oShell) == 0) || (reduceDimensionsAlpha == true)
 	exit;
 }
 
-print(floor(image_angle))
-
 //VADO AD AUMENTARE DI UNO IL NUMERO DI GIRI DEL TAMBURO-------
 if (image_angle % 90 == 0) && (rotDelay == 0)
 { 
