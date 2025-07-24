@@ -148,6 +148,7 @@
   },
   "name":"Turn Based battle system",
   "resources":[
+    {"id":{"name":"DisplayDDL","path":"extensions/DisplayDDL/DisplayDDL.yy",},},
     {"id":{"name":"fFontino","path":"fonts/fFontino/fFontino.yy",},},
     {"id":{"name":"fGenericText","path":"fonts/fGenericText/fGenericText.yy",},},
     {"id":{"name":"fSteamPunkTalk","path":"fonts/fSteamPunkTalk/fSteamPunkTalk.yy",},},

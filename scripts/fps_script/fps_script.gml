@@ -1,10 +1,12 @@
 #macro WANTED_FPS 60
 
-global.gameFPS = 0;
-function fps_script()
+function setOptimalHardwareSettings()
 {
-	global.gameFPS = display_get_frequency();
-	game_set_speed(global.gameFPS, gamespeed_fps);
+	show_message(setOptimalDisplaySettings(WANTED_FPS));
+	game_set_speed(WANTED_FPS, gamespeed_fps);
+	display_reset(8, true);
+	display_set_timing_method(tm_countvsyncs);
+	window_set_fullscreen(true);
 }
 
-fps_script();
+setOptimalHardwareSettings();
