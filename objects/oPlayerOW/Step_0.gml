@@ -29,7 +29,6 @@ if (canMove == true)
 
 	if (place_meeting(x + hsp, y, oWall)) { hsp = 0; image_speed = 0; image_index = 0; } 
 	if (place_meeting(x, y + vsp, oWall)) { vsp = 0; image_speed = 0; image_index = 0; } 
-
 	x += hsp;
 	y += vsp;
 }

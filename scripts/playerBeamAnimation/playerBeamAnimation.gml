@@ -65,7 +65,7 @@ function playerBeamAnimation(_activatedDuringTurn = false, _newState = noone)
 	with (oPlayerBeam)
 	{
 		beamHeight = clamp(beamHeight, 1, room_height + 1);
-		indexMax += 0.28 * (delta_time / 1_000_000) * WANTED_FPS;
+		indexMax += 0.28 * global.deltaMult;
 		draw_sprite_stretched(sBeam, indexMax, oSoul.x - 16 , 0, sprite_get_width(sBeam), beamHeight);
 	}
 	

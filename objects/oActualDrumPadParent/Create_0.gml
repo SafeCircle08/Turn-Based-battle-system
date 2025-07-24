@@ -10,6 +10,10 @@
 randomize();
 event_inherited();
 
+angle_test = 0;
+
+triggered = false;
+
 angleAdderRef = 100;
 angleAdder = angleAdderRef;
 delayRef = 100;

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"baka",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"baka",
+  "parent":{
+    "name":"Externals",
+    "path":"folders/Scripts/Externals.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -21,8 +21,6 @@ jumpTimer = 0;
 notGroundedDelayRef = 10;
 notGroundedDelay = notGroundedDelayRef;
 
-
-
 //DIMENSIONI DEL PLAYER IN FORMA
 image_xscale = 0.5;
 image_yscale = 0.5;

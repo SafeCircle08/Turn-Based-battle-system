@@ -1,0 +1,1 @@
+makeAlphaSinEffect(3, 0, "Effects", sCircleGlassFX, 4, 3, 1);
