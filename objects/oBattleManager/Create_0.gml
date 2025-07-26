@@ -11,7 +11,7 @@ global.borderHeight = 100;
 
 //PLAYER VARIABLES
 battle = true;
-turnNumber = 15;
+turnNumber = 0;
 defended = false;
 playerDeath = false;
 playerTurn = true;
@@ -76,6 +76,9 @@ defending = false;
 unbinding = false;
 healing = false;
 using_special_action = false;
+
+//The effect
+makeAlphaSinEffect(15, 0, LAYER_UNDER_EFFECT, 5, sInventory, 3, false, 2, 1.8, true);
 
 //------------------------------MENU NAVIGATION SECTION & ACTIONS------------------------------\\
 

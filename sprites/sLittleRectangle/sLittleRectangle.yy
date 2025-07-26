@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"BattleGUI-BattleBox",
-    "path":"folders/Sprites/GUI/BattleGUI-BattleBox.yy",
+    "name":"Buttons",
+    "path":"folders/Sprites/GUI/BattleGUI-BattleBox/Buttons.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

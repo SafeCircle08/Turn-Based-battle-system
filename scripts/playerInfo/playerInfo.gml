@@ -44,28 +44,28 @@ function initializePlayerMainBattleMenuOptions()
 	global.mainMenuOptions = {
 		choosing_battle_option: {
 			name: "BATTLE", //The name of the option
+			decoSprite: sAttackDeco,
 			_selectFunction: selectedBattleOption, //When you press enter
-			_function: navigatingSubMenuFunction, //The function you actually want to perform
-		},
-		choosing_defend_option: {
-			name: "DEFEND",
-			_selectFunction: selectedDefend_old_Option,
-			_function: defenceFunction,
+			_function: navigatingSubMenuFunction, //The function you perform afer pressing enter
 		},
 		choosing_cry_option: {
 			name: "CRY",
+			decoSprite: sCryDeco,
 			_selectFunction: selectedCryOption,	
 		},
 		choosing_inventory_option: {
 			name: "ITEM",
+			decoSprite: sInvDeco,
 			_selectFunction: selectedInventoryOption,
 			_function: navigatingInventoryFunction,
 		},
 		choosing_healing_option: {
 			name: "HEAL",
+			decoSprite: sHealDeco,
 			_selectFunction: selectedHealCheatOption
 		}
 	};
+	
 	
 	//Default options
 	global.settedMainBattleOptions[MAIN_MENU_BATTLE] = global.mainMenuOptions.choosing_battle_option;

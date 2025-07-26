@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":1.384458,
+  "duration":1.3844898,
   "name":"sndShieldBroke",
   "parent":{
     "name":"Sounds",

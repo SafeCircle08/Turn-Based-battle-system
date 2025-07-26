@@ -47,7 +47,7 @@ if (oBattleBox.visible == false)
 	draw_set_color(c_white);
 	
 	//Draws the button section
-	var _buttonY = room_height / 4;
+	var _buttonY = room_height / 4 - 5;
 	var _goalButtonX = 2;
 	
 	var _sprButton = sLittleRectangle;
@@ -55,7 +55,7 @@ if (oBattleBox.visible == false)
 	var _buttonH = sprite_get_height(_sprButton);
 	
 	//Button BG
-	draw_sprite_stretched(sInventory, 0, startButtonX - 50, _buttonY - 5, _buttonW / 2 + 70, _buttonH * 2 + 15);
+	draw_sprite_stretched(sInventory, 0, startButtonX - 50, _buttonY - 5, _buttonW / 2 + 71.5, _buttonH * 2 + 15);
 	//Mini player portrait
 	draw_sprite_ext(sPlayerMiniPortrait, 0, startButtonX + 40, _buttonY - 2, 1, 1, 0, c_white, 1);
 	
@@ -78,16 +78,22 @@ if (oBattleBox.visible == false)
 			{
 				if (selected_option == i) { _index = 1 };
 			}
-			draw_sprite_ext(sLittleRectangle, _index, startButtonX, _buttonY + 21 * i, 0.5, 0.5, 0, c_white, 1);
-		
-			//Draw the action on the button			
-			var text = mainOptionsNames[i];
-			draw_text(startButtonX + 10, (_buttonY + 5) + (_buttonH / 2 + 1) * i, text);
+			var _y = _buttonY + 21 * i;
+			var _x = startButtonX;
+			
+			//Actual button
+			draw_sprite(sGUIBattleButton, _index, _x, _y);
+			
+			//Button Properties (name, deco, ecc...)		
+			var text = global.settedMainBattleOptions[i].name;
+			draw_sprite(global.settedMainBattleOptions[i].decoSprite, _index, _x + 66, _y + 2)
+			var textX = startButtonX + 10;
+			var textY = (_buttonY + 5) + (_buttonH / 2 + 1) * i + 0.5;
+			draw_text(textX, textY, text);
 		}
 		//TO CHANGE
 		var _textList = ["<> It's like the surrounding heat\n   is taking your breath\n   away...", "<> You should probably find a way\n   to finish all of this..."];
 		drawFreeText_battle(_textList);
-		
 	}
 	else
 	{
@@ -188,5 +194,6 @@ if (enemyCanShowText) && (enemyTextShowed == false)
 		}  
 	}
 }
+
 draw_set_color(c_white);
 draw_set_font(fGenericText);

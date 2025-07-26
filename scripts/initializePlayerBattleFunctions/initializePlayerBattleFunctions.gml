@@ -65,7 +65,7 @@ function initializeNavigatingBattleOptionFunctions()
 		
 			//When to draw the arrow
 			if (_drawArrow) { draw_sprite(sArrow, 0, _bgX + _xBorder, battleOpNav[selected_option] + 2); }
-		
+			
 			if (keyboard_check_pressed(vk_enter))
 			{
 				//It calles the selectFunction (a set up for the main function)
@@ -165,7 +165,7 @@ function initializeInventoryOptionFunctions()
 		draw_sprite_stretched(_actualItemSprite, 0, _guiX + _bgW + 15, _guiY - 70, _itemWidth, _itemHeigth);
 	
 		//Draws the item properties
-		if (!instance_exists(itemOutputMessage))
+		if (!instance_exists(itemOutputMessage)) && (invItemNamesGUI.visible == true)
 		{	
 			//Draws the selected item's info
 			var _xx = _guiX + _border * 2;

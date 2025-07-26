@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":0.927891,
+  "duration":0.92789114,
   "name":"sndBallBounce",
   "parent":{
     "name":"Sounds",

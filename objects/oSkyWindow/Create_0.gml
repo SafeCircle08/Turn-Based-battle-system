@@ -1,1 +1,1 @@
-makeAlphaSinEffect(5, 0, "Effects", oSkyWindowLightFX, 4, 3, 1);
+makeAlphaSinEffect(5, 0, "Effects", 4, sSkyWindowLight, 3, 1);

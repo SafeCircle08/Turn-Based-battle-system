@@ -12,6 +12,7 @@ if (instance_number(oElectronCircular) < maxElectrons)
 	{
 		var _electron = instance_create_layer(_xx, _yy, LAYER_BULLETS, oElectronCircular);
 		_electron.image_angle = electronN * 30;
+		_electron.angleRef = electronN * 30;
 		if (electronN == 0) 
 		{ 
 			var trigger = instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oGeneralTrigger);

@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":1,
   "conversionMode":0,
-  "duration":1.375011,
+  "duration":1.3750113,
   "name":"sndHurt",
   "parent":{
     "name":"Sounds",

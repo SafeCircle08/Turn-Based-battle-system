@@ -9,8 +9,8 @@
   "name":"oSkyWindow",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"OverWorld",
+    "path":"folders/Objects/OverWorld.yy",
   },
   "parentObjectId":null,
   "persistent":false,
