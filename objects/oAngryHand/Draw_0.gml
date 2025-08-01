@@ -20,7 +20,7 @@ if (image_xscale >= 0.5)
 		draw_set_alpha(drawAlpha);
 		draw_sprite(sFaceTofaceBG, 0, room_width / 2, room_height / 2 - 75);
 		draw_sprite(sFaceToface, 0, _xx, _yy - 45);
-		draw_set_font(fSteamPunkTalk);
+		draw_set_font(fFontino);
 		draw_sprite_ext(sFtGear, 0, room_width / 2 - 105, room_height / 2 - 75, 1, 1, rot, c_white, drawAlpha);
 		draw_sprite_ext(sFtGear, 0, room_width / 2 + 105, room_height / 2 - 75, 1, 1, rot, c_white, drawAlpha);
 		draw_set_halign(fa_center);

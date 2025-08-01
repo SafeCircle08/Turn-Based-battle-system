@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"layer_macro_defines",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"layer_macro_defines",
+  "parent":{
+    "name":"Constants",
+    "path":"folders/Scripts/Defines/Constants.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -9,8 +9,8 @@
   "name":"oPersistentObject",
   "overriddenProperties":[],
   "parent":{
-    "name":"Turn Based battle system",
-    "path":"Turn Based battle system.yyp",
+    "name":"Objects",
+    "path":"folders/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":true,

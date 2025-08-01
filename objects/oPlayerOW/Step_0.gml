@@ -1,3 +1,5 @@
+if (room == Room_Battle) { exit; }
+
 var key_right = keyboard_check(ord("D")); 
 var key_left = keyboard_check(ord("A")); 
 var key_up = keyboard_check(ord("W"));
@@ -29,9 +31,19 @@ if (canMove == true)
 
 	if (place_meeting(x + hsp, y, oWall)) { hsp = 0; image_speed = 0; image_index = 0; } 
 	if (place_meeting(x, y + vsp, oWall)) { vsp = 0; image_speed = 0; image_index = 0; } 
-
+	
 	x += hsp;
 	y += vsp;
+}
+
+//Change Room trigger
+var _roomTrigger = instance_place(x, y, oChangeRoomTrigger);
+if (_roomTrigger) && (!instance_exists(oTransitionRoom))
+{
+	var _destRoom = _roomTrigger.rm_destination; 
+	var _playerX = _roomTrigger.destPlayerX;
+	var _playerY = _roomTrigger.destPlayerY;
+	startChangeRoom(_destRoom, _playerX, _playerY);
 }
 
 if (instance_exists(oInstanceText) || instance_exists(oInstanceCharText))  

@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sBackGround",
-    "path":"sprites/sBackGround/sBackGround.yy",
+    "name":"sBackGround_toFinish",
+    "path":"sprites/sBackGround_toFinish/sBackGround_toFinish.yy",
   },
   "spriteMaskId":null,
   "visible":true,

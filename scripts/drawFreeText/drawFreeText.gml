@@ -1,8 +1,12 @@
-function drawFreeText(_textList, _refObj = noone, _font = fFontino, _inBox = true, _boxX = camera_get_view_x(view_camera[view_current]) + 160, _boxY = camera_get_view_height(view_camera[view_current]))
+function drawFreeText(_textList, _refObj = noone, _font = fFontino, _inBox = true)
 {
+	
+	var _boxX = camera_get_view_x(view_camera[view_current]);
+	var _boxY = camera_get_view_height(view_camera[view_current]) + 1;
+	
 	//Basic properties
 	var _lSep = 15;
-	var _border = 25;
+	var _border = 10;
 	draw_set_font(fFontino);
 	draw_set_halign(fa_center);
 	
@@ -12,8 +16,8 @@ function drawFreeText(_textList, _refObj = noone, _font = fFontino, _inBox = tru
 	var _maxW = sprite_get_width(_sprTxtBox) - (_border * 2);
 	
 	//Where the text is being drawn
-	var _xPos = camera_get_view_x(view_camera[view_current]) + _border - 10;
-	var _yPos = _boxY - _height + _border;
+	var _xPos = _boxX + _border;
+	var _yPos = _boxY - _height + 13;
 	
 	if (_inBox == true)
 	{
@@ -23,12 +27,12 @@ function drawFreeText(_textList, _refObj = noone, _font = fFontino, _inBox = tru
 		//The player is "on the textBox"
 		if (oPlayerOW.y > _cameraH + _tollerance)
 		{
-			_boxY = camera_get_view_y(view_camera[view_current]) + _height - 10;
-			_yPos = _boxY - _height + _border;
+			_boxY = camera_get_view_y(view_camera[view_current]) + _height - 2;
+			_yPos = _boxY - _height + 13;
 		}
 		
 		//Draws the text box
-		draw_sprite(_sprTxtBox, 0, _boxX, _boxY);	
+		draw_sprite(_sprTxtBox, 0, _boxX + sprite_get_width(_sprTxtBox) / 2, _boxY);	
 		draw_set_halign(fa_left);
 	}
 	
@@ -52,7 +56,7 @@ function drawFreeText(_textList, _refObj = noone, _font = fFontino, _inBox = tru
 	
 	if (instance_exists(_refObj))
 	{
-		if (charCount < string_length(_textList[page]))	
+		if (charCount < string_length(_textList[page]))
 		{
 			_refObj.image_speed = 1; 
 		}	

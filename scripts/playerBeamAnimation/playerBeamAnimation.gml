@@ -68,5 +68,4 @@ function playerBeamAnimation(_activatedDuringTurn = false, _newState = noone)
 		indexMax += 0.28 * (delta_time / 1_000_000) * WANTED_FPS;
 		draw_sprite_stretched(sBeam, indexMax, oSoul.x - 16 , 0, sprite_get_width(sBeam), beamHeight);
 	}
-	
 }

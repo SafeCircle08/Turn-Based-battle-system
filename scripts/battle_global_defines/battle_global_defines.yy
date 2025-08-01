@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"battle_global_defines",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"battle_global_defines",
+  "parent":{
+    "name":"Battle",
+    "path":"folders/Scripts/Defines/Battle.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -17,7 +17,6 @@
     {"name":"inst_5D0B55E1","path":"rooms/rmSteamPunkOffice/rmSteamPunkOffice.yy",},
     {"name":"inst_386CFC8A","path":"rooms/rmSteamPunkOffice/rmSteamPunkOffice.yy",},
     {"name":"inst_7D508744","path":"rooms/rmSteamPunkOffice/rmSteamPunkOffice.yy",},
-    {"name":"inst_24A15AB7","path":"rooms/rmSteamPunkOffice/rmSteamPunkOffice.yy",},
     {"name":"inst_4AA92209","path":"rooms/rmSteamPunkOffice/rmSteamPunkOffice.yy",},
     {"name":"inst_15917EE4","path":"rooms/rmSteamPunkOffice/rmSteamPunkOffice.yy",},
     {"name":"inst_6491028E","path":"rooms/rmSteamPunkOffice/rmSteamPunkOffice.yy",},
@@ -26,6 +25,7 @@
     {"name":"inst_67C69F23","path":"rooms/rmSteamPunkOffice/rmSteamPunkOffice.yy",},
     {"name":"inst_50A9BAE6","path":"rooms/rmSteamPunkOffice/rmSteamPunkOffice.yy",},
     {"name":"inst_1A36A5FB","path":"rooms/rmSteamPunkOffice/rmSteamPunkOffice.yy",},
+    {"name":"inst_256556D1","path":"rooms/rmSteamPunkOffice/rmSteamPunkOffice.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -35,6 +35,7 @@
         {"$GMRInstance":"v2","%Name":"inst_67C69F23","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_67C69F23","objectId":{"name":"oTextTrigger","path":"objects/oTextTrigger/oTextTrigger.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":5.8500004,"scaleY":2.2,"x":101.0,"y":110.0,},
         {"$GMRInstance":"v2","%Name":"inst_50A9BAE6","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_50A9BAE6","objectId":{"name":"oTextTrigger","path":"objects/oTextTrigger/oTextTrigger.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":2.2,"scaleY":0.35,"x":233.0,"y":95.0,},
         {"$GMRInstance":"v2","%Name":"inst_1A36A5FB","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_1A36A5FB","objectId":{"name":"oTextTrigger","path":"objects/oTextTrigger/oTextTrigger.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":2.2,"scaleY":0.35,"x":42.0,"y":95.0,},
+        {"$GMRInstance":"v2","%Name":"inst_256556D1","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_256556D1","objectId":{"name":"oChangeRoomTrigger","path":"objects/oChangeRoomTrigger/oChangeRoomTrigger.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":144.0,"y":952.0,},
       ],"layers":[],"name":"Text","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"Walls","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v2","%Name":"inst_7CAD7168","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_7CAD7168","objectId":{"name":"oWall","path":"objects/oWall/oWall.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":128.0,"y":224.0,},
@@ -51,9 +52,7 @@
         {"$GMRInstance":"v2","%Name":"inst_6491028E","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_6491028E","objectId":{"name":"oWall","path":"objects/oWall/oWall.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.8125,"x":199.0,"y":96.0,},
       ],"layers":[],"name":"Walls","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":false,},
     {"$GMRAssetLayer":"","%Name":"Shadow","assets":[],"depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Shadow","properties":[],"resourceType":"GMRAssetLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
-    {"$GMRInstanceLayer":"","%Name":"Instances","depth":300,"effectEnabled":true,"effectType":null,"gridX":16,"gridY":16,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
-        {"$GMRInstance":"v2","%Name":"inst_24A15AB7","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_24A15AB7","objectId":{"name":"oPlayerOW","path":"objects/oPlayerOW/oPlayerOW.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":160.0,"y":208.0,},
-      ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
+    {"$GMRInstanceLayer":"","%Name":"Instances","depth":300,"effectEnabled":true,"effectType":null,"gridX":16,"gridY":16,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"Forniture","depth":400,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v2","%Name":"inst_41AE28E8","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_41AE28E8","objectId":{"name":"oSteamDesk","path":"objects/oSteamDesk/oSteamDesk.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":161.0,"y":129.0,},
       ],"layers":[],"name":"Forniture","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
@@ -70,8 +69,8 @@
   ],
   "name":"rmSteamPunkOffice",
   "parent":{
-    "name":"OverWorld",
-    "path":"folders/Rooms/InUseRooms/OverWorld.yy",
+    "name":"SteamPunk",
+    "path":"folders/Rooms/InUseRooms/OverWorld/SteamPunk.yy",
   },
   "parentRoom":null,
   "physicsSettings":{
@@ -84,7 +83,7 @@
   "resourceType":"GMRoom",
   "resourceVersion":"2.0",
   "roomSettings":{
-    "Height":240,
+    "Height":960,
     "inheritRoomSettings":false,
     "persistent":false,
     "Width":320,

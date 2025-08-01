@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"voodo_enemy_defines_info",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"voodo_enemy_defines_info",
+  "parent":{
+    "name":"EnemyDefines",
+    "path":"folders/Scripts/Defines/EnemyDefines.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

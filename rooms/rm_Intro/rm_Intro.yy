@@ -44,6 +44,7 @@
     {"name":"inst_165E235C","path":"rooms/rm_Intro/rm_Intro.yy",},
     {"name":"inst_27703A2A","path":"rooms/rm_Intro/rm_Intro.yy",},
     {"name":"inst_3D3EAFBE","path":"rooms/rm_Intro/rm_Intro.yy",},
+    {"name":"inst_27D7B520","path":"rooms/rm_Intro/rm_Intro.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -96,9 +97,14 @@
         {"$GMRInstance":"v2","%Name":"inst_3DF9D576","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_3DF9D576","objectId":{"name":"oSkyWindow","path":"objects/oSkyWindow/oSkyWindow.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":296.0,"y":96.0,},
         {"$GMRInstance":"v2","%Name":"inst_33AC47C6","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_33AC47C6","objectId":{"name":"oSkyWindow","path":"objects/oSkyWindow/oSkyWindow.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":239.0,"y":596.0,},
         {"$GMRInstance":"v2","%Name":"inst_5A639979","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5A639979","objectId":{"name":"oSkyWindow","path":"objects/oSkyWindow/oSkyWindow.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":297.0,"y":596.0,},
+        {"$GMRInstance":"v2","%Name":"inst_27D7B520","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_27D7B520","objectId":{"name":"oChangeRoomTrigger","path":"objects/oChangeRoomTrigger/oChangeRoomTrigger.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":2.0,"x":160.0,"y":224.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRAssetLayer":"","%Name":"Room","assets":[
         {"$GMRSpriteGraphic":"v1","%Name":"graphic_3C6476D8","animationSpeed":1.0,"colour":4294967295,"frozen":false,"headPosition":0.0,"ignore":false,"inheritedItemId":null,"inheritItemSettings":false,"name":"graphic_3C6476D8","resourceType":"GMRSpriteGraphic","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"spriteId":{"name":"sIntroRoom","path":"sprites/sIntroRoom/sIntroRoom.yy",},"x":0.0,"y":0.0,},
+        {"$GMRSpriteGraphic":"v1","%Name":"graphic_7DF0650F","animationSpeed":1.0,"colour":4294967295,"frozen":false,"headPosition":0.0,"ignore":false,"inheritedItemId":null,"inheritItemSettings":false,"name":"graphic_7DF0650F","resourceType":"GMRSpriteGraphic","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"spriteId":{"name":"sDoor","path":"sprites/sDoor/sDoor.yy",},"x":0.0,"y":416.0,},
+        {"$GMRSpriteGraphic":"v1","%Name":"graphic_712797E","animationSpeed":1.0,"colour":4294967295,"frozen":false,"headPosition":0.0,"ignore":false,"inheritedItemId":null,"inheritItemSettings":false,"name":"graphic_712797E","resourceType":"GMRSpriteGraphic","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"spriteId":{"name":"sWriterNPC","path":"sprites/sWriterNPC/sWriterNPC.yy",},"x":193.0,"y":462.0,},
+        {"$GMRSpriteGraphic":"v1","%Name":"graphic_3649E465","animationSpeed":1.0,"colour":4294967295,"frozen":false,"headPosition":0.0,"ignore":false,"inheritedItemId":null,"inheritItemSettings":false,"name":"graphic_3649E465","resourceType":"GMRSpriteGraphic","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"spriteId":{"name":"sWriterNPC","path":"sprites/sWriterNPC/sWriterNPC.yy",},"x":194.0,"y":497.0,},
+        {"$GMRSpriteGraphic":"v1","%Name":"graphic_5E3857AD","animationSpeed":1.0,"colour":4294967295,"frozen":false,"headPosition":0.0,"ignore":false,"inheritedItemId":null,"inheritItemSettings":false,"name":"graphic_5E3857AD","resourceType":"GMRSpriteGraphic","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"spriteId":{"name":"sWriterNPC","path":"sprites/sWriterNPC/sWriterNPC.yy",},"x":194.0,"y":524.0,},
       ],"depth":700,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Room","properties":[],"resourceType":"GMRAssetLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
   ],
   "name":"rm_Intro",
@@ -119,12 +125,12 @@
   "roomSettings":{
     "Height":960,
     "inheritRoomSettings":false,
-    "persistent":false,
+    "persistent":true,
     "Width":320,
   },
   "sequenceId":null,
   "views":[
-    {"hborder":1,"hport":1440,"hspeed":-1,"hview":240,"inherit":false,"objectId":null,"vborder":1,"visible":true,"vspeed":-1,"wport":1920,"wview":320,"xport":0,"xview":0,"yport":0,"yview":0,},
+    {"hborder":1,"hport":864,"hspeed":-1,"hview":216,"inherit":false,"objectId":null,"vborder":1,"visible":true,"vspeed":-1,"wport":1152,"wview":288,"xport":0,"xview":0,"yport":0,"yview":0,},
     {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
     {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},
     {"hborder":32,"hport":768,"hspeed":-1,"hview":768,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":1366,"wview":1366,"xport":0,"xview":0,"yport":0,"yview":0,},

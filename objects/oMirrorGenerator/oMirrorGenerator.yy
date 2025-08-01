@@ -9,8 +9,8 @@
   "name":"oMirrorGenerator",
   "overriddenProperties":[],
   "parent":{
-    "name":"Battle",
-    "path":"folders/Objects/Battle.yy",
+    "name":"Mirrors",
+    "path":"folders/Objects/Battle/Mirrors.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -11,34 +11,23 @@ var _myY = oCamera.finalCamY + attachedY + 2;
 x = _myX;
 y = _myY;
 
-//If fullscreen, you can't use the cursor
-if (window_get_fullscreen())
+if keyboard_check_pressed(secondKey) { performFunction(); }
+
+//If windowed mode, you see the cursor
+if (mouseHoover(x, y, _w, _h))
 {
-	if (pressed(secondKey)) { performFunction(); }
-	changeAlpha(self, minAlphaRef, 0.05, false);
-	drawAlpha -= 0.05;
-	textX += 0.05;
+	changeAlpha(self, maxAlphaRef, 0.05, false);
+	if mouse_check_button_pressed(mb_left) { performFunction(); }
+	drawAlpha += 0.05;
+	textX -= 0.5;
 }
 else
 {
-	//If windowed mode, you see the cursor
-	if (mouseHoover(x, y, _w, _h))
-	{
-		changeAlpha(self, maxAlphaRef, 0.05, false);
-		if (mouse_check_button_pressed(mb_left))
-		{
-			performFunction();
-		}
-		drawAlpha += 0.05;
-		textX -= 0.5;
-	}
-	else
-	{
-		changeAlpha(self, minAlphaRef, 0.05, false);
-		drawAlpha -= 0.05;
-		textX += 0.5;
-	}		
-}
+	changeAlpha(self, minAlphaRef, 0.05, false);
+	drawAlpha -= 0.05;
+	textX += 0.5;
+}		
+
 
 //Clamping values
 drawAlpha = clamp(drawAlpha, 0, 1);

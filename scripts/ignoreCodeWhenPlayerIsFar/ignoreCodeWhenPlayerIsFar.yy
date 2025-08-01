@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"ignoreCodeWhenPlayerIsFar",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"MenagementScripts",
+    "path":"folders/Scripts/MenagementScripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

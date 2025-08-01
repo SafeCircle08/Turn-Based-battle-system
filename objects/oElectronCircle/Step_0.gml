@@ -1,10 +1,9 @@
 event_inherited();
 
-var _posX =  [oSoul.x + 40, oSoul.y - 40];
-var _posY = [oSoul.y + 40, oSoul.y - 40];
-
 if (instance_number(oElectronCircular) < maxElectrons)
 {
+	var _posX =  [oSoul.x + 40, oSoul.y - 40];
+	var _posY = [oSoul.y + 40, oSoul.y - 40];
 	var _xx = global.boxOriginX;
 	var _yy = global.boxOriginY;
 	delayTimer = setTimer(delayTimer);
@@ -39,14 +38,4 @@ if (instance_number(oElectronCircular) < maxElectrons)
 		delayTimer = 10;
 		electronN++;
 	}
-	exit;
-}
-
-delayTimer_2 = setTimer(delayTimer_2);
-if (delayTimer_2 == 0)
-{
-	var _xx = irandom_range(global.border_l, global.border_r);
-	var _yy = irandom_range(global.border_u, global.border_d);
-	instance_create_layer(_xx, _yy, LAYER_EXTRAS_OBJECTS, oBoxPointer);	
-	delayTimer_2 = 70;
 }

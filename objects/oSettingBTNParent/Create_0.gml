@@ -20,5 +20,6 @@ function mouseHoover(_xPos, _yPos, _width, _height)
 
 function pressed(secondKey)
 {
-	return keyboard_check_pressed(secondKey)
+	return keyboard_check_pressed(secondKey) ||
+		   mouse_check_button_pressed(mb_left)
 }	

@@ -11,5 +11,5 @@ battleGUIFunction = function()
 {
 	var _height = sprite_get_height(sInventory) * image_yscale;
 	x = oBattleManager.startButtonX	+ cos(timerValue) * amplitude + 45;
-	y = room_height / 4 + (_height) - 5;
+	y = room_height / 4 + (_height) - 10;
 }

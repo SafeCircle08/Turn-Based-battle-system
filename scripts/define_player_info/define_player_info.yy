@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"define_player_info",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"define_player_info",
+  "parent":{
+    "name":"PlayerDefines",
+    "path":"folders/Scripts/Defines/PlayerDefines.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

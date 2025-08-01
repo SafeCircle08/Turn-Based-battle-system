@@ -2,7 +2,7 @@
 // You can write your code in this editor
 // feather disable all
 
-global.enemySeq = layer_sequence_create("Enemy", 101, 41, Sequence1);
+//global.enemySeq = layer_sequence_create("Enemy", 101, 41, Sequence1);
 mainOptionsNames = [];
 
 //BATTLE BOX VARIABLES

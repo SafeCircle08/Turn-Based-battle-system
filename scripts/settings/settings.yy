@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"settings",
   "parent":{
-    "name":"Turn Based battle system",
-    "path":"Turn Based battle system.yyp",
+    "name":"MenagementScripts",
+    "path":"folders/Scripts/MenagementScripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

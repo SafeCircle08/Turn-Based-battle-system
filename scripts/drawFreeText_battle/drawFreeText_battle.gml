@@ -1,8 +1,12 @@
-function drawFreeText_battle(_textList, _font = fFontino, _inBox = true, _boxX = camera_get_view_x(view_camera[view_current]) + 160, _boxY = camera_get_view_height(view_camera[view_current]))
+function drawFreeText_battle(_textList, _font = fFontino, _inBox = true)
 {
+	
+	var _boxX = camera_get_view_x(view_camera[view_current]) + sprite_get_width(sNewBox) / 2;
+	var _boxY = camera_get_view_height(view_camera[view_current]);
+	
 	//Basic properties
 	var _lSep = 15;
-	var _border = 25;
+	var _border = 10;
 	draw_set_font(fFontino);
 	draw_set_halign(fa_center);
 	
@@ -12,8 +16,8 @@ function drawFreeText_battle(_textList, _font = fFontino, _inBox = true, _boxX =
 	var _maxW = sprite_get_width(_sprTxtBox) - (_border * 2);
 	
 	//Where the text is being drawn
-	var _xPos = camera_get_view_x(view_camera[view_current]) + _border - 10;
-	var _yPos = _boxY - _height + _border;
+	var _xPos = _boxX + _border - sprite_get_width(sNewBox) / 2;
+	var _yPos = _boxY - _height + 13;
 	
 	if (_inBox == true)
 	{

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"makeAlphaListEffect",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"generalUse",
+    "path":"folders/Scripts/generalUse.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

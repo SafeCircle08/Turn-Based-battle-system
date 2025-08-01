@@ -1,5 +1,4 @@
 //When you choose an action in the submenu
-
 function selectAction(main = true, _moreStepsAct = true, _flavourText = [], _method = function() {})
 {
 	if (main)

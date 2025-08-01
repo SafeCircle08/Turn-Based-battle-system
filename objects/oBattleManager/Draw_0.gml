@@ -3,7 +3,6 @@ if (oBattleBox.visible == false)
 	//Variables
 	var guiX = room_width / 2;
 	var guiY = room_height;
-	var _border = 10;
 	var _sprTextBox = sNewBox;
 	var _textBoxW = sprite_get_width(_sprTextBox);
 	var _textBoxH = sprite_get_height(_sprTextBox);
@@ -14,19 +13,31 @@ if (oBattleBox.visible == false)
 	
 	//Draws the text box and the battle messages
 	draw_sprite(_sprTextBox, 0, guiX, guiY);
+	
+	var _dsBgW = sprite_get_width(_sprTextBox);
+	var _dsBgH = sprite_get_height(_sprTextBox);
+	
+	var _dsX = camera_get_view_x(view_camera[view_current]);
+	var _dsY = camera_get_view_height(view_camera[view_current]);
+	var _border = 10;
+	
 	if (showBattleText)
 	{
 		var _textX = guiX - (_textBoxW / 2) + BUFFER;
-		var _textY = guiY - (_textBoxH + BUFFER);
+		var _textY = _dsY - _dsBgH + 13;
 		for (var a = 0; a <= messageCounter; a++)
 		{
-			draw_text_ext(_textX + BUFFER, _textY + BUFFER + fontSize * a * 2 + 25, ds_messages[| a], (fontSize + BUFFER), _textBoxW - BUFFER * 3);
+			draw_set_color(c_gray);
+			draw_text_ext(_dsX + _border + 0.5, _textY + fontSize * a * 2 + 0.5, ds_messages[| a], (fontSize + BUFFER), _textBoxW - BUFFER * 3);
+			draw_set_color(c_white);
+			draw_text_ext(_dsX + _border, _textY + fontSize * a * 2, ds_messages[| a], (fontSize + BUFFER), _textBoxW - BUFFER * 3);
 		}
+		
 	}
 	
 	//Draws the player variables
 	var _playerInfoX = BUFFER - 5;
-	var _playerInfoY = guiY - (_textBoxH) + 2;
+	var _playerInfoY = guiY - (_textBoxH) - 7;
 	
 	//Hp
 	draw_text(_playerInfoX, _playerInfoY, "HP:" + string(global.playerHP) + "/" + string(global.playerMAX_HP) + ";");
@@ -36,19 +47,19 @@ if (oBattleBox.visible == false)
 	var _barCsW = 121;
 	var _barCsH = 10;
 	draw_text(_csX, _playerInfoY, "CS: ");
-	draw_sprite(sCSBarBG, 0, _csX + 25, _playerInfoY);
-	draw_sprite_stretched(sCSBar, 0, _csX + 25, _playerInfoY, (global.CSvalue/global.CSvalueMax) * _barCsW, _barCsH);
+	draw_sprite(sCSBarBG, 0, _csX + 25, _playerInfoY - 1);
+	draw_sprite_stretched(sCSBar, 0, _csX + 25, _playerInfoY - 1, (global.CSvalue/global.CSvalueMax) * _barCsW, _barCsH);
 	
 	//Draws the monster variables
-	var _enemyInfoX = _csX + 120;
+	var _enemyInfoX = _csX + 60;
 	var _enemyInfoY = _playerInfoY + 5;
 	draw_set_color(c_red);
 	draw_text_ext_transformed(_enemyInfoX + 40, _enemyInfoY, "(" + string(global.monsterHP) + "/" + string(global.maxMonsterHp) + ")", 5, 100, 0.5, 0.5, 0);
 	draw_set_color(c_white);
 	
 	//Draws the button section
-	var _buttonY = room_height / 4 - 5;
-	var _goalButtonX = 2;
+	var _buttonY = room_height / 4 - 12;
+	var _goalButtonX = 0;
 	
 	var _sprButton = sLittleRectangle;
 	var _buttonW = sprite_get_width(_sprButton);
@@ -92,7 +103,7 @@ if (oBattleBox.visible == false)
 			draw_text(textX, textY, text);
 		}
 		//TO CHANGE
-		var _textList = ["<> It's like the surrounding heat\n   is taking your breath\n   away...", "<> You should probably find a way\n   to finish all of this..."];
+		var _textList = ["<>It's like the surrounding heat\n   is taking your breath\n   away...", "<> You should probably find a way\n   to finish all of this..."];
 		drawFreeText_battle(_textList);
 	}
 	else
@@ -139,15 +150,28 @@ else
 
 if (enemyCanShowText) && (enemyTextShowed == false)
 {
-	var _border = 7;
+	var _border = 5;
 	var _xSep = 17;
 	var _ySep = 5;	
 	var _lSep = 17;
-	var _x = 200;
-	var _y = 50;
+	
+	
+	//Text BG coords
+	var _textBgX = room_width / 2 + 45;
+	var _textBgY = 50;
+	
+	//Sprite properties
+	var _textBgW = sprite_get_width(sTextBG) / 2;
+	var _textBgH = sprite_get_height(sTextBG) / 2;
+	var _border = 4;
+	
+	//Text Coords
+	var _textX = _textBgX + _border;
+	var _textY = _textBgY - (_textBgH) + _border - 1;
+
 	var _page = global.textList[turnNumber];
 	
-	draw_sprite(sTextBG, 0, _x, _y);
+	draw_sprite(sTextBG, 0, _textBgX, _textBgY);
 	draw_set_font(fFontino);
 	draw_set_color(c_white);
 	
@@ -169,13 +193,12 @@ if (enemyCanShowText) && (enemyTextShowed == false)
 	}
 
 	//FA PROGREDIRE IL TESTO LETTERA PER LETTERA	
-	var _bgH = sprite_get_height(sTextBG) / 2;
 	var _textPart = string_copy(_page[page], 1, charCount);
 	var _col = make_color_rgb(0, 42, 127);
 	draw_set_color(_col);
-	draw_text_ext_transformed(_x + _border + 0.5 , _y - _bgH + _border + 0.5, _textPart, _lSep, boxWidth + 70, 0.5, 0.5, 0);	
+	draw_text_ext_transformed(_textX + 0.5 , _textY + 0.5, _textPart, _lSep, _textBgW * 4, 0.5, 0.5, 0);	
 	draw_set_color(c_white);
-	draw_text_ext_transformed(_x + _border , _y - _bgH + _border, _textPart, _lSep, boxWidth + 70, 0.5, 0.5, 0);	
+	draw_text_ext_transformed(_textX, _textY, _textPart, _lSep, _textBgW * 4, 0.5, 0.5, 0);	
 
 	//SE PUOI EFFETTIVAMENTE SKIPPARE
 	if keyboard_check_pressed(vk_enter) && (charCount >= string_length(_page[page]))

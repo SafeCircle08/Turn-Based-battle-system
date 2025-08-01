@@ -26,14 +26,16 @@ function initializeNavigatingBattleOptionFunctions()
 		var _optionNumber = array_length(_optionList);
 		var _h = sprite_get_height(sLittleRectangle) / 2;
 		var _w = sprite_get_width(sLittleRectangle) / 2;
-		var _bgX = room_width / 2 - 30;
-		var _bgY = (room_height / 2 - 20) - ((_h * (_optionNumber - 2)) + 5 * (_optionNumber - 2));
+		var _bgX = (room_width / 2) - 48;
+		var _bgY = (room_height / 2 - 20) - ((_h * (_optionNumber - 2)) + 5 * (_optionNumber - 2)) - 5;
 		var _bgH = 25;
 		var _xBorder = 17;
 		var _yBorder = 4;
+		var _bgW = 80;
+		
 		//Draws the path arrow
-		draw_sprite(sSelectArrow, 0, _bgX - 42, _bgY + (_bgH * _optionNumber) / 2);
-		draw_sprite_stretched(sInventory, 0, _bgX, _bgY, 100, _bgH * _optionNumber);
+		draw_sprite(sSelectArrow, delta_time / 1_000, _bgX + 9, _bgY + (_bgH * _optionNumber) / 2);
+		draw_sprite_stretched(sInventory, 0, _bgX + 9, _bgY, _bgW, _bgH * _optionNumber);
 		var _options = [];
 	
 		//Draws the secondary options (BUTTONS)	
@@ -47,7 +49,7 @@ function initializeNavigatingBattleOptionFunctions()
 			var _btnY = _bgY + (_h * i) + _yBorder + 3;
 			var _index = 0;
 			if (i == selected_option) { _index = 1; } 
-			draw_sprite_ext(sLittleRectangle, _index, _btnX,  _btnY, 0.5, 0.5, 0, c_white, 1);
+			draw_sprite_ext(sGUIBattleButton, _index, _btnX,  _btnY, 1, 1, 0, c_white, 1);
 			draw_text(_btnX + _w / 4 - 7, _btnY + _yBorder + 2, _options[i]);
 		
 			//Takes all the possible positions
@@ -56,6 +58,10 @@ function initializeNavigatingBattleOptionFunctions()
 	
 		//Enemy indicating sprite arrow
 		if (_optionList[selected_option].name == "ATTACK") { draw_sprite(sIndicatingEnemyArrow, 0, _btnX + 45, _btnY - 75); }
+		if (_optionList[selected_option].name == "UNBIND") && (!instance_exists(oMirrorTargeting))
+		{
+			instance_create_layer(0, 0, LAYER_EFFECT, oMirrorTargeting);
+		}
 	
 		//To prevent to immediatly selecting when the player press enter
 		battleDelay = setTimer(battleDelay);
@@ -280,7 +286,7 @@ function initializeAttackFunctions()
 }
 function initializeUnbindFunctions()
 {
-	selectedUnbindCage = function() { selectAction(false, false, [], method(self, function() { unbinding = true; }))}
+	selectedUnbindCage = function() { selectAction(false, false, [], method(self, function() { unbinding = true; instance_destroy(oMirrorTargeting) }))}
 	unbindFunction = function() {
 		terminateAction(
 			global.playerOptions.unbind_function._flavourText,

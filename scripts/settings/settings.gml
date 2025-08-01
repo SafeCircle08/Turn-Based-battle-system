@@ -2,7 +2,6 @@ function openSettings()
 {
 	
 }
-
 global.windowButtons = {
 	
 	closeGame: {
@@ -10,25 +9,27 @@ global.windowButtons = {
 		text: "Quit",		
 		key: ord("Q"),
 		keyText: "(Q)",
-		_function: function() { game_end(); }
+		_function: function() { 
+			if (!instance_exists(oQuitting)) {
+				instance_create_layer(0, 0, "Text", oQuitting);	
+			}
+		}
 	},
 	fullScreenToggle: {
 		btnSprite: sFullScreenButton,
-		text: "FullScreen Mode",
+		text: "FullScreen",
 		key: vk_f4,
 		keyText: "(F4)",
 		_function: function() {
-			window_set_cursor(cr_none);
 			window_set_fullscreen(true);
 		}	
 	},
 	windowedScreenToggle: {
 		btnSprite: sWindowedScreenButton,
-		text: "Windowed Mode",
+		text: "Windowed",
 		key: vk_f5,
 		keyText: "(F5)",
 		_function: function() {
-			window_set_cursor(cr_default);
 			window_set_fullscreen(false);		
 		}	
 	},

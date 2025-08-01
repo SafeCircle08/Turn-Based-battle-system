@@ -7,7 +7,7 @@ global.playerHP = clamp(global.playerHP, -666, global.playerMAX_HP);
 
 if (oBattleBox.visible == false) 
 { 
-	x = global.boxOriginX;
+	x = room_width / 2;
 	y = -10;
 	exit; 
 }
