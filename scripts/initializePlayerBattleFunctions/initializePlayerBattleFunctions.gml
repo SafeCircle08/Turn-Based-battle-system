@@ -9,7 +9,7 @@
 //Default ones
 function initializeNavigatingBattleOptionFunctions()
 {
-	selectedBattleOption = function() { selectAction(true, true, [], method(self, function() { navigatingSubMenu = true; })) }	
+	selectedBattleOption = function() { selectAction(true, true, [], method(self, function() { navigatingSubMenu = true; subMenuSwiping = true; })) }	
 	navigatingSubMenuFunction = function(_drawArrow = false)
 	{
 		showMirrors();
@@ -18,60 +18,22 @@ function initializeNavigatingBattleOptionFunctions()
 		//Resets the navigation
 		if (keyboard_check_pressed(ord("X"))) { resetNavigation(0); }
 	
-		if (actualDrawAlpha < 1) { actualDrawAlpha += 0.05; }
-		draw_set_alpha(actualDrawAlpha);
-	
-		//The baseBG coordinates
 		var _optionList = global.playerEquippedOptions;
 		var _optionNumber = array_length(_optionList);
-		var _h = sprite_get_height(sLittleRectangle) / 2;
-		var _w = sprite_get_width(sLittleRectangle) / 2;
-		var _bgX = (room_width / 2) - 48;
-		var _bgY = (room_height / 2 - 20) - ((_h * (_optionNumber - 2)) + 5 * (_optionNumber - 2)) - 5;
-		var _bgH = 25;
-		var _xBorder = 17;
-		var _yBorder = 4;
-		var _bgW = 80;
-		
-		//Draws the path arrow
-		draw_sprite(sSelectArrow, delta_time / 1_000, _bgX + 9, _bgY + (_bgH * _optionNumber) / 2);
-		draw_sprite_stretched(sInventory, 0, _bgX + 9, _bgY, _bgW, _bgH * _optionNumber);
 		var _options = [];
 	
-		//Draws the secondary options (BUTTONS)	
+		//Draws the secondary options (BUTTONS)
 		for (var i = 0; i < _optionNumber; i++)
 		{
 			//Pushing the right names
 			array_push(_options, global.playerEquippedOptions[i].name);
-		
-			//Draws the buttons and the text
-			var _btnX = _bgX + _xBorder;
-			var _btnY = _bgY + (_h * i) + _yBorder + 3;
-			var _index = 0;
-			if (i == selected_option) { _index = 1; } 
-			draw_sprite_ext(sGUIBattleButton, _index, _btnX,  _btnY, 1, 1, 0, c_white, 1);
-			draw_text(_btnX + _w / 4 - 7, _btnY + _yBorder + 2, _options[i]);
-		
-			//Takes all the possible positions
-			if (array_length(battleOpNav) <= 1) { array_push(battleOpNav, _btnY + _yBorder + 2); }
 		}
-	
-		//Enemy indicating sprite arrow
-		if (_optionList[selected_option].name == "ATTACK") { draw_sprite(sIndicatingEnemyArrow, 0, _btnX + 45, _btnY - 75); }
-		if (_optionList[selected_option].name == "UNBIND") && (!instance_exists(oMirrorTargeting))
-		{
-			instance_create_layer(0, 0, LAYER_EFFECT, oMirrorTargeting);
-		}
-	
-		//To prevent to immediatly selecting when the player press enter
+		
+		//Select An Action
 		battleDelay = setTimer(battleDelay);
 		if (battleDelay == 0)
 		{
 			navigatingBattle(0, _optionNumber - 1);
-		
-			//When to draw the arrow
-			if (_drawArrow) { draw_sprite(sArrow, 0, _bgX + _xBorder, battleOpNav[selected_option] + 2); }
-			
 			if (keyboard_check_pressed(vk_enter))
 			{
 				//It calles the selectFunction (a set up for the main function)
@@ -97,7 +59,6 @@ function initializeNavigatingBattleOptionFunctions()
 				}
 			}
 		}
-		draw_set_alpha(1);
 	}
 }
 function initializeDefend_old_OptionFunction()
@@ -109,31 +70,31 @@ function initialiseCryOptionFunction()
 	selectedCryOption = function() { selectAction(true, false, ["<>Stop crying baby!"]); }		
 }
 function initializeInventoryOptionFunctions()
-{
-	function setUpInvItemNamesGUIObject()
+{	
+	//Create OutPut Message
+	createOutPutMessage = function(_x, _y)
 	{
-		//Creates inv text object
-		if (frame == -1)
-		{
-			invItemNamesGUI = instance_create_depth(0, 0, 0, oInventoryText);
-			for (var i = 0; i < array_length(global.equippedItems); i++)
-			{
-				invItemNamesGUI.actualArray[i] = global.equippedItems[i].name;	
-			}
-			invItemNamesGUI.visible = false;
-			frame++;
-		}		
+		//Creating the text element that will hold the item output message
+		itemOutputMessage = instance_create_depth(_x, _y, 0, oInventoryText);
+		itemOutputMessage.actualArray = usingItem(selected_option);
+		itemOutputMessage.visible = true;
+		itemOutputMessage.textDelay = 30;
+		//Making the item have an effect and removing  
+		//it from the inventory
+					
 	}
-	setUpInvItemNamesGUIObject();
 	
 	//When you select (press enter)
 	selectedInventoryOption = function()
 	{
-		selectAction(true, true, [], method(self, function() {
-			selected_option = 0;
-			navigatingInventory = true;
-			invItemNamesGUI.visible = true;
-		}));
+		if (array_length(global.equippedItems) > 0)
+		{
+			selectAction(true, true, [], method(self, function() {
+				selected_option = 0;
+				navigatingInventory = true;
+			}));
+		}
+		else { resetNavigation(3,method(self, function() { moreStepsAct = true; })); }
 	}
 	navigatingInventoryFunction = function()
 	{
@@ -152,34 +113,88 @@ function initializeInventoryOptionFunctions()
 				})
 			);
 		}
-	
-		var _guiX = room_width / 2 - 90;
-		var _guiY = room_width / 2 + 20;
-		var _spriteWidth = sprite_get_width(sInventory);
-		var _spriteHeight = sprite_get_height(sInventory);
+
 		var _itemWidth = sprite_get_width(sItemSprite);
-		var _itemHeigth = sprite_get_height(sItemSprite);
-		var _actualItemSprite = global.itemSpriteDraw;
-		var _sprBG = sInventory;
-		var _bgW = sprite_get_width(_sprBG);
-		var _bgH = sprite_get_height(_sprBG);
-		var _border = 5;
-		draw_set_font(fGenericText);
-	
+		var _border = 10;
+		var _inventoryX = room_width / 2 - 80;
+		var _inventoryY =  room_width / 2 - 60;
+		
+		var _sprBG = sInventoryBG;
+		var _bgW = sprite_get_width(_sprBG) * 3;
+		var _bgH = sprite_get_height(_sprBG) * 2;
+
 		//Draws the inventory BackGround
-		draw_sprite_stretched(sInventory, 0, _guiX, _guiY - 80, _bgW * 3, _bgH * 2);
-		draw_sprite_stretched(_actualItemSprite, 0, _guiX + _bgW + 15, _guiY - 70, _itemWidth, _itemHeigth);
-	
-		//Draws the item properties
-		if (!instance_exists(itemOutputMessage)) && (invItemNamesGUI.visible == true)
-		{	
-			//Draws the selected item's info
-			var _xx = _guiX + _border * 2;
-			var _yy = _guiY - 30;
-			var _info = itemInfo(selected_option);
-			draw_text_ext_transformed(_xx, _yy, _info, 20, _bgW * 5, 0.5, 0.5, 0);
+		draw_sprite_stretched(_sprBG, 0, _inventoryX, _inventoryY, _bgW, _bgH);
+		
+		//Draws the Inventory Mini Portrait (can an inventory have a portrait?, Idk lol)
+		draw_sprite(sInventoryMiniPortrait, 0, _inventoryX + _bgW - 30, _inventoryY + 3)
+		
+		//Draws the inventory space (useless but cool)
+		draw_set_font(fFontino);
+		draw_text(_inventoryX + _border * 3, _inventoryY - _border, string(array_length(global.equippedItems)) + "/8");
+		draw_set_font(fGenericText);
+		
+		//Draws the Item name, properties, info ecc...
+		var _spriteBorder = _border - 2;
+		var _itemNameX = _inventoryX + _spriteBorder;
+		var _itemNameY = _inventoryY + _spriteBorder;
+		var j = 0;
+		
+		for (var i = 0; i < array_length(global.equippedItems); i++)
+		{
+			if (selected_option == i) && (!instance_exists(itemOutputMessage)) 
+			{
+				//Sprite
+				var _itemSprX = _inventoryX + _bgW - _border - _itemWidth;
+				var _itemSprY = _inventoryY + _border + _border / 2 - 2;
+				draw_sprite(global.equippedItems[i].sprite, 0, _itemSprX, _itemSprY);
+				
+				//Draw statistics
+				for (var k = 0; k < 3; k++)
+				{
+					draw_sprite(global.equippedItems[i].propertiesList[k], 0, _itemSprX - _border - 1, _itemSprY + (10 * k + (1 * k)));	
+				}
+				draw_set_color(c_custom_yellow); 
+			}
+			else { draw_set_color(c_white); }
+			//Left Side
+			if (i < 4)
+			{
+				draw_text_ext_transformed(_itemNameX, _itemNameY + _border * i, ">" + global.equippedItems[i].name, 1, 200, 0.5, 0.5, 0);
+				continue;
+			}
+			//Right Side
+			_itemNameX = _inventoryX + _border + string_width("DIVID");
+			draw_text_ext_transformed(_itemNameX, _itemNameY + _border * j, ">" + global.equippedItems[i].name, 1, 200, 0.5, 0.5, 0);
+			j++;
 		}
-	
+		
+		//Draws the item properties
+		if (!instance_exists(itemOutputMessage))
+		{	
+			 draw_set_color(c_white); 
+			//Info
+			var _itemInfoBgX = _inventoryX + _border;
+			var _itemInfoBgY = _inventoryY + (_bgH / 2);
+			
+			var _infoBorder = 3;
+			var _itemInfoX = _itemInfoBgX - _border / 2;
+			var _itemInfoY = _itemInfoBgY - _border / 4 + 1;
+			
+			var _info = itemInfo(selected_option);
+			draw_sprite_stretched(sItemInfoBG, 0, _itemInfoX, _itemInfoY, _bgW - _border, _bgH / 2 + _border / 2 - _border);
+			draw_text_ext_transformed(_itemInfoX + _infoBorder * 2,  _itemInfoBgY + _border / 2, _info[0], 20, _bgW + 30, 0.5, 0.5, 0);
+		}
+		
+		//Draws the items statistics book (gonna make it an object in the future)
+		//This, when opened, is going to show and describe all the different item 
+		//statistics symbols meaning
+		var _itemInfoBgY = _inventoryY + (_bgH / 2);
+		var _bookW = sprite_get_width(sItemStatisticsBook);
+		var _bookX = _inventoryX + _bgW - _bookW - _border;
+		var _bookY = _inventoryY + _bgH / 2;
+		draw_sprite(sItemStatisticsBook, 0, _bookX, _itemInfoBgY + _border / 2);
+		
 		takenOptionDelay = setTimer(takenOptionDelay);
 		if (takenOptionDelay == 0)
 		{
@@ -191,23 +206,13 @@ function initializeInventoryOptionFunctions()
 				audio_play_sound(sndSelecting, 50, false, global.soundGain);
 				if (instance_exists(itemOutputMessage)) 
 				{ 
-					//Goes to the 'enemy talking section'
 					instance_destroy(itemOutputMessage);
 					terminateAction(["Player used an Item!\n>(Super idol!)"]);
 				}
 				else
 				{
-					//Creating the text element that will hold the item output message
-					itemOutputMessage = instance_create_depth(_guiX + 85, _guiY, 0, oInventoryText);
-					itemOutputMessage.actualArray = usingItem(selected_option);
-					itemOutputMessage.yAdder = 43;
-					itemOutputMessage.xAdder = 0;
-					itemOutputMessage.visible = true;
-					itemOutputMessage.textDelay = 30;
-					//Making the item have an effect and removing  
-					//it from the inventory
+					createOutPutMessage(_inventoryX + _border,_inventoryY + (_bgH / 2) + _border / 2);
 					array_delete(global.equippedItems, selected_option, 1);
-					array_delete(invItemNamesGUI.actualArray, selected_option, 1);
 				}
 			}
 		}
@@ -225,18 +230,19 @@ function initializeHealCheatFunction()
 function initializeAttackFunctions()
 {
 	selectedAttackFunction = function() { selectAction(false, false, [], method(self, function() { attacking = true; }))}
-	attackFunction = function(eqDrumP, eqSc)
+	attackFunction = function()
 	{
 		hideMirrors();
 		easeInBg(1);
-	
+		
 		//TIMER DEL PLAYER (PER QUANTI FRAME PUO' ATTACCARE)
 		global.playerAttackTime++;
 	
 		//CREATING THE ATTACK BAR
 		var _padX = room_width / 2;
 		var _padY = room_width / 2 - 75;
-	
+		var eqDrumP = global.eqDrumPad;
+		var eqSc = global.eqScope;
 		//CREO GLI OGGETTI 
 		if (global.playerAttackTime == 1)
 		{
@@ -286,7 +292,7 @@ function initializeAttackFunctions()
 }
 function initializeUnbindFunctions()
 {
-	selectedUnbindCage = function() { selectAction(false, false, [], method(self, function() { unbinding = true; instance_destroy(oMirrorTargeting) }))}
+	selectedUnbindCage = function() { selectAction(false, false, [], method(self, function() { unbinding = true; instance_destroy(oMirrorTargeting); }))}
 	unbindFunction = function() {
 		terminateAction(
 			global.playerOptions.unbind_function._flavourText,

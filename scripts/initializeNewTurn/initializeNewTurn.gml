@@ -18,6 +18,7 @@ function destroyBulletsGensExtras()
 //used to finish a turn, by creating the beam animation
 function finishTurn()
 {	
+	destroyBulletsGensExtras();
 	with (oBattleManager)
 	{
 		if (!ds_exists(ds_messages, ds_type_list)) { ds_messages = ds_list_create(); }
@@ -30,5 +31,6 @@ function finishTurn()
 		turnNumber += 1;
 		actualDrawAlpha = 0;
 		defended = 0;
-	}	
+	}
+	
 }

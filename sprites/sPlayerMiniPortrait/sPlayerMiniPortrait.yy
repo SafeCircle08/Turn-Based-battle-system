@@ -19,6 +19,7 @@
   "height":50,
   "HTile":false,
   "layers":[
+    {"$GMImageLayer":"","%Name":"fe2cbf4e-4ac8-4f49-a962-c9497be3b292","blendMode":0,"displayName":"Layer 1","isLocked":false,"name":"fe2cbf4e-4ac8-4f49-a962-c9497be3b292","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
     {"$GMImageLayer":"","%Name":"9bb1d060-33f6-4518-8885-a502aab83dfc","blendMode":0,"displayName":"default","isLocked":false,"name":"9bb1d060-33f6-4518-8885-a502aab83dfc","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"sPlayerMiniPortrait",

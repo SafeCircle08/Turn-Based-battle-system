@@ -1,5 +1,3 @@
-var _x = x;
-var _y = y;
 var _w = sprite_get_width(sprite_index);
 var _h = sprite_get_height(sprite_index);
 
@@ -27,7 +25,6 @@ else
 	drawAlpha -= 0.05;
 	textX += 0.5;
 }		
-
 
 //Clamping values
 drawAlpha = clamp(drawAlpha, 0, 1);

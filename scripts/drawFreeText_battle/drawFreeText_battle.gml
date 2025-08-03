@@ -1,6 +1,5 @@
 function drawFreeText_battle(_textList, _font = fFontino, _inBox = true)
 {
-	
 	var _boxX = camera_get_view_x(view_camera[view_current]) + sprite_get_width(sNewBox) / 2;
 	var _boxY = camera_get_view_height(view_camera[view_current]);
 	
@@ -17,7 +16,7 @@ function drawFreeText_battle(_textList, _font = fFontino, _inBox = true)
 	
 	//Where the text is being drawn
 	var _xPos = _boxX + _border - sprite_get_width(sNewBox) / 2;
-	var _yPos = _boxY - _height + 13;
+	var _yPos = _boxY - _height + 15;
 	
 	if (_inBox == true)
 	{

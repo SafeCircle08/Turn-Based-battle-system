@@ -1,6 +1,7 @@
 //When you choose an action in the submenu
 function selectAction(main = true, _moreStepsAct = true, _flavourText = [], _method = function() {})
 {
+	playSound(sndSelecting, SOUND_CHANNEL_1);
 	if (main)
 	{
 		_method();
@@ -17,6 +18,8 @@ function selectAction(main = true, _moreStepsAct = true, _flavourText = [], _met
 	else
 	{
 		_method();
+		actionChoosen = true;
+		subMenuSwiping = false;
 		battleDelay = 3;
 		moreStepsAct = false;
 		navigatingSubMenu = false;
@@ -64,16 +67,16 @@ function resetNavigation(_lastOption = 0, _resetMethod = function() {})
 	audio_play_sound(sndSelecting, 50, false, global.soundGain);
 	actualDrawAlpha = 0;
 	selected_option = _lastOption;
-	acting = false;
+	decidingSubAction = false;
 	moreStepsAct = false;
 	actualDrawAlpha = 0;
 	battleDelay = 3;
 	navigatingSubMenu = false;
+	subMenuSwiping = false;
 	
 	oAttackBG.fadingOut = true;
 	invPos = 0;
 	navigatingInventory = false;
-	invItemNamesGUI.visible = false;
 	takenOptionDelay = 3;
 	itemCordTaken = false;
 	navigatingInventoryNav = [];
@@ -91,16 +94,12 @@ function terminateAction(_ds_list = [], _method = function() {})
 	enemyTextShowed = false;
 	takenOptionDelay = 3;
 	battleDelay = 3;
-	acting = false;
+	decidingSubAction = false;
 	showBattleText = true;
 	navigatingSubMenu = false;
 	oAttackBG.fadingOut = true;
-	attacking = false;
-	unbinding = false;
-	using_special_action = false;
 	navigatingInventory = false;
-	invItemNamesGUI.visible = false;
-	drawNav = true;
+	actionChoosen = false;
 	_method();
 	
 	hideMirrors();

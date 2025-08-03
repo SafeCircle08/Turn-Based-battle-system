@@ -12,6 +12,5 @@ if (oBattleManager.playerTurn == false)
 if keyboard_check_pressed(ord("R")) 
 { 
 	finishTurn(); 
-	destroyBulletsGensExtras();
 	global.playerShield = global.playerMaxShield;
 }

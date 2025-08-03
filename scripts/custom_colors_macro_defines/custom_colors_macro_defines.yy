@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"custom_colors_macro_defines",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"custom_colors_macro_defines",
+  "parent":{
+    "name":"Constants",
+    "path":"folders/Scripts/Defines/Constants.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

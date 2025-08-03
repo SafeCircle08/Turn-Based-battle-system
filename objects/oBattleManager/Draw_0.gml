@@ -11,18 +11,17 @@ if (oBattleBox.visible == false)
 	var	BUFFER = 12;
 	draw_set_font(_battleFont);
 	
-	//Draws the text box and the battle messages
-	draw_sprite(_sprTextBox, 0, guiX, guiY);
-	
+	#region DRAWING DS MESSAGES
 	var _dsBgW = sprite_get_width(_sprTextBox);
 	var _dsBgH = sprite_get_height(_sprTextBox);
-	
 	var _dsX = camera_get_view_x(view_camera[view_current]);
 	var _dsY = camera_get_view_height(view_camera[view_current]);
 	var _border = 10;
 	
 	if (showBattleText)
 	{
+		//Draws the text box and the battle messages
+		draw_sprite(_sprTextBox, 0, guiX, guiY);
 		var _textX = guiX - (_textBoxW / 2) + BUFFER;
 		var _textY = _dsY - _dsBgH + 13;
 		for (var a = 0; a <= messageCounter; a++)
@@ -31,10 +30,11 @@ if (oBattleBox.visible == false)
 			draw_text_ext(_dsX + _border + 0.5, _textY + fontSize * a * 2 + 0.5, ds_messages[| a], (fontSize + BUFFER), _textBoxW - BUFFER * 3);
 			draw_set_color(c_white);
 			draw_text_ext(_dsX + _border, _textY + fontSize * a * 2, ds_messages[| a], (fontSize + BUFFER), _textBoxW - BUFFER * 3);
-		}
-		
+		}	
 	}
+	#endregion
 	
+	#region DRAWING PLAYER HP, CAGE STATE
 	//Draws the player variables
 	var _playerInfoX = BUFFER - 5;
 	var _playerInfoY = guiY - (_textBoxH) - 7;
@@ -49,22 +49,65 @@ if (oBattleBox.visible == false)
 	draw_text(_csX, _playerInfoY, "CS: ");
 	draw_sprite(sCSBarBG, 0, _csX + 25, _playerInfoY - 1);
 	draw_sprite_stretched(sCSBar, 0, _csX + 25, _playerInfoY - 1, (global.CSvalue/global.CSvalueMax) * _barCsW, _barCsH);
+	#endregion
 	
+	#region DRAWING ENEMY INFO
 	//Draws the monster variables
 	var _enemyInfoX = _csX + 60;
 	var _enemyInfoY = _playerInfoY + 5;
 	draw_set_color(c_red);
 	draw_text_ext_transformed(_enemyInfoX + 40, _enemyInfoY, "(" + string(global.monsterHP) + "/" + string(global.maxMonsterHp) + ")", 5, 100, 0.5, 0.5, 0);
 	draw_set_color(c_white);
+	#endregion
 	
-	//Draws the button section
+	#region DRAWING SUB MENU 
+	var _optionList = global.playerEquippedOptions;
+	var _optionNumber = array_length(_optionList);
+	var _h = sprite_get_height(sLittleRectangle) / 2;
+	var _w = sprite_get_width(sLittleRectangle) / 2;
+		
+	//Sub Menu Button Pos
+	setSubMenuPositions(
+		(room_width / 2) - 48, 
+		(room_height / 2 - 20) - ((_h * (_optionNumber - 2)) + 5 * (_optionNumber - 2)) - 5
+	);
+	
+	var _bgH = 25;
+	var _xBorder = 17;
+	var _yBorder = 4;
+	var _bgW = 80;
 	var _buttonY = room_height / 4 - 12;
 	var _goalButtonX = 0;
-	
 	var _sprButton = sLittleRectangle;
 	var _buttonW = sprite_get_width(_sprButton);
 	var _buttonH = sprite_get_height(_sprButton);
+		
+	if (subMenuAlpha > 0)
+	{
+		drawFadeInSprite(sSelectArrow, subMenuX - 49, subMenuY + (_bgH * _optionNumber) / 2, subMenuAlpha, subMenuXAdder);
+		drawFadeInSpriteStretched(sInventory, subMenuX - 49, subMenuY, subMenuAlpha, subMenuXAdder, _bgW, _bgH * _optionNumber);
+		drawFadeInSprite(sSteamPunkMiniPortrait, subMenuX - 49 + _bgW / 2, subMenuY + 3, subMenuAlpha, subMenuXAdder);	
+		var _options = [];
 	
+		draw_set_alpha(subMenuAlpha);
+		//Draws the secondary options (BUTTONS)
+		for (var i = 0; i < _optionNumber; i++)
+		{
+			//Pushing the right names
+			array_push(_options, global.playerEquippedOptions[i].name);
+			//Draws the buttons and the text
+			var _btnX = subMenuX + _xBorder - 58;
+			var _btnY = subMenuY + (_h * i + 1 * i) + _yBorder + 2;
+			var _index = 0;
+			if (i == selected_option) { _index = 1; } 
+			draw_sprite_ext(sGUIBattleButton, _index, _btnX + subMenuXAdder, _btnY, 1, 1, 0, c_white, subMenuAlpha);
+			draw_text(_btnX + _w / 4 - 7 + subMenuXAdder, _btnY + _yBorder + 2, _options[i]);
+		}
+		draw_set_alpha(1);
+	}
+	#endregion
+	
+	#region DRAWING MAIN MENU
 	//Button BG
 	draw_sprite_stretched(sInventory, 0, startButtonX - 50, _buttonY - 5, _buttonW / 2 + 71.5, _buttonH * 2 + 15);
 	//Mini player portrait
@@ -84,8 +127,7 @@ if (oBattleBox.visible == false)
 		{
 			//Draws the button
 			var _index = 0;
-			var _xBufferFirst = 160;
-			if (acting == false)
+			if (decidingSubAction == false)
 			{
 				if (selected_option == i) { _index = 1 };
 			}
@@ -103,7 +145,7 @@ if (oBattleBox.visible == false)
 			draw_text(textX, textY, text);
 		}
 		//TO CHANGE
-		var _textList = ["<>It's like the surrounding heat\n   is taking your breath\n   away...", "<> You should probably find a way\n   to finish all of this..."];
+		var _textList = ["<>It's like the surrounding heat\n  is taking your breath away...", "<>You should probably find a way\n  to finish all of this...\n<>And get some water :>"];
 		drawFreeText_battle(_textList);
 	}
 	else
@@ -114,16 +156,19 @@ if (oBattleBox.visible == false)
 			startButtonX = clamp(startButtonX, -200, 100);
 		}			
 	}
+	#endregion
 	
-	//Drawing the sub options the player can take
-	if (acting == true)
+	#region MENAGING ALPHAS AND ACTING
+	if (decidingSubAction == true)
 	{
-		if (navigatingInventory == true) { global.mainMenuOptions.choosing_inventory_option._function(); }	
-		if (navigatingSubMenu == true) { global.mainMenuOptions.choosing_battle_option._function(); }
+		if (navigatingSubMenu == true) { global.settedMainBattleOptions[MAIN_MENU_BATTLE]._function(); }		
+		if (navigatingInventory == true) { global.settedMainBattleOptions[MAIN_MENU_INVENTORY]._function(); }	
 	}
+	#endregion
 }
 else
 {
+	#region DRAWING PLAYER INFO DURING TURN
 	//DRAWS THE PLAYER HEALTH AND SHIELD BARS
 	var _bX = 10; 
 	var _bY = room_height - 15;
@@ -146,6 +191,7 @@ else
 	draw_text_ext_transformed(_bX + _xOffSet + (_bW / 2) - 5, _bY - 11, "HP: " + string(global.playerHP) + " / " + string(global.playerMAX_HP) + ";", 3, 9999, 0.5, 0.5, 0);
 		
 	draw_set_halign(fa_left);
+	#endregion
 }
 
 if (enemyCanShowText) && (enemyTextShowed == false)

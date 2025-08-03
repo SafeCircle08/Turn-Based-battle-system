@@ -1,7 +1,7 @@
 {
   "$GMFont":"",
   "%Name":"fFontino",
-  "AntiAlias":1,
+  "AntiAlias":0,
   "applyKerning":0,
   "ascender":9,
   "ascenderOffset":1,
@@ -107,7 +107,7 @@
     "124":{"character":124,"h":12,"offset":2,"shift":8,"w":1,"x":77,"y":16,},
     "125":{"character":125,"h":12,"offset":0,"shift":8,"w":3,"x":72,"y":16,},
     "126":{"character":126,"h":12,"offset":0,"shift":8,"w":7,"x":91,"y":72,},
-    "9647":{"character":9647,"h":12,"offset":2,"shift":11,"w":7,"x":100,"y":72,},
+    "9647":{"character":9647,"h":12,"offset":2,"shift":11,"w":6,"x":100,"y":72,},
   },
   "hinting":0,
   "includeTTF":false,
@@ -134,10 +134,7 @@
   "sdfSpread":8,
   "size":8.0,
   "styleName":"Regular",
-  "textureGroupId":{
-    "name":"Default",
-    "path":"texturegroups/Default",
-  },
+  "textureGroupId":null,
   "TTFName":"",
   "usesSDF":false,
 }

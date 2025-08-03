@@ -1,46 +1,63 @@
-global.pizza =
+#macro ITEM_PROPERTY_HEAL sHealProperty
+#macro ITEM_PROPERTY_SPD sSpeedProperty
+#macro ITEM_PROPERTY_DEF sDefenceProperty
+#macro ITEM_PROPERTY_NOONE sNooneProperty
+#macro ITEM_PROPERTY_STRENGTH sStrengthPropery
+#macro ITEM_PROPERTY_HELLO_WORLD sHelloWorldProperty
+#macro ITEM_PROPERTY_JUMP_BOOST sJumpBoostPropery
+#macro ITEM_PROPERTY_INVISIBILITY sInvisibleProperty
+#macro ITEM_PROPRTY_BIO_HAAZARD sBioHaazardProperty
+
+function createNewItem(_name, spr, _hp, propList, _info, fullHpTxt, outPutMsg)
 {
-	name: "Pizza",
-	sprite: sPizza,
-	hp: 200, 
-	info: ["A slice of pizza... You have bad feelings about it..."],
-	fullHPText: ["Pizza full hp text"],
-	outPutMessage: ["You ate a slice of pizza! It wasn't good tho..."]
+	return {
+		name: _name,
+		sprite: spr,
+		hp: _hp,
+		propertiesList: propList,
+		info: _info,
+		fullHPText: fullHpTxt,
+		outPutMessage: outPutMsg
+	}
 }
 
-global.kfc =
-{
-	name: "KFC",
-	sprite: sKfc,
-	hp: 33,
-	info: ["You have seen too many memes to take that seriusly..."],
-	fullHPText: ["kfc full hp text"],
-	outPutMessage: ["You became a black ninja! How awesome isnt it"]
-}
+global.pizza = createNewItem("Pizza", sPizza, 200, 
+	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_STRENGTH, ITEM_PROPERTY_DEF],
+	["A slice of pizza... You have bad feelings about it..."],
+	["Pizza full hp text"],
+	["You ate a slice of pizza! It wasn't good tho..."])
 
-global.candy =
-{
-	name: "Candy",
-	sprite: sCandy,
-	hp: 200,
-	info: ["Candy candy candy! Just take ONLY one candy!"],
-	fullHPText: ["That candy was so good you feel like you... ehr... Nevermind."],
-	outPutMessage: ["You took one candy... You would like to take more, but you can't..."]
-}
+global.kfc = createNewItem("KFC", sKfc, 150, 
+	 [ITEM_PROPERTY_HEAL, ITEM_PROPERTY_DEF, ITEM_PROPERTY_NOONE],
+	["You have seen too many memes to take that seriusly..."],
+	["kfc full hp text"],
+	["You became a black ninja! How awesome isnt it"])
 
-global.itemsSprites =
-{
-	pizza: sPizza,
-	spdPot: sSpdPotion,
-	candy: sCandy,
-	kfc: sKfc,
-}
+global.candy = createNewItem("Candy", sCandy, 200,
+	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_SPD, ITEM_PROPERTY_DEF],
+	["Candy candy candy! Just take ONLY one candy!"],
+	["That candy was so good you feel like you... ehr... Nevermind."],
+	["You took one candy... You would like to take more, but you can't..."])
+
+global.joice = createNewItem("Joice", sJoiceItem, 233,
+	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_DEF, ITEM_PROPERTY_JUMP_BOOST],
+	["!JOICE! The Juice made with Joy since -984!"],
+	["Drinking Joy Juice (Joice) made your day better!\nHP maxed Out!"],
+	["Oh Man, one sip of Joice is enough to make a grown man cry..."])
+
+global.cyanide = createNewItem("CN-", sCyanideItem, -237,
+	[ITEM_PROPRTY_BIO_HAAZARD, ITEM_PROPERTY_NOONE, ITEM_PROPERTY_NOONE],
+	["A pill of cyanide. You would never eat this."],
+	["There is no HP lol"],
+	["Why did you do that like, are you stupid or what like lololol bro please stop eating that this is not good for your health hellmhaw hellmhaw hellmhaw"])
 
 global.equippedItems = [
-	global.pizza,
+	global.cyanide,
 	global.kfc,
+	global.joice,
 	global.candy,
-	global.candy
+	global.pizza,
+	global.joice,
+	global.cyanide,
+	global.joice
 ]
-
-global.itemSpriteDraw = global.itemsSprites.pizza;

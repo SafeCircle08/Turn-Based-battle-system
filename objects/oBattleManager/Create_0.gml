@@ -18,7 +18,7 @@ playerTurn = true;
 
 //GENERAL ACT VARIABLES
 moreStepsAct = false; //if an action requires more steps
-acting = false;
+decidingSubAction = false;
 selected_option = 0;
 
 shieldBarW = 121;
@@ -28,10 +28,7 @@ hpbarW = 121;
 attacking = false;
 
 //BOX VARIABLES and TEXTS
-boxWidth = sprite_get_width(sTextBG) + 10;
-strHeight = string_height(global.textList[turnNumber]);
 charCount = 0;
-enter = keyboard_check_pressed(vk_enter);
 page = 0;
 speechSpeed = 0.5;
 ds_messages = ds_list_create();
@@ -41,17 +38,13 @@ messageTimer = 0;
 timeBeforePressed = 15;
 enemyTextShowed = false;
 enemyCanShowText = 0;
-textSkipTimer = 100;
-color = c_white;
 dialogueDelay = 10;
-lastSpace = 0;
 
 //BUTTONS VARIABLES
 startButtonXRef = -200;
 startButtonX = startButtonXRef;
 buttonFrame = 0;
 btTextWrote = false;
-btCharCount = 0;
 
 //INVENTORY VARIABLES
 frame = -1;
@@ -59,23 +52,49 @@ invItemNamesGUI = undefined;
 navigatingInventoryNav = []; //the position to navigate in the inventory
 takenOptionDelay = 3;
 itemOutputMessage = undefined;
-maxOption = undefined;
 itemCordTaken = false;
-drawNav = true;
 navigatingInventory = false; //if you decided to use the item act
 invPos = 0; //the pos your cursor is in the inventory
 
 //BATTLE OPTIONS VARIABLES
-battlePos = 0;
-battleOpNav = [];
 navigatingSubMenu = false;
 battleDelay = 3;
 actualDrawAlpha = 0;
-defending = false;
 
-unbinding = false;
-healing = false;
-using_special_action = false;
+//Alpha Values
+subMenuAlpha = 0;
+subMenuXAdder = 0;
+
+subArrowGoalX = 20;
+subArrowAlpha = 0;
+subMenuSwiping = false;
+
+subMenuFadeIn = function()
+{
+	subMenuXAdder += 7;
+	subMenuAlpha += 0.05;
+	subMenuXAdder = clamp(subMenuXAdder, 0, 58);
+	subMenuAlpha = clamp(subMenuAlpha, 0, 1);	
+}
+
+subMenuFadeOut = function()
+{
+	if (subMenuAlpha > 0) { subMenuAlpha -= 0.05; }
+	if (subMenuXAdder > 0) { subMenuXAdder -= 5; }
+	subMenuXAdder = clamp(subMenuXAdder, 0, 58);
+	subMenuAlpha = clamp(subMenuAlpha, 0, 1);			
+}
+
+subMenuX = 0;
+subMenuY = 0;
+//Method
+setSubMenuPositions = function(_x, _y)
+{
+	subMenuX = _x;
+	subMenuY = _y;
+}
+
+actionChoosen = false;
 
 //The effect
 makeAlphaSinEffect(15, 0, LAYER_UNDER_EFFECT, 5, sInventory, 3, false, 2, 1.8, true);
