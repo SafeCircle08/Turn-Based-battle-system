@@ -1,6 +1,6 @@
 if (oBattleBox.visible == false)
 {
-	//Variables
+	#region //VARIABLES
 	var guiX = room_width / 2;
 	var guiY = room_height;
 	var _sprTextBox = sNewBox;
@@ -10,6 +10,7 @@ if (oBattleBox.visible == false)
 	var fontSize = font_get_size(_battleFont);
 	var	BUFFER = 12;
 	draw_set_font(_battleFont);
+	#endregion
 	
 	#region DRAWING DS MESSAGES
 	var _dsBgW = sprite_get_width(_sprTextBox);
@@ -27,9 +28,9 @@ if (oBattleBox.visible == false)
 		for (var a = 0; a <= messageCounter; a++)
 		{
 			draw_set_color(c_gray);
-			draw_text_ext(_dsX + _border + 0.5, _textY + fontSize * a * 2 + 0.5, ds_messages[| a], (fontSize + BUFFER), _textBoxW - BUFFER * 3);
+			draw_text_ext(_dsX + _border + 0.5, _textY + fontSize * a * 2 + 0.5, ds_messages[| a], fontSize + 9, _textBoxW - BUFFER * 3);
 			draw_set_color(c_white);
-			draw_text_ext(_dsX + _border, _textY + fontSize * a * 2, ds_messages[| a], (fontSize + BUFFER), _textBoxW - BUFFER * 3);
+			draw_text_ext(_dsX + _border, _textY + fontSize * a * 2, ds_messages[| a], fontSize + 9, _textBoxW - BUFFER * 3);
 		}	
 	}
 	#endregion
@@ -158,11 +159,93 @@ if (oBattleBox.visible == false)
 	}
 	#endregion
 	
-	#region MENAGING ALPHAS AND ACTING
-	if (decidingSubAction == true)
+	#region	DRAWING THE INVENTORY
+	
+	if (inventoryAlpha > 0 )
 	{
-		if (navigatingSubMenu == true) { global.settedMainBattleOptions[MAIN_MENU_BATTLE]._function(); }		
-		if (navigatingInventory == true) { global.settedMainBattleOptions[MAIN_MENU_INVENTORY]._function(); }	
+		draw_set_alpha(inventoryAlpha);
+		
+		var _itemWidth = sprite_get_width(sItemSprite);
+		var _border = 10;
+		var _inventoryX = room_width / 2 - 80 - (59);
+		var _inventoryY =  room_width / 2 - 60;
+		
+		var _sprBG = sInventoryBG;
+		var _bgW = sprite_get_width(_sprBG) * 3;
+		var _bgH = sprite_get_height(_sprBG) * 2;
+
+		//Draws the inventory BackGround
+		draw_sprite_stretched(_sprBG, 0, _inventoryX + inventoryXAdder, _inventoryY, _bgW, _bgH);
+		
+		//Draws the Inventory Mini Portrait (can an inventory have a portrait?, Idk lol)
+		draw_sprite(sInventoryMiniPortrait, 0, _inventoryX + _bgW - 30 + inventoryXAdder, _inventoryY + 3)
+		
+		//Draws the inventory space (useless but cool)
+		draw_set_font(fFontino);
+		draw_text(_inventoryX + _border * 3 + inventoryXAdder, _inventoryY - _border, string(array_length(global.equippedItems)) + "/8");
+		draw_set_font(fGenericText);
+		
+		//Draws the Item name, properties, info ecc...
+		var _spriteBorder = _border - 2;
+		var _itemNameX = _inventoryX + _spriteBorder;
+		var _itemNameY = _inventoryY + _spriteBorder;
+		var j = 0;
+		
+		for (var i = 0; i < array_length(global.equippedItems); i++)
+		{
+			if (selected_option == i) && (!instance_exists(itemOutputMessage)) 
+			{
+				//Sprite
+				var _itemSprX = _inventoryX + _bgW - _border - _itemWidth;
+				var _itemSprY = _inventoryY + _border + _border / 2 - 2;
+				draw_sprite(global.equippedItems[i].sprite, 0, _itemSprX + inventoryXAdder, _itemSprY);
+				
+				//Draw statistics
+				for (var k = 0; k < 3; k++)
+				{
+					draw_sprite(global.equippedItems[i].propertiesList[k], 0, _itemSprX - _border - 1 + inventoryXAdder, _itemSprY + (10 * k + (1 * k)));	
+				}
+				draw_set_color(c_custom_yellow); 
+			}
+			else { draw_set_color(c_white); }
+			//Left Side
+			if (i < 4)
+			{
+				draw_text_ext_transformed(_itemNameX + inventoryXAdder, _itemNameY + _border * i, global.equippedItems[i].name, 1, 200, 0.5, 0.5, 0);
+				continue;
+			}
+			//Right Side
+			_itemNameX = _inventoryX + _border + string_width("DIVI");
+			draw_text_ext_transformed(_itemNameX + inventoryXAdder, _itemNameY + _border * j, global.equippedItems[i].name, 1, 200, 0.5, 0.5, 0);
+			j++;
+		}
+		
+		//Draws the item properties
+		if (!instance_exists(itemOutputMessage))
+		{	
+				draw_set_color(c_white); 
+			//Info
+			var _itemInfoBgX = _inventoryX + _border;
+			var _itemInfoBgY = _inventoryY + (_bgH / 2);
+			
+			var _infoBorder = 3;
+			var _itemInfoX = _itemInfoBgX - _border / 2;
+			var _itemInfoY = _itemInfoBgY - _border / 4 + 1;
+			
+			var _info = itemInfo(selected_option);
+			draw_sprite_stretched(sItemInfoBG, 0, _itemInfoX + inventoryXAdder, _itemInfoY, _bgW - _border, _bgH / 2 + _border / 2 - _border);
+			draw_text_ext_transformed(_itemInfoX + _infoBorder * 2 + inventoryXAdder,  _itemInfoBgY + _border / 2, _info[0], 20, _bgW + 30, 0.5, 0.5, 0);
+		}
+		
+		//Draws the items statistics book (gonna make it an object in the future)
+		//This, when opened, is going to show and describe all the different item 
+		//statistics symbols meaning
+		var _itemInfoBgY = _inventoryY + (_bgH / 2);
+		var _bookW = sprite_get_width(sItemStatisticsBook);
+		var _bookX = _inventoryX + _bgW - _bookW - _border;
+		var _bookY = _inventoryY + _bgH / 2;
+		draw_sprite(sItemStatisticsBook, 0, _bookX + inventoryXAdder, _itemInfoBgY + _border / 2);
+		draw_set_alpha(1);
 	}
 	#endregion
 }

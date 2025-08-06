@@ -13,16 +13,13 @@ if (playerTurn == true) && (showBattleText == false) && (decidingSubAction == fa
 	{
 		decidingSubAction = true;
 		enemyTextShowed = false;
-		oBulletGeneratorManager.generatorCreated = false; //will create the actual generator
+		oBulletGeneratorManager.generatorCreated = false;
 		
 		if (!ds_exists(ds_messages, ds_type_list)) { ds_messages = ds_list_create() }
 		
-		//---------------------------SELECTING MAIN ACTIONS-------------------------
+		mainPressed = selected_option;
 		global.settedMainBattleOptions[selected_option]._selectFunction();
-		
-		//If an action requires more step, like attacking or 
-		//using an item, it won't show the BattleText
-		//when you touch enter the first time
+	
 		if (moreStepsAct == false) { terminateAction(); }
 	}
 }
@@ -64,23 +61,26 @@ if (showBattleText)
 	}	
 }
 
-//Performing the options' functions
+//Navigating 
 if (decidingSubAction == true)
-{
-	if (subMenuSwiping) { subMenuFadeIn(); }
-	else { subMenuFadeOut(); }
+{	
+	if (playingGuiAnimation) 
+	{ 
+		global.settedMainBattleOptions[mainPressed]._fadeInFunc(); 
+	} else { global.settedMainBattleOptions[mainPressed]._fadeOutFunc(); }
 	
+	if (showingSubWindow) { global.settedMainBattleOptions[mainPressed]._function(); }	
 	if (actionChoosen) { global.playerEquippedOptions[selected_option]._function(); }
 }
-else { subMenuFadeOut(); }
+else { global.settedMainBattleOptions[mainPressed]._fadeOutFunc(); }
 
 //When the player is inside the bullet box
 if (!playerTurn) && (!showBattleText)
 {
 	global.playerHP = clamp(global.playerHP, -666, global.playerMAX_HP);
-	enemyCanShowText = false;
-	global.enemyTimer++; //Parte da 0 e arriva fino a global.enemyAttackTime
+	global.enemyTimer++; //0 -> global.enemyAttackTime
 	oBattleBox.visible = true;
+	enemyCanShowText = false;
 	
 	//Starts the beam animation 60 frames before the end of the turn
 	if (global.enemyTimer == global.enemyAttackTime - 60) { startBeamAnimation(false); }

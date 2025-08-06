@@ -47,77 +47,39 @@ buttonFrame = 0;
 btTextWrote = false;
 
 //INVENTORY VARIABLES
-frame = -1;
-invItemNamesGUI = undefined;
-navigatingInventoryNav = []; //the position to navigate in the inventory
 takenOptionDelay = 3;
 itemOutputMessage = undefined;
-itemCordTaken = false;
-navigatingInventory = false; //if you decided to use the item act
-invPos = 0; //the pos your cursor is in the inventory
 
 //BATTLE OPTIONS VARIABLES
-navigatingSubMenu = false;
 battleDelay = 3;
 actualDrawAlpha = 0;
 
-//Alpha Values
-subMenuAlpha = 0;
-subMenuXAdder = 0;
-
-subArrowGoalX = 20;
-subArrowAlpha = 0;
-subMenuSwiping = false;
-
-subMenuFadeIn = function()
-{
-	subMenuXAdder += 7;
-	subMenuAlpha += 0.05;
-	subMenuXAdder = clamp(subMenuXAdder, 0, 58);
-	subMenuAlpha = clamp(subMenuAlpha, 0, 1);	
-}
-
-subMenuFadeOut = function()
-{
-	if (subMenuAlpha > 0) { subMenuAlpha -= 0.05; }
-	if (subMenuXAdder > 0) { subMenuXAdder -= 5; }
-	subMenuXAdder = clamp(subMenuXAdder, 0, 58);
-	subMenuAlpha = clamp(subMenuAlpha, 0, 1);			
-}
+initializeInventoryAnimations();
+initializeSubBattleMenuAnimations();
 
 subMenuX = 0;
 subMenuY = 0;
+mainPressed = 0;
+
+playingGuiAnimation = false;
+
 //Method
 setSubMenuPositions = function(_x, _y)
 {
 	subMenuX = _x;
 	subMenuY = _y;
 }
+showingSubSubWindow = false;
 
 actionChoosen = false;
+showingSubWindow = false;
+subSubDelay = 3;
 
 //The effect
 makeAlphaSinEffect(15, 0, LAYER_UNDER_EFFECT, 5, sInventory, 3, false, 2, 1.8, true);
+//Initialize the "coded" functions
+initializeAllCreatedFunctions();
 
-//------------------------------MENU NAVIGATION SECTION & ACTIONS------------------------------\\
-
-//MAIN MENU FUNCTIONS
-//Default ones
-initializeNavigatingBattleOptionFunctions();
-initializeDefend_old_OptionFunction();
-initialiseCryOptionFunction();
-initializeInventoryOptionFunctions();
-//Special ones
-initializeHealCheatFunction();
-
-//SUBMENU FUNCTIONS
-//Default ones
-initializeAttackFunctions();
-initializeUnbindFunctions();
-
-//Special ones
-initializeDefenceFunctions();
-
-//Initialize all the option the player has equipped
+//Initialize the functions the player havs
 initializePlayerOptionsinfo();
 initializePlayerMainBattleMenuOptions();

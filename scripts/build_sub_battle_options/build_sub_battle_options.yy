@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"build_sub_battle_options",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"build_sub_battle_options",
+  "parent":{
+    "name":"PlayerDefines",
+    "path":"folders/Scripts/Defines/PlayerDefines.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

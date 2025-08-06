@@ -6,6 +6,7 @@ function selectAction(main = true, _moreStepsAct = true, _flavourText = [], _met
 	{
 		_method();
 		moreStepsAct = _moreStepsAct;
+		if (moreStepsAct) { showingSubWindow = true; }
 		var _pages = array_length(_flavourText);
 		if ((_pages >= 0) && (_moreStepsAct == false))
 		{
@@ -18,12 +19,12 @@ function selectAction(main = true, _moreStepsAct = true, _flavourText = [], _met
 	else
 	{
 		_method();
-		actionChoosen = true;
-		subMenuSwiping = false;
+		actionChoosen = true; 
+		playingGuiAnimation = false;
+		showingSubWindow = false;
 		battleDelay = 3;
-		moreStepsAct = false;
-		navigatingSubMenu = false;
-	}	
+		moreStepsAct = false;			
+	}
 }
 
 //Reset the text variables to show all the texts
@@ -71,15 +72,10 @@ function resetNavigation(_lastOption = 0, _resetMethod = function() {})
 	moreStepsAct = false;
 	actualDrawAlpha = 0;
 	battleDelay = 3;
-	navigatingSubMenu = false;
-	subMenuSwiping = false;
 	
 	oAttackBG.fadingOut = true;
 	invPos = 0;
-	navigatingInventory = false;
 	takenOptionDelay = 3;
-	itemCordTaken = false;
-	navigatingInventoryNav = [];
 	
 	_resetMethod();
 	
@@ -111,9 +107,6 @@ function terminateAction(_ds_list = [], _method = function() {})
 		if (!ds_exists(ds_messages, ds_type_list)) { ds_messages = ds_list_create(); }
 	
 		//Assign the ds messages value
-		for (var i = 0; i < array_length(_ds_list); i++)
-		{
-			ds_messages[| i] = _ds_list[i];	
-		}
+		for (var i = 0; i < array_length(_ds_list); i++) { ds_messages[| i] = _ds_list[i];	}
 	}
 }
