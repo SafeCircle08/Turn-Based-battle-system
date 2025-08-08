@@ -65,7 +65,7 @@ function initializeDefend_old_OptionFunction()
 }
 function initialiseCryOptionFunction()
 {
-	selectedCryOption = function() { selectAction(true, false, ["<>Stop crying baby!"]); }		
+	selectedCryOption = function() { selectAction(true, false, ["<>Crying won't do nothing\n  but dehydratate you to death.", "\n<>Stop it."]); }		
 }
 function initializeInventoryOptionFunctions()
 {	
@@ -169,7 +169,6 @@ function initializeAttackFunctions()
 		}
 		else
 		{
-			//QUANDO TUTTI I PROIETTILI BUONI FINISCONO
 			if (instance_number(oShell) == 0)
 			{
 				//TODO:
@@ -216,7 +215,18 @@ function initializeDefenceFunctions()
 }
 function initializePrayFunctions() 
 {
-	selectedPrayOption = function() { selectAction(true, true, []) }
+	selectedPrayOption = function() { 
+		selectAction(true, true, []); 
+		if (!instance_exists(oAdSlidingManager)) {
+			var _downAds = instance_create_layer(x, y, layer, oAdSlidingManager);
+			_downAds._sign = 1;
+			_downAds.createVerticalAds();
+			var _upAds = instance_create_layer(x, y, layer, oAdSlidingManager);
+			_upAds._sign = -1;
+			_upAds.xPos = room_width - (sprite_get_width(sPizzaAd));
+			_upAds.createVerticalAds();
+		}	
+	}
 	prayOption = function() { 
 		createAnimationObject(sSendYourPrayAnimation_good, [],
 		method(self, function() {
@@ -246,7 +256,6 @@ function initializePrayFunctions()
 		}));
 	}
 }
-
 
 function initializeAllCreatedFunctions()
 {

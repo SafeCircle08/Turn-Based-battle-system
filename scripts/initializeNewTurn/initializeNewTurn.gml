@@ -18,19 +18,23 @@ function destroyBulletsGensExtras()
 //used to finish a turn, by creating the beam animation
 function finishTurn()
 {	
-	destroyBulletsGensExtras();
-	with (oBattleManager)
+	if (oBattleManager.playerTurn == false)
 	{
-		if (!ds_exists(ds_messages, ds_type_list)) { ds_messages = ds_list_create(); }
-		ds_messages[| 0] = "The monster has finished his attack."	
-		battleOption = 0;		
-		selected_option = 0;
-		oBattleBox.visible = false;
-		showBattleText = true;
-		global.enemyTimer = 0;
-		turnNumber += 1;
-		actualDrawAlpha = 0;
-		defended = 0;
+		destroyBulletsGensExtras();
+		with (oBattleManager)
+		{
+			ds_messages = ds_list_create();
+			ds_messages[| 0] = "<>Turn ended.";
+			ds_messages[| 1] = "<>The Fight continues.";
+			selected_option = 0;
+			enemyTextShowed = true;
+			showBattleText = true;
+			oBattleBox.visible = false;
+			global.enemyTimer = 0;
+			global.playerShield = global.playerMaxShield;
+			turnNumber += 1;
+			actualDrawAlpha = 0;
+			defended = 0;
+		}
 	}
-	
 }

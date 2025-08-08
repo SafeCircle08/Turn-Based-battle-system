@@ -1,4 +1,4 @@
-if (oBattleBox.visible == false)
+if (!isInBulletHellSection())
 {
 	#region //VARIABLES
 	var guiX = room_width / 2;
@@ -120,7 +120,7 @@ if (oBattleBox.visible == false)
 		if (startButtonX < _goalButtonX)
 		{
 			buttonFrame += 0.05;
-			startButtonX += 10 * buttonFrame;
+			startButtonX += 8 * buttonFrame;
 		}
 		startButtonX = clamp(startButtonX, -200, _goalButtonX);
 		
@@ -277,14 +277,13 @@ else
 	#endregion
 }
 
-if (enemyCanShowText) && (enemyTextShowed == false)
+if (isEnemySpeaking())
 {
 	var _border = 5;
 	var _xSep = 17;
 	var _ySep = 5;	
 	var _lSep = 17;
-	
-	
+
 	//Text BG coords
 	var _textBgX = room_width / 2 + 45;
 	var _textBgY = 50;
