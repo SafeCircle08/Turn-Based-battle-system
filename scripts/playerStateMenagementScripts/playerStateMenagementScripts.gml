@@ -28,7 +28,7 @@ function setPlayerStateEffect(_effect, _otherInits = function() {})
 {
 	effect = instance_create_layer(oSoul.x, oSoul.y, LAYER_EXTRAS_OBJECTS, oPlayerEffect);
 	effect.sprite_index = _effect;
-	if (instance_exists(oBoxSidePlatformParent)) { instance_destroy(oBoxSidePlatformParent); }
+	//if (instance_exists(oBoxSidePlatformParent)) { instance_destroy(oBoxSidePlatformParent); }
 	_otherInits();
 	return;		
 }

@@ -33,6 +33,9 @@ function drawFreeText_battle(_textList, _font = fFontino, _inBox = true)
 	if (dialogueDelay == 0) && (charCount < string_length(_textList[page])) 
 	{
 		charCount += speechSpeed; 
+		
+		playVoice(sndBasicTxt4, 0.7, _textList);
+		
 		if (string_char_at(_textList[page], charCount) == "." || string_char_at(_textList[page], charCount) == "?" || string_char_at(_textList[page], charCount) == "!") 
 		{
 			dialogueDelay = 10;

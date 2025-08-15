@@ -3,6 +3,7 @@ currentWidth = 0;
 currentHeight = 0;
 animateBoxTimer = 50;
 draw = true;
+drawAlpha = 0;
 
 //ORIGINI DEL BATTLE BOX
 global.boxOriginX = 160;

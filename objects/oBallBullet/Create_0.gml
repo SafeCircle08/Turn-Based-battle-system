@@ -11,6 +11,18 @@ instance_create_layer(x, y, LAYER_BULLETS, oShake);
 timer = 0;
 collided = false;
 
+touchedWall = function()
+{
+	var _w = sprite_get_width(sprite_index) / 4; 
+	var _h = sprite_get_height(sprite_index) / 4;
+
+	return (x + _w >= global.border_r) ||
+		   (x - _w <= global.border_l) ||
+		   (y + _h >= global.border_d) ||
+		   (y - _h <= global.border_u) 
+}
+
+
 //Methods that determine the actual 
 //movement the "balls" have to follow
 moveElectron = function()
@@ -29,14 +41,19 @@ moveElectron = function()
 		ballEffect.image_xscale = image_xscale;
 		ballEffect.image_yscale = image_yscale;
 	}
-
+	
+	if (touchedWall()) 
+	{
+		var soundGain = 0.4;
+		playSound(sndBallBounce, SOUND_CHANNEL_2, false, soundGain);
+	}
+	
 	if (xspd > 0)
 	{
 		if (x + _w >= global.border_r) 
 		{ 
 			xspd *= -1; 
-			oShake.shake = true; 
-			audio_play_sound(sndBallBounce, 50, false, global.soundGain); 
+			oShake.shake = true;
 		}
 	} 
 	else
@@ -44,8 +61,7 @@ moveElectron = function()
 		if (x - _w <= global.border_l) 
 		{ 
 			xspd *= -1;  
-			oShake.shake = true; 
-			audio_play_sound(sndBallBounce, 50, false, global.soundGain); 
+			oShake.shake = true;
 		}
 	}
 	if (yspd > 0)
@@ -54,7 +70,6 @@ moveElectron = function()
 		{ 
 			yspd *= -1; 
 			oShake.shake = true; 
-			audio_play_sound(sndBallBounce, 50, false, global.soundGain);
 		}
 	}
 	else
@@ -63,7 +78,6 @@ moveElectron = function()
 		{
 			yspd *= -1;
 			oShake.shake = true; 
-			audio_play_sound(sndBallBounce, 50, false, global.soundGain);
 		}
 	}		
 }
@@ -96,7 +110,8 @@ moveProton = function()
 		{ 
 			xSign *= -1; x -= 10; 
 			oShake.shake = true; 
-			audio_play_sound(sndBallBounce, 50, false, global.soundGain); 
+			var soundGain = 0.4;
+			playSound(sndBallBounce, SOUND_CHANNEL_2, false, soundGain); 
 		}
 	}
 	if (xspd * xSign < 0)
@@ -105,7 +120,8 @@ moveProton = function()
 		{
 			xSign *= -1; x += 10;  
 			oShake.shake = true; 
-			audio_play_sound(sndBallBounce, 50, false, global.soundGain); 
+			var soundGain = 0.4;
+			playSound(sndBallBounce, SOUND_CHANNEL_2, false, soundGain); 
 		}
 	}
 	if (yspd * ySign > 0)
@@ -114,7 +130,8 @@ moveProton = function()
 		{ 
 			ySign *= -1; y -= 10; 
 			oShake.shake = true;
-			audio_play_sound(sndBallBounce, 50, false, global.soundGain); 
+			var soundGain = 0.4;
+			playSound(sndBallBounce, SOUND_CHANNEL_2, false, soundGain); 
 		}
 	}
 	if (yspd * ySign < 0)
@@ -123,7 +140,8 @@ moveProton = function()
 		{ 
 			ySign *= -1; y += 10;
 			oShake.shake = true; 
-			audio_play_sound(sndBallBounce, 50, false, global.soundGain); 
+			var soundGain = 0.4;
+			playSound(sndBallBounce, SOUND_CHANNEL_2, false, soundGain); 
 		}
 	}	
 }

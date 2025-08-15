@@ -20,7 +20,7 @@ function createAnimationObject(sprite, _messages, _method = function() {})
 function initializeNavigatingBattleOptionFunctions()
 {
 	selectedBattleOption = function() { 
-		selectAction(true, true, [], 
+		selectAction(true, true, sndSelecting_2, [],
 			method(self, function() { 
 				playingGuiAnimation = true;
 		}));
@@ -61,11 +61,11 @@ function initializeNavigatingBattleOptionFunctions()
 }
 function initializeDefend_old_OptionFunction()
 {
-	selectedDefend_old_Option = function() { selectAction(true, false, ["<>Player defended!", "<>How cool?"]); }	
+	selectedDefend_old_Option = function() { selectAction(true, false, sndSelecting_2, ["<>Player defended!", "<>How cool?"]); }	
 }
 function initialiseCryOptionFunction()
 {
-	selectedCryOption = function() { selectAction(true, false, ["<>Crying won't do nothing\n  but dehydratate you to death.", "\n<>Stop it."]); }		
+	selectedCryOption = function() { selectAction(true, false, sndSelecting_2, ["<>Crying won't do nothing\n  but dehydratate you to death.", "\n<>Stop it."]); }		
 }
 function initializeInventoryOptionFunctions()
 {	
@@ -84,18 +84,18 @@ function initializeInventoryOptionFunctions()
 	{
 		if (array_length(global.equippedItems) > 0)
 		{
-			selectAction(true, true, [], method(self, function() {
+			selectAction(true, true, sndOpeningInventory, [], method(self, function() {
 				selected_option = 0;
 				playingGuiAnimation = true; 
 			}));
 		}
-		else { resetNavigation(3, method(self, function() { moreStepsAct = true; })); }
+		else { resetNavigation(3, sndClosingInventory, method(self, function() { moreStepsAct = true; })); }
 	}
 	navigatingInventoryFunction = function()
 	{
 		easeInBg();
 		//When you decide not to use the inventory
-		if (keyboard_check_pressed(ord("X")) && (!instance_exists(itemOutputMessage))) { resetNavigation(3); }
+		if (keyboard_check_pressed(ord("X")) && (!instance_exists(itemOutputMessage))) { resetNavigation(3, sndClosingInventory); }
 		
 		takenOptionDelay = setTimer(takenOptionDelay);
 		if (takenOptionDelay == 0)
@@ -105,7 +105,6 @@ function initializeInventoryOptionFunctions()
 		
 			if (keyboard_check_pressed(vk_enter)) 
 			{ 
-				audio_play_sound(sndSelecting, 50, false, global.soundGain);
 				if (instance_exists(itemOutputMessage)) 
 				{ 
 					instance_destroy(itemOutputMessage);
@@ -119,7 +118,6 @@ function initializeInventoryOptionFunctions()
 					var _sprBG = sInventoryBG;
 					var _bgH = sprite_get_height(_sprBG) * 2;
 					createOutPutMessage(_inventoryX + _border + inventoryXAdder,_inventoryY + (_bgH / 2) + _border / 2);
-					array_delete(global.equippedItems, selected_option, 1);
 				}
 			}
 		}
@@ -132,7 +130,7 @@ function initializeHealCheatFunction()
 }
 function initializeAttackFunctions()
 {
-	selectedAttackFunction = function() { selectAction(false, false, []) }
+	selectedAttackFunction = function() { selectAction(false, false, sndSelecting_2, []) }
 	
 	attackFunction = function()
 	{
@@ -195,7 +193,7 @@ function initializeAttackFunctions()
 }
 function initializeUnbindFunctions()
 {
-	selectedUnbindCage = function() { selectAction(false, false, [], method(self, function() { unbinding = true; instance_destroy(oMirrorTargeting); }))}
+	selectedUnbindCage = function() { selectAction(false, false, sndSelecting_2, [], method(self, function() { unbinding = true; instance_destroy(oMirrorTargeting); }))}
 	unbindFunction = function() {
 		terminateAction(
 			global.playerOptions.unbind_function._flavourText,
@@ -207,7 +205,7 @@ function initializeUnbindFunctions()
 }
 function initializeDefenceFunctions()
 {
-	selectedDefenceFunction = function() { selectAction(false, false, [], method(self, function() { hideMirrors(); }))}
+	selectedDefenceFunction = function() { selectAction(false, false, sndSelecting_2, [], method(self, function() { hideMirrors(); }))}
 	defenceFunction = function() {
 		createAnimationObject(sUmbrellaEffectGUI, ["<>You decided to defend!"],
 				method(self, function() { defended = true; }));
@@ -216,7 +214,7 @@ function initializeDefenceFunctions()
 function initializePrayFunctions() 
 {
 	selectedPrayOption = function() { 
-		selectAction(true, true, []); 
+		selectAction(true, true, sndSelecting_2, []); 
 		if (!instance_exists(oAdSlidingManager)) {
 			var _downAds = instance_create_layer(x, y, layer, oAdSlidingManager);
 			_downAds._sign = 1;
@@ -244,7 +242,7 @@ function initializePrayFunctions()
 					if (global.playerHP + _heal >= global.playerMAX_HP) { 
 						array_push(fadeInOutAnimationsParent.messages, "<>HP MAXED OUT!")
 					}
-					healPlayer(_heal);
+					healPlayer(_heal, sndPlayerBasicHeal);
 				},
 				function() {
 					fadeInOutAnimationsParent.messages = addItemToInventory();

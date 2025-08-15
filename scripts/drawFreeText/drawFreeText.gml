@@ -1,5 +1,8 @@
 function drawFreeText(_textList, _refObj = noone, _font = fFontino, _inBox = true)
 {
+	var _textSounds = [
+		sndBasicTxt1,
+	];
 	
 	var _boxX = camera_get_view_x(view_camera[view_current]);
 	var _boxY = camera_get_view_height(view_camera[view_current]) + 1;
@@ -43,7 +46,8 @@ function drawFreeText(_textList, _refObj = noone, _font = fFontino, _inBox = tru
 	dialogueDelay = setTimer(dialogueDelay);
 	if (dialogueDelay == 0) && (charCount < string_length(_textList[page])) 
 	{
-		charCount += speechSpeed; 
+		charCount += speechSpeed;
+		playVoice(sndBasicTxt1, 1, _textList);
 		if (string_char_at(_textList[page], charCount) == "." || string_char_at(_textList[page], charCount) == "?" || string_char_at(_textList[page], charCount) == "!") 
 		{
 			dialogueDelay = 10;

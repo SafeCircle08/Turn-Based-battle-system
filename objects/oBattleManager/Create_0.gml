@@ -9,7 +9,7 @@ global.borderHeight = 100;
 
 //PLAYER VARIABLES
 battle = true;
-turnNumber = 0;
+turnNumber = 16;
 defended = false;
 playerDeath = false;
 playerTurn = true;
@@ -70,6 +70,26 @@ actionChoosen = false;
 showingSubWindow = false;
 subSubDelay = 3;
 
+increaseMainMenuXPos = function()
+{
+	var _goalButtonX = 2;
+	if (startButtonX < _goalButtonX)
+	{
+		buttonFrame += 0.05;
+		startButtonX += 20 * buttonFrame;
+	}
+	startButtonX = clamp(startButtonX, -200, _goalButtonX);		
+}
+
+decreaseMainMenuXPos = function()
+{
+	if (startButtonX > startButtonXRef)
+	{
+		startButtonX -= 5;
+		startButtonX = clamp(startButtonX, -200, 100);
+	}		
+}	
+
 isEnemySpeaking = function()
 {
 	return (enemyCanShowText) &&
@@ -103,8 +123,10 @@ changeTurn = function()
 	resetTextVars();
 	showBattleText = false;
 	playerTurn = !playerTurn; 
+	buttonFrame = 0;
 	messageCounter = 0;
 	if (playerTurn == false) {
+		oBulletGeneratorManager.createGenerator();
 		oBattleBox.visible = true;
 		enemyCanShowText = false;
 	}

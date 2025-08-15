@@ -18,6 +18,7 @@ function destroyBulletsGensExtras()
 //used to finish a turn, by creating the beam animation
 function finishTurn()
 {	
+	if (instance_exists(oBoxSidePlatformParent)) { instance_destroy(oBoxSidePlatformParent); }
 	if (oBattleManager.playerTurn == false)
 	{
 		destroyBulletsGensExtras();

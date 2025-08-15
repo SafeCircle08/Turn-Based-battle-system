@@ -14,8 +14,6 @@ else
 	y += ySpd;
 }
 
-print(speedTimer)
-
 if (!instance_exists(fadeInOutAnimationsParent))
 {
 	if (xSpd == 0) 

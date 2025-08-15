@@ -1,15 +1,33 @@
-function playerChangeState(_newState, _spr, _effectSpr = sNoEffects, _xOffSet = 0, _yOffSet = 0,_newPov = "Up")
+function playerChangeState(_globalStateInfo, _additionlVarsMethod = function() {})
 {
-	oSoul.sprite_index = _spr;
-	oSoul.x += _xOffSet;
-	oSoul.y += _yOffSet;
-	oSoul.state = _newState;
-	global.pov = _newPov;
-	if (global.beamAnimation == false)
+	with (oSoul)
 	{
-		instance_create_layer(oSoul.x, oSoul.y, LAYER_EXTRAS_OBJECTS, oPlayerEffect, 
-		{ sprite_index: _effectSpr });
-		return;
+		sprite_index = _globalStateInfo.startSprite;
+		image_angle = _globalStateInfo.angle;
+		x += _globalStateInfo.xOffSet;
+		y += _globalStateInfo.yOffSet;
+		state = _globalStateInfo.state;
+		hbX = _globalStateInfo.hbX;
+		hbY = _globalStateInfo.hbY;
+		global.pov = _globalStateInfo.pov;
+		_additionlVarsMethod();
+		if (global.beamAnimation == false)
+		{
+			instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oPlayerEffect, 
+			{ sprite_index: _globalStateInfo.effectSpr });
+			return;
+		}	
 	}
-	return;
+}
+
+function additionalGravityStateMethod(_newGravityState) {
+	var _changeJumpPower = 5;
+	with (oSoul)
+	{
+		if (inUseGravity.horizontal) { vsp += _changeJumpPower * -inUseGravity._sign; }
+		else { vsp += _changeJumpPower * -inUseGravity._sign; }
+		vsp = clamp(vsp, -2, 2);
+		image_angle = inUseGravity.angle;
+		gravCreateRightGravityBorder(inUseGravity.boxSidePlatformToCreate);
+	}		
 }

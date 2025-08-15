@@ -4,4 +4,6 @@ image_angle = goalDir - 60;
 frame = 0;
 timer = 0;
 launched = false;
-audio_play_sound(sndAllert_1, 50, false, global.soundGain + 1);
+
+var soundGain = 0.7;
+playSound(sndAllert_1, SOUND_CHANNEL_1, false, soundGain);

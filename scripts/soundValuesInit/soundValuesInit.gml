@@ -14,15 +14,15 @@
 #macro MUSIC_CHANNEL 80
 #macro MUSIC_CHANNEL_2 90
 
-global.soundGain = 0.2;
+global.soundGain = 1;
 global.musicGain = 1;
 
-function playSound(sndIndex, sndChannel, loop = false, gain = global.soundGain)
+function playSound(sndIndex, sndChannel, loop = false, gainValue = 1)
 {
-	audio_play_sound(sndIndex, sndChannel, loop, gain);
+	audio_play_sound(sndIndex, sndChannel, loop, global.soundGain * gainValue);
 }
 
-function playMusic(mscIndex, mscChannel, loop = true, gain = global.musicGain)
+function playMusic(mscIndex, mscChannel, loop = true, gainValue = 1)
 {
-	audio_play_sound(mscIndex, mscChannel, loop, gain);
+	audio_play_sound(mscIndex, mscChannel, loop, global.musicGain * gainValue);
 }

@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"sndBasicTxt4",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":1,
+  "conversionMode":0,
+  "duration":0.8620408,
+  "name":"sndBasicTxt4",
+  "parent":{
+    "name":"Basic Text",
+    "path":"folders/Sounds/TextSounds/Basic Text.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndBasicTxt4.mp3",
+  "type":1,
+  "volume":1.0,
+}

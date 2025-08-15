@@ -22,15 +22,17 @@ if (!isInBulletHellSection())
 	if (showBattleText)
 	{
 		//Draws the text box and the battle messages
-		draw_sprite(_sprTextBox, 0, guiX, guiY);
+		var dsBoxX = camera_get_view_x(view_camera[view_current]) + sprite_get_width(sNewBox) / 2;
+		var dsBoxY = camera_get_view_height(view_camera[view_current]);
+		draw_sprite(_sprTextBox, 0, dsBoxX, dsBoxY);
 		var _textX = guiX - (_textBoxW / 2) + BUFFER;
 		var _textY = _dsY - _dsBgH + 13;
 		for (var a = 0; a <= messageCounter; a++)
 		{
 			draw_set_color(c_gray);
-			draw_text_ext(_dsX + _border + 0.5, _textY + fontSize * a * 2 + 0.5, ds_messages[| a], fontSize + 9, _textBoxW - BUFFER * 3);
+			draw_text_ext(_dsX + _border + 0.5, _textY + fontSize * a * 2 + 2.5, ds_messages[| a], fontSize + 9, _textBoxW - BUFFER * 3);
 			draw_set_color(c_white);
-			draw_text_ext(_dsX + _border, _textY + fontSize * a * 2, ds_messages[| a], fontSize + 9, _textBoxW - BUFFER * 3);
+			draw_text_ext(_dsX + _border, _textY + fontSize * a * 2 + 2, ds_messages[| a], fontSize + 9, _textBoxW - BUFFER * 3);
 		}	
 	}
 	#endregion
@@ -116,14 +118,7 @@ if (!isInBulletHellSection())
 	
 	if (!showBattleText)
 	{
-		//Increase the buttons position
-		if (startButtonX < _goalButtonX)
-		{
-			buttonFrame += 0.05;
-			startButtonX += 8 * buttonFrame;
-		}
-		startButtonX = clamp(startButtonX, -200, _goalButtonX);
-		
+		increaseMainMenuXPos();	
 		for (var i = 0; i < array_length(mainOptionsNames); i++)
 		{
 			//Draws the button
@@ -149,14 +144,7 @@ if (!isInBulletHellSection())
 		var _textList = ["<>It's like the surrounding heat\n  is taking your breath away...", "<>You should probably find a way\n  to finish all of this...\n<>And get some water :>"];
 		drawFreeText_battle(_textList);
 	}
-	else
-	{
-		if (startButtonX > startButtonXRef)
-		{
-			startButtonX -= 5;
-			startButtonX = clamp(startButtonX, -200, 100);
-		}			
-	}
+	else { decreaseMainMenuXPos(); }
 	#endregion
 	
 	#region	DRAWING THE INVENTORY
@@ -203,6 +191,7 @@ if (!isInBulletHellSection())
 				//Draw statistics
 				for (var k = 0; k < 3; k++)
 				{
+					//print(global.equippedItems[i].propertiesList);
 					draw_sprite(global.equippedItems[i].propertiesList[k], 0, _itemSprX - _border - 1 + inventoryXAdder, _itemSprY + (10 * k + (1 * k)));	
 				}
 				draw_set_color(c_custom_yellow); 
@@ -220,20 +209,19 @@ if (!isInBulletHellSection())
 			j++;
 		}
 		
+		var _itemInfoBgX = _inventoryX + _border;
+		var _itemInfoBgY = _inventoryY + (_bgH / 2);	
+		var _infoBorder = 3;
+		var _itemInfoX = _itemInfoBgX - _border / 2;
+		var _itemInfoY = _itemInfoBgY - _border / 4 + 1;
+		
+		draw_sprite_stretched(sItemInfoBG, 0, _itemInfoX + inventoryXAdder, _itemInfoY, _bgW - _border, _bgH / 2 + _border / 2 - _border);
+		
 		//Draws the item properties
 		if (!instance_exists(itemOutputMessage))
 		{	
-				draw_set_color(c_white); 
-			//Info
-			var _itemInfoBgX = _inventoryX + _border;
-			var _itemInfoBgY = _inventoryY + (_bgH / 2);
-			
-			var _infoBorder = 3;
-			var _itemInfoX = _itemInfoBgX - _border / 2;
-			var _itemInfoY = _itemInfoBgY - _border / 4 + 1;
-			
+			draw_set_color(c_white);
 			var _info = itemInfo(selected_option);
-			draw_sprite_stretched(sItemInfoBG, 0, _itemInfoX + inventoryXAdder, _itemInfoY, _bgW - _border, _bgH / 2 + _border / 2 - _border);
 			draw_text_ext_transformed(_itemInfoX + _infoBorder * 2 + inventoryXAdder,  _itemInfoBgY + _border / 2, _info[0], 20, _bgW + 30, 0.5, 0.5, 0);
 		}
 		
@@ -279,13 +267,12 @@ else
 
 if (isEnemySpeaking())
 {
-	var _border = 5;
 	var _xSep = 17;
 	var _ySep = 5;	
 	var _lSep = 17;
 
 	//Text BG coords
-	var _textBgX = room_width / 2 + 45;
+	var _textBgX = room_width / 2 + 40;
 	var _textBgY = 50;
 	
 	//Sprite properties
@@ -310,6 +297,7 @@ if (isEnemySpeaking())
 	if (dialogueDelay == 0) && (charCount < string_length(_page[page])) 
 	{
 		charCount += speechSpeed; 
+		playVoice(sndSteamPunkTalk, 2, _page);
 		if (string_char_at(_page[page], charCount) == "." || string_char_at(_page[page], charCount) == "?" || string_char_at(_page[page], charCount) == "!") 
 		{
 			dialogueDelay = 15;

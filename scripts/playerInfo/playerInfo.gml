@@ -1,7 +1,7 @@
 //General info:
 global.playerName = "Misery";
 global.playerMAX_HP = 512;
-global.playerHP = 511;
+global.playerHP = 100;
 global.playerShield = 50;
 global.playerMaxShield = 50;
 global.CSvalue = 100;	//CAGE STATE

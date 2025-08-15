@@ -1,10 +1,5 @@
 event_inherited();
 
-if keyboard_check(ord("X")) oSoul.state = oSoul.stateGravity;
-if keyboard_check(ord("Z")) oSoul.state = oSoul.stateGravityUp;
-if keyboard_check(ord("C")) oSoul.state = oSoul.stateGravityRight;
-if keyboard_check(ord("V")) oSoul.state = oSoul.stateGravityLeft;
-
 #region SAWS ARRAYS (ALL THE KINDS: LEFT, UP...)
 var sawsDown =
 [
@@ -82,7 +77,9 @@ if (changeStateTimer == 0)
 	if (global.generatorPhase == 1) { index = irandom_range(2, 3); }
 	else { index = irandom_range(0, 3) }
 	
-	oSoul.state = states[index];
+	oSoul.inUseGravity = states[index];
+	playerChangeState(global.playerStateGravity, 
+	method(self, function() { additionalGravityStateMethod(0); }));
 	oSoul.umbrelling = false;
 	oSoul.umbrellaJump = false;
 	changeStateTimer = 40;

@@ -1,8 +1,5 @@
 event_inherited();
 
-genTimeVars(0, false, 700, 0)
-playerSetState(oSoul.stateFree);
-
-//DIMENSIONI BOX 
-global.borderWidth = 230;
-global.borderHeight = 85;
+var _rmX = room_width / 2;
+var _rmY = room_height / 2;
+initializeNewTurn(0, false, 700, 0, 230, 85, _rmX, _rmY, oSoul.stateFree);

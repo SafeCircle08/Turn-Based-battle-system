@@ -78,8 +78,8 @@ if (sliding == true)
 create++;
 if (create > 100)
 {
-	if (create % 10 == 0) 
+	if (create % 15 == 0) 
 	{
-		createObstacleWall(3);
+		createObstacleWall(choose(1, 2));
 	}
 }

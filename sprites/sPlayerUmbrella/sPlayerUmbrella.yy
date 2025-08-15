@@ -24,7 +24,7 @@
   ],
   "name":"sPlayerUmbrella",
   "nineSlice":null,
-  "origin":7,
+  "origin":9,
   "parent":{
     "name":"sPlayerUmbrella",
     "path":"folders/Sprites/PLAYER_SPRITES/sPlayerUmbrella.yy",
@@ -82,7 +82,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":25,
-    "yorigin":68,
+    "yorigin":43,
   },
   "swatchColours":null,
   "swfPrecision":0.5,

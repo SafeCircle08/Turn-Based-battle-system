@@ -7,9 +7,12 @@ if (self.visible = false)
 	animateBoxTimer = 50;
 	currentWidth = 50;
 	currentHeight = 50;
+	drawAlpha = 0;
 } 
 else 
-{ 
+{ 	
+	var _alphaValue = 0.01;
+	if (drawAlpha < 1) { drawAlpha += _alphaValue; }
 	if (animateBoxTimer > 0 ) { animateBoxTimer-- } 
 }
 

@@ -1,7 +1,8 @@
 //When you choose an action in the submenu
-function selectAction(main = true, _moreStepsAct = true, _flavourText = [], _method = function() {})
+function selectAction(main = true, _moreStepsAct = true, _sound = sndSelecting_2, _flavourText = [], _method = function() {})
 {
-	playSound(sndSelecting, SOUND_CHANNEL_1);
+	var soundGain = 0.7;
+	playSound(_sound, SOUND_CHANNEL_1, false, soundGain);
 	if (main)
 	{
 		_method();
@@ -64,9 +65,10 @@ function easeOutBg(_finalAlpha = 0, _bgObj = oAttackBG)
 }
 
 //When you are in the sub menu and you press "X"
-function resetNavigation(_lastOption = 0, _resetMethod = function() {})
+function resetNavigation(_lastOption = 0, _sound = sndResetNavigation, _resetMethod = function() {})
 {
-	audio_play_sound(sndSelecting, 50, false, global.soundGain);
+	var soundGain = 0.7;
+	playSound(_sound, SOUND_CHANNEL_1, false, 0.7);
 	actualDrawAlpha = 0;
 	selected_option = _lastOption;
 	decidingSubAction = false;

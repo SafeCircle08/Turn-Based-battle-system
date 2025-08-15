@@ -43,7 +43,7 @@
     ],
     "top":0,
   },
-  "origin":7,
+  "origin":4,
   "parent":{
     "name":"sPlayerJump",
     "path":"folders/Sprites/PLAYER_SPRITES/sPlayerJump.yy",
@@ -101,7 +101,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":25,
-    "yorigin":50,
+    "yorigin":25,
   },
   "swatchColours":null,
   "swfPrecision":0.5,

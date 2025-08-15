@@ -1,0 +1,19 @@
+{
+	quando premi "X" per chiudere l'inventario, la selected option è 3.
+	Se ci sono (es) 1 oggett(i) nell'inventario darà errore (out of range)
+	Sistemare sta cosa.
+}
+
+{
+	quando cambi la gravità del player durante il turno è tutto sballato.
+	fare una funzione che vada a resettare la gravità del player ogni volta che si cambia
+	gravità durante il turno.
+	
+	ex.
+	function setNewJumpState(_angle, _sprite) {
+		oSoul.image_angle = _angle;
+		//.sprite = _sprite
+		//...
+		...
+	}
+}

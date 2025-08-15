@@ -6,6 +6,6 @@ function navigatingBattle(_minClam, _maxClamp)
 	
 	selected_option = clamp(selected_option, _minClam, _maxClamp);
 	
-	//If i actually moved with the navigation
-	if (selected_option != _firstValue) { audio_play_sound(sndNavigating, 50, false, global.soundGain); }	
+	var soundGain = 0.6;
+	if (selected_option != _firstValue) { playSound(sndNavigating_2, SOUND_CHANNEL_2, false, soundGain); }	
 }

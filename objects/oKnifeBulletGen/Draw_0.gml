@@ -8,7 +8,6 @@ var _tubes =
 	[global.border_d - 20, global.border_d - 40, global.border_d - 60, global.border_d - 80],
 ];
 
-
 if (_extras == 4) { exit; }
 
 for (var i = 1; i < 5; i++)

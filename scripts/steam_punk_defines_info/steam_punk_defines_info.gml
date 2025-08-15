@@ -1,7 +1,20 @@
 //Dialogue list
 global.steamEnemyText =
 [
-	["So right now you are telling me this is not working???"],
+	[
+	 "Initializing...",
+	 "Loading packages...",
+	 "std::cout <<\n 'FINALLY' \n<< std::endl;",
+	 "I've finally obtained\n a voice!",
+	 "And you know,\n I've invented pretty much\n  everything here;\n I think a little\n  gift won't hurt me!",
+	 "You can't understand\n for how long I've\n  waited for this\nmoment!",
+	 "I should probably call\n my BOSS, my Robots,\n  my-",
+	 "You know what?",
+	 "Let's not tell\n anything to BOSS",
+	 "He'd probably\n starts a business\n  on ts",
+	 "&&",
+	 "I hate\n my boss!\n  => (LOL)",
+	],
 	[
 		"This is very annoying... for real ngl",   
 		"I'll gain a lot of POWER!",
@@ -69,7 +82,7 @@ global.steamEnemyText =
 //Generator list
 global.steamPunkBulletGenerator = 
 [
-	oElectronCircle,
+	oEmpyTurn,
 	oRailsKnifeAttack,
 	oBallAttack,
 	oSpikeUpBulletGen,

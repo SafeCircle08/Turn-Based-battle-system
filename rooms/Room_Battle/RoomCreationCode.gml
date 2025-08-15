@@ -1,1 +1,2 @@
-audio_play_sound(sBGMusic,  100, true, global.soundGain + 2);
+var musicGain = 1.5;
+playMusic(sBGMusic, MUSIC_CHANNEL, true, musicGain);

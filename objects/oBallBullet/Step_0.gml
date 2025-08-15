@@ -20,4 +20,5 @@ if (y + _h >= _yD) && (collided == false)
 
 if (collided == false) { exit; }
 
+
 moveState();
