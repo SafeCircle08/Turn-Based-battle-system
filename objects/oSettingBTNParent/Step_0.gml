@@ -9,6 +9,7 @@ var _myY = oCamera.finalCamY + attachedY + 2;
 x = _myX;
 y = _myY;
 
+
 if keyboard_check_pressed(secondKey) { performFunction(); }
 
 //If windowed mode, you see the cursor

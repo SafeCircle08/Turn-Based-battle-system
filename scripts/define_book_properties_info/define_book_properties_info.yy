@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"define_book_properties_info",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"define_book_properties_info",
+  "parent":{
+    "name":"ItemsDefines",
+    "path":"folders/Scripts/Defines/ItemsDefines.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

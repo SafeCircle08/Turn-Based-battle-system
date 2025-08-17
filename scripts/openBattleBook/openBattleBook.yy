@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"openBattleBook",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"openBattleBook",
+  "parent":{
+    "name":"BattleBookScripts",
+    "path":"folders/Scripts/BattleScripts/BattleBookScripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

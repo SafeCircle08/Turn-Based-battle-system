@@ -156,7 +156,7 @@ if (!isInBulletHellSection())
 		var _itemWidth = sprite_get_width(sItemSprite);
 		var _border = 10;
 		var _inventoryX = room_width / 2 - 80 - (59);
-		var _inventoryY =  room_width / 2 - 60;
+		var _inventoryY =  room_width / 2 - 55;
 		
 		var _sprBG = sInventoryBG;
 		var _bgW = sprite_get_width(_sprBG) * 3;
@@ -170,7 +170,8 @@ if (!isInBulletHellSection())
 		
 		//Draws the inventory space (useless but cool)
 		draw_set_font(fFontino);
-		draw_text(_inventoryX + _border * 3 + inventoryXAdder, _inventoryY - _border, string(array_length(global.equippedItems)) + "/8");
+		var _invCapacity = string(array_length(global.equippedItems)) + "/" + string(MAX_ITEMS_NUM);
+		draw_text(_inventoryX + _border * 3 + inventoryXAdder, _inventoryY - _border, _invCapacity);
 		draw_set_font(fGenericText);
 		
 		//Draws the Item name, properties, info ecc...
@@ -230,9 +231,70 @@ if (!isInBulletHellSection())
 		//statistics symbols meaning
 		var _itemInfoBgY = _inventoryY + (_bgH / 2);
 		var _bookW = sprite_get_width(sItemStatisticsBook);
+		var _bookH = sprite_get_height(sItemStatisticsBook);
 		var _bookX = _inventoryX + _bgW - _bookW - _border;
 		var _bookY = _inventoryY + _bgH / 2;
-		draw_sprite(sItemStatisticsBook, 0, _bookX + inventoryXAdder, _itemInfoBgY + _border / 2);
+		var _bookSubImg = 0;
+		
+		if (mouse_x > _bookX + inventoryXAdder && mouse_x < _bookX + inventoryXAdder + _bookW) &&
+		   (mouse_y > _bookY && mouse_y < _bookY + _bookH)
+		{
+			_bookSubImg = 1;
+			if (mouse_check_button_pressed(mb_left))
+			{
+				if (!instance_exists(oBattleInvBookManager)) { openBattleBook(); }
+				else {
+					oBattleInvBookManager.fadeInDone = true;
+					oBattleInvBookManager.fadingOut = true;	
+				}
+			}
+		}
+		
+		
+		/*
+		
+		//Book object
+		
+		global.healProperties = {
+			propertiesList: [sDoubleHeal, sHeal...];
+		}
+		
+		Draw:
+		
+		draw_sprite(itemBookBg, bgX, bgY);
+		
+		propertiesKind = [
+			global.healProp,
+			...
+			...
+		]
+		
+		for (var i = 0; i < length(propertiesKind); i++)
+		{
+			for (var j = 0; j < propertiesKind[i].propertiesList; j++) {
+				draw_sprite(propertiesKind[i].propertiesList[j][PROPERTY_INFO_SPR], _pX, _pY);	
+				draw_text(propertiesKind[i].propertiesList[j][PROPERY_INFO_DESC], _px, _pY + 20);
+			}
+		}
+		
+		//
+		
+		function openBook()
+		{
+			if (!instance_exist(oBattleItemBook)) {
+				instance_create(oBattleItemBook);
+			}
+		}
+		
+		if (mouse_hover on book sprite || instance_exist(oBattleItemBook)) {
+			sBookSubImg = 1;
+			if (mb_left) {
+				openBook();
+			}
+		}
+		*/
+		
+		draw_sprite(sItemStatisticsBook, _bookSubImg, _bookX + inventoryXAdder, _itemInfoBgY + _border / 2);
 		draw_set_alpha(1);
 	}
 	#endregion

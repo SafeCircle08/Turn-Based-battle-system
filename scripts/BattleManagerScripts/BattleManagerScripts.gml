@@ -81,6 +81,7 @@ function resetNavigation(_lastOption = 0, _sound = sndResetNavigation, _resetMet
 	
 	_resetMethod();
 	
+	closeBattleBook();
 	resetTextVars();
 	easeOutBg();
 	hideMirrors();
@@ -95,6 +96,7 @@ function terminateAction(_ds_list = [], _method = function() {})
 	oAttackBG.fadingOut = true;
 	takenOptionDelay = 3;
 	battleDelay = 3;
+	closeBattleBook();
 	_method();
 	
 	hideMirrors();

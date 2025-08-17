@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"item_properties_declaration",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"item_properties_declaration",
+  "parent":{
+    "name":"ItemsDefines",
+    "path":"folders/Scripts/Defines/ItemsDefines.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
