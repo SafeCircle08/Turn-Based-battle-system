@@ -43,15 +43,24 @@ if (!isInBulletHellSection())
 	var _playerInfoY = guiY - (_textBoxH) - 7;
 	
 	//Hp
+	draw_set_colour(playerHpTextColor);
 	draw_text(_playerInfoX, _playerInfoY, "HP:" + string(global.playerHP) + "/" + string(global.playerMAX_HP) + ";");
+	draw_set_color(c_white);
 	
 	//Cage State
-	var _csX = _playerInfoX + (10 * BUFFER) - 20;
+	var _csX = _playerInfoX + (10 * BUFFER) - 30;
 	var _barCsW = 121;
 	var _barCsH = 10;
 	draw_text(_csX, _playerInfoY, "CS: ");
-	draw_sprite(sCSBarBG, 0, _csX + 25, _playerInfoY - 1);
-	draw_sprite_stretched(sCSBar, 0, _csX + 25, _playerInfoY - 1, (global.CSvalue/global.CSvalueMax) * _barCsW, _barCsH);
+	draw_sprite(sCSBarBG, 0, _csX + 22, _playerInfoY - 1);
+	draw_sprite_stretched(sCSBar, 0, _csX + 22, _playerInfoY - 1, (global.CSvalue/global.CSvalueMax) * _barCsW, _barCsH);
+	
+	//Gold
+	var _goldStr = string(global.playerGold);
+	var _strL = string_length(_goldStr);
+	var _goldX = _csX + _barCsW + 32 - (2 * _strL - 3);
+	draw_text(_goldX, _playerInfoY, string(global.playerGold) + "$");
+	
 	#endregion
 	
 	#region DRAWING ENEMY INFO
@@ -172,7 +181,7 @@ if (!isInBulletHellSection())
 		draw_set_font(fFontino);
 		var _invCapacity = string(array_length(global.equippedItems)) + "/" + string(MAX_ITEMS_NUM);
 		draw_text(_inventoryX + _border * 3 + inventoryXAdder, _inventoryY - _border, _invCapacity);
-		draw_set_font(fGenericText);
+		draw_set_font(fHungrySkinny);
 		
 		//Draws the Item name, properties, info ecc...
 		var _spriteBorder = _border - 2;
@@ -182,31 +191,40 @@ if (!isInBulletHellSection())
 		
 		for (var i = 0; i < array_length(global.equippedItems); i++)
 		{
-			if (selected_option == i) && (!instance_exists(itemOutputMessage)) 
+			var _item = global.equippedItems[i];
+			if (thisItemIsSelected(i)) 
 			{
-				//Sprite
-				var _itemSprX = _inventoryX + _bgW - _border - _itemWidth;
+				//Sprite Coords
+				var _itemSprX = _inventoryX + _bgW - _itemWidth - _border - 7;
 				var _itemSprY = _inventoryY + _border + _border / 2 - 2;
-				draw_sprite(global.equippedItems[i].sprite, 0, _itemSprX + inventoryXAdder, _itemSprY);
-				
-				//Draw statistics
-				for (var k = 0; k < 3; k++)
-				{
-					//print(global.equippedItems[i].propertiesList);
-					draw_sprite(global.equippedItems[i].propertiesList[k], 0, _itemSprX - _border - 1 + inventoryXAdder, _itemSprY + (10 * k + (1 * k)));	
-				}
+				var _itemSprW = sprite_get_width(sCocoMilk);
+				//Drawing the sprite with enchant effect if needed
+				if (_item.enchanted == true) { setGlintShader(); }
+				draw_sprite(_item.sprite, 0, _itemSprX + inventoryXAdder, _itemSprY);
+				shader_reset();
+				drawStatistics(i, _itemSprX, _itemSprY, _border);
+				drawEnchants(i, _itemSprX, _itemSprY, _border);
 				draw_set_color(c_custom_yellow); 
 			}
 			else { draw_set_color(c_white); }
+			
+			if (_item.enchanted == true) { setEnchantText(i); }
+			
+			var scale = 0.5;
+			var sep = 0.5;
+			var w = 50;
+			
 			//Left Side
 			if (i < 4)
 			{
-				draw_text_ext_transformed(_itemNameX + inventoryXAdder, _itemNameY + _border * i, global.equippedItems[i].name, 1, 200, 0.5, 0.5, 0);
+				draw_text_ext_transformed(_itemNameX + inventoryXAdder, _itemNameY + _border * i, _item.name, sep, w, scale, scale, 0);
+				shader_reset();
 				continue;
 			}
 			//Right Side
-			_itemNameX = _inventoryX + _border + string_width("DIVI");
-			draw_text_ext_transformed(_itemNameX + inventoryXAdder, _itemNameY + _border * j, global.equippedItems[i].name, 1, 200, 0.5, 0.5, 0);
+			_itemNameX = _inventoryX + _border + string_width("PNE") + 5;
+			draw_text_ext_transformed(_itemNameX + inventoryXAdder, _itemNameY + _border * j, _item.name, sep, w, scale, scale, 0);
+			shader_reset();
 			j++;
 		}
 		
@@ -214,7 +232,7 @@ if (!isInBulletHellSection())
 		var _itemInfoBgY = _inventoryY + (_bgH / 2);	
 		var _infoBorder = 3;
 		var _itemInfoX = _itemInfoBgX - _border / 2;
-		var _itemInfoY = _itemInfoBgY - _border / 4 + 1;
+		var _itemInfoY = _itemInfoBgY - 2;
 		
 		draw_sprite_stretched(sItemInfoBG, 0, _itemInfoX + inventoryXAdder, _itemInfoY, _bgW - _border, _bgH / 2 + _border / 2 - _border);
 		
@@ -223,17 +241,14 @@ if (!isInBulletHellSection())
 		{	
 			draw_set_color(c_white);
 			var _info = itemInfo(selected_option);
-			draw_text_ext_transformed(_itemInfoX + _infoBorder * 2 + inventoryXAdder,  _itemInfoBgY + _border / 2, _info[0], 20, _bgW + 30, 0.5, 0.5, 0);
+			draw_text_ext_transformed(_itemInfoX + _infoBorder * 2 + inventoryXAdder,  _itemInfoBgY + _border / 2, _info[0], 20, 200, scale, scale, 0);
 		}
-		
-		//Draws the items statistics book (gonna make it an object in the future)
-		//This, when opened, is going to show and describe all the different item 
-		//statistics symbols meaning
+
 		var _itemInfoBgY = _inventoryY + (_bgH / 2);
 		var _bookW = sprite_get_width(sItemStatisticsBook);
 		var _bookH = sprite_get_height(sItemStatisticsBook);
 		var _bookX = _inventoryX + _bgW - _bookW - _border;
-		var _bookY = _inventoryY + _bgH / 2;
+		var _bookY = _itemInfoBgY + _border / 2 + 1.5;
 		var _bookSubImg = 0;
 		
 		if (mouse_x > _bookX + inventoryXAdder && mouse_x < _bookX + inventoryXAdder + _bookW) &&
@@ -249,52 +264,7 @@ if (!isInBulletHellSection())
 				}
 			}
 		}
-		
-		
-		/*
-		
-		//Book object
-		
-		global.healProperties = {
-			propertiesList: [sDoubleHeal, sHeal...];
-		}
-		
-		Draw:
-		
-		draw_sprite(itemBookBg, bgX, bgY);
-		
-		propertiesKind = [
-			global.healProp,
-			...
-			...
-		]
-		
-		for (var i = 0; i < length(propertiesKind); i++)
-		{
-			for (var j = 0; j < propertiesKind[i].propertiesList; j++) {
-				draw_sprite(propertiesKind[i].propertiesList[j][PROPERTY_INFO_SPR], _pX, _pY);	
-				draw_text(propertiesKind[i].propertiesList[j][PROPERY_INFO_DESC], _px, _pY + 20);
-			}
-		}
-		
-		//
-		
-		function openBook()
-		{
-			if (!instance_exist(oBattleItemBook)) {
-				instance_create(oBattleItemBook);
-			}
-		}
-		
-		if (mouse_hover on book sprite || instance_exist(oBattleItemBook)) {
-			sBookSubImg = 1;
-			if (mb_left) {
-				openBook();
-			}
-		}
-		*/
-		
-		draw_sprite(sItemStatisticsBook, _bookSubImg, _bookX + inventoryXAdder, _itemInfoBgY + _border / 2);
+		draw_sprite(sItemStatisticsBook, _bookSubImg, _bookX + inventoryXAdder, _bookY - 2);
 		draw_set_alpha(1);
 	}
 	#endregion
@@ -331,24 +301,24 @@ if (isEnemySpeaking())
 {
 	var _xSep = 17;
 	var _ySep = 5;	
-	var _lSep = 17;
+	var _lSep = 13;
 
 	//Text BG coords
-	var _textBgX = room_width / 2 + 40;
-	var _textBgY = 50;
+	var _textBgX = room_width / 2 + 30;
+	var _textBgY = 20;
 	
 	//Sprite properties
-	var _textBgW = sprite_get_width(sTextBG) / 2;
-	var _textBgH = sprite_get_height(sTextBG) / 2;
-	var _border = 4;
+	var _textBgW = 110;
+	var _textBgH = 60;
+	var _border = 10;
 	
 	//Text Coords
 	var _textX = _textBgX + _border;
-	var _textY = _textBgY - (_textBgH) + _border - 1;
+	var _textY = _textBgY + _border;
 
 	var _page = global.textList[turnNumber];
 	
-	draw_sprite(sTextBG, 0, _textBgX, _textBgY);
+	draw_sprite_stretched(sTextBG, 0, _textBgX, _textBgY, _textBgW, _textBgH);
 	draw_set_font(fFontino);
 	draw_set_color(c_white);
 	
@@ -356,7 +326,7 @@ if (isEnemySpeaking())
 	if keyboard_check_pressed(ord("X")) { charCount = string_length(_page[page]); }
 	
 	dialogueDelay = setTimer(dialogueDelay);
-	if (dialogueDelay == 0) && (charCount < string_length(_page[page])) 
+	if (dialogueDelay == 0) && (charCount < string_length(_page[page]))
 	{
 		charCount += speechSpeed; 
 		playVoice(sndSteamPunkTalk, 2, _page);
@@ -364,7 +334,7 @@ if (isEnemySpeaking())
 		{
 			dialogueDelay = 15;
 		}
-		if (string_char_at(_page[page], charCount) == ",")
+		if (string_char_at(_page[page], charCount) == "," || string_char_at(_page[page], charCount) == ";")
 		{
 			dialogueDelay = 7;
 		}
@@ -373,12 +343,9 @@ if (isEnemySpeaking())
 	//FA PROGREDIRE IL TESTO LETTERA PER LETTERA	
 	var _textPart = string_copy(_page[page], 1, charCount);
 	var _col = make_color_rgb(0, 42, 127);
-	draw_set_color(_col);
-	draw_text_ext_transformed(_textX + 0.5 , _textY + 0.5, _textPart, _lSep, _textBgW * 4, 0.5, 0.5, 0);	
 	draw_set_color(c_white);
-	draw_text_ext_transformed(_textX, _textY, _textPart, _lSep, _textBgW * 4, 0.5, 0.5, 0);	
-
-	//SE PUOI EFFETTIVAMENTE SKIPPARE
+	draw_text_ext_transformed(_textX, _textY, _textPart, _lSep, _textBgW * 2 - _border, 0.5, 0.5, 0);	
+	//SE PUOI EFFETTIVAMENTE SKIPPAR
 	if keyboard_check_pressed(vk_enter) && (charCount >= string_length(_page[page]))
 	{
 		if (page + 1 < array_length(_page))

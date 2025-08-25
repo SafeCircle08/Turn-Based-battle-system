@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"playerHpsSections",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"playerHpsSections",
+  "parent":{
+    "name":"playerHpsSections",
+    "path":"folders/Scripts/PlayerScripts/playerHpsSections.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

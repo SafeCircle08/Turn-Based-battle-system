@@ -1,7 +1,3 @@
-/// @description Insert description here
-// You can write your code in this editor
-// feather disable all
-
 mainOptionsNames = [];
 
 global.borderWidth = 100;
@@ -9,7 +5,7 @@ global.borderHeight = 100;
 
 //PLAYER VARIABLES
 battle = true;
-turnNumber = 16;
+turnNumber = 0;
 defended = false;
 playerDeath = false;
 playerTurn = true;
@@ -34,6 +30,7 @@ timeBeforePressed = 15;
 enemyTextShowed = false;
 enemyCanShowText = 0;
 dialogueDelay = 10;
+playerHpTextColor = c_white;
 
 //BUTTONS VARIABLES
 startButtonXRef = -200;

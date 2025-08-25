@@ -118,8 +118,8 @@
   "maintainGms1Font":false,
   "name":"fGenericText",
   "parent":{
-    "name":"Fonts",
-    "path":"folders/Fonts.yy",
+    "name":"InUseFonts",
+    "path":"folders/Fonts/InUseFonts.yy",
   },
   "pointRounding":0,
   "ranges":[
@@ -128,14 +128,11 @@
   "regenerateBitmap":false,
   "resourceType":"GMFont",
   "resourceVersion":"2.0",
-  "sampleText":"abcdef ABCDEF\n0123456789 .,<>\"'&!?\nthe quick brown fox jumps over the lazy dog\nTHE QUICK BROWN FOX JUMPS OVER THE LAZY DOG\nDefault character: ▯ (9647)",
+  "sampleText":"abcdef ABCDEF\n0123456789 .,<>\"'&!?\nthe quicAhiafGNQgqYk GIbrown fox jumps over the lazy dog\nTHE QUICK BROWN FOX JUMPS OVER THE LAZY DOG\nDefault character: ▯ (9647)\r\nJjms\r\nAy\r\nJKMNRSVWZQ\r\nGgpqCq acqua5(q/<?A@q\r\naaaaaaaaaaaaaaaMaaaa2",
   "sdfSpread":2,
   "size":12.0,
   "styleName":"Regular",
-  "textureGroupId":{
-    "name":"Default",
-    "path":"texturegroups/Default",
-  },
+  "textureGroupId":null,
   "TTFName":"",
   "usesSDF":false,
 }

@@ -1,0 +1,1 @@
+draw_sprite(sEnchantSystemBG, 0, room_width / 2 - 50, room_height / 2 - 20);

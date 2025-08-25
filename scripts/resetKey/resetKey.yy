@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"resetKey",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"resetKey",
+  "parent":{
+    "name":"keyFunctions",
+    "path":"folders/Scripts/keyFunctions.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

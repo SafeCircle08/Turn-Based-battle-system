@@ -69,6 +69,43 @@ function initialiseCryOptionFunction()
 }
 function initializeInventoryOptionFunctions()
 {	
+	drawStatistics = function(_index, _itemSprX, _itemSprY, _border) {
+		var _item = global.equippedItems[_index];
+		for (var k = 0; k < MAX_PROPERTIES_NUMBER; k++)
+		{	
+			draw_sprite(_item.propertiesList[k], 0, _itemSprX - _border - 1 + inventoryXAdder, _itemSprY + (10 * k + (1 * k)));	
+		}	
+	}
+	drawEnchants = function(_index, _itemSprX, _itemSprY, _border) {
+		var _item = global.equippedItems[_index];
+		var _enchantsN = array_length(_item.enchants);
+		var _itemSprW = sprite_get_width(sBandagesItem);
+		for (var k = 0; k < MAX_ENCHANTS_PER_ITEM_NUM; k++) {
+			if (k < _enchantsN) {
+				setGlintShader();
+				draw_sprite(_item.enchants[k][ENCHANT_SPRITE], 0, _itemSprX + _itemSprW + 1 + inventoryXAdder, _itemSprY + (10 * k + (1 * k)));
+				shader_reset();
+				continue;
+			}
+			else { 
+				draw_sprite(
+					sNoEnchants, 0, 
+					_itemSprX + _itemSprW + 1 + inventoryXAdder, 
+					_itemSprY + (10 * k + (1 * k))
+				); 
+			}
+		}
+	}
+	
+	setEnchantText = function(_index, _col = c_purple) {
+		if (selected_option != _index) { draw_set_color(_col); }
+		setGlintShader();
+	}
+	
+	thisItemIsSelected = function(_index) {
+		return (selected_option == _index) && (!instance_exists(itemOutputMessage)) 	
+	}
+	
 	//Create OutPut Message
 	createOutPutMessage = function(_x, _y)
 	{
@@ -101,17 +138,16 @@ function initializeInventoryOptionFunctions()
 		if (takenOptionDelay == 0)
 		{
 			var _itemsNumber = array_length(global.equippedItems);
-			navigatingBattle(0, _itemsNumber - 1);
-		
+			if (keyboard_check_pressed(ord("V"))) { enchantItem(global.equippedItems[selected_option]); }
+			if (keyboard_check_pressed(ord("O"))) { disenchantItem(global.equippedItems[selected_option]); }
+			navigatingBattle(0, _itemsNumber - 1); 
 			if (keyboard_check_pressed(vk_enter)) 
 			{ 
-				if (instance_exists(itemOutputMessage)) 
-				{ 
+				if (instance_exists(itemOutputMessage)) { 
 					instance_destroy(itemOutputMessage);
 					terminateAction(["<>Finished using the \n  Inventory."]);
 				}
-				else
-				{
+				else {
 					var _inventoryX = room_width / 2 - 80 - (59);
 					var _inventoryY =  room_width / 2 - 60;
 					var _border = 10;
@@ -255,6 +291,39 @@ function initializePrayFunctions()
 	}
 }
 
+function initializeEnchantingFunctions()
+{
+	selectedEnchantOption = function() 
+	{
+		selectAction(true, true, sndSelecting_2, []);
+		if (!instance_exists(oEnchantOptionManager)) { instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oEnchantOptionManager); }  
+	}
+	
+	enchantingOption = function() {
+		if (resetKey()) && (oEnchantOptionManager.showingInv == false) { 
+			resetNavigation(1); 
+			instance_destroy(oEnchantOptionManager);
+		}
+		
+		if (instance_exists(oEnchantOptionManager)) {
+			if (resetKey() && (oEnchantOptionManager.showingInv == true)) {
+				oEnchantOptionManager.showingInv = false;
+				goToPreviousOption(method(self, function() { inventoryXAdder = 0; inventoryAlpha = 0; }))	
+			}
+		}
+		
+		takenOptionDelay = setTimer(takenOptionDelay);
+		if (takenOptionDelay == 0) {	
+			if (pressedEnter()) { 
+				takenOptionDelay = 3;
+				oEnchantOptionManager.showingInv = !oEnchantOptionManager.showingInv; 
+				//code to continue the enchant here
+			}
+		}
+	}
+}
+
+
 function initializeAllCreatedFunctions()
 {
 	initializeNavigatingBattleOptionFunctions();
@@ -265,5 +334,6 @@ function initializeAllCreatedFunctions()
 	initializeAttackFunctions();
 	initializeUnbindFunctions();
 	initializeDefenceFunctions();
-	initializePrayFunctions()
+	initializePrayFunctions();
+	initializeEnchantingFunctions();
 }

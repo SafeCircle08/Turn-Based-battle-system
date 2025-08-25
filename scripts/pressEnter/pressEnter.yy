@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"pressEnter",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"pressEnter",
+  "parent":{
+    "name":"keyFunctions",
+    "path":"folders/Scripts/keyFunctions.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

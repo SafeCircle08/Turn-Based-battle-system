@@ -87,11 +87,15 @@ function initializePlayerMainBattleMenuOptions()
 	choosing_pray_option = buildNewMainMenuOptions("PRAY", sPrayDeco, selectedPrayOption, prayOption,
 			method(self, function() {}),
 			method(self, function() {}));
+			
+	choosing_enchant_option = buildNewMainMenuOptions("MAGICK", sEnchantDeco, selectedEnchantOption, enchantingOption,
+			method(self, function() {}),
+			method(self, function() {}));
 	
 	//The global list of all the options inside the game
 	global.mainMenuOptions = {
 		choosing_battle_option, 
-		choosing_cry_option,
+		choosing_enchant_option,
 		choosing_inventory_option,
 		choosing_heal_option,
 		choosing_pray_option
@@ -99,7 +103,7 @@ function initializePlayerMainBattleMenuOptions()
 	
 	//The global list of the options the player can use in battle
 	global.settedMainBattleOptions[MAIN_MENU_BATTLE] = global.mainMenuOptions.choosing_battle_option;
-	global.settedMainBattleOptions[MAIN_MENU_DEFEND_old] = global.mainMenuOptions.choosing_cry_option;
+	global.settedMainBattleOptions[MAIN_MENU_DEFEND_old] = global.mainMenuOptions.choosing_enchant_option;
 	global.settedMainBattleOptions[MAIN_MENU_SPECIAL] = global.mainMenuOptions.choosing_pray_option;
 	global.settedMainBattleOptions[MAIN_MENU_INVENTORY] = global.mainMenuOptions.choosing_inventory_option;
 	

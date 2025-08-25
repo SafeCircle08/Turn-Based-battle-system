@@ -1,4 +1,4 @@
-function setGlintShader(draw = false)
+function setGlintShader(draw = false, r = 0, g = 0, b = 0)
 {
 	shader_set(shd_glint);
 
@@ -15,7 +15,7 @@ function setGlintShader(draw = false)
 	shader_set_uniform_f(shader_get_uniform(shd_glint, "u_offset"), _offsetX * 10, _offsetY * 10);
 	shader_set_uniform_f(shader_get_uniform(shd_glint, "u_angle"), 0.5);
 	shader_set_uniform_f(shader_get_uniform(shd_glint, "u_scale"), 0.5);
-	shader_set_uniform_f(shader_get_uniform(shd_glint, "u_tint"), abs(_offsetX), abs(_offsetX) / 2, abs(_offsetX), 1.0);
+	shader_set_uniform_f(shader_get_uniform(shd_glint, "u_tint"), abs(_offsetX) + r, abs(_offsetX) / 2 + g, abs(_offsetX) + b, 1.0);
 	var _str = _offsetX;
 	_str = clamp(_str, 0.1, 0.1);
 	shader_set_uniform_f(shader_get_uniform(shd_glint, "u_strength"), 0.1);

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"item_enchants_declaration",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"item_enchants_declaration",
+  "parent":{
+    "name":"ItemsDefines",
+    "path":"folders/Scripts/Defines/ItemsDefines.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

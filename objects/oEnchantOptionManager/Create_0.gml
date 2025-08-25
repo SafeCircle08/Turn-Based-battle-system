@@ -1,0 +1,2 @@
+showingInv = false;
+canFadeInv = true;

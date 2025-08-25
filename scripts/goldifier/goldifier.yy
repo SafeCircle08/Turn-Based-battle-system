@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"goldifier",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"goldifier",
+  "parent":{
+    "name":"EnchantsFunction",
+    "path":"folders/Scripts/EnchantsFunction.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

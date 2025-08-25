@@ -52,7 +52,7 @@ if (decidingSubAction == true)
 	} else { global.settedMainBattleOptions[mainPressed]._fadeOutFunc(); }
 	
 	if (showingSubWindow) { global.settedMainBattleOptions[mainPressed]._function(); }
-	if (actionChoosen) { global.playerEquippedOptions[selected_option]._function(); }
+	if (actionChoosen) { global.playerEquippedOptions[selected_option]._function(); }	
 }
 else { global.settedMainBattleOptions[mainPressed]._fadeOutFunc(); }
 

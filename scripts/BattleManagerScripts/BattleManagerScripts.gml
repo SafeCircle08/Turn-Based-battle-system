@@ -87,6 +87,11 @@ function resetNavigation(_lastOption = 0, _sound = sndResetNavigation, _resetMet
 	hideMirrors();
 }
 
+function goToPreviousOption(_goToPrevious = function() {}) {
+	closeBattleBook();
+	_goToPrevious();
+}
+
 function terminateAction(_ds_list = [], _method = function() {})
 {
 	showBattleText = true;

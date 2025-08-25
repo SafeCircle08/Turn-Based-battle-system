@@ -37,7 +37,10 @@ for (var i = 0; i < array_length(global.propertiesKind); i++)
 		{
 			if (_miniPropY > 0 && _miniPropY < 210)
 			{
-				draw_sprite(global.propertiesKind[i][k].sprite, 0, _miniPropX + (_miniPropW * (z - 1) + 1 * (z - 1)), _miniPropY);	
+				var _actualProp = global.propertiesKind[i][k];
+				if (_actualProp.enchanted == true) { setGlintShader(); }
+				draw_sprite(_actualProp.sprite, 0, _miniPropX + (_miniPropW * (z - 1) + 1 * (z - 1)), _miniPropY);
+				shader_reset();
 			}
 			if (
 			    mouse_x > _miniPropX + (_miniPropW * (z - 1) + 1 * (z - 1)) &&
@@ -58,6 +61,7 @@ for (var i = 0; i < array_length(global.propertiesKind); i++)
 		}
 	}
 	_yAdder += 11 + 5 + (_rowsOfProps * 10 + 5);
+	shader_reset();
 }
 
 if (hoovering == false) && (instance_exists(oBattleInvBookPropDesc)) { instance_destroy(oBattleInvBookPropDesc); }

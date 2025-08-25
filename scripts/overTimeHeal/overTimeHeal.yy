@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"overTimeHeal",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"overTimeHeal",
+  "parent":{
+    "name":"EnchantsFunction",
+    "path":"folders/Scripts/EnchantsFunction.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

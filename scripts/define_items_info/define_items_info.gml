@@ -1,7 +1,20 @@
 #macro MAX_PROPERTIES_NUMBER 3
 #macro MAX_ITEMS_NUM 8
+#macro MAX_CHARS_FOR_LINE 17
 global.itemsInGame = [];
 global.equippedItems = [];
+
+function hpMessage(_msg, _hp) { 
+	var _hpMsg = "(Recovers " + string(_hp) + "HPs)";
+	if (digitNotEqualsToSpecialChars(_msg)) { return changeLastDigit(_msg) + _hpMsg; }
+	return _msg + "\n" + _hpMsg;
+}
+
+function fullHpMessage(_msg) {
+	var _hpMaxed = "HPs MAXED OUT!";
+	if (digitNotEqualsToSpecialChars(_msg)) { return changeLastDigit(_msg) + _hpMaxed; }
+	return _msg + "\n" + _hpMaxed;		
+}
 
 function changeItemPropertiesList(_item, _newPropertyList) {
 	_item.propertiesList = _newPropertyList;
@@ -35,37 +48,39 @@ _method_1 = function() {}, _method_2 = function() {}, _method_3 = function() {})
 			_method_1,
 			_method_2,
 			_method_3
-		]
+		],
+		enchants: [],
+		enchanted: false
 	}
 	array_push(global.itemsInGame, item);
 	return item;
 }
 
 global.pizza = createNewItem("Pizza", sPizza, 200, sndPlayerEatingHeal,
-	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_STRENGTH, ITEM_PROPERTY_DEF],
-	["A slice of pepperoni pizza...\nRecovers 200HPs"],
-	["That pizza was so awesome TwT\nHPs MAXED OUT!"],
+	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_NOONE, ITEM_PROPERTY_NOONE],
+	[hpMessage("A slice of pepperoni pizza.", 200)],
+	[fullHpMessage("That pizza was incredible!")],
 	["You ate a slice of pizza! It was mid tho..."],
 	method(self, function() { healPlayer(200, sndPlayerEatingHeal); }));
 
 global.kfc = createNewItem("KFC", sKfc, 150, sndPlayerEatingHeal,
-	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_DEF, ITEM_PROPERTY_NOONE],
-	["There are too many reels...\nRecovers 150 HPs"],
-	["Run run run!\nHPs MAXED OUT!"],
+	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_NOONE, ITEM_PROPERTY_NOONE],
+	[hpMessage("Made in Kentucky with LOVE!", 150)],
+	[fullHpMessage("Fried the right way!")],
 	["You became a black ninja! How awesome isnt it"],
 	method(self, function() { healPlayer(150, sndPlayerEatingHeal); }));
 
 global.candy = createNewItem("Candy", sCandy, 200, sndPlayerEatingHeal,
-	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_SPD, ITEM_PROPERTY_DEF],
-	["Just take ONLY one candy!\nRecovers 200 Hps"],
-	["That candy reminded you of Christmas.\nHPs MAXED OUT!"],
+	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_SPD, ITEM_PROPERTY_NOONE],
+	[hpMessage("Just take one and you'll be fine", 200)],
+	[fullHpMessage("You took one. You feel fine.")],
 	["You took one candy... You would like to take more, but you can't..."],
 	method(self, function() { healPlayer(200, sndPlayerEatingHeal); }));
 
 global.joice = createNewItem("Joice", sJoiceItem, 233, sndPlayerDrinkingHeal,
-	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_DEF, ITEM_PROPERTY_JUMP_BOOST],
-	["JOICE, the Juice made with Joy!\nRecovers 233 HPs"],
-	["Drinking Joice made your day better!\nHPs MAXED OUT!"],
+	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_DEF, ITEM_PROPERTY_NOONE],
+	[hpMessage("JOICE, the juice made with joy!", 233)],
+	[fullHpMessage("Drinking JOICE made your day better!")],
 	["Oh Man, one sip of Joice is enough to make a grown man cry..."],
 	method(self, function() { healPlayer(233, sndPlayerDrinkingHeal); }));
 
@@ -78,22 +93,22 @@ global.cyanide = createNewItem("CN-", sCyanideItem, -237, sndPlayerEatingHeal,
 
 global.honeyHoneyComb = createNewItem("HHComb", sHHComb, 150, sndPlayerEatingHeal,
 	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_DEF, ITEM_PROPERTY_NOONE],
-	["A Honey Comb made of Honey.\nRecovers 150 HPs"],
-	["That taste... Thank you glucose for existing!\nHPs MAXED OUT!"],
+	[hpMessage("A HoneyComb made of Honey", 150)],
+	[fullHpMessage("That taste... Thank you Glucose for existing!")],
 	["You ate the HHComb so quicly your hands got dirty."],
 	method(self, function() { healPlayer(150, sndPlayerEatingHeal); }));
 
 global.painKiller = createNewItem("P.Kill", sPainKillerItem, 35, sndPlayerEatingHeal,
 	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_NOONE, ITEM_PROPERTY_NOONE],
-	["Found by chance among some wraps.\nRecovers 30 HPs."],
-	["A simple pill was enough to stop your aches.\nHPs MAXED OUT!"],
-	["Your " + string(choose("stomach", "head", "leg", "back", "arms")) + " stomach still hurts, but it's bearable."],
+	[hpMessage("Found by chance among some wraps.", 35)],
+	[fullHpMessage("This Pill was enough to stop your pains")],
+	["Your " + string(choose("stomach", "head", "leg", "back", "arms")) + " still hurts, but it's bearable."],
 	method(self, function() { healPlayer(25, sndPlayerEatingHeal); }));
 
-global.bandages = createNewItem("M.Wraps", sBandagesItem, 20, sndPlayerBasicHeal,
+global.bandages = createNewItem("M.Wraps", sBandagesItem, 215, sndPlayerBasicHeal,
 	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_DOUBLE_HEAL, ITEM_PROPERTY_ADD_TO_INV],
-	["Bandages used to treat Injuries.\nRecovers 125 HPs"],
-	["Your deepest wounds got healed!\nHPs MAXED OUT!"],
+	[hpMessage("Bandages used to treat Injuries", 215)],
+	[fullHpMessage("Your deepest wounds got healed")],
 	["Cuts are less annoying if they are protected."],
 	method(self, function() { healPlayer(global.bandages.hp, global.bandages.outSound);}),
 	method(self, function() { healPlayer(global.bandages.hp, global.bandages.outSound);}),
@@ -101,15 +116,15 @@ global.bandages = createNewItem("M.Wraps", sBandagesItem, 20, sndPlayerBasicHeal
 	
 global.mint = createNewItem("Dropint", sMintDrop, 75, sndPlayerEatingHeal,
 	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_NOONE, ITEM_PROPERTY_NOONE],
-	["Gathered from pine drops in Winter.\nRecovers 75 Hps"],
-	["Fresh.\nWinter.\nHPs MAXED OUT!"],
+	[hpMessage("Gathered from pine drops.", 75)],
+	[fullHpMessage("Fresh. Winter. Snow. Cold")],
 	["Make sure not to drink fresh water in the next 5 minutes!"],
 	method(self, function() { healPlayer(global.mint.hp, global.mint.outSound); }))
 	
 global.cocoMilk = createNewItem("C.Milk", sCocoMilk, 122, sndPlayerDrinkingHeal,
 	[ITEM_PROPERTY_HEAL, ITEM_PROPERTY_NOONE, ITEM_PROPERTY_NOONE],
-	["Dying because of the heat? Try this!\nRecovers 122 HPs."],
-	["This milk really refreshed me!\nHPs MAXED OUT!"],
+	[hpMessage("Gives a awesome feeling of fresh.", 122)],
+	[fullHpMessage("This milk really refreshed you!")],
 	["This milf really gives you that summer feeling! Sadly..."],
 	method(self, function() { healPlayer(global.cocoMilk.hp, global.cocoMilk.outSound); }))	
 

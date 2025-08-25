@@ -2,11 +2,11 @@
 global.steamEnemyText =
 [
 	[
-	 "Initializing...",
+	 "AAAnnnnd, I have\nchanged my Font again...\nIs this better???\nPLEASE! You have to\ntell me!\nTwT",
 	 "Loading packages...",
 	 "std::cout <<\n 'FINALLY' \n<< std::endl;",
 	 "I've finally obtained\n a voice!",
-	 "And you know,\n I've invented pretty much\n  everything here;\n I think a little\n  gift won't hurt me!",
+	 "And you know,\n I've invented \n  much everything here;\n I think a little\n  gift won't hurt me!",
 	 "You can't understand\n for how long I've\n  waited for this\nmoment!",
 	 "I should probably call\n my BOSS, my Robots,\n  my-",
 	 "You know what?",

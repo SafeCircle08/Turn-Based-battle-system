@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"enchantItem",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"enchantItem",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
