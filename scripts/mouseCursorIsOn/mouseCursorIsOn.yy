@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"mouseCursorIsOn",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"mouseCursorIsOn",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

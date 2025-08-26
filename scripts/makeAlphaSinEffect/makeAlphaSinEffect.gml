@@ -1,4 +1,4 @@
-function makeAlphaSinEffect(_yAdder, _xAdder, _layer, _amplitude, _FXsprite,_nOfFXs, _oneNotMoving = 0, _xScale = 1, _yScale = 1, attached = false)
+function makeAlphaSinEffect(_yAdder, _xAdder, _layer, _amplitude, _FXsprite,_nOfFXs, _oneNotMoving = 0, _xScale = 1, _yScale = 1, attached = false, _frequence = 0.006)
 {
 	//Error catch
 	if (!layer_exists(_layer)) 
@@ -26,6 +26,7 @@ function makeAlphaSinEffect(_yAdder, _xAdder, _layer, _amplitude, _FXsprite,_nOf
 		_mySinAlphaFXObj.image_alpha = 0.9 - (0.2 * i); 
 		_mySinAlphaFXObj.amplitude = _amplitude + (_amplitude * i);
 		_mySinAlphaFXObj.frequence = 0.006;
+		_mySinAlphaFXObj.alphaFrequency = _frequence;
 		_mySinAlphaFXObj.timerValue = 90 + (1 * i);
 		_mySinAlphaFXObj.attached = attached;
 	}

@@ -6,6 +6,7 @@ frame = 0;
 sining = true;
 attached = false;
 caller = 0;
+alphaFrequency = 0.01;
 
 battleGUIFunction = function()
 {

@@ -1,0 +1,1 @@
+makeAlphaSinEffect(0, 10, LAYER_EFFECT, 7, sActiveEnchantBase, 5, true);

@@ -13,6 +13,5 @@ function overTimeHeal() {
 	var _myOverTimeHealSource = instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oOverTimeHealingManager);
 	_myOverTimeHealSource.amount = _amount;
 	_myOverTimeHealSource.hpGoal = global.playerHP + _amount;
-	print(_amount);
 	return;
 }

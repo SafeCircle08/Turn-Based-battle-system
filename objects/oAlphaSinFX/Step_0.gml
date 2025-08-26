@@ -27,4 +27,4 @@ else
 	image_alpha = clamp(image_alpha, 0, 1);
 }
 
-frame += 0.01;
+frame += alphaFrequency;

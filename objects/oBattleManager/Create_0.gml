@@ -55,6 +55,8 @@ mainPressed = 0;
 
 playingGuiAnimation = false;
 
+setSelectionDelay = function() { takenOptionDelay = 3; }
+
 //Method
 setSubMenuPositions = function(_x, _y)
 {

@@ -141,7 +141,7 @@ function initializeInventoryOptionFunctions()
 			if (keyboard_check_pressed(ord("V"))) { enchantItem(global.equippedItems[selected_option]); }
 			if (keyboard_check_pressed(ord("O"))) { disenchantItem(global.equippedItems[selected_option]); }
 			navigatingBattle(0, _itemsNumber - 1); 
-			if (keyboard_check_pressed(vk_enter)) 
+			if (keyboard_check_pressed(vk_enter))
 			{ 
 				if (instance_exists(itemOutputMessage)) { 
 					instance_destroy(itemOutputMessage);
@@ -293,36 +293,52 @@ function initializePrayFunctions()
 
 function initializeEnchantingFunctions()
 {
-	selectedEnchantOption = function() 
-	{
-		selectAction(true, true, sndSelecting_2, []);
-		if (!instance_exists(oEnchantOptionManager)) { instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oEnchantOptionManager); }  
+	selectedEnchantOption = function() { selectAction(true, true, sndSelecting_2, []);
+		if (!instance_exists(oEnchantOptionManager)) { 
+			instance_create_layer(x, y, "Instances", oEnchantOptionManager); 
+		} else {
+			oEnchantOptionManager.fadingOut = false;
+			oEnchantOptionManager.fadedIn = false;
+			oEnchantOptionManager.fadingIn = true;
+		}
 	}
 	
 	enchantingOption = function() {
-		if (resetKey()) && (oEnchantOptionManager.showingInv == false) { 
+		easeInBg();
+		var _enchantManager = instance_find(oEnchantOptionManager, instance_number(oEnchantOptionManager) - 1);
+		
+		if (resetKey()) && (_enchantManager.showingInv == false) {
+			_enchantManager.removeBaseFX();
+			_enchantManager.fadedIn = true;
+			_enchantManager.fadingOut = true;
 			resetNavigation(1); 
-			instance_destroy(oEnchantOptionManager);
 		}
 		
-		if (instance_exists(oEnchantOptionManager)) {
-			if (resetKey() && (oEnchantOptionManager.showingInv == true)) {
-				oEnchantOptionManager.showingInv = false;
-				goToPreviousOption(method(self, function() { inventoryXAdder = 0; inventoryAlpha = 0; }))	
-			}
+		if (resetKey() && (_enchantManager.showingInv == true)) {
+			_enchantManager.showingInv = false; //doesnt call the invFunc anymore
+			goToPreviousOption(method(self, function() { 
+				inventoryXAdder = 0; 
+				inventoryAlpha = 0; 
+				oEnchantOptionManager.placeItemTimer = 2;
+				oEnchantOptionManager.removeBaseFX();
+			}));
 		}
-		
+
 		takenOptionDelay = setTimer(takenOptionDelay);
-		if (takenOptionDelay == 0) {	
-			if (pressedEnter()) { 
-				takenOptionDelay = 3;
-				oEnchantOptionManager.showingInv = !oEnchantOptionManager.showingInv; 
-				//code to continue the enchant here
+		if (takenOptionDelay == 0) 
+		{
+			if (pressedEnter() && (_enchantManager.placedItem == undefined) && array_length(global.equippedItems) > 0) 
+			{ 
+				setSelectionDelay();
+				if (_enchantManager.showingInv == false)
+				{
+					selected_option = 0;
+					_enchantManager.showingInv = true; 
+				}
 			}
 		}
 	}
 }
-
 
 function initializeAllCreatedFunctions()
 {

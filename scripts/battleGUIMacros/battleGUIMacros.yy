@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"battleGUIMacros",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"battleGUIMacros",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

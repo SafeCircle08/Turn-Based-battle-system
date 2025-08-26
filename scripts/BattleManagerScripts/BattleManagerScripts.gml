@@ -77,7 +77,7 @@ function resetNavigation(_lastOption = 0, _sound = sndResetNavigation, _resetMet
 	battleDelay = 3;
 	
 	oAttackBG.fadingOut = true;
-	takenOptionDelay = 3;
+	setSelectionDelay();
 	
 	_resetMethod();
 	
@@ -94,22 +94,26 @@ function goToPreviousOption(_goToPrevious = function() {}) {
 
 function terminateAction(_ds_list = [], _method = function() {})
 {
-	showBattleText = true;
-	enemyTextShowed = false;
-	decidingSubAction = false;
-	actionChoosen = false;
-	oAttackBG.fadingOut = true;
-	takenOptionDelay = 3;
-	battleDelay = 3;
-	closeBattleBook();
-	_method();
-	
-	hideMirrors();
-	resetTextVars();
-	
-	if (array_length(_ds_list) != 0)
+	with (oBattleManager)
 	{
-		ds_messages = ds_list_create();
-		for (var i = 0; i < array_length(_ds_list); i++) { ds_messages[| i] = _ds_list[i];	}
+		showBattleText = true;
+		enemyTextShowed = false;
+		decidingSubAction = false;
+		showingSubWindow = false;
+		actionChoosen = false;
+		oAttackBG.fadingOut = true;
+		setSelectionDelay();
+		battleDelay = 3;
+		closeBattleBook();
+		_method();
+	
+		hideMirrors();
+		resetTextVars();
+	
+		if (array_length(_ds_list) != 0)
+		{
+			ds_messages = ds_list_create();
+			for (var i = 0; i < array_length(_ds_list); i++) { ds_messages[| i] = _ds_list[i];	}
+		}
 	}
 }
