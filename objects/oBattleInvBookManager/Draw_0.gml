@@ -51,7 +51,7 @@ for (var i = 0; i < array_length(global.propertiesKind); i++)
 			{
 				hoovering = true;
 				if (!instance_exists(oBattleInvBookPropDesc)) {
-					var _propDescObj = instance_create_layer(x, y, LAYER_EXTRAS_OBJECTS, oBattleInvBookPropDesc);
+					var _propDescObj = instance_create_layer(x, y, LAYER_EFFECT_TOP, oBattleInvBookPropDesc);
 					_propDescObj.description = global.propertiesKind[i][k].desc;
 					_propDescObj.detSprite = global.propertiesKind[i][k].detailedSprite;
 				}	

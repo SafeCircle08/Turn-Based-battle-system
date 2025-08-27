@@ -12,12 +12,13 @@ var _goldCostY = 114;
 
 draw_set_font(fHungrySkinny);
 
+print(placedItem)
+
 //Draws the enchant properties
 if (placedItem != undefined)
 {
 	var _enchantsOnTheItem = array_length(placedItem.enchants);
 	var _enchLevel = _enchantsOnTheItem;
-	print(_enchantsOnTheItem);
 	var _enchLevelStr = _enchLevel;
 	
 	if (_enchLevel + 1 < 4) { _enchLevelStr = string(_enchLevel) + " (+1)"; }
@@ -36,7 +37,9 @@ if (placedItem != undefined)
 	//Draws the placed Item
 	var _placedItemX = 108 - xAdderRef;
 	var _placedItemY = _enchBGY + 32;
+	if (placedItem.enchanted == true) { setGlintShader(); }  
 	draw_sprite(placedItem.sprite, 0,itemSpriteX + xAdder, itemSpriteY);
+	shader_reset();
 	
 	//Draws the enchanted Item
 	setGlintShader();

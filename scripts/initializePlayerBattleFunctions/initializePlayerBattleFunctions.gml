@@ -293,48 +293,40 @@ function initializePrayFunctions()
 
 function initializeEnchantingFunctions()
 {
-	selectedEnchantOption = function() { selectAction(true, true, sndSelecting_2, []);
-		if (!instance_exists(oEnchantOptionManager)) { 
-			instance_create_layer(x, y, "Instances", oEnchantOptionManager); 
-		} else {
-			oEnchantOptionManager.fadingOut = false;
-			oEnchantOptionManager.fadedIn = false;
-			oEnchantOptionManager.fadingIn = true;
-		}
+	selectedEnchantOption = function() 
+	{ 
+		selectAction(true, true, sndSelecting_2, []);
+		if (!instance_exists(oEnchantOptionManager)) { instance_create_layer(x, y, "Instances", oEnchantOptionManager); } 
+		else { oEnchantOptionManager.setTofadeIn(); }
 	}
 	
-	enchantingOption = function() {
+	enchantingOption = function() 
+	{
 		easeInBg();
 		var _enchantManager = instance_find(oEnchantOptionManager, instance_number(oEnchantOptionManager) - 1);
 		
-		if (resetKey()) && (_enchantManager.showingInv == false) {
-			_enchantManager.removeBaseFX();
-			_enchantManager.fadedIn = true;
-			_enchantManager.fadingOut = true;
-			resetNavigation(1); 
-		}
-		
-		if (resetKey() && (_enchantManager.showingInv == true)) {
-			_enchantManager.showingInv = false; //doesnt call the invFunc anymore
-			goToPreviousOption(method(self, function() { 
-				inventoryXAdder = 0; 
-				inventoryAlpha = 0; 
-				oEnchantOptionManager.placeItemTimer = 2;
-				oEnchantOptionManager.removeBaseFX();
-			}));
+		if (resetKey()) {
+			if (_enchantManager.showingInv == false) {
+				_enchantManager.setToStartStateItemVars();
+				_enchantManager.setToFadeOut();
+				resetNavigation(1); 				
+			} else {
+				_enchantManager.showingInv = false; //doesnt call the invFunc anymore
+				goToPreviousOption(method(self, function() { 
+					inventoryXAdder = 0; 
+					inventoryAlpha = 0; 
+					oEnchantOptionManager.setToStartStateItemVars();
+				}));					
+			}
 		}
 
 		takenOptionDelay = setTimer(takenOptionDelay);
 		if (takenOptionDelay == 0) 
 		{
-			if (pressedEnter() && (_enchantManager.placedItem == undefined) && array_length(global.equippedItems) > 0) 
+			if ((pressedEnter()) && (_enchantManager.placedItem == undefined) && (array_length(global.equippedItems) > 0)) 
 			{ 
 				setSelectionDelay();
-				if (_enchantManager.showingInv == false)
-				{
-					selected_option = 0;
-					_enchantManager.showingInv = true; 
-				}
+				if (_enchantManager.showingInv == false) { selected_option = 0; _enchantManager.showingInv = true; }
 			}
 		}
 	}

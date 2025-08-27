@@ -15,6 +15,7 @@ placeItemTimer = 2;
 goldCost = 0;
 placedItem = undefined;
 
+finishedEnchanting = false;
 itemSpriteX = 108 - xAdderRef;
 itemSpriteY = MAIN_BATTLE_MENU_Y + 32
 enchantedItemX = itemSpriteX + 123;
@@ -38,12 +39,11 @@ placeItem = function()
 	{
 		if (keyboard_check_pressed(vk_enter)) && (placedItem == undefined)
 		{
-			print(oBattleManager.selected_option);
 			var _selectedItem = global.equippedItems[oBattleManager.selected_option];
 
 			createBaseFX();
 			var _enchN = array_length(_selectedItem.enchants);
-			goldCost = irandom_range(200, 400) + (2 ^ _enchN * 2)
+			goldCost = irandom_range(200, 400) + (100 ^ _enchN * 2)
 			placedItem = _selectedItem;
 			showingInv = false;
 			placeItemTimer = 2;
@@ -61,13 +61,34 @@ playerHasGold = function() {
 
 confirmEnchant = function()
 {
-	if (playerHasGold()) && (array_length(placedItem.enchants) + 1 < 4){
+	if (playerHasGold()) && (array_length(placedItem.enchants) + 1 < 4) {
+		finishedEnchanting = true;
 		enchantItem(placedItem);
 		global.playerGold -= goldCost;
-		fadingOut = true;
-		removeBaseFX();
 		terminateAction(["<>You enchanted an Item.\n<>You'll be able to use it\n  next turn."]);
+		removeBaseFX();
+		fadingOut = true;
 	}
+}
+
+setToStartStateItemVars = function()
+{
+	removeItem();
+	removeBaseFX();
+	placeItemTimer = 2;
+}
+
+setTofadeIn = function()
+{
+	fadingOut = false;
+	fadedIn = false;
+	fadingIn = true;
+}
+
+setToFadeOut = function()
+{
+	fadedIn = true;
+	fadingOut = true;		
 }
 
 fadeIn = function() {
