@@ -40,7 +40,7 @@ placeItem = function()
 		if (keyboard_check_pressed(vk_enter)) && (placedItem == undefined)
 		{
 			var _selectedItem = global.equippedItems[oBattleManager.selected_option];
-
+			closeBattleBook();
 			createBaseFX();
 			var _enchN = array_length(_selectedItem.enchants);
 			goldCost = irandom_range(200, 400) + (100 ^ _enchN * 2)
@@ -52,8 +52,20 @@ placeItem = function()
 }
 
 removeItem = function() {
+	var _myFX = instance_create_layer(itemSpriteX + xAdder + 16, itemSpriteY + 16, LAYER_EFFECT_TOP, oChangeAlphaDimObjFX);
+	_myFX.startXScale = 1;
+	_myFX.startYScale = 1;
+	_myFX.finalXScale = 5;
+	_myFX.finalYScale = 5;
+	_myFX.startAlpha = 1;
+	_myFX.finalAlpha = 0;
+	_myFX.alphaAmount = 0.02;
+	_myFX.scaleAmount = 0.02;
+	_myFX.rotates = true;
+	_myFX.rotationAmount = 5;
+	_myFX.sprite_index = sStoppedEnchantDeco;
 	placedItem = undefined; removeBaseFX(); 
-}	
+}
 
 playerHasGold = function() {
 	return global.playerGold >= goldCost;	
@@ -73,7 +85,7 @@ confirmEnchant = function()
 
 setToStartStateItemVars = function()
 {
-	removeItem();
+	if (placedItem != undefined) { removeItem(); }
 	removeBaseFX();
 	placeItemTimer = 2;
 }

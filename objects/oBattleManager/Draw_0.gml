@@ -180,6 +180,9 @@ if (!isInBulletHellSection())
 		//Draws the inventory space (useless but cool)
 		draw_set_font(fFontino);
 		var _invCapacity = string(array_length(global.equippedItems)) + "/" + string(MAX_ITEMS_NUM);
+		draw_set_color(c_black);
+		draw_text(_inventoryX + _border * 3 + inventoryXAdder + 1, _inventoryY - _border + 1, _invCapacity);
+		draw_set_color(c_white);
 		draw_text(_inventoryX + _border * 3 + inventoryXAdder, _inventoryY - _border, _invCapacity);
 		draw_set_font(fHungrySkinny);
 		

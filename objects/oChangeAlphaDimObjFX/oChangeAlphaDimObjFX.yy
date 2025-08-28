@@ -1,13 +1,16 @@
 {
   "$GMObject":"",
-  "%Name":"Object218",
-  "eventList":[],
+  "%Name":"oChangeAlphaDimObjFX",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"Object218",
+  "name":"oChangeAlphaDimObjFX",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"FX",
+    "path":"folders/Objects/FX.yy",
   },
   "parentObjectId":null,
   "persistent":false,
